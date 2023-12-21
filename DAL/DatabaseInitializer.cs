@@ -99,7 +99,7 @@ namespace DAL
 
         private async Task SeedDemoDataAsync()
         {
-            if (!await _context.Customers.AnyAsync() && !await _context.ProductCategories.AnyAsync())
+            if (!await _context.Customers.AnyAsync())// && !await _context.ProductCategories.AnyAsync())
             {
                 _logger.LogInformation("Seeding demo data");
 
@@ -150,76 +150,76 @@ namespace DAL
                     DateModified = DateTime.UtcNow
                 };
 
-                var prodCat_1 = new ProductCategory
-                {
-                    Name = "None",
-                    Description = "Default category. Products that have not been assigned a category",
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                };
+                //var prodCat_1 = new ProductCategory
+                //{
+                //    Name = "None",
+                //    Description = "Default category. Products that have not been assigned a category",
+                //    DateCreated = DateTime.UtcNow,
+                //    DateModified = DateTime.UtcNow
+                //};
 
-                var prod_1 = new Product
-                {
-                    Name = "BMW M6",
-                    Description = "Yet another masterpiece from the world's best car manufacturer",
-                    BuyingPrice = 109775,
-                    SellingPrice = 114234,
-                    UnitsInStock = 12,
-                    IsActive = true,
-                    ProductCategory = prodCat_1,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                };
+                //var prod_1 = new Product
+                //{
+                //    Name = "BMW M6",
+                //    Description = "Yet another masterpiece from the world's best car manufacturer",
+                //    BuyingPrice = 109775,
+                //    SellingPrice = 114234,
+                //    UnitsInStock = 12,
+                //    IsActive = true,
+                //    ProductCategory = prodCat_1,
+                //    DateCreated = DateTime.UtcNow,
+                //    DateModified = DateTime.UtcNow
+                //};
 
-                var prod_2 = new Product
-                {
-                    Name = "Nissan Patrol",
-                    Description = "A true man's choice",
-                    BuyingPrice = 78990,
-                    SellingPrice = 86990,
-                    UnitsInStock = 4,
-                    IsActive = true,
-                    ProductCategory = prodCat_1,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                };
+                //var prod_2 = new Product
+                //{
+                //    Name = "Nissan Patrol",
+                //    Description = "A true man's choice",
+                //    BuyingPrice = 78990,
+                //    SellingPrice = 86990,
+                //    UnitsInStock = 4,
+                //    IsActive = true,
+                //    ProductCategory = prodCat_1,
+                //    DateCreated = DateTime.UtcNow,
+                //    DateModified = DateTime.UtcNow
+                //};
 
-                var ordr_1 = new Order
-                {
-                    Discount = 500,
-                    Cashier = await _context.Users.OrderBy(u => u.UserName).FirstAsync(),
-                    Customer = cust_1,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow,
-                    OrderDetails = new List<OrderDetail>
-                    {
-                        new OrderDetail {UnitPrice = prod_1.SellingPrice, Quantity=1, Product = prod_1 },
-                        new OrderDetail {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
-                    }
-                };
+                //var ordr_1 = new Order
+                //{
+                //    Discount = 500,
+                //    Cashier = await _context.Users.OrderBy(u => u.UserName).FirstAsync(),
+                //    Customer = cust_1,
+                //    DateCreated = DateTime.UtcNow,
+                //    DateModified = DateTime.UtcNow,
+                //    OrderDetails = new List<OrderDetail>
+                //    {
+                //        new OrderDetail {UnitPrice = prod_1.SellingPrice, Quantity=1, Product = prod_1 },
+                //        new OrderDetail {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
+                //    }
+                //};
 
-                var ordr_2 = new Order
-                {
-                    Cashier = await _context.Users.OrderBy(u => u.UserName).FirstAsync(),
-                    Customer = cust_2,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow,
-                    OrderDetails = new List<OrderDetail>
-                    {
-                        new OrderDetail {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
-                    }
-                };
+                //var ordr_2 = new Order
+                //{
+                //    Cashier = await _context.Users.OrderBy(u => u.UserName).FirstAsync(),
+                //    Customer = cust_2,
+                //    DateCreated = DateTime.UtcNow,
+                //    DateModified = DateTime.UtcNow,
+                //    OrderDetails = new List<OrderDetail>
+                //    {
+                //        new OrderDetail {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
+                //    }
+                //};
 
                 _context.Customers.Add(cust_1);
                 _context.Customers.Add(cust_2);
                 _context.Customers.Add(cust_3);
                 _context.Customers.Add(cust_4);
 
-                _context.Products.Add(prod_1);
-                _context.Products.Add(prod_2);
+                //_context.Products.Add(prod_1);
+                //_context.Products.Add(prod_2);
 
-                _context.Orders.Add(ordr_1);
-                _context.Orders.Add(ordr_2);
+                //_context.Orders.Add(ordr_1);
+                //_context.Orders.Add(ordr_2);
 
                 await _context.SaveChangesAsync();
 

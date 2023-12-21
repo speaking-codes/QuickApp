@@ -19,10 +19,10 @@ namespace DAL
     {
         public string CurrentUserId { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        //public DbSet<ProductCategory> ProductCategories { get; set; }
+        //public DbSet<Product> Products { get; set; }
+        //public DbSet<Order> Orders { get; set; }
+        //public DbSet<OrderDetail> OrderDetails { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { }
@@ -45,26 +45,26 @@ namespace DAL
             builder.Entity<Customer>().Property(c => c.City).HasMaxLength(50);
             builder.Entity<Customer>().ToTable($"App{nameof(Customers)}");
 
-            builder.Entity<ProductCategory>().Property(p => p.Name).IsRequired().HasMaxLength(100);
-            builder.Entity<ProductCategory>().Property(p => p.Description).HasMaxLength(500);
-            builder.Entity<ProductCategory>().ToTable($"App{nameof(ProductCategories)}");
+            //builder.Entity<ProductCategory>().Property(p => p.Name).IsRequired().HasMaxLength(100);
+            //builder.Entity<ProductCategory>().Property(p => p.Description).HasMaxLength(500);
+            //builder.Entity<ProductCategory>().ToTable($"App{nameof(ProductCategories)}");
 
-            builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(100);
-            builder.Entity<Product>().HasIndex(p => p.Name);
-            builder.Entity<Product>().Property(p => p.Description).HasMaxLength(500);
-            builder.Entity<Product>().Property(p => p.Icon).IsUnicode(false).HasMaxLength(256);
-            builder.Entity<Product>().HasOne(p => p.Parent).WithMany(p => p.Children).OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<Product>().ToTable($"App{nameof(Products)}");
-            builder.Entity<Product>().Property(p => p.BuyingPrice).HasColumnType(priceDecimalType);
-            builder.Entity<Product>().Property(p => p.SellingPrice).HasColumnType(priceDecimalType);
+            //builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(100);
+            //builder.Entity<Product>().HasIndex(p => p.Name);
+            //builder.Entity<Product>().Property(p => p.Description).HasMaxLength(500);
+            //builder.Entity<Product>().Property(p => p.Icon).IsUnicode(false).HasMaxLength(256);
+            //builder.Entity<Product>().HasOne(p => p.Parent).WithMany(p => p.Children).OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<Product>().ToTable($"App{nameof(Products)}");
+            //builder.Entity<Product>().Property(p => p.BuyingPrice).HasColumnType(priceDecimalType);
+            //builder.Entity<Product>().Property(p => p.SellingPrice).HasColumnType(priceDecimalType);
 
-            builder.Entity<Order>().Property(o => o.Comments).HasMaxLength(500);
-            builder.Entity<Order>().ToTable($"App{nameof(Orders)}");
-            builder.Entity<Order>().Property(p => p.Discount).HasColumnType(priceDecimalType);
+            //builder.Entity<Order>().Property(o => o.Comments).HasMaxLength(500);
+            //builder.Entity<Order>().ToTable($"App{nameof(Orders)}");
+            //builder.Entity<Order>().Property(p => p.Discount).HasColumnType(priceDecimalType);
 
-            builder.Entity<OrderDetail>().ToTable($"App{nameof(OrderDetails)}");
-            builder.Entity<OrderDetail>().Property(p => p.UnitPrice).HasColumnType(priceDecimalType);
-            builder.Entity<OrderDetail>().Property(p => p.Discount).HasColumnType(priceDecimalType);
+            //builder.Entity<OrderDetail>().ToTable($"App{nameof(OrderDetails)}");
+            //builder.Entity<OrderDetail>().Property(p => p.UnitPrice).HasColumnType(priceDecimalType);
+            //builder.Entity<OrderDetail>().Property(p => p.Discount).HasColumnType(priceDecimalType);
         }
 
         public override int SaveChanges()

@@ -34,7 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
   isAppLoaded = false;
   isUserLoggedIn = false;
   newNotificationCount = 0;
-  appTitle = 'QuickApp';
+  appTitle = 'Dat - Assicurazioni';
+  pathLogo = "assets/images/logo-white.png";
 
   stickyToasties: number[] = [];
 
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.toastaConfig.showDuration = false;
 
     AppTitleService.appName = this.appTitle;
+    AppTitleService.pathLogo = this.pathLogo;
   }
 
   ngOnInit() {
