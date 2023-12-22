@@ -3,11 +3,10 @@
 // Templates: www.ebenmonney.com/templates
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
-
-using DAL.Models;
-using DAL.Models.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Models.Entities;
+using Models.Entities.Interfaces;
 using System;
 using System.Linq;
 using System.Threading;
@@ -19,10 +18,8 @@ namespace DAL
     {
         public string CurrentUserId { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        //public DbSet<ProductCategory> ProductCategories { get; set; }
-        //public DbSet<Product> Products { get; set; }
-        //public DbSet<Order> Orders { get; set; }
-        //public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { }
@@ -38,33 +35,24 @@ namespace DAL
             builder.Entity<ApplicationRole>().HasMany(r => r.Claims).WithOne().HasForeignKey(c => c.RoleId).IsRequired().OnDelete(DeleteBehavior.Cascade);
             builder.Entity<ApplicationRole>().HasMany(r => r.Users).WithOne().HasForeignKey(r => r.RoleId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Customer>().Property(c => c.Name).IsRequired().HasMaxLength(100);
-            builder.Entity<Customer>().HasIndex(c => c.Name);
-            builder.Entity<Customer>().Property(c => c.Email).HasMaxLength(100);
-            builder.Entity<Customer>().Property(c => c.PhoneNumber).IsUnicode(false).HasMaxLength(30);
-            builder.Entity<Customer>().Property(c => c.City).HasMaxLength(50);
+            builder.Entity<Customer>().Property(c => c.FullName).IsRequired().HasMaxLength(100);
+            builder.Entity<Customer>().HasIndex(c => c.FullName);
+            builder.Entity<Customer>().Property(c => c.TaxIdCode).HasMaxLength(20);
+            builder.Entity<Customer>().HasIndex(c => c.TaxIdCode);
             builder.Entity<Customer>().ToTable($"App{nameof(Customers)}");
 
-            //builder.Entity<ProductCategory>().Property(p => p.Name).IsRequired().HasMaxLength(100);
-            //builder.Entity<ProductCategory>().Property(p => p.Description).HasMaxLength(500);
-            //builder.Entity<ProductCategory>().ToTable($"App{nameof(ProductCategories)}");
+            builder.Entity<Delivery>().Property(c => c.Email).HasMaxLength(100);
+            builder.Entity<Delivery>().Property(c => c.PhoneNumber).IsUnicode(false).HasMaxLength(30);
+            builder.Entity<Delivery>().ToTable($"App{nameof(Deliveries)}");
 
-            //builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(100);
-            //builder.Entity<Product>().HasIndex(p => p.Name);
-            //builder.Entity<Product>().Property(p => p.Description).HasMaxLength(500);
-            //builder.Entity<Product>().Property(p => p.Icon).IsUnicode(false).HasMaxLength(256);
-            //builder.Entity<Product>().HasOne(p => p.Parent).WithMany(p => p.Children).OnDelete(DeleteBehavior.Restrict);
-            //builder.Entity<Product>().ToTable($"App{nameof(Products)}");
-            //builder.Entity<Product>().Property(p => p.BuyingPrice).HasColumnType(priceDecimalType);
-            //builder.Entity<Product>().Property(p => p.SellingPrice).HasColumnType(priceDecimalType);
+            builder.Entity<Address>().Property(c => c.Location).HasMaxLength(50);
+            builder.Entity<Address>().Property(c => c.HouseNumber).HasMaxLength(3);
+            builder.Entity<Address>().Property(c => c.Province).HasMaxLength(5);
+            builder.Entity<Address>().Property(c => c.City).HasMaxLength(50);
+            builder.Entity<Address>().Property(c => c.PostalCode).HasMaxLength(10);
+            builder.Entity<Address>().Property(c => c.Country).HasMaxLength(50);
+            builder.Entity<Address>().ToTable($"App{nameof(Addresses)}");
 
-            //builder.Entity<Order>().Property(o => o.Comments).HasMaxLength(500);
-            //builder.Entity<Order>().ToTable($"App{nameof(Orders)}");
-            //builder.Entity<Order>().Property(p => p.Discount).HasColumnType(priceDecimalType);
-
-            //builder.Entity<OrderDetail>().ToTable($"App{nameof(OrderDetails)}");
-            //builder.Entity<OrderDetail>().Property(p => p.UnitPrice).HasColumnType(priceDecimalType);
-            //builder.Entity<OrderDetail>().Property(p => p.Discount).HasColumnType(priceDecimalType);
         }
 
         public override int SaveChanges()

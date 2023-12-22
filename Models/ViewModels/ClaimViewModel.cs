@@ -9,10 +9,9 @@ using System.Linq;
 
 namespace QuickApp.ViewModels
 {
-    public class OrderViewModel
+    public class ClaimViewModel
     {
-        public int Id { get; set; }
-        public decimal Discount { get; set; }
-        public string Comments { get; set; }
+        public string Type { get; set; }
+        public string Value { get; set; }
     }
 }

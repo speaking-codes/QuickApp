@@ -6,6 +6,7 @@
 
 using AutoMapper;
 using DAL;
+using DAL.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuickApp.Helpers;
@@ -22,14 +23,14 @@ namespace QuickApp.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICustomerManager _customerManager;
         private readonly ILogger _logger;
         private readonly IEmailSender _emailSender;
 
-        public CustomerController(IMapper mapper, IUnitOfWork unitOfWork, ILogger<CustomerController> logger, IEmailSender emailSender)
+        public CustomerController(IMapper mapper, ICustomerManager customerManager, ILogger<CustomerController> logger, IEmailSender emailSender)
         {
             _mapper = mapper;
-            _unitOfWork = unitOfWork;
+            _customerManager = customerManager;
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -38,7 +39,7 @@ namespace QuickApp.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var allCustomers = _unitOfWork.Customers.GetAllCustomersData();
+            var allCustomers = _customerManager.GetCustomers();
             return Ok(_mapper.Map<IEnumerable<CustomerViewModel>>(allCustomers));
         }
 

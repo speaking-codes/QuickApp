@@ -4,11 +4,10 @@
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
 
-using DAL.Models;
 using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Models.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace DAL.Repositories
@@ -18,19 +17,25 @@ namespace DAL.Repositories
         public CustomerRepository(ApplicationDbContext context) : base(context)
         { }
 
-        public IEnumerable<Customer> GetTopActiveCustomers(int count)
+        public IQueryable<Customer> GetTopActiveCustomers(int count)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Customer> GetAllCustomersData()
+        public IQueryable<Customer> GetAllCustomers()
         {
             return _appContext.Customers
-                .Include(c => c.Orders).ThenInclude(o => o.OrderDetails).ThenInclude(d => d.Product)
-                .Include(c => c.Orders).ThenInclude(o => o.Cashier)
                 .AsSingleQuery()
-                .OrderBy(c => c.Name)
-                .ToList();
+                .OrderBy(c => c.FullName);
+        }
+
+        public IQueryable<Customer> GetCustomer(string taxIdCode)
+        {
+            return _appContext.Customers
+                            .Include(c => c.Deliveries)
+                            .Include(c => c.Addresses)
+                            .AsSingleQuery()
+                            .Where(c => c.TaxIdCode == taxIdCode);
         }
 
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;

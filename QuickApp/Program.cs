@@ -7,7 +7,6 @@
 using DAL;
 using DAL.Core;
 using DAL.Core.Interfaces;
-using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
+using Models.Entities;
 using OpenIddict.Validation.AspNetCore;
 using Quartz;
 using QuickApp.Authorization;
@@ -187,6 +187,7 @@ namespace QuickApp
             // Repositories
             builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
             builder.Services.AddScoped<IAccountManager, AccountManager>();
+            builder.Services.AddScoped<ICustomerManager, CustomerManager>();
 
             // Auth Handlers
             builder.Services.AddSingleton<IAuthorizationHandler, ViewUserAuthorizationHandler>();

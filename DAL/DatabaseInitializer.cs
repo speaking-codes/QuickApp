@@ -6,9 +6,10 @@
 
 using DAL.Core;
 using DAL.Core.Interfaces;
-using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Models.Entities;
+using Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,121 +106,315 @@ namespace DAL
 
                 var cust_1 = new Customer
                 {
-                    Name = "Ebenezer Monney",
-                    Email = "contact@ebenmonney.com",
-                    Gender = Gender.Male,
+                    FullName = "Ebenezer Monney",
+                    Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
+                    DateModified = DateTime.UtcNow,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Professional,
+                            Email = "contact@ebenmonney.com"
+                        }
+                    }
                 };
 
                 var cust_2 = new Customer
                 {
-                    Name = "Itachi Uchiha",
-                    Email = "uchiha@narutoverse.com",
-                    PhoneNumber = "+81123456789",
-                    Address = "Some fictional Address, Street 123, Konoha",
-                    City = "Konoha",
-                    Gender = Gender.Male,
+                    FullName = "Itachi Uchiha",
+                    Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
+                    DateModified = DateTime.UtcNow,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Professional,
+                             Email = "uchiha@narutoverse.com",
+                    PhoneNumber = "+81123456789"
+                        }
+                    },
+                    Addresses = new List<Address>
+                    {
+                        new Address
+                        {
+                            AddressType = EnumAddressType.Work,
+                                    Location = "Some fictional Address, Street 123, Konoha",
+                    City = "Konoha",
+                        }
+                    }
                 };
 
                 var cust_3 = new Customer
                 {
-                    Name = "John Doe",
-                    Email = "johndoe@anonymous.com",
-                    PhoneNumber = "+18585858",
-                    Address = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                    Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet",
-                    City = "Lorem Ipsum",
-                    Gender = Gender.Male,
+                    FullName = "John Doe",
+                    Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
+                    DateModified = DateTime.UtcNow,
+                    Deliveries = new List<Delivery>{
+                      new Delivery{
+                          DeliveryType = EnumDeliveryType.Personal,
+                          Email = "johndoe@anonymous.com",
+                    PhoneNumber = "+18585858",
+                      } },
                 };
 
                 var cust_4 = new Customer
                 {
-                    Name = "Jane Doe",
-                    Email = "Janedoe@anonymous.com",
-                    PhoneNumber = "+18585858",
-                    Address = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                    Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet",
-                    City = "Lorem Ipsum",
-                    Gender = Gender.Male,
+                    FullName = "Jane Doe",
+                    Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
+                    DateModified = DateTime.UtcNow,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType= EnumDeliveryType.Personal,
+                            Email = "Janedoe@anonymous.com",
+                    PhoneNumber = "+18585858",
+                        }
+                    }
                 };
 
-                //var prodCat_1 = new ProductCategory
-                //{
-                //    Name = "None",
-                //    Description = "Default category. Products that have not been assigned a category",
-                //    DateCreated = DateTime.UtcNow,
-                //    DateModified = DateTime.UtcNow
-                //};
+                var cust_5 = new Customer
+                {
+                    FullName = "Mario Rossi",
+                    TaxIdCode = "MR123456",
+                    BirthDate = new DateTime(1985, 5, 15),
+                    BirthPlace = "Roma",
+                    BirthCounty = "Italy",
+                    Gender = EnumGender.Male,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Personal,
+                                                Email = "mario@email.com",
+                    PhoneNumber = "+39 123456789"
+                        }
+                    },
+                    Addresses = new List<Address>
+                    {
+                        new Address
+                        {
+                            AddressType = EnumAddressType.Domicile,
+                                                Location = "Via Roma 1",
+                    City = "Roma",
+                    PostalCode = "00100",
+                    Province = "RM",
+                        }
+                    }
+                };
 
-                //var prod_1 = new Product
-                //{
-                //    Name = "BMW M6",
-                //    Description = "Yet another masterpiece from the world's best car manufacturer",
-                //    BuyingPrice = 109775,
-                //    SellingPrice = 114234,
-                //    UnitsInStock = 12,
-                //    IsActive = true,
-                //    ProductCategory = prodCat_1,
-                //    DateCreated = DateTime.UtcNow,
-                //    DateModified = DateTime.UtcNow
-                //};
+                var cust_6 = new Customer
+                {
+                    FullName = "Giulia Bianchi",
+                    TaxIdCode = "GB654321",
+                    BirthDate = new DateTime(1990, 8, 25),
+                    BirthPlace = "Milano",
+                    BirthCounty = "Italy",
+                    Gender = EnumGender.Female,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Personal,
+                              Email = "giulia@email.com",
+                    PhoneNumber = "+39 987654321"
+                        }
+                    },
+                    Addresses = new List<Address>
+                    {
+                        new Address
+                        {
+                            AddressType = EnumAddressType.Residence,
+                                                Location = "Via Milano 5",
+                    City = "Milano",
+                    PostalCode = "20100",
+                    Province = "MI",
 
-                //var prod_2 = new Product
-                //{
-                //    Name = "Nissan Patrol",
-                //    Description = "A true man's choice",
-                //    BuyingPrice = 78990,
-                //    SellingPrice = 86990,
-                //    UnitsInStock = 4,
-                //    IsActive = true,
-                //    ProductCategory = prodCat_1,
-                //    DateCreated = DateTime.UtcNow,
-                //    DateModified = DateTime.UtcNow
-                //};
+                        }
+                    }
+                };
 
-                //var ordr_1 = new Order
-                //{
-                //    Discount = 500,
-                //    Cashier = await _context.Users.OrderBy(u => u.UserName).FirstAsync(),
-                //    Customer = cust_1,
-                //    DateCreated = DateTime.UtcNow,
-                //    DateModified = DateTime.UtcNow,
-                //    OrderDetails = new List<OrderDetail>
-                //    {
-                //        new OrderDetail {UnitPrice = prod_1.SellingPrice, Quantity=1, Product = prod_1 },
-                //        new OrderDetail {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
-                //    }
-                //};
+                var cust_7 = new Customer
+                {
+                    FullName = "Marco Rossi",
+                    TaxIdCode = "MR123456",
+                    BirthDate = new DateTime(1985, 5, 15),
+                    BirthPlace = "Roma",
+                    BirthCounty = "Italy",
+                    Gender = EnumGender.Male,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Personal,
+                                                Email = "mario@email.com",
+                    PhoneNumber = "+39 123456789",
+                        }
+                    },
+                    Addresses = new List<Address>
+                    {
+                        new Address
+                        {
+                            AddressType = EnumAddressType.Work,
+                            Location= "Via Roma 1",
+                    City = "Roma",
+                    PostalCode = "00100",
+                    Province = "RM",
+                        }
+                    }
+                };
 
-                //var ordr_2 = new Order
-                //{
-                //    Cashier = await _context.Users.OrderBy(u => u.UserName).FirstAsync(),
-                //    Customer = cust_2,
-                //    DateCreated = DateTime.UtcNow,
-                //    DateModified = DateTime.UtcNow,
-                //    OrderDetails = new List<OrderDetail>
-                //    {
-                //        new OrderDetail {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
-                //    }
-                //};
+                var cust_8 = new Customer
+                {
+                    FullName = "Gilda Bianchi",
+                    TaxIdCode = "GB654321",
+                    BirthDate = new DateTime(1990, 8, 25),
+                    BirthPlace = "Milano",
+                    BirthCounty = "Italy",
+                    Gender = EnumGender.Female,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Professional,
+                                                Email = "giulia@email.com",
+                    PhoneNumber = "+39 987654321",
+                        }
+                    },
+                    Addresses = new List<Address>
+                    {
+                        new Address
+                        {
+                            AddressType= EnumAddressType.Residence,
+                            Location = "Via Milano 5",
+                    City = "Milano",
+                    PostalCode = "20100",
+                    Province = "MI",
+                        }
+                    }
+                };
+
+                var cust_9 = new Customer
+                {
+                    FullName = "Laura Verdi",
+                    TaxIdCode = "LV987654",
+                    BirthDate = new DateTime(1992, 3, 10),
+                    BirthPlace = "Napoli",
+                    BirthCounty = "Italy",
+                    Gender = EnumGender.Female,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Deliveries = new List<Delivery>
+{
+    new Delivery
+    {
+        DeliveryType = EnumDeliveryType.Personal,
+                            Email = "laura@email.com",
+                    PhoneNumber = "+39 555444333",
+    }
+},
+                    Addresses = new List<Address> {
+                    new Address
+                    {
+                        AddressType = EnumAddressType.Domicile,
+                        Location="Via Napoli 3",
+                    City = "Napoli",
+                    PostalCode = "80100",
+                    Province = "NA",
+                    }
+                    }
+                };
+
+                var cust_10 = new Customer
+                {
+                    FullName = "Luigi Gialli",
+                    TaxIdCode = "LG333222",
+                    BirthDate = new DateTime(1980, 12, 5),
+                    BirthPlace = "Torino",
+                    BirthCounty = "Italy",
+                    Gender = EnumGender.Male,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Professional,
+                                Email = "luigi@email.com",
+                    PhoneNumber = "+39 333444555",
+                        }
+                    },
+                    Addresses = new List<Address>
+                    {
+                        new Address
+                        {
+                            AddressType = EnumAddressType.Work,
+                            Location = "Via Torino 8",
+                    City = "Torino",
+                    PostalCode = "10100",
+                    Province = "TO",
+                        }
+                    }
+                };
+
+                var cust_11 = new Customer
+                {
+                    FullName = "Maria Rosso",
+                    TaxIdCode = "MR567890",
+                    BirthDate = new DateTime(1975, 7, 20),
+                    BirthPlace = "Palermo",
+                    BirthCounty = "Italy",
+                    Gender = EnumGender.Female,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Deliveries = new List<Delivery>
+                    {
+                        new Delivery
+                        {
+                            DeliveryType = EnumDeliveryType.Personal,
+                                                Email = "maria@email.com",
+                    PhoneNumber = "+39 777888999",
+                        }
+                    },
+                    Addresses = new List<Address>
+                    {
+                        new Address
+                        {
+                            AddressType = EnumAddressType.Domicile,
+                            Location= "Via Palermo 10",
+                    City = "Palermo",
+                    PostalCode = "90100",
+                    Province = "PA",
+
+                        }
+                    }
+                };
+
+                // E così via, fino a customer10 con dati diversi
 
                 _context.Customers.Add(cust_1);
                 _context.Customers.Add(cust_2);
                 _context.Customers.Add(cust_3);
                 _context.Customers.Add(cust_4);
-
-                //_context.Products.Add(prod_1);
-                //_context.Products.Add(prod_2);
-
-                //_context.Orders.Add(ordr_1);
-                //_context.Orders.Add(ordr_2);
+                _context.Customers.Add(cust_5);
+                _context.Customers.Add(cust_6);
+                _context.Customers.Add(cust_7);
+                _context.Customers.Add(cust_8);
+                _context.Customers.Add(cust_9);
+                _context.Customers.Add(cust_10);
+                _context.Customers.Add(cust_11);
 
                 await _context.SaveChangesAsync();
 

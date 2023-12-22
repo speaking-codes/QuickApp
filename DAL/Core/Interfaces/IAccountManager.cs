@@ -4,10 +4,8 @@
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
 
-using DAL.Models;
-using System;
+using Models.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.Core.Interfaces

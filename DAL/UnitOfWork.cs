@@ -15,8 +15,6 @@ namespace DAL
     {
         private readonly ApplicationDbContext _context;
         private ICustomerRepository _customers;
-        private IProductRepository _products;
-        private IOrdersRepository _orders;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -31,27 +29,7 @@ namespace DAL
 
                 return _customers;
             }
-        }
-
-        public IProductRepository Products
-        {
-            get
-            {
-                _products ??= new ProductRepository(_context);
-
-                return _products;
-            }
-        }
-
-        public IOrdersRepository Orders
-        {
-            get
-            {
-                _orders ??= new OrdersRepository(_context);
-
-                return _orders;
-            }
-        }
+        }       
 
         public int SaveChanges()
         {

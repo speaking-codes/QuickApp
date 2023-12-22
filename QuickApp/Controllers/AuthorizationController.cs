@@ -5,11 +5,11 @@
 // ---------------------------------------
 
 using DAL.Core;
-using DAL.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Models.Entities;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using System;

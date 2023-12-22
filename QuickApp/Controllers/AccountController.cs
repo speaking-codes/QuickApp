@@ -7,11 +7,11 @@
 using AutoMapper;
 using DAL.Core;
 using DAL.Core.Interfaces;
-using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Models.Entities;
 using QuickApp.Authorization;
 using QuickApp.Helpers;
 using QuickApp.ViewModels;
