@@ -58,7 +58,7 @@ import { RolesManagementComponent } from './components/controls/roles-management
 import { RoleEditorComponent } from './components/controls/role-editor.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-
+import { CompanyInsuranceComponent } from './company-insurance/company-insurance.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +81,8 @@ import { HeaderComponent } from './header/header.component';
     BootstrapTabDirective,
     GroupByPipe,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    CompanyInsuranceComponent
   ],
   imports: [
     BrowserModule,

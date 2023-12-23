@@ -66,10 +66,11 @@ namespace QuickApp.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{taxIdCode}")]
+        public IActionResult Get(string taxIdCode)
         {
-            return $"value: {id}";
+            var customer = _customerManager.GetCustomer(taxIdCode);
+            return Ok(_mapper.Map<CustomerViewModel>(customer));
         }
 
         // POST api/values

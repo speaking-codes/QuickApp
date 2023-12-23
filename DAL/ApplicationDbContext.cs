@@ -31,26 +31,41 @@ namespace DAL
 
             builder.Entity<ApplicationUser>().HasMany(u => u.Claims).WithOne().HasForeignKey(c => c.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
             builder.Entity<ApplicationUser>().HasMany(u => u.Roles).WithOne().HasForeignKey(r => r.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<ApplicationUser>().Property(c => c.CreatedBy).IsRequired(false);
+            builder.Entity<ApplicationUser>().Property(c => c.UpdatedBy).IsRequired(false);
+            builder.Entity<ApplicationUser>().Property(c => c.Configuration).IsRequired(false);
+            builder.Entity<ApplicationUser>().Property(c => c.JobTitle).IsRequired(false);
+            builder.Entity<ApplicationUser>().Property(c => c.FullName).IsRequired(false);
 
             builder.Entity<ApplicationRole>().HasMany(r => r.Claims).WithOne().HasForeignKey(c => c.RoleId).IsRequired().OnDelete(DeleteBehavior.Cascade);
             builder.Entity<ApplicationRole>().HasMany(r => r.Users).WithOne().HasForeignKey(r => r.RoleId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<ApplicationRole>().Property(c => c.CreatedBy).IsRequired(false);
+            builder.Entity<ApplicationRole>().Property(c => c.UpdatedBy).IsRequired(false);
 
             builder.Entity<Customer>().Property(c => c.FullName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.FullName);
-            builder.Entity<Customer>().Property(c => c.TaxIdCode).HasMaxLength(20);
+            builder.Entity<Customer>().Property(c => c.TaxIdCode).IsRequired(false).HasMaxLength(20);
             builder.Entity<Customer>().HasIndex(c => c.TaxIdCode);
+            builder.Entity<Customer>().Property(c => c.BirthPlace).IsRequired(false);
+            builder.Entity<Customer>().Property(c => c.BirthCounty).IsRequired(false);
+            builder.Entity<Customer>().Property(c => c.CreatedBy).IsRequired(false);
+            builder.Entity<Customer>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Customer>().ToTable($"App{nameof(Customers)}");
 
-            builder.Entity<Delivery>().Property(c => c.Email).HasMaxLength(100);
-            builder.Entity<Delivery>().Property(c => c.PhoneNumber).IsUnicode(false).HasMaxLength(30);
+            builder.Entity<Delivery>().Property(c => c.Email).HasMaxLength(100).IsRequired(false);
+            builder.Entity<Delivery>().Property(c => c.PhoneNumber).IsUnicode(false).IsRequired(false).HasMaxLength(30);
+            builder.Entity<Delivery>().Property(c => c.CreatedBy).IsRequired(false);
+            builder.Entity<Delivery>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Delivery>().ToTable($"App{nameof(Deliveries)}");
 
-            builder.Entity<Address>().Property(c => c.Location).HasMaxLength(50);
-            builder.Entity<Address>().Property(c => c.HouseNumber).HasMaxLength(3);
-            builder.Entity<Address>().Property(c => c.Province).HasMaxLength(5);
-            builder.Entity<Address>().Property(c => c.City).HasMaxLength(50);
-            builder.Entity<Address>().Property(c => c.PostalCode).HasMaxLength(10);
-            builder.Entity<Address>().Property(c => c.Country).HasMaxLength(50);
+            builder.Entity<Address>().Property(c => c.Location).HasMaxLength(50).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.HouseNumber).HasMaxLength(3).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.Province).HasMaxLength(5).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.City).HasMaxLength(50).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.PostalCode).HasMaxLength(10).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.Country).HasMaxLength(50).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.CreatedBy).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Address>().ToTable($"App{nameof(Addresses)}");
 
         }

@@ -1,0 +1,12 @@
+$footerHeight: 40px;
+
+.footer-height {
+    height: $footerHeight;
+  }
+  
+  footer {
+    width: 100%;
+    height: $footerHeight;
+    line-height: $footerHeight;
+    background-color: #f5f5f5;
+  }
