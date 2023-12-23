@@ -56,9 +56,8 @@ import { UserPreferencesComponent } from './components/controls/user-preferences
 import { UsersManagementComponent } from './components/controls/users-management.component';
 import { RolesManagementComponent } from './components/controls/roles-management.component';
 import { RoleEditorComponent } from './components/controls/role-editor.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { CompanyInsuranceComponent } from './company-insurance/company-insurance.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CompanyInsuranceComponent } from './components/company-insurance/company-insurance.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +80,6 @@ import { CompanyInsuranceComponent } from './company-insurance/company-insurance
     BootstrapTabDirective,
     GroupByPipe,
     FooterComponent,
-    HeaderComponent,
     CompanyInsuranceComponent
   ],
   imports: [

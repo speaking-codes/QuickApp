@@ -3,16 +3,10 @@
 
   <a class="close-navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target=".menuItemsContainer">
   </a>
-  <app-header></app-header>
-  <!-- <nav id="header" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+ 
+  <nav id="header" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container-xl px-md-3 px-xxl-4">
-      <a ngPreserveWhitespaces class="navbar-brand" routerLink="/">
-        <img src="{{pathLogo}}" class="d-inline-block align-top" alt="logo">
-        <span class="d-lg-none d-xl-inline">{{appTitle}}</span>
-      </a>
-      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".menuItemsContainer">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <app-company-insurance></app-company-insurance>
 
       <div *ngIf="isUserLoggedIn" class="collapse navbar-collapse menuItemsContainer">
         <ul class="nav nav-pills flex-column flex-lg-row flex-fill">
@@ -63,7 +57,7 @@
         </ul>
       </div>
     </div>
-  </nav> -->
+  </nav>
 
   <div id="pre-bootstrap" *ngIf="!isAppLoaded" class="prebootStep prebootShow">
     <div class="messaging">
