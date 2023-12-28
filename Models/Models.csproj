@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\**" />
-    <EmbeddedResource Remove="ViewModels\**" />
-    <None Remove="ViewModels\**" />
+    <Compile Remove="ViewModels\AutoMapperProfile.cs" />
+    <Compile Remove="ViewModels\ClaimViewModel.cs" />
+    <Compile Remove="ViewModels\Class1.cs" />
+    <Compile Remove="ViewModels\CustomerViewModel.cs" />
+    <Compile Remove="ViewModels\PageHeader.cs" />
+    <Compile Remove="ViewModels\PermissionViewModel.cs" />
+    <Compile Remove="ViewModels\RoleViewModel.cs" />
+    <Compile Remove="ViewModels\UserViewModels.cs" />
   </ItemGroup>
 
   <ItemGroup>

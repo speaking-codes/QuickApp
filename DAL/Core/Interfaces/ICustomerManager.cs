@@ -8,5 +8,6 @@ namespace DAL.Core.Interfaces
         IList<Customer> GetCustomers();
         Customer GetCustomer(string taxIdCode);
         IList<Customer> GetCustomersActive(string search);
+        int AddCustomer(Customer customer);
     }
 }

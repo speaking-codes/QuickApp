@@ -25,8 +25,10 @@ namespace DAL.Repositories
         public IQueryable<Customer> GetAllCustomers()
         {
             return _appContext.Customers
+                .Include(c => c.Addresses)
                 .AsSingleQuery()
-                .OrderBy(c => c.FullName);
+                .OrderBy(c => c.LastName)
+                .ThenBy(c => c.FirstName);
         }
 
         public IQueryable<Customer> GetCustomer(string taxIdCode)

@@ -1,8 +1,7 @@
 export class Customer {
-    fullName: string;
-    taxIdCode: string;
-    // birhDate: Date;
-    gender: string;
-    city: string;
-    province: string;
+    FullName: string;
+    TaxIdCode: string;
+    BirthDate: string;
+    Gender: string;
+    Residence: string;
 }

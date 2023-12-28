@@ -90,7 +90,7 @@ namespace DAL
                 PhoneNumber = phoneNumber,
                 EmailConfirmed = true,
                 IsEnabled = true,
-                CreatedBy= userName,
+                CreatedBy = userName,
                 CreatedDate = DateTime.UtcNow
             };
 
@@ -110,7 +110,8 @@ namespace DAL
 
                 var cust_1 = new Customer
                 {
-                    FullName = "Ebenezer Monney",
+                    FirstName = "Ebenezer",
+                    LastName = "Monney",
                     Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
                     DateModified = DateTime.UtcNow,
@@ -126,7 +127,8 @@ namespace DAL
 
                 var cust_2 = new Customer
                 {
-                    FullName = "Itachi Uchiha",
+                    FirstName = "Itachi",
+                    LastName="Uchiha",
                     Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
                     DateModified = DateTime.UtcNow,
@@ -152,7 +154,8 @@ namespace DAL
 
                 var cust_3 = new Customer
                 {
-                    FullName = "John Doe",
+                    FirstName = "John",
+                    LastName="Doe",
                     Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
                     DateModified = DateTime.UtcNow,
@@ -166,7 +169,8 @@ namespace DAL
 
                 var cust_4 = new Customer
                 {
-                    FullName = "Jane Doe",
+                    FirstName = "Jane",
+                    LastName="Doe",
                     Gender = EnumGender.Male,
                     DateCreated = DateTime.UtcNow,
                     DateModified = DateTime.UtcNow,
@@ -183,7 +187,8 @@ namespace DAL
 
                 var cust_5 = new Customer
                 {
-                    FullName = "Mario Rossi",
+                    FirstName = "Mario",
+                    LastName="Rossi",
                     TaxIdCode = "MR123456",
                     BirthDate = new DateTime(1985, 5, 15),
                     BirthPlace = "Roma",
@@ -215,7 +220,8 @@ namespace DAL
 
                 var cust_6 = new Customer
                 {
-                    FullName = "Giulia Bianchi",
+                    FirstName = "Giulia",
+                    LastName="Bianchi",
                     TaxIdCode = "GB654321",
                     BirthDate = new DateTime(1990, 8, 25),
                     BirthPlace = "Milano",
@@ -248,7 +254,8 @@ namespace DAL
 
                 var cust_7 = new Customer
                 {
-                    FullName = "Marco Rossi",
+                    FirstName = "Marco",
+                    LastName="Rossi",
                     TaxIdCode = "MR123456",
                     BirthDate = new DateTime(1985, 5, 15),
                     BirthPlace = "Roma",
@@ -280,7 +287,8 @@ namespace DAL
 
                 var cust_8 = new Customer
                 {
-                    FullName = "Gilda Bianchi",
+                    FirstName = "Gilda",
+                    LastName="Bianchi",
                     TaxIdCode = "GB654321",
                     BirthDate = new DateTime(1990, 8, 25),
                     BirthPlace = "Milano",
@@ -312,7 +320,8 @@ namespace DAL
 
                 var cust_9 = new Customer
                 {
-                    FullName = "Laura Verdi",
+                    FirstName = "Laura",
+                    LastName="Verdi",
                     TaxIdCode = "LV987654",
                     BirthDate = new DateTime(1992, 3, 10),
                     BirthPlace = "Napoli",
@@ -343,7 +352,8 @@ namespace DAL
 
                 var cust_10 = new Customer
                 {
-                    FullName = "Luigi Gialli",
+                    FirstName = "Luigi",
+                    LastName="Gialli",
                     TaxIdCode = "LG333222",
                     BirthDate = new DateTime(1980, 12, 5),
                     BirthPlace = "Torino",
@@ -375,7 +385,8 @@ namespace DAL
 
                 var cust_11 = new Customer
                 {
-                    FullName = "Maria Rosso",
+                    FirstName = "Maria",
+                    LastName="Rosso",
                     TaxIdCode = "MR567890",
                     BirthDate = new DateTime(1975, 7, 20),
                     BirthPlace = "Palermo",

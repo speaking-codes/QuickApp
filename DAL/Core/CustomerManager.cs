@@ -19,5 +19,11 @@ namespace DAL.Core
         public Customer GetCustomer(string taxIdCode) => _unitOfWork.Customers.GetCustomer(taxIdCode).FirstOrDefault();
 
         public IList<Customer> GetCustomersActive(string search) => new List<Customer>();
+
+        public int AddCustomer(Customer customer)
+        {
+            _unitOfWork.Customers.Add(customer);
+            return _unitOfWork.SaveChanges();
+        }
     }
 }
