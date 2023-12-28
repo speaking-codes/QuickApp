@@ -4,32 +4,79 @@
   </header>
 
   <div class="reduced-font text-link" [@fadeInOut]>
+    <div class="container">
+      <div class="row">        
+        <div class="col-12">
+          <p>{{companyDescription1}}</p>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col-12">
+          <p>{{companyDescription2}}</p>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col-12">
+          <p>{{companyDescription3}}</p>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col-12">
+          <p>{{companyDescription4}}</p>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col-12">
+          <p>{{companyDescription5}}</p>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col-12">
+          <p>{{companyDescription6}}</p>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col-12">
      <h3>
-      Qualche informazione su di noi
+      Qualche informazione in più su di noi
     </h3>
+        </div>
+      </div>
     <hr />
+    <div class="row">
+    <div class="col-6">
     <h5>La nostra sede principale si trova in:</h5>
+    </div>
+    <div class="col-6"><h5>I recapiti della nostra sede principale</h5></div>
+    </div>
+    <div class="row">
+      <div class="col-5 offset-1">
     <ul>
       <li>Indirizzo: {{companyAddress}}</li>
       <li>Città: {{companyPostalCode}} - {{companyCity}}</li>
       <li>Paese: {{companyCountry}}</li>      
-    </ul>
-    <hr />
-    <h5>I recapiti della nostra sede principale</h5>
-    <ul>
+    </ul></div>
+    <div class="col-5 offset-1">
+        <ul>
       <li>Email: {{companyEmail}}</li>
       <li>Numero di Telefono: {{companyPhoneNumber}}</li>
       <li>Numero di Fax: {{companyFaxNumber}}</li>
     </ul>
+    </div>
+    </div>
     <hr />
+    <div class="row">
+      <div class="col-12">
     <h5>Informazioni società</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
     <ul>
       <li>Capitale Sociale: {{companyCapitaleSociale}}</li>
     </ul>
-    <hr />
-    <h5>Descrizione:</h5>
-    <div *ngFor="let item of companyDescriptionList">
-      <p>{{item}}</p>
+      </div>
     </div>
+    <hr />    
   </div>
 </div>

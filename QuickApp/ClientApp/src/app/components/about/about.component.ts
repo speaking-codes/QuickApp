@@ -6,13 +6,13 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { fadeInOut } from '../../services/animations';
-import { InsuranceCompany } from 'src/app/models/insurance-company';
+import { fadeInOut } from 'src/app/services/animations';
 import { AboutService } from 'src/app/services/about.service';
 import { error } from 'console';
 import { AlertService, MessageSeverity } from 'src/app/services/alert.service';
 import { Utilities } from 'src/app/services/utilities';
 import { HttpResponse } from '@angular/common/http';
+import { IAbout, About } from 'src/app/models/iabout';
 
 @Component({
   selector: 'app-about',
@@ -23,7 +23,7 @@ import { HttpResponse } from '@angular/common/http';
 export class AboutComponent implements OnInit{
   private loadingIndicator = false;  
   
-  insuranceCompany: InsuranceCompany;
+  aboutCompany: About;
   companyName: string;
   companyAddress: string;
   companyCity: string;
@@ -32,10 +32,13 @@ export class AboutComponent implements OnInit{
   companyPhoneNumber: string;
   companyFaxNumber: string;
   companyEmail: string;
-  companyAbstract: string;
-  companyCapitaleSociale: string;
-  companyDescription: string;
-  companyDescriptionList: [string];
+  companyDescription1: string;
+  companyDescription2: string;
+  companyDescription3: string;
+  companyDescription4: string;
+  companyDescription5: string;
+  companyDescription6: string;
+  companyCapitaleSociale: string; 
 
   constructor(private aboutService: AboutService, private alertService: AlertService){}
 
@@ -49,21 +52,23 @@ export class AboutComponent implements OnInit{
         });
   }
 
-  onDataLoadSuccessful(insuranceCompany: InsuranceCompany){   
-    this.insuranceCompany = insuranceCompany;
-    this.insuranceCompany = insuranceCompany;
-    this.companyName = insuranceCompany.name;
-    this.companyAddress = insuranceCompany.address;
-    this.companyCity = insuranceCompany.city
-    this.companyPostalCode = insuranceCompany.postalCode;
-    this.companyCountry = insuranceCompany.country;
-    this.companyPhoneNumber = insuranceCompany.phoneNumber;
-    this.companyFaxNumber = insuranceCompany.faxNumber;
-    this.companyEmail = insuranceCompany.email;
-    this.companyAbstract = insuranceCompany.abstract;
-    this.companyCapitaleSociale = insuranceCompany.capitaleSociale;
-    this.companyDescription = insuranceCompany.description;
-    this.companyDescriptionList = insuranceCompany.descriptionList;
+  onDataLoadSuccessful(aboutCompany: IAbout){   
+    this.aboutCompany = aboutCompany as About;
+    this.companyName = aboutCompany.name;
+    this.companyAddress = aboutCompany.address;
+    this.companyCity = aboutCompany.city
+    this.companyPostalCode = aboutCompany.postalCode;
+    this.companyCountry = aboutCompany.country;
+    this.companyPhoneNumber = aboutCompany.phoneNumber;
+    this.companyFaxNumber = aboutCompany.faxNumber;
+    this.companyEmail = aboutCompany.email;
+    this.companyDescription1 = aboutCompany.description1;
+    this.companyDescription2 = aboutCompany.description2;
+    this.companyDescription3 = aboutCompany.description3;
+    this.companyDescription4 = aboutCompany.description4;
+    this.companyDescription5 = aboutCompany.description5;
+    this.companyDescription6 = aboutCompany.description6;
+    this.companyCapitaleSociale = aboutCompany.socialCapital;
   }
 
   onDataLoadFailed(error: HttpErrorResponse){
