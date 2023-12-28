@@ -3,8 +3,8 @@
 </header>
 
 <div [@fadeInOut]>
-  <!-- -- Sample Page Content --
-  <app-todo-demo [verticalScrollbar]="true"></app-todo-demo> -->
+  <!-- -- Sample Page Content ---->
+  <app-todo-demo [verticalScrollbar]="true"></app-todo-demo> 
 
 <div class="row control-box">
   <div class="col-lg-12">
@@ -15,13 +15,31 @@
   <ngx-datatable class="material colored-header sm table-x table-striped table-hover"
     [loadingIndicator]="loadingIndicator"
     [rows]="rows"
-    [rowHeight]="35"
-    [headerHeight]="37"
-    [footerHeight]="35"
+    [rowHeight]="55"
+    [headerHeight]="55"
+    [footerHeight]="55"
     [columns]="columns"
     [scrollbarV]="true"
     [columnMode]="'force'">
-</ngx-datatable>
+    <ngx-datatable-column name="index" [resizeable]="false"  [maxWidth]="40">
+      <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+    </ngx-datatable-column>
+      <ngx-datatable-column name="fullName" [resizeable]="false"  [maxWidth]="300">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="taxIdCode" [resizeable]="false"  [maxWidth]="160">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="birthDate" [resizeable]="false"  [maxWidth]="140">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="gender" [resizeable]="false" [maxWidth]="80">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="residence" [resizeable]="false">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+      </ngx-datatable-column>
+  </ngx-datatable>
 <!-- 
 <ng-template #statusHeaderTemplate>
   <i class="fa fa-check-square-o"></i>

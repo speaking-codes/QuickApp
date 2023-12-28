@@ -4,7 +4,7 @@
       <app-search-box (searchChange)="onSearchChanged($event)" placeholder="{{'todoDemo.management.Search' | translate}}"></app-search-box>
     </div>
   </div>
-  <!-- <div class="col-lg-4">
+  <div class="col-lg-4">
     <ul class="nav flex-row">
       <li [class.active]="hideCompletedTasks" class="nav-item toolbaritem">
         <a class="nav-link" href="javascript:;" (click)="hideCompletedTasks = !hideCompletedTasks"><i class="fa fa-eye-slash"></i> {{'todoDemo.management.HideCompleted' | translate}}</a>
@@ -13,7 +13,7 @@
         <a class="nav-link" href="javascript:;" (click)="addTask()"><i class="fa fa-plus"></i> {{'todoDemo.management.AddTask' | translate}}</a>
       </li>
     </ul>
-  </div> -->
+  </div>
 </div>
 <ngx-datatable class="material colored-header sm table-hover"
                [loadingIndicator]="loadingIndicator"
@@ -60,7 +60,7 @@
 </ng-template>
 
 
-<!-- <ng-template #editorModal let-modal>
+<ng-template #editorModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title"><i class="fa fa-tasks"></i> {{'todoDemo.editor.NewTask' | translate}}</h5>
     <button type="button" class="btn-close fs-sm" title="Close" (click)="modal.close()" tabindex="-1"></button>
@@ -110,4 +110,4 @@
       <div class="clearfix"></div>
     </form>
   </div>
-</ng-template> -->
+</ng-template>

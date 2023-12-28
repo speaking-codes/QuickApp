@@ -21,6 +21,7 @@ import { ConfigurationService } from './services/configuration.service';
 import { Alertify } from './models/Alertify';
 import { Permission } from './models/permission.model';
 import { LoginComponent } from './components/login/login.component';
+import { CompanyInsuranceComponent } from './components/company-insurance/company-insurance.component';
 
 declare let alertify: Alertify;
 

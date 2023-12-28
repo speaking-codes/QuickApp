@@ -46,16 +46,6 @@ export class CustomersComponent implements OnInit{
       { prop: 'details', name: '', canAutoResize: false, sortable: false}
     ];
 
-    this.columns.push({
-      name: '',
-      width: 160,
-      // cellTemplate: this.actionsTemplate,
-      resizeable: false,
-      canAutoResize: false,
-      sortable: false,
-      draggable: false
-    });
-
     this.loadData();
   }
 
