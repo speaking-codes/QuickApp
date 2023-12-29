@@ -1,7 +1,8 @@
 export class Customer {
-    FullName: string;
-    TaxIdCode: string;
-    BirthDate: string;
-    Gender: string;
-    Residence: string;
+    $$index: number;
+    fullName: string;
+    taxIdCode: string;
+    birthDate: string;
+    gender: string;
+    residence: string;
 }

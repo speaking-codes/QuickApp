@@ -3,24 +3,24 @@
 </header>
 
 <div [@fadeInOut]>
-  <!-- -- Sample Page Content ---->
-  <app-todo-demo [verticalScrollbar]="true"></app-todo-demo> 
-
-<div class="row control-box">
+ <div class="row control-box">
   <div class="col-lg-12">
     <div class="search-box">
-      <!-- <app-search-box (searchChange)="onSearchChanged($event)" placeholder="{{'todoDemo.management.Search' | translate}}"></app-search-box> -->
+      <app-search-box (searchChange)="updateFilter($event)" placeholder="{{'todoDemo.management.Search' | translate}}"></app-search-box>      
     </div>
   </div>
   <ngx-datatable class="material colored-header sm table-x table-striped table-hover"
     [loadingIndicator]="loadingIndicator"
     [rows]="rows"
-    [rowHeight]="55"
-    [headerHeight]="55"
-    [footerHeight]="55"
+    [rowHeight]="35"
+    [headerHeight]="45"
+    [footerHeight]="45"
+    [columnMode]="'force'"
     [columns]="columns"
-    [scrollbarV]="true"
-    [columnMode]="'force'">
+    [scrollbarV]="verticalScrollbar"
+    [columnMode]="'force'"
+    [limit]="5"
+    [selectionType]="'single'">
     <ngx-datatable-column name="index" [resizeable]="false"  [maxWidth]="40">
       <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
     </ngx-datatable-column>

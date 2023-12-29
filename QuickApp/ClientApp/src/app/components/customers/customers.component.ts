@@ -3,23 +3,27 @@
 // Templates: www.ebenmonney.com/templates
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
+// ---------------------------------------
 
-import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { AuthService } from 'src/app/services/auth.service';
+import { AppTranslationService } from 'src/app/services/app-translation.service';
+import { LocalStoreManager } from 'src/app/services/local-store-manager.service';
+
+import { Component, OnInit, OnDestroy, Input, TemplateRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TableColumn } from '@swimlane/ngx-datatable';
 import { SearchBoxComponent } from '../controls/search-box.component';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { Customer } from 'src/app/models/customer';
-import { Role } from 'src/app/models/role.model';
 
 import { fadeInOut } from '../../services/animations';
 import { CustomerService } from 'src/app/services/customer.service';
 import { AlertService, DialogType, MessageSeverity } from 'src/app/services/alert.service';
 import { Utilities } from 'src/app/services/utilities';
-
-interface CustomerIndex extends Customer{
-  index: number;
-}
 
 @Component({
   selector: 'app-customers',
@@ -27,12 +31,17 @@ interface CustomerIndex extends Customer{
   styleUrls: ['./customers.component.scss'],
   animations: [fadeInOut]
 })
-export class CustomersComponent implements OnInit{
+export class CustomersComponent implements OnInit, OnDestroy {
   columns: TableColumn[] = [];
   rows: Customer[] = [];
   rowsCache: Customer[] = [];
   loadingIndicator = false;  
   
+  @Input()
+  verticalScrollbar = false;
+  
+  @ViewChild(DatatableComponent) table: DatatableComponent;
+
   constructor(private customerService: CustomerService, private alertService: AlertService){}
   
   ngOnInit(): void {
@@ -49,6 +58,10 @@ export class CustomersComponent implements OnInit{
     this.loadData();
   }
 
+  ngOnDestroy(): void {
+    
+  }
+
   loadData(): void{
     this.loadingIndicator = true;
  
@@ -59,16 +72,12 @@ export class CustomersComponent implements OnInit{
         });
   }
 
-  onDataLoadSuccessful(customers: Customer[]) {
+  onDataLoadSuccessful(data: Customer[]) {
     this.alertService.stopLoadingMessage();
     this.loadingIndicator = false;
-
-    customers.forEach((customer, index) => {
-      (customer as CustomerIndex).index = index + 1;
-    });
-
-    this.rowsCache = [...customers];
-    this.rows = customers;
+    this.refreshDataIndexes(data);
+    this.rows = data;
+    this.rowsCache = [...data];
   }
   
   onDataLoadFailed(error: HttpErrorResponse) {
@@ -78,5 +87,32 @@ export class CustomersComponent implements OnInit{
     this.alertService.showStickyMessage('Load Error',
       `Unable to retrieve users from the server.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
       MessageSeverity.error, error);
+  }
+
+  updateFilter(searchValue) {
+    //const value = event.target.value;
+    if (!searchValue)
+    {
+      this.rows = this.rowsCache;
+      this.table.offset = 0;
+      return
+    }
+    
+    // filter our data
+    this.rows = this.rowsCache.filter(function (c) {      
+      Utilities.searchArray(searchValue, false, c.fullName) === true;
+    });
+
+    // update the rows
+    // Whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
+  }
+
+  refreshDataIndexes(data: Customer[]) {
+    let index = 0;
+
+    for (const i of data) {
+      i.$$index = index++;
+    }
   }
 }

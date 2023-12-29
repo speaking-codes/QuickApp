@@ -173,7 +173,7 @@ export class TodoDemoComponent implements OnInit, OnDestroy {
     this.rows = this.rowsCache.filter(r =>
       Utilities.searchArray(value, false, r.name, r.description) ||
       value === 'important' && r.important ||
-      value === 'not important' && !r.important);
+      value === 'not important' && !r.important);    
   }
 
   showErrorAlert(caption: string, message: string) {
