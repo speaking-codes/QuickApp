@@ -5,4 +5,5 @@ export class Customer {
     birthDate: string;
     gender: string;
     residence: string;
+    isActive: boolean
 }

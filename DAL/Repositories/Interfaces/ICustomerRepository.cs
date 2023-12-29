@@ -11,8 +11,9 @@ namespace DAL.Repositories.Interfaces
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
-        IQueryable<Customer> GetTopActiveCustomers(int count);
+        IQueryable<Customer> GetActiveCustomers();
         IQueryable<Customer> GetAllCustomers();
-        IQueryable<Customer> GetCustomer(string taxIdCode);   
+        IQueryable<Customer> GetCustomer(string taxIdCode);
+        void Update(Customer customer);
     }
 }

@@ -46,7 +46,7 @@ namespace DAL
             builder.Entity<Customer>().HasIndex(c => c.FirstName);
             builder.Entity<Customer>().Property(c => c.LastName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.LastName);
-            builder.Entity<Customer>().Property(c => c.TaxIdCode).IsRequired(false).HasMaxLength(20);
+            builder.Entity<Customer>().Property(c => c.TaxIdCode).IsRequired().HasMaxLength(250);
             builder.Entity<Customer>().HasIndex(c => c.TaxIdCode);
             builder.Entity<Customer>().Property(c => c.BirthPlace).IsRequired(false);
             builder.Entity<Customer>().Property(c => c.BirthCounty).IsRequired(false);

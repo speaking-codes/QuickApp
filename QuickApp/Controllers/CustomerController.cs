@@ -87,9 +87,10 @@ namespace QuickApp.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{taxIdCode}")]
+        public void Delete(string taxIdCode)
         {
+            _customerManager.DeleteCustomer(taxIdCode);
         }
     }
 }

@@ -7,7 +7,8 @@ namespace DAL.Core.Interfaces
     {
         IList<Customer> GetCustomers();
         Customer GetCustomer(string taxIdCode);
-        IList<Customer> GetCustomersActive(string search);
+        IList<Customer> GetActiveCustomers();
         int AddCustomer(Customer customer);
+        void DeleteCustomer(string taxIdCode);
     }
 }

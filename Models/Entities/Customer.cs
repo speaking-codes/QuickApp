@@ -19,6 +19,9 @@ namespace Models.Entities
         public EnumGender Gender { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
+        public ContractType ContractType { get; set; }
+        public double? RAL { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual IList<Delivery> Deliveries { get; set; }
 

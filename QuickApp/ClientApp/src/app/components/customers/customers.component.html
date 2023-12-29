@@ -12,66 +12,49 @@
   <ngx-datatable class="material colored-header sm table-x table-striped table-hover"
     [loadingIndicator]="loadingIndicator"
     [rows]="rows"
-    [rowHeight]="35"
+    [rowHeight]="40"
     [headerHeight]="45"
     [footerHeight]="45"
     [columnMode]="'force'"
     [columns]="columns"
     [scrollbarV]="verticalScrollbar"
     [columnMode]="'force'"
-    [limit]="5"
+    [limit]="pageSize"
     [selectionType]="'single'">
-    <ngx-datatable-column name="index" [resizeable]="false"  [maxWidth]="40">
+    <ngx-datatable-column name="" prop="index" [resizeable]="false"  [maxWidth]="10">
       <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
     </ngx-datatable-column>
-      <ngx-datatable-column name="fullName" [resizeable]="false"  [maxWidth]="300">
+      <ngx-datatable-column name="Nominativo" prop="fullName" [resizeable]="false">
         <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="taxIdCode" [resizeable]="false"  [maxWidth]="160">
+      <ngx-datatable-column name="Codice Fiscale" prop="taxIdCode" [resizeable]="false" [maxWidth]="140">
         <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="birthDate" [resizeable]="false"  [maxWidth]="140">
+      <ngx-datatable-column name="Data di Nascita" prop="birthDate" [resizeable]="false"  [maxWidth]="120">
         <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="gender" [resizeable]="false" [maxWidth]="80">
-        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+      <ngx-datatable-column name="Sesso" prop="gender" [resizeable]="false" [maxWidth]="80">
+        <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+          <p *ngIf="isCustomerMale(row)"><i class="fa fa-male"></i></p>
+          <p *ngIf="!isCustomerMale(row)"><i class="fa fa-female"></i></p>
+        </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="residence" [resizeable]="false">
+      <ngx-datatable-column name="Residenza" prop="residence" [resizeable]="false" [maxWidth]="140">
         <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
-      </ngx-datatable-column>
-  </ngx-datatable>
-<!-- 
-<ng-template #statusHeaderTemplate>
-  <i class="fa fa-check-square-o"></i>
-</ng-template>
-
-<ng-template #statusTemplate let-row="row" let-value="value">
-  <div class="form-check">
-    <input class="form-check-input" attr.name="checkboxes-{{value}}" type="checkbox" [(ngModel)]="row.completed">
-  </div>
-</ng-template>
-
-<ng-template #nameTemplate let-row="row" let-value="value">
-  <span *ngIf="!editing[row.$$index + '-name']" class="inline-label" [class.completed]="row.completed" attr.title="Double click to edit - {{value}}" (dblclick)="editing[row.$$index + '-name'] = true">
-    {{value}}
-  </span>
-  <input *ngIf="editing[row.$$index + '-name']" class="inline-editor" appAutofocus (blur)="updateValue($event, 'name', value, row)" type="text" [value]="value" />
-</ng-template>
-
-<ng-template #descriptionTemplate let-row="row" let-value="value">
-  <span *ngIf="!editing[row.$$index + '-description']" class="inline-label" [class.completed]="row.completed" attr.title="Double click to edit - {{value}}" (dblclick)="editing[row.$$index + '-description'] = true">
-    {{value}}
-  </span>
-  <input *ngIf="editing[row.$$index + '-description']" class="inline-editor" appAutofocus (blur)="updateValue($event, 'description', value, row)" type="text" [value]="value" />
-</ng-template>
-
-<ng-template #actionsTemplate let-row="row">
-  <a class="btn btn-link btn-sm" href="javascript:;" ngbTooltip="{{'todoDemo.management.Delete' | translate}}" container="body" (click)="delete(row)">
-    <i class="fa fa-times"></i>
-  </a>
-  <a class="btn btn-link btn-sm" href="javascript:;" ngbTooltip="{{'todoDemo.management.Important' | translate}}" container="body" (click)="row.important = !row.important">
-    <i [ngClass]="row.important ? 'fa fa-bookmark' : 'fa fa-bookmark-o'"></i>
-  </a>
-</ng-template> -->
+      </ngx-datatable-column> 
+      <ngx-datatable-column name="Stato" prop="state" [resizeable]="false" [maxWidth]="80">
+        <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+          <p *ngIf="isCustomerActive(row)"><i class="fa fa-check"></i></p>
+          <p *ngIf="!isCustomerActive(row)"><i class="fa fa-times"></i></p>
+        </ng-template>
+      </ngx-datatable-column>  
+      <ngx-datatable-column name="Azioni" sortable="false" prop="actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="detailsCustomer(row)"><i class="fa fa-eye" aria-hidden="true"></i> Dettagli</a> 
+          <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="editCustomer(row)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifica</a>
+          <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="deleteCustomer(row)"><i class="fa fa-trash-o" aria-hidden="true"></i> Rimuovi</a> 
+        </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>  
 </div>
 </div>

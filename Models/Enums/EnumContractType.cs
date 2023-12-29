@@ -1,10 +1,14 @@
 ﻿namespace Models.Enums
 {
-    //public enum ContractType
-    //{
-    //    Fixed term
-    //        Indefinite period
-    //        VAT number
-    //        to Project
-    //}
+    public enum ContractType
+    {
+        [ValueInfo(Name = "Contratto a Tempo Determinato")]
+        FixedTerm,
+        [ValueInfo(Name = "Contratto a Tempo Indeterminato")]
+        IndefinitePeriod,
+        [ValueInfo(Name = "Contratto a Partita IVA")]
+        VATNumber,
+        [ValueInfo(Name = "Contratto a Progetto")]
+        ToProject
+    }
 }

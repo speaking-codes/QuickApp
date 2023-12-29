@@ -6,7 +6,6 @@
 // ---------------------------------------
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { AuthService } from 'src/app/services/auth.service';
 import { AppTranslationService } from 'src/app/services/app-translation.service';
 import { LocalStoreManager } from 'src/app/services/local-store-manager.service';
@@ -40,10 +39,17 @@ export class CustomersComponent implements OnInit, OnDestroy {
   @Input()
   verticalScrollbar = false;
   
+  @Input()
+  pageSize = 12;
+
   @ViewChild(DatatableComponent) table: DatatableComponent;
 
   constructor(private customerService: CustomerService, private alertService: AlertService){}
   
+  isCustomerActive(data: Customer) { return data.isActive; }
+
+  isCustomerMale(data: Customer) { return data.gender.toLowerCase() === "uomo"; }
+
   ngOnInit(): void {
     this.columns = [
       { prop: 'index', name: '#', width: 40, canAutoResize: false, sortable: false },
@@ -52,7 +58,8 @@ export class CustomersComponent implements OnInit, OnDestroy {
       { prop: 'taxIdCode', name: 'Codice Fiscale', canAutoResize: false, sortable: true },
       { prop: 'gender', name: 'Sesso', canAutoResize: false, sortable: false},
       { prop: 'city', name: 'Residenza', canAutoResize: false, sortable: false},
-      { prop: 'details', name: '', canAutoResize: false, sortable: false}
+      { prop: 'state', name: 'Stato', canAutoResize: false, sortable: false },
+      { prop: 'actions', name: 'Azioni', canAutoResize: false, sortable: false}
     ];
 
     this.loadData();
@@ -90,7 +97,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   updateFilter(searchValue) {
-    //const value = event.target.value;
     if (!searchValue)
     {
       this.rows = this.rowsCache;
@@ -98,13 +104,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
       return
     }
     
-    // filter our data
-    this.rows = this.rowsCache.filter(function (c) {      
-      Utilities.searchArray(searchValue, false, c.fullName) === true;
-    });
-
-    // update the rows
-    // Whenever the filter changes, always go back to the first page
+    this.rows = this.rowsCache.filter(function (c) { Utilities.searchArray(searchValue, false, c.fullName); });
     this.table.offset = 0;
   }
 
@@ -114,5 +114,17 @@ export class CustomersComponent implements OnInit, OnDestroy {
     for (const i of data) {
       i.$$index = index++;
     }
+  }
+
+  detailsCustomer(data: Customer){
+    console.log('Details of Customer: ' + data.fullName);
+  }
+
+  editCustomer(data: Customer){
+    console.log('Edit Customer: ' + data.fullName);
+  }
+
+  deleteCustomer(data: Customer){
+    console.log('Delete Customer: ' + data.fullName);
   }
 }

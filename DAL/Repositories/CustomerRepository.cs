@@ -17,9 +17,14 @@ namespace DAL.Repositories
         public CustomerRepository(ApplicationDbContext context) : base(context)
         { }
 
-        public IQueryable<Customer> GetTopActiveCustomers(int count)
+        public IQueryable<Customer> GetActiveCustomers()
         {
-            throw new NotImplementedException();
+            return _appContext.Customers
+                .Include(c => c.Addresses)
+                .AsSingleQuery()
+                .Where(x => x.IsActive)
+                .OrderBy(c => c.LastName)
+                .ThenBy(c => c.FirstName);
         }
 
         public IQueryable<Customer> GetAllCustomers()
@@ -39,6 +44,8 @@ namespace DAL.Repositories
                             .AsSingleQuery()
                             .Where(c => c.TaxIdCode == taxIdCode);
         }
+
+        public void Update(Customer customer) => base.Update(customer);
 
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
     }
