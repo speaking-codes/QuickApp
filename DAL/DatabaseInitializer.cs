@@ -37,8 +37,8 @@ namespace DAL
 
         public async Task SeedAsync()
         {
-            //await _context.Database.EnsureDeletedAsync();
-            //await _context.Database.EnsureCreatedAsync();
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.EnsureCreatedAsync();
             //await _context.Database.MigrateAsync().ConfigureAwait(false);
             await SeedDefaultUsersAsync();
             await SeedDemoDataAsync();

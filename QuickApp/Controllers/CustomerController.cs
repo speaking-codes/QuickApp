@@ -44,6 +44,13 @@ namespace QuickApp.Controllers
             return Ok(_mapper.Map<IEnumerable<CustomerGridViewModel>>(allCustomers));
         }
 
+        [HttpGet("active")]
+        public IActionResult GetActive()
+        {
+            var activeCustomers = _customerManager.GetActiveCustomers();
+            return Ok(_mapper.Map<IEnumerable<CustomerGridViewModel>>(activeCustomers));
+        }
+
         //[HttpGet("throw")]
         //public IEnumerable<CustomerViewModel> Throw()
         //{
