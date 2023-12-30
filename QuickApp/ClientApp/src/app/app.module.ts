@@ -59,6 +59,7 @@ import { RoleEditorComponent } from './components/controls/role-editor.component
 import { FooterComponent } from './components/footer/footer.component';
 import { CompanyInsuranceComponent } from './components/company-insurance/company-insurance.component';
 import { CustomerGridComponent } from './components/customers/customer-grid/customer-grid.component';
+import { CustomerEditorComponent } from './components/customers/customer-editor/customer-editor.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { CustomerGridComponent } from './components/customers/customer-grid/cust
     GroupByPipe,
     FooterComponent,
     CompanyInsuranceComponent,
-    CustomerGridComponent
+    CustomerGridComponent,
+    CustomerEditorComponent
   ],
   imports: [
     BrowserModule,

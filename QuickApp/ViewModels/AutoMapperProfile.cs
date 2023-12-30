@@ -54,6 +54,15 @@ namespace QuickApp.ViewModels
             CreateMap<Customer, CustomerViewModel>()
                 .ReverseMap();
 
+            CreateMap<Customer, CustomerEditViewModel>()
+                .ReverseMap();
+
+            CreateMap<Address, AddressViewModel>()
+                .ReverseMap();
+
+            CreateMap<Delivery, DeliveryViewModel>()
+                .ReverseMap();
+
             CreateMap<Customer, CustomerGridViewModel>()
                 .ForMember(d => d.FullName, map => map.MapFrom(s => $"{s.LastName} {s.FirstName}"))
                 .ForMember(d => d.BirthDate, map => map.MapFrom(s => s.BirthDate.ToString("dd MMM yyyy")))

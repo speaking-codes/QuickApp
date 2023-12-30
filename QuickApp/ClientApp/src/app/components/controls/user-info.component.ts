@@ -100,7 +100,7 @@ export class UserInfoComponent implements OnInit {
         .subscribe({
           next: user => this.onCurrentUserDataLoadSuccessful(user, user.roles.map(role => new Role(role))),
           error: error => this.onCurrentUserDataLoadFailed(error)
-        });
+        });   
     }
   }
 

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Customer } from '../models/customer';
+import { CustomerDetailHeader, CustomerGrid } from '../models/customer';
 import { CustomerEndpointService } from './customer-endpoint.service';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs';
 
 export type CustomerChangedOperation = 'add' | 'delete' | 'modify';
-export interface CustomersChangedEventArg { customers: Customer[] | string[]; operation: CustomerChangedOperation; }
+export interface CustomersChangedEventArg { customers: CustomerGrid[] | string[]; operation: CustomerChangedOperation; }
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +20,19 @@ export class CustomerService {
   constructor(private customerEndpoint: CustomerEndpointService) { }
 
   getCustomers() {
-    return this.customerEndpoint.getCustomersEndpoint<Customer>();    
+    return this.customerEndpoint.getCustomersEndpoint<CustomerGrid>();    
   }
 
-  deleteCustomer(data: Customer): Observable<Customer> {
-      return this.customerEndpoint.getDeleteCustomerEndpoint<Customer>(data.taxIdCode).pipe<Customer>(
+  getCustomer(taxIdCode: string): Observable<CustomerDetailHeader> {
+    return this.customerEndpoint.getCustomerEndpoint(taxIdCode);
+  }
+  
+  deleteCustomer(data: CustomerGrid): Observable<CustomerGrid> {
+      return this.customerEndpoint.getDeleteCustomerEndpoint<CustomerGrid>(data.taxIdCode).pipe<CustomerGrid>(
         tap(data => this.onCustomersChanged([data], CustomerService.customerDeletedOperation)));    
   }
 
-  private onCustomersChanged(customers: Customer[] | string[], op: CustomerChangedOperation) {
+  private onCustomersChanged(customers: CustomerGrid[] | string[], op: CustomerChangedOperation) {
     this.customersChanged.next({ customers, operation: op });
   }
 }

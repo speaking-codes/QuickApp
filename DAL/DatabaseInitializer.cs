@@ -37,8 +37,8 @@ namespace DAL
 
         public async Task SeedAsync()
         {
-            await _context.Database.EnsureDeletedAsync();
-            await _context.Database.EnsureCreatedAsync();
+            //await _context.Database.EnsureDeletedAsync();
+            //await _context.Database.EnsureCreatedAsync();
             //await _context.Database.MigrateAsync().ConfigureAwait(false);
             await SeedDefaultUsersAsync();
             await SeedDemoDataAsync();
@@ -126,10 +126,11 @@ namespace DAL
                                 Email = "contact@ebenmonney.com"
                             }
                         },
+                        Profession="Fabbro",
                         ContractType = ContractType.VATNumber,
                         RAL = 15000,
                         TaxIdCode = $"EM{DateTime.UtcNow.Ticks}{i}",
-                        IsActive = (rnd.Next(9)%2)==0
+                        IsActive = (rnd.Next(9)%2)==0                        
                     };
 
                     var cust_2 = new Customer
@@ -158,6 +159,7 @@ namespace DAL
                                 Province ="KN"
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.VATNumber,
                         RAL = 150000,
                         TaxIdCode = $"IU{DateTime.UtcNow.Ticks}{i}",
@@ -177,6 +179,7 @@ namespace DAL
                                 Email = "johndoe@anonymous.com",
                                 PhoneNumber = "+18585858",
                             } },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"JD{DateTime.UtcNow.Ticks}{i}",
@@ -199,6 +202,7 @@ namespace DAL
                                 PhoneNumber = "+18585858",
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"JD{DateTime.UtcNow.Ticks}{i}",
@@ -235,6 +239,7 @@ namespace DAL
                                 Province = "RM",
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"MR{DateTime.UtcNow.Ticks}{i}",
@@ -271,6 +276,7 @@ namespace DAL
                                 Province = "MI",
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"GB{DateTime.UtcNow.Ticks}{i}",
@@ -307,6 +313,7 @@ namespace DAL
                                 Province = "RM",
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"MR{DateTime.UtcNow.Ticks}{i}",
@@ -343,6 +350,7 @@ namespace DAL
                                 Province = "MI",
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"MB{DateTime.UtcNow.Ticks}{i}",
@@ -378,6 +386,7 @@ namespace DAL
                                 Province = "NA",
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"LV{DateTime.UtcNow.Ticks}{i}",
@@ -414,6 +423,7 @@ namespace DAL
                                 Province = "TO",
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"LG{DateTime.UtcNow.Ticks}{i}",
@@ -451,6 +461,7 @@ namespace DAL
 
                             }
                         },
+                        Profession = "Fabbro",
                         ContractType = ContractType.ToProject,
                         RAL = 15000,
                         TaxIdCode = $"RR{DateTime.UtcNow.Ticks}{i}",

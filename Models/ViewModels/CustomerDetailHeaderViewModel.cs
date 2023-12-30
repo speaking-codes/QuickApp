@@ -8,6 +8,7 @@ namespace Models.ViewModels
 {
     public class CustomerDetailHeaderViewModel
     {
+        public string TaxIdCode { get; set; }
         public string FullName { get; set; }
         public string Residence { get; set; }
         public string PhoneNumber { get; set; }

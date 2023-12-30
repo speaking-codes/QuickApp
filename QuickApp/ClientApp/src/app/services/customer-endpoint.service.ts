@@ -19,7 +19,7 @@ export class CustomerEndpointService extends EndpointBase {
     super(http, authService);
   }
 
-  getCustomersEndpoint<T>(){
+  getCustomersEndpoint<T>() {
     return this.http.get<T>(this.customersActiveUrl, this.requestHeaders).pipe(
       catchError(error =>{
         console.log('error');
@@ -28,6 +28,15 @@ export class CustomerEndpointService extends EndpointBase {
     );
   }
 
+  getCustomerEndpoint<T>(taxIdCode: string): Observable<T> {
+    const endpointUrl = `${this.customersUrl}/${taxIdCode}`;
+
+    return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
+      catchError(error => {
+        return this.handleError(error, () => this.getCustomerEndpoint<T>(taxIdCode));
+      }));
+  }
+  
   getDeleteCustomerEndpoint<T>(taxIdCode: string): Observable<T> {
     const endpointUrl = `${this.customersUrl}/${taxIdCode}`;
 

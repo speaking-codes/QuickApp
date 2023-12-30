@@ -17,11 +17,12 @@ namespace Models.Entities
         public string BirthPlace { get; set; }
         public string BirthCounty { get; set; }
         public EnumGender Gender { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateModified { get; set; }
+        public string Profession { get; set; }
         public ContractType ContractType { get; set; }
         public double? RAL { get; set; }
         public bool IsActive { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateModified { get; set; }
 
         public virtual IList<Delivery> Deliveries { get; set; }
 

@@ -74,11 +74,14 @@ namespace QuickApp.Controllers
         //}
 
         // GET api/values/5
-        [HttpGet("{taxIdCode}")]
-        public IActionResult Get(string taxIdCode)
+        [HttpGet("foredit/{taxIdCode}")]
+        public IActionResult GetForEdit(string taxIdCode)
         {
             var customer = _customerManager.GetCustomer(taxIdCode);
-            return Ok(_mapper.Map<CustomerDetailHeaderViewModel>(customer));
+            var customerViewModel = _mapper.Map<CustomerEditViewModel>(customer);
+            customerViewModel.AddressList = _mapper.Map<IList<AddressViewModel>>(customer.Addresses);
+            customerViewModel.DeliveryList = _mapper.Map<IList<DeliveryViewModel>>(customer.Deliveries);
+            return Ok(customerViewModel);
         }
 
         // POST api/values
