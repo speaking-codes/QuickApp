@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CustomerDetailHeader, CustomerGrid } from '../models/customer';
+import { CustomerEdit, CustomerGrid } from '../models/customer';
 import { CustomerEndpointService } from './customer-endpoint.service';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs';
@@ -23,7 +23,7 @@ export class CustomerService {
     return this.customerEndpoint.getCustomersEndpoint<CustomerGrid>();    
   }
 
-  getCustomer(taxIdCode: string): Observable<CustomerDetailHeader> {
+  getCustomer(taxIdCode: string): Observable<CustomerEdit> {
     return this.customerEndpoint.getCustomerEndpoint(taxIdCode);
   }
   

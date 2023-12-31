@@ -12,7 +12,16 @@ export class CustomerGrid extends Customer{
 }    
 
 export class CustomerEdit extends Customer {
-
+    firstName: string;
+    lastName: string;
+    taxIdCode: string;
+    birthDate: string;
+    birthPlace: string;
+    birthCounty: string;
+    gender: string;
+    profession: string;
+    contractType: string;
+    ral: number;
 }
 
 export class CustomerDetailHeader extends Customer{

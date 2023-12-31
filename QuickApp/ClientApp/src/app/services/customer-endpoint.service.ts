@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class CustomerEndpointService extends EndpointBase {
   get customersUrl() { return this.configurations.baseUrl + '/api/Customer';}
+  get customerForEditUrl() { return this.configurations.baseUrl + '/api/Customer/foredit'; }
   get customersActiveUrl() { return this.configurations.baseUrl + '/api/Customer/Active';}
   get customerByTaxIdCode() { return this.configurations.baseUrl + '/api/Customer/taxidcode'; }
  
@@ -29,7 +30,7 @@ export class CustomerEndpointService extends EndpointBase {
   }
 
   getCustomerEndpoint<T>(taxIdCode: string): Observable<T> {
-    const endpointUrl = `${this.customersUrl}/${taxIdCode}`;
+    const endpointUrl = `${this.customerForEditUrl}/${taxIdCode}`;
 
     return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
       catchError(error => {
