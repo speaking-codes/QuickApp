@@ -2,9 +2,11 @@
 {
     public enum EnumDeliveryType
     {
+        [ValueInfo(Name = "Non Specificato")]
+        None,
         [ValueInfo(Name = "Privato")]
-        Personal,
+        Privato,
         [ValueInfo(Name = "Lavoro")]
-        Professional
+        Lavorativo
     }
 }

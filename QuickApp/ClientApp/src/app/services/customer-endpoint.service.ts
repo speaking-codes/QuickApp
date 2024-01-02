@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { error } from 'console';
 import { Observable } from 'rxjs';
+import { CustomerEdit } from '../models/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class CustomerEndpointService extends EndpointBase {
   }
 
   getCustomersEndpoint<T>() {
-    return this.http.get<T>(this.customersActiveUrl, this.requestHeaders).pipe(
+    return this.http.get<T>(this.customersUrl, this.requestHeaders).pipe(
       catchError(error =>{
         console.log('error');
         return this.handleError(error, () => this.getCustomersEndpoint<T>())
@@ -46,4 +47,13 @@ export class CustomerEndpointService extends EndpointBase {
         return this.handleError(error, () => this.getDeleteCustomerEndpoint<T>(taxIdCode));
       }));
   }
+
+  getNewCustomerEndpoint<T>(customer: CustomerEdit): Observable<T>{
+    const endpointUrl = this.customersUrl;
+    return this.http.post<T>(endpointUrl, JSON.stringify(customer), this.requestHeaders).pipe(
+      catchError(error => {
+        return this.handleError(error, () => this.getNewCustomerEndpoint<T>(customer));
+      })
+    );
+  }  
 }

@@ -102,6 +102,15 @@ namespace DAL
             return applicationUser;
         }
 
+        private string getTaxIdCode(string initial, int id)
+        {
+            var ticks = DateTime.UtcNow.Ticks.ToString();
+            var offset = ticks.Length - (ticks.Length - (initial.Length + id.ToString().Length));
+            offset = offset < 0 ? 0 : offset;            
+            ticks = ticks.Substring(offset);
+            return $"{initial}{ticks}{id}";
+        }
+
         private async Task SeedDemoDataAsync()
         {
             var rnd = new Random(42);
@@ -115,36 +124,36 @@ namespace DAL
                     {
                         FirstName = "Ebenezer",
                         LastName = "Monney",
-                        Gender = EnumGender.Male,
+                        Gender = EnumGender.Uomo,
                         DateCreated = DateTime.UtcNow,
                         DateModified = DateTime.UtcNow,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Professional,
+                                DeliveryType = EnumDeliveryType.Lavorativo,
                                 Email = "contact@ebenmonney.com"
                             }
                         },
-                        Profession="Fabbro",
-                        ContractType = ContractType.VATNumber,
+                        Profession = "Fabbro",
+                        ContractType = ContractType.Contratto_Partita_Iva,
                         RAL = 15000,
-                        TaxIdCode = $"EM{DateTime.UtcNow.Ticks}{i}",
-                        IsActive = (rnd.Next(9)%2)==0                        
+                        TaxIdCode = getTaxIdCode("EM", i),
+                        IsActive = (rnd.Next(9) % 2) == 0
                     };
 
                     var cust_2 = new Customer
                     {
                         FirstName = "Itachi",
                         LastName = "Uchiha",
-                        Gender = EnumGender.Male,
+                        Gender = EnumGender.Uomo,
                         DateCreated = DateTime.UtcNow,
                         DateModified = DateTime.UtcNow,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Professional,
+                                DeliveryType = EnumDeliveryType.Lavorativo,
                                 Email = "uchiha@narutoverse.com",
                                 PhoneNumber = "+81123456789"
                             }
@@ -153,16 +162,16 @@ namespace DAL
                         {
                             new Address
                             {
-                                AddressType = EnumAddressType.Work,
+                                AddressType = EnumAddressType.Lavoro,
                                 Location = "Some fictional Address, Street 123, Konoha",
                                 City = "Konoha",
                                 Province ="KN"
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.VATNumber,
+                        ContractType = ContractType.Contratto_Partita_Iva,
                         RAL = 150000,
-                        TaxIdCode = $"IU{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("IU", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -170,19 +179,19 @@ namespace DAL
                     {
                         FirstName = "John",
                         LastName = "Doe",
-                        Gender = EnumGender.Male,
+                        Gender = EnumGender.Uomo,
                         DateCreated = DateTime.UtcNow,
                         DateModified = DateTime.UtcNow,
                         Deliveries = new List<Delivery> {
                             new Delivery {
-                                DeliveryType = EnumDeliveryType.Personal,
+                                DeliveryType = EnumDeliveryType.Privato,
                                 Email = "johndoe@anonymous.com",
                                 PhoneNumber = "+18585858",
                             } },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"JD{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("JD",i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -190,22 +199,22 @@ namespace DAL
                     {
                         FirstName = "Jane",
                         LastName = "Doe",
-                        Gender = EnumGender.Male,
+                        Gender = EnumGender.Uomo,
                         DateCreated = DateTime.UtcNow,
                         DateModified = DateTime.UtcNow,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Personal,
+                                DeliveryType = EnumDeliveryType.Privato,
                                 Email = "Janedoe@anonymous.com",
                                 PhoneNumber = "+18585858",
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"JD{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("JD",i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -216,14 +225,14 @@ namespace DAL
                         BirthDate = new DateTime(1985, 5, 15),
                         BirthPlace = "Roma",
                         BirthCounty = "Italy",
-                        Gender = EnumGender.Male,
+                        Gender = EnumGender.Uomo,
                         DateCreated = DateTime.Now,
                         DateModified = DateTime.Now,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Personal,
+                                DeliveryType = EnumDeliveryType.Privato,
                                 Email = "mario@email.com",
                                 PhoneNumber = "+39 123456789"
                             }
@@ -232,7 +241,7 @@ namespace DAL
                         {
                             new Address
                             {
-                                AddressType = EnumAddressType.Domicile,
+                                AddressType = EnumAddressType.Domicilio,
                                 Location = "Via Roma 1",
                                 City = "Roma",
                                 PostalCode = "00100",
@@ -240,9 +249,9 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"MR{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("MR", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -253,14 +262,14 @@ namespace DAL
                         BirthDate = new DateTime(1990, 8, 25),
                         BirthPlace = "Milano",
                         BirthCounty = "Italy",
-                        Gender = EnumGender.Female,
+                        Gender = EnumGender.Donna,
                         DateCreated = DateTime.Now,
                         DateModified = DateTime.Now,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Personal,
+                                DeliveryType = EnumDeliveryType.Privato,
                                 Email = "giulia@email.com",
                                 PhoneNumber = "+39 987654321"
                             }
@@ -269,7 +278,7 @@ namespace DAL
                         {
                             new Address
                             {
-                                AddressType = EnumAddressType.Residence,
+                                AddressType = EnumAddressType.Residenza,
                                 Location = "Via Milano 5",
                                 City = "Milano",
                                 PostalCode = "20100",
@@ -277,9 +286,9 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"GB{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("GB", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -290,14 +299,14 @@ namespace DAL
                         BirthDate = new DateTime(1985, 5, 15),
                         BirthPlace = "Roma",
                         BirthCounty = "Italy",
-                        Gender = EnumGender.Male,
+                        Gender = EnumGender.Uomo,
                         DateCreated = DateTime.Now,
                         DateModified = DateTime.Now,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Personal,
+                                DeliveryType = EnumDeliveryType.Privato,
                                 Email = "mario@email.com",
                                 PhoneNumber = "+39 123456789",
                             }
@@ -306,7 +315,7 @@ namespace DAL
                         {
                             new Address
                             {
-                                AddressType = EnumAddressType.Work,
+                                AddressType = EnumAddressType.Lavoro,
                                 Location = "Via Roma 1",
                                 City = "Roma",
                                 PostalCode = "00100",
@@ -314,9 +323,9 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"MR{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("MR", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -327,14 +336,14 @@ namespace DAL
                         BirthDate = new DateTime(1990, 8, 25),
                         BirthPlace = "Milano",
                         BirthCounty = "Italy",
-                        Gender = EnumGender.Female,
+                        Gender = EnumGender.Donna,
                         DateCreated = DateTime.Now,
                         DateModified = DateTime.Now,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Professional,
+                                DeliveryType = EnumDeliveryType.Lavorativo,
                                 Email = "giulia@email.com",
                                 PhoneNumber = "+39 987654321",
                             }
@@ -343,7 +352,7 @@ namespace DAL
                         {
                             new Address
                             {
-                                AddressType = EnumAddressType.Residence,
+                                AddressType = EnumAddressType.Residenza,
                                 Location = "Via Milano 5",
                                 City = "Milano",
                                 PostalCode = "20100",
@@ -351,9 +360,9 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"MB{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("MB", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -364,14 +373,14 @@ namespace DAL
                         BirthDate = new DateTime(1992, 3, 10),
                         BirthPlace = "Napoli",
                         BirthCounty = "Italy",
-                        Gender = EnumGender.Female,
+                        Gender = EnumGender.Donna,
                         DateCreated = DateTime.Now,
                         DateModified = DateTime.Now,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Personal,
+                                DeliveryType = EnumDeliveryType.Privato,
                                 Email = "laura@email.com",
                                 PhoneNumber = "+39 555444333",
                             }
@@ -379,7 +388,7 @@ namespace DAL
                         Addresses = new List<Address> {
                             new Address
                             {
-                                AddressType = EnumAddressType.Domicile,
+                                AddressType = EnumAddressType.Domicilio,
                                 Location = "Via Napoli 3",
                                 City = "Napoli",
                                 PostalCode = "80100",
@@ -387,9 +396,9 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"LV{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("LV", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -400,14 +409,14 @@ namespace DAL
                         BirthDate = new DateTime(1980, 12, 5),
                         BirthPlace = "Torino",
                         BirthCounty = "Italy",
-                        Gender = EnumGender.Male,
+                        Gender = EnumGender.Uomo,
                         DateCreated = DateTime.Now,
                         DateModified = DateTime.Now,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Professional,
+                                DeliveryType = EnumDeliveryType.Lavorativo,
                                 Email = "luigi@email.com",
                                 PhoneNumber = "+39 333444555",
                             }
@@ -416,7 +425,7 @@ namespace DAL
                         {
                             new Address
                             {
-                                AddressType = EnumAddressType.Work,
+                                AddressType = EnumAddressType.Lavoro,
                                 Location = "Via Torino 8",
                                 City = "Torino",
                                 PostalCode = "10100",
@@ -424,9 +433,9 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"LG{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("LG", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -437,14 +446,14 @@ namespace DAL
                         BirthDate = new DateTime(1975, 7, 20),
                         BirthPlace = "Palermo",
                         BirthCounty = "Italy",
-                        Gender = EnumGender.Female,
+                        Gender = EnumGender.Donna,
                         DateCreated = DateTime.Now,
                         DateModified = DateTime.Now,
                         Deliveries = new List<Delivery>
                         {
                             new Delivery
                             {
-                                DeliveryType = EnumDeliveryType.Personal,
+                                DeliveryType = EnumDeliveryType.Privato,
                                 Email = "maria@email.com",
                                 PhoneNumber = "+39 777888999",
                             }
@@ -453,7 +462,7 @@ namespace DAL
                         {
                             new Address
                             {
-                                AddressType = EnumAddressType.Domicile,
+                                AddressType = EnumAddressType.Domicilio,
                                 Location = "Via Palermo 10",
                                 City = "Palermo",
                                 PostalCode = "90100",
@@ -462,9 +471,9 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.ToProject,
+                        ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = $"RR{DateTime.UtcNow.Ticks}{i}",
+                        TaxIdCode = getTaxIdCode("RR", i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 

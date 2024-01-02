@@ -4,9 +4,9 @@
     {
         [ValueInfo(Name = "Non specificato")]
         None,
-        [ValueInfo(Name = "Donna")]
-        Female,
         [ValueInfo(Name = "Uomo")]
-        Male
+        Uomo,
+        [ValueInfo(Name = "Donna")]
+        Donna
     }
 }

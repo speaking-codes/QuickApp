@@ -44,7 +44,6 @@ export class AboutComponent implements OnInit{
 
   ngOnInit(): void{
     this.loadingIndicator = true;
-    debugger;
     this.aboutService.getInsuranceCompanyAbout()
         .subscribe({
             next: results => this.onDataLoadSuccessful(results),

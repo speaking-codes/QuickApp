@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{4F76CCB0-1A50-4DDF-85A9-05DD77CF998D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctionTransferPolicy", "AzureFunctionTransferPolicy\AzureFunctionTransferPolicy.csproj", "{94E7C71C-A3F6-4A1C-B430-81ED371FE442}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{4F76CCB0-1A50-4DDF-85A9-05DD77CF998D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F76CCB0-1A50-4DDF-85A9-05DD77CF998D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F76CCB0-1A50-4DDF-85A9-05DD77CF998D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94E7C71C-A3F6-4A1C-B430-81ED371FE442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E7C71C-A3F6-4A1C-B430-81ED371FE442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E7C71C-A3F6-4A1C-B430-81ED371FE442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E7C71C-A3F6-4A1C-B430-81ED371FE442}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

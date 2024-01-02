@@ -1,3 +1,7 @@
+import { Address } from "./address";
+import { Delivery } from "./delivery";
+import { EnumContractType, EnumGender } from "./enums";
+
 export class Customer {
     taxIdCode: string;
 }
@@ -12,16 +16,19 @@ export class CustomerGrid extends Customer{
 }    
 
 export class CustomerEdit extends Customer {
+    taxIdCode: string;
     firstName: string;
     lastName: string;
-    taxIdCode: string;
     birthDate: string;
     birthPlace: string;
     birthCounty: string;
-    gender: string;
+    gender: EnumGender;
     profession: string;
-    contractType: string;
+    contractType: EnumContractType;
     ral: number;
+
+    addressList: Address[];
+    deliveryList: Delivery[];   
 }
 
 export class CustomerDetailHeader extends Customer{

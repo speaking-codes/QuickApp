@@ -2,13 +2,15 @@
 {
     public enum ContractType
     {
+        [ValueInfo(Name = "Non Specificato")]
+        None,
         [ValueInfo(Name = "Contratto a Tempo Determinato")]
-        FixedTerm,
+        Contratto_Tempo_Determinato,
         [ValueInfo(Name = "Contratto a Tempo Indeterminato")]
-        IndefinitePeriod,
+        Contratto_Tempo_Indeterminato,
         [ValueInfo(Name = "Contratto a Partita IVA")]
-        VATNumber,
+        Contratto_Partita_Iva,
         [ValueInfo(Name = "Contratto a Progetto")]
-        ToProject
+        Contratto_CO_CO_PRO
     }
 }

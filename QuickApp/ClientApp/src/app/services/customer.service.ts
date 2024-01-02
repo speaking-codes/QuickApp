@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CustomerEdit, CustomerGrid } from '../models/customer';
+import { Customer, CustomerEdit, CustomerGrid } from '../models/customer';
 import { CustomerEndpointService } from './customer-endpoint.service';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs';
 
 export type CustomerChangedOperation = 'add' | 'delete' | 'modify';
 export interface CustomersChangedEventArg { customers: CustomerGrid[] | string[]; operation: CustomerChangedOperation; }
+export interface CustomerChangedEventArg { customer: CustomerEdit | string; operation: CustomerChangedOperation; }
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class CustomerService {
   public static readonly customerModifiedOperation: CustomerChangedOperation = 'modify';
   
   private customersChanged = new Subject<CustomersChangedEventArg>();
-  
+  private customerChanged = new Subject<CustomerChangedEventArg>();
+
   constructor(private customerEndpoint: CustomerEndpointService) { }
 
   getCustomers() {
@@ -32,7 +34,30 @@ export class CustomerService {
         tap(data => this.onCustomersChanged([data], CustomerService.customerDeletedOperation)));    
   }
 
+  // updateRole(role: Role) {
+  //   if (role.id) {
+  //     return this.accountEndpoint.getUpdateRoleEndpoint(role, role.id).pipe(
+  //       tap(() => this.onRolesChanged([role], AccountService.roleModifiedOperation)));
+  //   } else {
+  //     return this.accountEndpoint.getRoleByRoleNameEndpoint<Role>(role.name).pipe(
+  //       mergeMap(foundRole => {
+  //         role.id = foundRole.id;
+  //         return this.accountEndpoint.getUpdateRoleEndpoint(role, role.id);
+  //       }),
+  //       tap(() => this.onRolesChanged([role], AccountService.roleModifiedOperation)));
+  //   }
+  // }
+
+  newCustomer(customer: CustomerEdit) {
+    return this.customerEndpoint.getNewCustomerEndpoint<CustomerEdit>(customer).pipe<CustomerEdit>(
+      tap(() => this.onCustomerChanged(customer, CustomerService.customerAddedOperation)));
+  }
+
   private onCustomersChanged(customers: CustomerGrid[] | string[], op: CustomerChangedOperation) {
     this.customersChanged.next({ customers, operation: op });
+  }
+
+  private onCustomerChanged(customer: CustomerEdit | string, op: CustomerChangedOperation) {
+    this.customerChanged.next({ customer, operation: op });
   }
 }

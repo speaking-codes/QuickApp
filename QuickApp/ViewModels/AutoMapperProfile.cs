@@ -55,6 +55,7 @@ namespace QuickApp.ViewModels
                 .ReverseMap();
 
             CreateMap<Customer, CustomerEditViewModel>()
+                .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetName()))
                 .ReverseMap();
 
             CreateMap<Address, AddressViewModel>()

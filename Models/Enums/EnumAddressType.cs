@@ -2,11 +2,13 @@
 {
     public enum EnumAddressType
     {
+        [ValueInfo(Name = "Non Specificato")]
+        None,
         [ValueInfo(Name = "Residenza")]
-        Residence,
+        Residenza,
         [ValueInfo(Name = "Lavoro")]
-        Work,
+        Lavoro,
         [ValueInfo(Name = "Domicilio")]
-        Domicile
+        Domicilio
     }
 }
