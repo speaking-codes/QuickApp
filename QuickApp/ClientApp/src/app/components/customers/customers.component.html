@@ -1,5 +1,8 @@
- <header class="pageHeader">
+<header class="pageHeader">
   <h3><i class="fa fa-handshake-o fa-lg page-caption" aria-hidden="true"></i> {{'pageHeader.Customers' | translate}}</h3>
 </header>
 
-<app-customer-grid [verticalScrollbar]="false" [pageSize]="10"></app-customer-grid>
+<div [@fadeInOut]>
+  <!---- Sample Page Content ---->
+  <app-todo-demo [verticalScrollbar]="true"></app-todo-demo>
+</div>

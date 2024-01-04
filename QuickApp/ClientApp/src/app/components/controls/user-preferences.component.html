@@ -22,7 +22,11 @@
     <div class="col-sm-4">
       <ng-select id="language" [(ngModel)]="configurations.language" [searchable]="false" [clearable]="false" class="form-control">
         <ng-option [value]="'en'">{{'preferences.English' | translate}} <small class="text-muted"><i>({{'preferences.Default' | translate}})</i></small></ng-option>
-        <ng-option [value]="'it'">{{'preferences.Italian' | translate}}</ng-option>
+        <ng-option [value]="'fr'">{{'preferences.French' | translate}}</ng-option>
+        <ng-option [value]="'de'">{{'preferences.German' | translate}}</ng-option>
+        <ng-option [value]="'pt'">{{'preferences.Portuguese' | translate}}</ng-option>
+        <ng-option [value]="'ar'">{{'preferences.Arabic' | translate}}</ng-option>
+        <ng-option [value]="'ko'">{{'preferences.Korean' | translate}}</ng-option>
       </ng-select>
     </div>
     <div class="col-sm-5">

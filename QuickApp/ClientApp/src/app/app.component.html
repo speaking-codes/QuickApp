@@ -3,10 +3,16 @@
 
   <a class="close-navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target=".menuItemsContainer">
   </a>
- 
+
   <nav id="header" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container-xl px-md-3 px-xxl-4">
-      <app-company-insurance></app-company-insurance>
+      <a ngPreserveWhitespaces class="navbar-brand" routerLink="/">
+        <img src="assets/images/logo-white.png" class="d-inline-block align-top" alt="logo">
+        <span class="d-lg-none d-xl-inline">{{appTitle}}</span>
+      </a>
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".menuItemsContainer">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
       <div *ngIf="isUserLoggedIn" class="collapse navbar-collapse menuItemsContainer">
         <ul class="nav nav-pills flex-column flex-lg-row flex-fill">
@@ -76,5 +82,13 @@
     <div class="footer-height"></div>
   </main>
 
-<app-footer></app-footer>
+  <footer class="footer fixed-bottom">
+    <div class="container">
+      <p class="text-center text-muted">
+        <span style="font-style:italic">quick</span>App &copy; {{getYear()}}
+        <a class="text-link" href="https://www.ebenmonney.com" target="_blank">www.ebenmonney.com</a>
+        <!--<span class="small display-none">- Powered by <a href="https://www.ebenmonney.com/quickapp" target="_blank"><span style="font-style:italic">quick</span>App</a></span>-->
+      </p>
+    </div>
+  </footer>
 </div>

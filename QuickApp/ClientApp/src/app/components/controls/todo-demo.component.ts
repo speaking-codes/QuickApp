@@ -8,11 +8,12 @@ import { Component, OnInit, OnDestroy, Input, TemplateRef, ViewChild } from '@an
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TableColumn } from '@swimlane/ngx-datatable';
 
-import { AuthService } from 'src/app/services/auth.service';
-import { AlertService, MessageSeverity, DialogType } from 'src/app/services/alert.service';
-import { AppTranslationService } from 'src/app/services/app-translation.service';
-import { LocalStoreManager } from 'src/app/services/local-store-manager.service';
-import { Utilities } from 'src/app/services/utilities';
+import { AuthService } from '../../services/auth.service';
+import { AlertService, MessageSeverity, DialogType } from '../../services/alert.service';
+import { AppTranslationService } from '../../services/app-translation.service';
+import { LocalStoreManager } from '../../services/local-store-manager.service';
+import { Utilities } from '../../services/utilities';
+
 
 interface Todo {
   $$index?: number;
@@ -144,13 +145,6 @@ export class TodoDemoComponent implements OnInit, OnDestroy {
               description: 'Create tutorials (blog/video/youtube) on how to build applications (full stack)' +
                 ' using aspnet-core/Angular. The tutorial will focus on getting productive with the technology right away rather than the details on how and why they work so audience can get onboard quickly.'
             },
-            {
-              completed: true,
-              important: true,
-              name: 'Create aspnet-core/Angular tutorials based on this project',
-              description: 'Create tutorials (blog/video/youtube) on how to build applications (full stack)' +
-                ' using aspnet-core/Angular. The tutorial will focus on getting productive with the technology right away rather than the details on how and why they work so audience can get onboard quickly.'
-            }
           ];
         }
 
@@ -173,7 +167,7 @@ export class TodoDemoComponent implements OnInit, OnDestroy {
     this.rows = this.rowsCache.filter(r =>
       Utilities.searchArray(value, false, r.name, r.description) ||
       value === 'important' && r.important ||
-      value === 'not important' && !r.important);    
+      value === 'not important' && !r.important);
   }
 
   showErrorAlert(caption: string, message: string) {

@@ -21,7 +21,6 @@ import { ConfigurationService } from './services/configuration.service';
 import { Alertify } from './models/Alertify';
 import { Permission } from './models/permission.model';
 import { LoginComponent } from './components/login/login.component';
-import { CompanyInsuranceComponent } from './components/company-insurance/company-insurance.component';
 
 declare let alertify: Alertify;
 
@@ -35,8 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isAppLoaded = false;
   isUserLoggedIn = false;
   newNotificationCount = 0;
-  appTitle = 'Dat - Assicurazioni';
-  pathLogo = "assets/images/logo-white.png";
+  appTitle = 'QuickApp';
 
   stickyToasties: number[] = [];
 
@@ -77,7 +75,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.toastaConfig.showDuration = false;
 
     AppTitleService.appName = this.appTitle;
-    AppTitleService.pathLogo = this.pathLogo;
   }
 
   ngOnInit() {

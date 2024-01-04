@@ -164,35 +164,35 @@ export class RolesManagementComponent implements OnInit {
   }
 
   openRoleEditor() {
-    // const modalRef = this.modalService.open(this.editorModalTemplate, {
-    //   size: 'lg',
-    //   backdrop: 'static'
-    // });
+    const modalRef = this.modalService.open(this.editorModalTemplate, {
+      size: 'lg',
+      backdrop: 'static'
+    });
 
-    // modalRef.shown.subscribe(() => {
-    //   if (!this.roleEditor)
-    //     throw new Error('The role editor component was not set.');
+    modalRef.shown.subscribe(() => {
+      if (!this.roleEditor)
+        throw new Error('The role editor component was not set.');
 
-    //   this.roleEditor.changesSavedCallback = () => {
-    //     this.addNewRoleToList();
-    //     modalRef.close();
-    //   };
+      this.roleEditor.changesSavedCallback = () => {
+        this.addNewRoleToList();
+        modalRef.close();
+      };
 
-    //   this.roleEditor.changesCancelledCallback = () => {
-    //     this.editedRole = null;
-    //     this.sourceRole = null;
-    //     modalRef.close();
-    //   };
-    // });
+      this.roleEditor.changesCancelledCallback = () => {
+        this.editedRole = null;
+        this.sourceRole = null;
+        modalRef.close();
+      };
+    });
 
-    // modalRef.hidden.subscribe(() => {
-    //   if (!this.roleEditor)
-    //     throw new Error('The role editor component was not set.');
+    modalRef.hidden.subscribe(() => {
+      if (!this.roleEditor)
+        throw new Error('The role editor component was not set.');
 
-    //   this.editingRoleName = null;
-    //   this.roleEditor.resetForm(true);
-    //   this.roleEditor = null;
-    // });
+      this.editingRoleName = null;
+      this.roleEditor.resetForm(true);
+      this.roleEditor = null;
+    });
   }
 
   deleteRole(row: Role) {
