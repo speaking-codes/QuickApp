@@ -13,6 +13,7 @@ import { Utilities } from './utilities';
 @Injectable()
 export class AppTitleService extends TitleStrategy {
   static appName: string | undefined;
+  static pathLogo: string | undefined;
 
   constructor(private readonly titleService: Title) {
     super();

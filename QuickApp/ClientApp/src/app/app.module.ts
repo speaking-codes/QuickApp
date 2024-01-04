@@ -56,7 +56,10 @@ import { UserPreferencesComponent } from './components/controls/user-preferences
 import { UsersManagementComponent } from './components/controls/users-management.component';
 import { RolesManagementComponent } from './components/controls/roles-management.component';
 import { RoleEditorComponent } from './components/controls/role-editor.component';
-
+import { FooterComponent } from './components/footer/footer.component';
+import { CompanyInsuranceComponent } from './components/company-insurance/company-insurance.component';
+import { CustomerGridComponent } from './components/customers/customer-grid/customer-grid.component';
+import { CustomerEditorComponent } from './components/customers/customer-editor/customer-editor.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +80,11 @@ import { RoleEditorComponent } from './components/controls/role-editor.component
     EqualValidator,
     AutofocusDirective,
     BootstrapTabDirective,
-    GroupByPipe
+    GroupByPipe,
+    CompanyInsuranceComponent,
+    FooterComponent,
+    CustomerGridComponent,
+    CustomerEditorComponent
   ],
   imports: [
     BrowserModule,

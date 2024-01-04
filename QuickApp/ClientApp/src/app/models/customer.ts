@@ -1,5 +1,3 @@
-import { Address } from "./address";
-import { Delivery } from "./delivery";
 import { EnumContractType, EnumGender } from "./enums";
 
 export class Customer {
@@ -25,10 +23,7 @@ export class CustomerEdit extends Customer {
     gender: EnumGender;
     profession: string;
     contractType: EnumContractType;
-    ral: number;
-
-    addressList: Address[];
-    deliveryList: Delivery[];   
+    ral: number;  
 }
 
 export class CustomerDetailHeader extends Customer{
