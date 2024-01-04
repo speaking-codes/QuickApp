@@ -34,19 +34,10 @@ export class CustomerService {
         tap(data => this.onCustomersChanged([data], CustomerService.customerDeletedOperation)));    
   }
 
-  // updateRole(role: Role) {
-  //   if (role.id) {
-  //     return this.accountEndpoint.getUpdateRoleEndpoint(role, role.id).pipe(
-  //       tap(() => this.onRolesChanged([role], AccountService.roleModifiedOperation)));
-  //   } else {
-  //     return this.accountEndpoint.getRoleByRoleNameEndpoint<Role>(role.name).pipe(
-  //       mergeMap(foundRole => {
-  //         role.id = foundRole.id;
-  //         return this.accountEndpoint.getUpdateRoleEndpoint(role, role.id);
-  //       }),
-  //       tap(() => this.onRolesChanged([role], AccountService.roleModifiedOperation)));
-  //   }
-  // }
+  updateCustomer(customer: CustomerEdit) {
+      return this.customerEndpoint.getUpdateCustomerEndpoint(customer.taxIdCode, customer).pipe(
+        tap(() => this.onCustomerChanged(customer, CustomerService.customerModifiedOperation)));    
+  }
 
   newCustomer(customer: CustomerEdit) {
     return this.customerEndpoint.getNewCustomerEndpoint<CustomerEdit>(customer).pipe<CustomerEdit>(

@@ -48,11 +48,20 @@ export class CustomerEndpointService extends EndpointBase {
       }));
   }
 
-  getNewCustomerEndpoint<T>(customer: CustomerEdit): Observable<T>{
+  getNewCustomerEndpoint<T>(customer: CustomerEdit): Observable<T>{    
     const endpointUrl = this.customersUrl;
     return this.http.post<T>(endpointUrl, JSON.stringify(customer), this.requestHeaders).pipe(
       catchError(error => {
         return this.handleError(error, () => this.getNewCustomerEndpoint<T>(customer));
+      })
+    );
+  }  
+
+  getUpdateCustomerEndpoint<T>(taxIdCode:string, customer: CustomerEdit): Observable<T>{
+    const endpointUrl = '${this.customerForEditUrl}/${taxIdCode}';
+    return this.http.put<T>(endpointUrl, JSON.stringify(customer), this.requestHeaders).pipe(
+      catchError(error => {
+        return this.handleError(error, () => this.getUpdateCustomerEndpoint<T>(taxIdCode, customer));
       })
     );
   }  
