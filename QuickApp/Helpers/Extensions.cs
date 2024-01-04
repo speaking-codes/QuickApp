@@ -33,6 +33,11 @@ namespace QuickApp.Helpers
             return string.IsNullOrWhiteSpace(value) ? null : value;
         }
 
+        public static bool IsStringEmpty(this string value)
+        {
+            return string.IsNullOrEmpty(value) || value.Length == 0;
+        }
+
         // Array
         public static T[] NullIfEmpty<T>(this T[] value)
         {

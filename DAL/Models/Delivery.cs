@@ -1,6 +1,6 @@
-﻿using Models.Enums;
+﻿using DAL.Enums;
 
-namespace Models.Entities
+namespace DAL.Models
 {
     public class Delivery : AuditableEntity
     {

@@ -6,13 +6,12 @@
 
 using DAL.Core;
 using DAL.Core.Interfaces;
+using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Models.Entities;
-using Models.Enums;
+using DAL.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL

@@ -3,10 +3,10 @@
 // Templates: www.ebenmonney.com/templates
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
+using DAL.Models;
+using DAL.Models.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Models.Entities;
-using Models.Entities.Interfaces;
 using System;
 using System.Linq;
 using System.Threading;
@@ -60,12 +60,10 @@ namespace DAL
             builder.Entity<Delivery>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Delivery>().ToTable($"App{nameof(Deliveries)}");
 
-            builder.Entity<Address>().Property(c => c.Location).HasMaxLength(50).IsRequired(false);
-            builder.Entity<Address>().Property(c => c.HouseNumber).HasMaxLength(3).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.Location).HasMaxLength(80).IsRequired(false);
             builder.Entity<Address>().Property(c => c.Province).HasMaxLength(5).IsRequired(false);
             builder.Entity<Address>().Property(c => c.City).HasMaxLength(50).IsRequired(false);
             builder.Entity<Address>().Property(c => c.PostalCode).HasMaxLength(10).IsRequired(false);
-            builder.Entity<Address>().Property(c => c.Country).HasMaxLength(50).IsRequired(false);
             builder.Entity<Address>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Address>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Address>().ToTable($"App{nameof(Addresses)}");

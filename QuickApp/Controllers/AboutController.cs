@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Models.ViewModels;
+using QuickApp.ViewModels;
 using System.Collections.Generic;
 
 namespace QuickApp.Controllers

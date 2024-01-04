@@ -4,10 +4,9 @@
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
 
+using DAL.Models;
 using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Models.Entities;
-using System;
 using System.Linq;
 
 namespace DAL.Repositories

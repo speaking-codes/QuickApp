@@ -5,6 +5,7 @@
 // ---------------------------------------
 
 using DAL.Core.Interfaces;
+using DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Models.Entities;
 
 namespace DAL.Core
 {

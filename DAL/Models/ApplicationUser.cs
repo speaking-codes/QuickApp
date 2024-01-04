@@ -1,14 +1,10 @@
-﻿// ---------------------------------------
-// Email: quickapp@ebenmonney.com
-// Templates: www.ebenmonney.com/templates
-// (c) 2023 www.ebenmonney.com/mit-license
-// ---------------------------------------
-
-using DAL.Models.Interfaces;
-using Microsoft.AspNetCore.Identity;
+﻿using DAL.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace DAL.Models
 {

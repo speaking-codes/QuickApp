@@ -4,7 +4,7 @@
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
 
-using Models.Entities;
+using DAL.Models;
 using System.Linq;
 
 namespace DAL.Repositories.Interfaces

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.ViewModels
+namespace QuickApp.ViewModels
 {
     public class AboutViewModel
     {

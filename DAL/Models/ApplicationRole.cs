@@ -1,25 +1,17 @@
-﻿// ---------------------------------------
-// Email: quickapp@ebenmonney.com
-// Templates: www.ebenmonney.com/templates
-// (c) 2023 www.ebenmonney.com/mit-license
-// ---------------------------------------
-
-using DAL.Models.Interfaces;
+﻿using DAL.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DAL.Models
 {
     public class ApplicationRole : IdentityRole, IAuditableEntity
-    {
-        /// <summary>
-        /// Initializes a new instance of <see cref="ApplicationRole"/>.
-        /// </summary>
-        /// <remarks>
-        /// The Id property is initialized to from a new GUID string value.
-        /// </remarks>
+    {  /// <summary>
+       /// Initializes a new instance of <see cref="ApplicationRole"/>.
+       /// </summary>
+       /// <remarks>
+       /// The Id property is initialized to from a new GUID string value.
+       /// </remarks>
         public ApplicationRole()
         {
 

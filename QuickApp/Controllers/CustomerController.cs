@@ -5,17 +5,12 @@
 // ---------------------------------------
 
 using AutoMapper;
-using DAL;
 using DAL.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Models.ViewModels;
 using QuickApp.Helpers;
 using QuickApp.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickApp.Controllers
 {
@@ -79,8 +74,6 @@ namespace QuickApp.Controllers
         {
             var customer = _customerManager.GetCustomer(taxIdCode);
             var customerViewModel = _mapper.Map<CustomerEditViewModel>(customer);
-            customerViewModel.AddressList = _mapper.Map<IList<AddressViewModel>>(customer.Addresses);
-            customerViewModel.DeliveryList = _mapper.Map<IList<DeliveryViewModel>>(customer.Deliveries);
             return Ok(customerViewModel);
         }
 

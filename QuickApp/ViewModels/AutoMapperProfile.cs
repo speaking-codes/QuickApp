@@ -6,16 +6,53 @@
 
 using AutoMapper;
 using DAL.Core;
+using DAL.Enums;
+using DAL.Models;
 using Microsoft.AspNetCore.Identity;
-using Models.Entities;
-using Models.Enums;
-using Models.ViewModels;
+using System.Collections.Generic;
 using System.Linq;
+using QuickApp.Helpers;
 
 namespace QuickApp.ViewModels
 {
     public class AutoMapperProfile : Profile
     {
+        private IList<Address> getAddressCollection(CustomerEditViewModel customerViewModel)
+        {
+            if (customerViewModel.Location.IsStringEmpty() &&
+                customerViewModel.City.IsStringEmpty() &&
+                customerViewModel.PostalCode.IsStringEmpty() &&
+                customerViewModel.Province.IsStringEmpty())
+                return null;
+
+            return new List<Address>()
+            {
+                new Address
+                {
+                    AddressType = EnumAddressType.Residenza,
+                    Location = customerViewModel.Location,
+                    City = customerViewModel.City,
+                    PostalCode = customerViewModel.PostalCode,
+                    Province = customerViewModel.Province
+                }
+            };
+        }
+
+        private IList<Delivery> getDeliveryCollection(CustomerEditViewModel customerViewModel)
+        {
+            if (customerViewModel.PhoneNumber.IsStringEmpty() && customerViewModel.Email.IsStringEmpty())
+                return null;
+
+            return new List<Delivery>() {
+                new Delivery
+                {
+                    DeliveryType= EnumDeliveryType.Privato,
+                    PhoneNumber= customerViewModel.PhoneNumber,
+                    Email= customerViewModel.Email
+                }
+            };
+        }
+
         public AutoMapperProfile()
         {
             CreateMap<ApplicationUser, UserViewModel>()
@@ -55,25 +92,27 @@ namespace QuickApp.ViewModels
                 .ReverseMap();
 
             CreateMap<Customer, CustomerEditViewModel>()
-                .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetName()))
-                .ReverseMap();
-
-            CreateMap<Address, AddressViewModel>()
-                .ReverseMap();
-
-            CreateMap<Delivery, DeliveryViewModel>()
-                .ReverseMap();
+                .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetDefinition()))
+                .ForMember(d => d.Location, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().Location))
+                .ForMember(d => d.City, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().City))
+                .ForMember(d => d.PostalCode, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().PostalCode))
+                .ForMember(d => d.Province, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().Province))
+                .ForMember(d => d.PhoneNumber, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries.FirstOrDefault().PhoneNumber))
+                .ForMember(d => d.Email, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries.FirstOrDefault().Email))
+                .ReverseMap()
+                .ForMember(d => d.Addresses, map => map.MapFrom(s => getAddressCollection(s)))
+                .ForMember(d => d.Deliveries, map => map.MapFrom(s => getDeliveryCollection(s)));
 
             CreateMap<Customer, CustomerGridViewModel>()
                 .ForMember(d => d.FullName, map => map.MapFrom(s => $"{s.LastName} {s.FirstName}"))
                 .ForMember(d => d.BirthDate, map => map.MapFrom(s => s.BirthDate.ToString("dd MMM yyyy")))
-                .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetName()))
+                .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetDefinition()))
                 .ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].City} ({s.Addresses[0].Province})"));
 
             CreateMap<Customer, CustomerDetailHeaderViewModel>()
                 .ForMember(d => d.FullName, map => map.MapFrom(s => $"{s.LastName} {s.FirstName}"))
-                .ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].Location}, {s.Addresses[0].HouseNumber} - {s.Addresses[0].City} ({s.Addresses[0].Province})"))
-                .ForMember(d => d.PhoneNumber, map => map.MapFrom(s => (s.Deliveries == null|| s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].PhoneNumber))
+                .ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].Location} - {s.Addresses[0].City} ({s.Addresses[0].Province})"))
+                .ForMember(d => d.PhoneNumber, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].PhoneNumber))
                 .ForMember(d => d.Email, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].Email));
         }
     }

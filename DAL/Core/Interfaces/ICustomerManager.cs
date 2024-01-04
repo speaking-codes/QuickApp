@@ -1,4 +1,4 @@
-﻿using Models.Entities;
+﻿using DAL.Models;
 using System.Collections.Generic;
 
 namespace DAL.Core.Interfaces

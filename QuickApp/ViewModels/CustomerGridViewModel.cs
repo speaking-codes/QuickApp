@@ -1,4 +1,4 @@
-﻿namespace Models.ViewModels
+﻿namespace QuickApp.ViewModels
 {
     public class CustomerGridViewModel
     {
