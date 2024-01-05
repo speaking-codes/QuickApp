@@ -6,9 +6,10 @@ namespace DAL.Core.Interfaces
     public interface ICustomerManager
     {
         IList<Customer> GetCustomers();
-        Customer GetCustomer(string taxIdCode);
+        Customer GetCustomer(string customerCode);
         IList<Customer> GetActiveCustomers();
-        int AddCustomer(Customer customer);
-        void DeleteCustomer(string taxIdCode);
+        string AddCustomer(Customer customer);
+        string UpdateCustomer(string customerCode, Customer customer);
+        int DeleteCustomer(string customerCode);
     }
 }

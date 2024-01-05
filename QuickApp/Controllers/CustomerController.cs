@@ -6,6 +6,7 @@
 
 using AutoMapper;
 using DAL.Core.Interfaces;
+using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuickApp.Helpers;
@@ -39,61 +40,44 @@ namespace QuickApp.Controllers
             return Ok(_mapper.Map<IEnumerable<CustomerGridViewModel>>(allCustomers));
         }
 
-        [HttpGet("active")]
-        public IActionResult GetActive()
-        {
-            var activeCustomers = _customerManager.GetActiveCustomers();
-            return Ok(_mapper.Map<IEnumerable<CustomerGridViewModel>>(activeCustomers));
-        }
-
-        //[HttpGet("throw")]
-        //public IEnumerable<CustomerViewModel> Throw()
+        //[HttpGet("active")]
+        //public IActionResult GetActive()
         //{
-        //    throw new InvalidOperationException($"This is a test exception: {DateTime.Now}");
+        //    var activeCustomers = _customerManager.GetActiveCustomers();
+        //    return Ok(_mapper.Map<IEnumerable<CustomerGridViewModel>>(activeCustomers));
         //}
 
-        //[HttpGet("email")]
-        //public async Task<string> Email()
-        //{
-        //    var recipientName = "QickApp Tester"; //         <===== Put the recipient's name here
-        //    var recipientEmail = "test@ebenmonney.com"; //   <===== Put the recipient's email here
-
-        //    var message = EmailTemplates.GetTestEmail(recipientName, DateTime.UtcNow);
-
-        //    (var success, var errorMsg) = await _emailSender.SendEmailAsync(recipientName, recipientEmail, "Test Email from QuickApp", message);
-
-        //    if (success)
-        //        return "Success";
-
-        //    return $"Error: {errorMsg}";
-        //}
-
-        // GET api/values/5
-        [HttpGet("foredit/{taxIdCode}")]
-        public IActionResult GetForEdit(string taxIdCode)
+        [HttpGet("{customerCode}")]
+        public IActionResult Get(string customerCode)
         {
-            var customer = _customerManager.GetCustomer(taxIdCode);
+            var customer = _customerManager.GetCustomer(customerCode);
             var customerViewModel = _mapper.Map<CustomerEditViewModel>(customer);
             return Ok(customerViewModel);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] CustomerEditViewModel customerViewModel)
         {
+            var customer = _mapper.Map<Customer>(customerViewModel);
+            _customerManager.AddCustomer(customer);
+            return Ok();
         }
 
         // PUT api/values/5
-        [HttpPut("{taxIdCode}")]
-        public void Put(string taxIdCode, [FromBody] CustomerEditViewModel value)
+        [HttpPut("{customerCode}")]
+        public IActionResult Put(string customerCode, [FromBody] CustomerEditViewModel customerViewModel)
         {
+            var customer = _mapper.Map<Customer>(customerViewModel);
+            _customerManager.UpdateCustomer(customerCode, customer);
+            return Ok();
         }
 
         // DELETE api/values/5
-        [HttpDelete("{taxIdCode}")]
-        public void Delete(string taxIdCode)
+        [HttpDelete("{customerCode}")]
+        public void Delete(string customerCode)
         {
-            _customerManager.DeleteCustomer(taxIdCode);
+            _customerManager.DeleteCustomer(customerCode);
         }
     }
 }

@@ -35,16 +35,16 @@ namespace DAL.Repositories
                 .ThenBy(c => c.FirstName);
         }
 
-        public IQueryable<Customer> GetCustomer(string taxIdCode)
+        public IQueryable<Customer> GetCustomer(string customerCode)
         {
             return _appContext.Customers
                             .Include(c => c.Deliveries)
                             .Include(c => c.Addresses)
                             .AsSingleQuery()
-                            .Where(c => c.TaxIdCode == taxIdCode);
+                            .Where(c => c.CustomerCode == customerCode);
         }
 
-        public void Update(Customer customer) => base.Update(customer);
+        public int MaxId() => _appContext.Customers.Max(x => x.Id);
 
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
     }

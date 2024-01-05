@@ -13,9 +13,6 @@ import { CustomerEdit } from '../models/customer';
 })
 export class CustomerEndpointService extends EndpointBase {
   get customersUrl() { return this.configurations.baseUrl + '/api/Customer';}
-  get customerForEditUrl() { return this.configurations.baseUrl + '/api/Customer/foredit'; }
-  get customersActiveUrl() { return this.configurations.baseUrl + '/api/Customer/Active';}
-  get customerByTaxIdCode() { return this.configurations.baseUrl + '/api/Customer/taxidcode'; }
  
   constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) {
     super(http, authService);
@@ -30,21 +27,21 @@ export class CustomerEndpointService extends EndpointBase {
     );
   }
 
-  getCustomerEndpoint<T>(taxIdCode: string): Observable<T> {
-    const endpointUrl = `${this.customerForEditUrl}/${taxIdCode}`;
+  getCustomerEndpoint<T>(customerCode: string): Observable<T> {
+    const endpointUrl = `${this.customersUrl}/${customerCode}`;
 
     return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
       catchError(error => {
-        return this.handleError(error, () => this.getCustomerEndpoint<T>(taxIdCode));
+        return this.handleError(error, () => this.getCustomerEndpoint<T>(customerCode));
       }));
   }
   
-  getDeleteCustomerEndpoint<T>(taxIdCode: string): Observable<T> {
-    const endpointUrl = `${this.customersUrl}/${taxIdCode}`;
+  getDeleteCustomerEndpoint<T>(customerCode: string): Observable<T> {
+    const endpointUrl = `${this.customersUrl}/${customerCode}`;
 
     return this.http.delete<T>(endpointUrl, this.requestHeaders).pipe(
       catchError(error => {
-        return this.handleError(error, () => this.getDeleteCustomerEndpoint<T>(taxIdCode));
+        return this.handleError(error, () => this.getDeleteCustomerEndpoint<T>(customerCode));
       }));
   }
 
@@ -57,11 +54,11 @@ export class CustomerEndpointService extends EndpointBase {
     );
   }  
 
-  getUpdateCustomerEndpoint<T>(taxIdCode:string, customer: CustomerEdit): Observable<T>{
-    const endpointUrl = '${this.customerForEditUrl}/${taxIdCode}';
+  getUpdateCustomerEndpoint<T>(customerCode: string, customer: CustomerEdit): Observable<T>{
+    const endpointUrl = `${this.customersUrl}/${customerCode}`;
     return this.http.put<T>(endpointUrl, JSON.stringify(customer), this.requestHeaders).pipe(
       catchError(error => {
-        return this.handleError(error, () => this.getUpdateCustomerEndpoint<T>(taxIdCode, customer));
+        return this.handleError(error, () => this.getUpdateCustomerEndpoint<T>(customerCode, customer));
       })
     );
   }  

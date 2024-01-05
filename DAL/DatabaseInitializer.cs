@@ -13,6 +13,7 @@ using DAL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DAL.Core.Helpers;
 
 namespace DAL
 {
@@ -36,8 +37,8 @@ namespace DAL
 
         public async Task SeedAsync()
         {
-            //await _context.Database.EnsureDeletedAsync();
-            //await _context.Database.EnsureCreatedAsync();
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.EnsureCreatedAsync();
             //await _context.Database.MigrateAsync().ConfigureAwait(false);
             await SeedDefaultUsersAsync();
             await SeedDemoDataAsync();
@@ -101,15 +102,6 @@ namespace DAL
             return applicationUser;
         }
 
-        private string getTaxIdCode(string initial, int id)
-        {
-            var ticks = DateTime.UtcNow.Ticks.ToString();
-            var offset = ticks.Length - (ticks.Length - (initial.Length + id.ToString().Length));
-            offset = offset < 0 ? 0 : offset;            
-            ticks = ticks.Substring(offset);
-            return $"{initial}{ticks}{id}";
-        }
-
         private async Task SeedDemoDataAsync()
         {
             var rnd = new Random(42);
@@ -117,7 +109,7 @@ namespace DAL
             {
                 _logger.LogInformation("Seeding demo data");
 
-                for (var i = 0; i < 3; i++)
+                for (var i = 1; i < 4; i++)
                 {
                     var cust_1 = new Customer
                     {
@@ -137,7 +129,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_Partita_Iva,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("EM", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Ebenezer", "Monney", 1 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -170,7 +162,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_Partita_Iva,
                         RAL = 150000,
-                        TaxIdCode = getTaxIdCode("IU", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Itachi", "Uchiha", 2 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -190,7 +182,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("JD",i),
+                        CustomerCode = Utility.GenerateCustomerCode("John", "Doe", 3 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -213,7 +205,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("JD",i),
+                        CustomerCode = Utility.GenerateCustomerCode("Jane", "Doe", 4 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -250,7 +242,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("MR", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Mario", "Rossi", 5 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -287,7 +279,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("GB", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Giulia", "Bianchi", 6 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -324,7 +316,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("MR", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Marco", "Rossi", 7 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -361,7 +353,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("MB", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Marina", "Bianchi", 8 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -397,7 +389,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("LV", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Laura", "Verdi", 9 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -434,7 +426,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("LG", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Luigi", "Gialli", 10 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 
@@ -472,7 +464,7 @@ namespace DAL
                         Profession = "Fabbro",
                         ContractType = ContractType.Contratto_CO_CO_PRO,
                         RAL = 15000,
-                        TaxIdCode = getTaxIdCode("RR", i),
+                        CustomerCode = Utility.GenerateCustomerCode("Rosaria", "Rosso", 11 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
                     };
 

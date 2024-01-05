@@ -6,8 +6,8 @@
 
 export enum EnumGender {
     None,
-    Donna,
-    Uomo
+    Uomo,
+    Donna
 }
 
 export enum EnumAddressType

@@ -13,7 +13,7 @@ namespace DAL.Repositories.Interfaces
     {
         IQueryable<Customer> GetActiveCustomers();
         IQueryable<Customer> GetAllCustomers();
-        IQueryable<Customer> GetCustomer(string taxIdCode);
-        void Update(Customer customer);
+        IQueryable<Customer> GetCustomer(string customerCode);
+        int MaxId();
     }
 }

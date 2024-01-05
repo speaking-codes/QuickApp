@@ -1,7 +1,7 @@
 import { EnumContractType, EnumGender } from "./enums";
 
 export class Customer {
-    taxIdCode: string;
+    customerCode: string;
 }
 
 export class CustomerGrid extends Customer{
@@ -14,7 +14,7 @@ export class CustomerGrid extends Customer{
 }    
 
 export class CustomerEdit extends Customer {
-    taxIdCode: string;
+    //customerCode: string;
     firstName: string;
     lastName: string;
     birthDate: string;
@@ -24,6 +24,14 @@ export class CustomerEdit extends Customer {
     profession: string;
     contractType: EnumContractType;
     ral: number;  
+
+    location: string;
+    city: string;
+    postalCode: string;
+    province: string;
+        
+    email: string;
+    phoneNumber: string;
 }
 
 export class CustomerDetailHeader extends Customer{

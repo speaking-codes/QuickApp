@@ -25,17 +25,17 @@ export class CustomerService {
     return this.customerEndpoint.getCustomersEndpoint<CustomerGrid>();    
   }
 
-  getCustomer(taxIdCode: string): Observable<CustomerEdit> {
-    return this.customerEndpoint.getCustomerEndpoint(taxIdCode);
+  getCustomer(customerCode: string): Observable<CustomerEdit> {
+    return this.customerEndpoint.getCustomerEndpoint(customerCode);
   }
   
   deleteCustomer(data: CustomerGrid): Observable<CustomerGrid> {
-      return this.customerEndpoint.getDeleteCustomerEndpoint<CustomerGrid>(data.taxIdCode).pipe<CustomerGrid>(
+      return this.customerEndpoint.getDeleteCustomerEndpoint<CustomerGrid>(data.customerCode).pipe<CustomerGrid>(
         tap(data => this.onCustomersChanged([data], CustomerService.customerDeletedOperation)));    
   }
 
   updateCustomer(customer: CustomerEdit) {
-      return this.customerEndpoint.getUpdateCustomerEndpoint(customer.taxIdCode, customer).pipe(
+      return this.customerEndpoint.getUpdateCustomerEndpoint(customer.customerCode, customer).pipe(
         tap(() => this.onCustomerChanged(customer, CustomerService.customerModifiedOperation)));    
   }
 
