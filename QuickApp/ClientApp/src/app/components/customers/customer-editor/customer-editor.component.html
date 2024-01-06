@@ -1,0 +1,217 @@
+<div>
+    <form *ngIf="formResetToggle" name="roleEditorForm" #f="ngForm" novalidate
+          (ngSubmit)="save()">
+
+      <div  *ngIf="!isNewCustomer">
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <label class="col-form-label col-lg-2" for="customerCode">Codice Cliente</label>
+                <div class="col-lg-9">
+                    <input [readonly]="true" type="text" id="customerCode" name="customerCode" placeholder="Inserisci il Codice Fiscale" class="form-control"
+                    [(ngModel)]="customerEdit.customerCode" #customerCode="ngModel" />
+                </div>    
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <hr class="hr-separator edit-separator" />
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Anagrafica</h3>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <label class="col-form-label col-lg-2" for="firstName">Nome</label>
+                <div class="col-lg-4">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="firstName" name="firstName" placeholder="Inserisci il Nome" class="form-control"
+                    [(ngModel)]="customerEdit.firstName" #firstName="ngModel" required />
+                </div>    
+                <label class="col-form-label col-lg-2" for="lastName">Cognome</label>
+                <div class="col-lg-4">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="lastName" name="lastName" placeholder="Inserisci il Cognome" class="form-control"
+                    [(ngModel)]="customerEdit.lastName" #lastName="ngModel" required />
+                </div>    
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+              <label class="col-form-label col-lg-2" for="gender">Sesso</label>
+              <div class="col-lg-4">
+                <ng-select id="gender" name="gender" [(ngModel)]="customerEdit.gender" [searchable]="false" [clearable]="false" class="form-control">
+                  <ng-option [value]="none"></ng-option>"
+                  <ng-option [value]="Uomo">Uomo</ng-option>
+                  <ng-option [value]="Donna">Donna</ng-option>
+                </ng-select>
+              </div>    
+              <label class="col-form-label col-lg-2" for="birthDate">Data di Nascita</label>
+                <div class="col-lg-4">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="birthDate" name="birthDate" placeholder="Inserisci la Data di Nascita" class="form-control"
+                    [(ngModel)]="customerEdit.birthDate" #birthDate="ngModel" required />
+                </div>                    
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <label class="col-form-label col-lg-2" for="birthPlace">Nato/a a</label>
+                <div class="col-lg-4">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="birthPlace" name="birthPlace" placeholder="Inserisci il Luogo di Nascita" class="form-control"
+                    [(ngModel)]="customerEdit.birthPlace" #birthPlace="ngModel" required />
+                </div>                    
+                <label class="col-form-label col-lg-2" for="birthCounty">Prov.</label>
+                <div class="col-lg-4">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="birthCounty" name="birthCounty" placeholder="Inserisci la Provincia di Nascita" class="form-control"
+                    [(ngModel)]="customerEdit.birthCounty" #birthCounty="ngModel" required minlength="2" maxlength="3" />
+                </div>                    
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <hr class="hr-separator edit-separator" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Anagrafica</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <label class="col-form-label col-lg-2" for="profession">Professione</label>
+                <div class="col-lg-10">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="profession" name="profession" placeholder="Inserisci la Professione" class="form-control"
+                    [(ngModel)]="customerEdit.profession" #profession="ngModel" />
+                </div>    
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+              <label class="col-form-label col-lg-2" for="contractType">Tipo Contratto</label>
+              <div class="col-lg-4">
+                <ng-select id="contractType" name="contractType" [(ngModel)]="customerEdit.contractType" [searchable]="false" [clearable]="false" class="form-control">
+                  <ng-option [value]="None"></ng-option>
+                  <ng-option [value]="Contratto_Tempo_Determinato">Tempo Determinato</ng-option>
+                  <ng-option [value]="Contratto_Tempo_Indeterminato">Tempo Indeterminato</ng-option>
+                  <ng-option [value]="Contratto_Partita_Iva">Partita IVA</ng-option>
+                  <ng-option [value]="Contratto_CO_CO_PRO">CO.CO.PRO.</ng-option>
+                </ng-select>
+              </div>    
+              <label class="col-form-label col-lg-2" for="ral">R.A.L.</label>
+                <div class="col-lg-4">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="ral" name="ral" placeholder="Inserisci la R.A.L. (Reddito Annuo Lordo\)" class="form-control"
+                    [(ngModel)]="customerEdit.ral" #ral="ngModel" required />
+                </div>                    
+            </div>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-12">
+          <hr class="hr-separator edit-separator" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Recapito</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <label class="col-form-label col-lg-2" for="email">E-mail</label>
+            <div class="col-lg-4">
+                <input [readonly]="IsFieldReadOnly" type="text" id="email" name="email" placeholder="Inserisci l'indirizzo mail" class="form-control"
+                [(ngModel)]="customerEdit.email" #email="ngModel" required />
+            </div>                    
+            <label class="col-form-label col-lg-2" for="phoneNumber">Telefono</label>
+            <div class="col-lg-4">
+                <input [readonly]="IsFieldReadOnly" type="text" id="phoneNumber" name="phoneNumber" placeholder="Inserisci il numero di telefono" class="form-control"
+                [(ngModel)]="customerEdit.phoneNumber" #phoneNumber="ngModel" required minlength="2" maxlength="10" />
+            </div>                    
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <hr class="hr-separator edit-separator" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Indirizzo</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <label class="col-form-label col-lg-2" for="location">Indirizzo</label>
+                    <div class="col-lg-10">
+                        <input [readonly]="IsFieldReadOnly" type="text" id="location" name="location" placeholder="Inserisci l'indirizzo" class="form-control"
+                        [(ngModel)]="customerEdit.location" #location="ngModel" />
+                    </div>    
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <label class="col-form-label col-lg-2" for="city">Città</label>
+                <div class="col-lg-4">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="city" name="city" placeholder="Inserisci la città" class="form-control"
+                    [(ngModel)]="customerEdit.city" #birthPlace="ngModel" required />
+                </div>                    
+                <label class="col-form-label col-lg-1" for="postalCode">C.A.P.</label>
+                <div class="col-lg-2">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="postalCode" name="postalCode" placeholder="Inserisci il C.A.P." class="form-control"
+                    [(ngModel)]="customerEdit.postalCode" #birthCounty="ngModel" required minlength="2" maxlength="6" />
+                </div>                    
+                <label class="col-form-label col-lg-1" for="province">Prov.</label>
+                <div class="col-lg-2">
+                    <input [readonly]="IsFieldReadOnly" type="text" id="province" name="province" placeholder="Inserisci la Provincia" class="form-control"
+                    [(ngModel)]="customerEdit.province" #province="ngModel" required minlength="2" maxlength="6" />
+                </div>    
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <hr class="hr-separator edit-separator" />
+        </div>
+      </div>
+
+        <div class="col-7">
+          <div ngPreserveWhitespaces class="float-end">
+            <button *ngIf="!isEditMode" type="button" (click)="cancel()" class="btn btn-outline-secondary"><i class='fa fa-times'></i> Chiudi</button>
+            <button *ngIf="!isEditMode" type="button" (click)="editCustomer()" class="btn btn-primary"><i class='fa fa-edit'></i> Modifica</button>
+            <button *ngIf="isEditMode" type="button" (click)="cancel()" class="btn btn-danger" [disabled]="isSaving"><i class='fa fa-times'></i> Annulla e Chiudi</button>
+            <button *ngIf="isEditMode" type="submit" class="btn btn-primary" [disabled]="isSaving">
+              <i *ngIf="!isSaving" class='fa fa-save'></i><i *ngIf="isSaving" class='fa fa-circle-o-notch fa-spin'></i> Salva e Chiudi</button>
+          </div>
+        </div>     
+    </form>
+  </div>
+  
+
