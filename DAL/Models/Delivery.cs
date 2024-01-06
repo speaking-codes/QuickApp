@@ -1,4 +1,5 @@
 ﻿using DAL.Enums;
+using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {

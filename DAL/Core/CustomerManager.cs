@@ -1,7 +1,8 @@
 ﻿using DAL.Core.Helpers;
 using DAL.Core.Interfaces;
-using DAL.Enums;
 using DAL.Models;
+using DAL.ModelsRabbitMQ;
+using DAL.QueueService;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,16 @@ namespace DAL.Core
 {
     public class CustomerManager : ICustomerManager
     {
+        private readonly ILogger _logger; 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger _logger;
+        private readonly IMessageQueueProducer _messageQueueProducer;
 
-        public CustomerManager(IUnitOfWork unitOfWork)
+        private const string _queueName = "customers";
+
+        public CustomerManager(IUnitOfWork unitOfWork, IMessageQueueProducer messageQueueProducer)
         {
             _unitOfWork = unitOfWork;
+            _messageQueueProducer = messageQueueProducer;
         }
 
         public IList<Customer> GetCustomers() => _unitOfWork.Customers.GetAllCustomers().ToList();
@@ -31,6 +36,7 @@ namespace DAL.Core
             customer.IsActive = true;
             _unitOfWork.Customers.Add(customer);
             _unitOfWork.SaveChanges();
+            _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Created, customer.CustomerCode));
             return customer.CustomerCode;
         }
 
@@ -78,6 +84,7 @@ namespace DAL.Core
 
             _unitOfWork.Customers.Update(customer);
              _unitOfWork.SaveChanges();
+            _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Updated, customer.CustomerCode));
             return customer.CustomerCode;
         }
 
@@ -89,6 +96,7 @@ namespace DAL.Core
 
             customer.IsActive = false;
             _unitOfWork.Customers.Update(customer);
+            _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Deleted, customer.CustomerCode));
             return _unitOfWork.SaveChanges();
         }
     }

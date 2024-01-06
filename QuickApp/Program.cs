@@ -8,6 +8,7 @@ using DAL;
 using DAL.Core;
 using DAL.Core.Interfaces;
 using DAL.Models;
+using DAL.QueueService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -204,6 +205,7 @@ namespace QuickApp
             builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
             builder.Services.AddScoped<IAccountManager, AccountManager>();
             builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+            builder.Services.AddScoped<IMessageQueueProducer, MessageQueueProducer>();
 
             // Auth Handlers
             builder.Services.AddSingleton<IAuthorizationHandler, ViewUserAuthorizationHandler>();
