@@ -22,7 +22,9 @@ namespace DAL
         public DbSet<Address> Addresses { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
-        { }
+        { 
+        
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

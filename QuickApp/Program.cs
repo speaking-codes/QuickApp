@@ -93,26 +93,11 @@ namespace QuickApp
             });
 
             //Configure OpenIddict periodic pruning of orphaned authorizations / tokens from the database.
-           builder.Services.AddQuartz(options =>
-           {
-               options.UseSimpleTypeLoader();
-               options.UseInMemoryStore();
-               //options.UsePersistentStore(x => {
-               //    x.UseProperties = true;
-               //    x.UseClustering();
-               //    x.UseSqlServer(connectionString);                   
-               //});                
-
-               var jobKey = new JobKey("CustomerJobs");
-               options.AddJob<CustomerJobs>(opts => opts.WithIdentity(jobKey));
-
-               options.AddTrigger(opts => opts
-                   .ForJob(jobKey)
-                   .WithIdentity("CustomerJobs-trigger")
-                   //This Cron interval can be described as "run every minute" (when second is zero)
-                   .WithCronSchedule("0 * * ? * *")
-               );
-           });
+            builder.Services.AddQuartz(options =>
+            {
+                options.UseSimpleTypeLoader();
+                options.UseInMemoryStore();
+            });
 
             // Register the Quartz.NET service and configure it to block shutdown until jobs are complete.
             builder.Services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
