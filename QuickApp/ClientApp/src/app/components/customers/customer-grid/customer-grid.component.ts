@@ -55,7 +55,6 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   get hideDeletedCustomer() { return (this.loadGridStep == EnumLoadGridStep.First || this.loadGridStep == EnumLoadGridStep.ShowOnlyActive); }
 
   updateLoadGridStep(){
-    debugger;
     switch(this.loadGridStep){
       case EnumLoadGridStep.First:
         this.loadGridStep = EnumLoadGridStep.ShowAll;
@@ -111,17 +110,18 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
         .subscribe({
           next: results => this.onDataLoadSuccessful(results),
           error: error => this.onDataLoadFailed(error)
-        });
+        });        
   }
 
   onDataLoadSuccessful(data: CustomerGrid[]) {
-    debugger;
     this.alertService.stopLoadingMessage();
     this.loadingIndicator = false;
     this.updateLoadGridStep();
     this.refreshDataIndexes(data);
     this.rowsCache = [...data];    
     this.rows = this.getCustomersFilterActive();    
+
+    setTimeout(() => { this.loadingIndicator = false; }, 1500);    
   }
   
   onDataLoadFailed(error: HttpErrorResponse) {

@@ -24,23 +24,8 @@ export class AboutComponent implements OnInit{
   private loadingIndicator = false;  
   
   aboutCompany: About;
-  companyName: string;
-  companyAddress: string;
-  companyCity: string;
-  companyPostalCode: string;
-  companyCountry: string;
-  companyPhoneNumber: string;
-  companyFaxNumber: string;
-  companyEmail: string;
-  companyDescription1: string;
-  companyDescription2: string;
-  companyDescription3: string;
-  companyDescription4: string;
-  companyDescription5: string;
-  companyDescription6: string;
-  companyCapitaleSociale: string; 
 
-  constructor(private aboutService: AboutService, private alertService: AlertService){}
+ constructor(private aboutService: AboutService, private alertService: AlertService){}
 
   ngOnInit(): void{
     this.loadingIndicator = true;
@@ -53,21 +38,6 @@ export class AboutComponent implements OnInit{
 
   onDataLoadSuccessful(aboutCompany: IAbout){   
     this.aboutCompany = aboutCompany as About;
-    this.companyName = aboutCompany.name;
-    this.companyAddress = aboutCompany.address;
-    this.companyCity = aboutCompany.city
-    this.companyPostalCode = aboutCompany.postalCode;
-    this.companyCountry = aboutCompany.country;
-    this.companyPhoneNumber = aboutCompany.phoneNumber;
-    this.companyFaxNumber = aboutCompany.faxNumber;
-    this.companyEmail = aboutCompany.email;
-    this.companyDescription1 = aboutCompany.description1;
-    this.companyDescription2 = aboutCompany.description2;
-    this.companyDescription3 = aboutCompany.description3;
-    this.companyDescription4 = aboutCompany.description4;
-    this.companyDescription5 = aboutCompany.description5;
-    this.companyDescription6 = aboutCompany.description6;
-    this.companyCapitaleSociale = aboutCompany.socialCapital;
   }
 
   onDataLoadFailed(error: HttpErrorResponse){

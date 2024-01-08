@@ -81,7 +81,6 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
     this.isEditMode = true;
   }
   private edit(){
-    debugger;
     if (!this.isNewCustomer){
       this.customerEdit = new CustomerEdit();      
       Object.assign(this.customerEdit, this.customer);
@@ -151,7 +150,6 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
 
   
   save() {
-    debugger;
     this.isSaving = true;
     this.alertService.startLoadingMessage('Saving changes...');   
 
@@ -168,7 +166,6 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
 
   private saveSuccessHelper(customer: CustomerEdit)
   {
-    debugger;
     if (customer) {
       Object.assign(this.customerEdit, customer);
     }

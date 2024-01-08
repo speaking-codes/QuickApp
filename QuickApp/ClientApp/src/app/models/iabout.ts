@@ -1,4 +1,4 @@
-export interface IAbout {
+export interface IAbout { 
     name: string;
     logo: string;
     logoDescription: string;

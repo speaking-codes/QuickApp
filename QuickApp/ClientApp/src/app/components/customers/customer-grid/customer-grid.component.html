@@ -2,7 +2,7 @@
     <div class="row control-box">
      <div class="col-lg-8">
        <div class="search-box">
-         <app-search-box (searchChange)="updateFilter($event)" placeholder="{{'todoDemo.management.Search' | translate}}"></app-search-box>      
+         <app-search-box (searchChange)="updateFilter($event)" placeholder="{{'customer.grid.Search' | translate}}"></app-search-box>      
        </div>
      </div>
      <div class="col-lg-4">
@@ -38,10 +38,7 @@
           <ngx-datatable-column name="Codice Cliente" prop="customerCode" [resizeable]="false" [maxWidth]="140">
             <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
           </ngx-datatable-column>
-          <!-- <ngx-datatable-column name="" prop="$$index" [resizeable]="false"  [maxWidth]="10">
-             <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
-          </ngx-datatable-column> -->
-             <ngx-datatable-column name="Nominativo" prop="fullName" [resizeable]="false">
+              <ngx-datatable-column name="Nominativo" prop="fullName" [resizeable]="false">
              <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
              </ngx-datatable-column>
              <ngx-datatable-column name="Data di Nascita" prop="birthDate" [resizeable]="false" [sortable]="false" [maxWidth]="120">

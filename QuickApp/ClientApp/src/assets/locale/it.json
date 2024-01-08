@@ -23,7 +23,7 @@
     },
     "mainMenu": {
       "Appointments": "Appointments",
-      "Customers": "Customers",
+      "Customers": "Clienti",
       "Products": "Products",
       "Orders": "Orders",
       "About": "About",
@@ -241,7 +241,12 @@
       "Language": "Language:",
       "Default": "Default",
       "English": "Inglese",
-      "Italian": "Italian",
+      "French": "Français",
+      "German": "Deutsch",
+      "Portuguese": "Português",
+      "Arabic": "العربية",
+      "Korean": "한국어",
+      "Italian": "Italiano",
       "LanguageHint": "Seleziona la lingua preferita per il tuo profilo",
       "HomePage": "Home Page:",
       "Dashboard": "Dashboard",
@@ -374,7 +379,7 @@
       }
     },
     "customer":{
-      "management":{
+      "grid":{
         "Search": "Cerca per nominativo..."
       }
     }
