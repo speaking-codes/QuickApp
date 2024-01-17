@@ -60,8 +60,8 @@ namespace QuickApp.Controllers
         public IActionResult Post([FromBody] CustomerEditViewModel customerViewModel)
         {
             var customer = _mapper.Map<Customer>(customerViewModel);
-            _customerManager.AddCustomer(customer);
-            return Ok();
+            customerViewModel.CustomerCode = _customerManager.AddCustomer(customer);
+            return Ok(customerViewModel);
         }
 
         // PUT api/values/5
@@ -69,8 +69,8 @@ namespace QuickApp.Controllers
         public IActionResult Put(string customerCode, [FromBody] CustomerEditViewModel customerViewModel)
         {
             var customer = _mapper.Map<Customer>(customerViewModel);
-            _customerManager.UpdateCustomer(customerCode, customer);
-            return Ok();
+            customerViewModel.CustomerCode = _customerManager.UpdateCustomer(customerCode, customer);
+            return Ok(customerViewModel);
         }
 
         // DELETE api/values/5

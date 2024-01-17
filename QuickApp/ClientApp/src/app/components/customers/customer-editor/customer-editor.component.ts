@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { error } from 'console';
 import { Utilities } from 'src/app/services/utilities';
 import { TableColumn } from '@swimlane/ngx-datatable';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-customer-editor',
@@ -17,11 +18,6 @@ import { TableColumn } from '@swimlane/ngx-datatable';
 
 export class CustomerEditorComponent implements OnInit, OnDestroy {
   private addressColumns: TableColumn[] = [];
-  // private addressRows: Address[] = [];
-  // private addressRowsCache: Address[] = [];  
-  // private deliveryColumns: TableColumn[] = [];
-  // private deliveryRows: Delivery[] = [];
-  // private deliveryRowsCache: Delivery[] = [];  
   private isNewCustomer: boolean = true;
   private customer: Customer | null;
   private customerEdit: CustomerEdit = new CustomerEdit();
@@ -156,7 +152,7 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
     if (this.isNewCustomer) {
       console.log('Insert new customer');
       this.customerService.newCustomer(this.customerEdit)
-        .subscribe({ next: role => this.saveSuccessHelper(this.customerEdit), error: error => this.saveFailedHelper(error) });
+        .subscribe({ next: () => this.saveSuccessHelper(this.customerEdit), error: error => this.saveFailedHelper(error) });
     } else {
       console.log('Update customer');
       this.customerService.updateCustomer(this.customerEdit)
@@ -166,6 +162,7 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
 
   private saveSuccessHelper(customer: CustomerEdit)
   {
+    debugger;
     if (customer) {
       Object.assign(this.customerEdit, customer);
     }

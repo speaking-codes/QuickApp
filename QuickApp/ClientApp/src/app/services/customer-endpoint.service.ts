@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { EndpointBase } from './endpoint-base.service';
 import { ConfigurationService } from './configuration.service';
 import { AuthService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { error } from 'console';
 import { Observable } from 'rxjs';
@@ -50,7 +50,7 @@ export class CustomerEndpointService extends EndpointBase {
     return this.http.post<T>(endpointUrl, JSON.stringify(customer), this.requestHeaders).pipe(
       catchError(error => {
         return this.handleError(error, () => this.getNewCustomerEndpoint<T>(customer));
-      })
+      })      
     );
   }  
 

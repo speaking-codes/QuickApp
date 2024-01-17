@@ -127,7 +127,7 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.Contratto_Partita_Iva,
+                        ContractType = ContractType.Partita_Iva,
                         RAL = 15000,
                         CustomerCode = Utility.GenerateCustomerCode("Ebenezer", "Monney", 1 * i),
                         IsActive = (rnd.Next(9) % 2) == 0
@@ -160,7 +160,7 @@ namespace DAL
                             }
                         },
                         Profession = "Fabbro",
-                        ContractType = ContractType.Contratto_Partita_Iva,
+                        ContractType = ContractType.Partita_Iva,
                         RAL = 150000,
                         CustomerCode = Utility.GenerateCustomerCode("Itachi", "Uchiha", 2 * i),
                         IsActive = (rnd.Next(9) % 2) == 0

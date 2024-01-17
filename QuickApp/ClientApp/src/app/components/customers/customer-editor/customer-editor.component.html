@@ -6,9 +6,9 @@
       <div class="row">
         <div class="col-sm-12">
             <div class="row">
-                <label class="col-form-label col-lg-2" for="customerCode">Codice Cliente</label>
+                <label class="col-form-label col-lg-2" for="customerCode">{{'customer.edit.CustomerCode' | translate}}</label>
                 <div class="col-lg-9">
-                    <input [readonly]="true" type="text" id="customerCode" name="customerCode" placeholder="Inserisci il Codice Fiscale" class="form-control"
+                    <input [readonly]="true" type="text" id="customerCode" name="customerCode" class="form-control"
                     [(ngModel)]="customerEdit.customerCode" #customerCode="ngModel" />
                 </div>    
             </div>
@@ -30,14 +30,14 @@
       <div class="row">
         <div class="col-sm-12">
             <div class="row">
-                <label class="col-form-label col-lg-2" for="firstName">Nome</label>
+                <label class="col-form-label col-lg-2" for="firstName">{{'customer.edit.FirstName' | translate}}</label>
                 <div class="col-lg-4">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="firstName" name="firstName" placeholder="Inserisci il Nome" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="firstName" name="firstName" placeholder="{{'customer.edit.FirstNamePlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.firstName" #firstName="ngModel" required />
                 </div>    
-                <label class="col-form-label col-lg-2" for="lastName">Cognome</label>
+                <label class="col-form-label col-lg-2" for="lastName">{{'customer.edit.LastName' | translate}}</label>
                 <div class="col-lg-4">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="lastName" name="lastName" placeholder="Inserisci il Cognome" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="lastName" name="lastName" placeholder="{{'customer.edit.LastNamePlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.lastName" #lastName="ngModel" required />
                 </div>    
             </div>
@@ -47,17 +47,16 @@
       <div class="row">
         <div class="col-sm-12">
             <div class="row">
-              <label class="col-form-label col-lg-2" for="gender">Sesso</label>
+              <label class="col-form-label col-lg-2" for="gender">{{'customer.edit.Gender' | translate}}</label>
               <div class="col-lg-4">
-                <ng-select id="gender" name="gender" [(ngModel)]="customerEdit.gender" [searchable]="false" [clearable]="false" class="form-control">
-                  <ng-option [value]="none"></ng-option>"
-                  <ng-option [value]="Uomo">Uomo</ng-option>
-                  <ng-option [value]="Donna">Donna</ng-option>
+                <ng-select id="gender" name="gender" [(ngModel)]="customerEdit.gender" placeholder="{{'customer.edit.GenderPlaceHolder' | translate}}" [searchable]="false" [clearable]="false" class="form-control">
+                  <ng-option [value]="1">Uomo</ng-option>
+                  <ng-option [value]="2">Donna</ng-option>
                 </ng-select>
               </div>    
-              <label class="col-form-label col-lg-2" for="birthDate">Data di Nascita</label>
+              <label class="col-form-label col-lg-2" for="birthDate">{{'customer.edit.BirthDate' | translate}}</label>
                 <div class="col-lg-4">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="birthDate" name="birthDate" placeholder="Inserisci la Data di Nascita" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="birthDate" name="birthDate" placeholder="{{'customer.edit.BirthDatePlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.birthDate" #birthDate="ngModel" required />
                 </div>                    
             </div>
@@ -67,14 +66,16 @@
       <div class="row">
         <div class="col-sm-12">
             <div class="row">
-                <label class="col-form-label col-lg-2" for="birthPlace">Nato/a a</label>
+                <label class="col-form-label col-lg-2" for="birthPlace">{{'customer.edit.BirthPlace' | translate}}</label>
                 <div class="col-lg-4">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="birthPlace" name="birthPlace" placeholder="Inserisci il Luogo di Nascita" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="birthPlace" name="birthPlace" placeholder="{{'customer.edit.BirthPlacePlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.birthPlace" #birthPlace="ngModel" required />
+                    <input [matDatepicker]="myDatepicker">
+                    <mat-datepicker #myDatepicker></mat-datepicker> 
                 </div>                    
-                <label class="col-form-label col-lg-2" for="birthCounty">Prov.</label>
+                <label class="col-form-label col-lg-2" for="birthCounty">{{'customer.edit.BirthCounty' | translate}}</label>
                 <div class="col-lg-4">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="birthCounty" name="birthCounty" placeholder="Inserisci la Provincia di Nascita" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="birthCounty" name="birthCounty" placeholder="{{'customer.edit.BirthCountyPlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.birthCounty" #birthCounty="ngModel" required minlength="2" maxlength="3" />
                 </div>                    
             </div>
@@ -94,9 +95,9 @@
       <div class="row">
         <div class="col-sm-12">
             <div class="row">
-                <label class="col-form-label col-lg-2" for="profession">Professione</label>
+                <label class="col-form-label col-lg-2" for="profession">{{'customer.edit.JobTitle' | translate}}</label>
                 <div class="col-lg-10">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="profession" name="profession" placeholder="Inserisci la Professione" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="profession" name="profession" placeholder="{{'customer.edit.JobTitlePlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.profession" #profession="ngModel" />
                 </div>    
             </div>
@@ -105,14 +106,13 @@
       <div class="row">
         <div class="col-sm-12">
             <div class="row">
-              <label class="col-form-label col-lg-2" for="contractType">Tipo Contratto</label>
+              <label class="col-form-label col-lg-2" for="contractType">{{'customer.edit.ContractType' | translate}}</label>
               <div class="col-lg-4">
-                <ng-select id="contractType" name="contractType" [(ngModel)]="customerEdit.contractType" [searchable]="false" [clearable]="false" class="form-control">
-                  <ng-option [value]="None"></ng-option>
-                  <ng-option [value]="Contratto_Tempo_Determinato">Tempo Determinato</ng-option>
-                  <ng-option [value]="Contratto_Tempo_Indeterminato">Tempo Indeterminato</ng-option>
-                  <ng-option [value]="Contratto_Partita_Iva">Partita IVA</ng-option>
-                  <ng-option [value]="Contratto_CO_CO_PRO">CO.CO.PRO.</ng-option>
+                <ng-select id="contractType" name="contractType" [(ngModel)]="customerEdit.contractType" [searchable]="false" [clearable]="false" class="form-control" placeholder="{{'customer.edit.ContractTypePlaceHolder' | translate}}">
+                  <ng-option [value]="1">Tempo Determinato</ng-option>
+                  <ng-option [value]="2">Tempo Indeterminato</ng-option>
+                  <ng-option [value]="3">Partita IVA</ng-option>
+                  <ng-option [value]="4">CO. CO. PRO.</ng-option>
                 </ng-select>
               </div>    
               <label class="col-form-label col-lg-2" for="ral">R.A.L.</label>

@@ -3,6 +3,8 @@ import { Customer, CustomerEdit, CustomerGrid } from '../models/customer';
 import { CustomerEndpointService } from './customer-endpoint.service';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { subscribe } from 'diagnostics_channel';
 
 export type CustomerChangedOperation = 'add' | 'delete' | 'modify';
 export interface CustomersChangedEventArg { customers: CustomerGrid[] | string[]; operation: CustomerChangedOperation; }
@@ -34,14 +36,15 @@ export class CustomerService {
         tap(data => this.onCustomersChanged([data], CustomerService.customerDeletedOperation)));    
   }
 
-  updateCustomer(customer: CustomerEdit) {
-      return this.customerEndpoint.getUpdateCustomerEndpoint(customer.customerCode, customer).pipe(
-        tap(() => this.onCustomerChanged(customer, CustomerService.customerModifiedOperation)));    
+  updateCustomer(customer: CustomerEdit): Observable<CustomerEdit> {
+      return this.customerEndpoint.getUpdateCustomerEndpoint(customer.customerCode, customer)
+        .pipe<CustomerEdit>(
+            tap<CustomerEdit>(() => this.onCustomerChanged(customer, CustomerService.customerModifiedOperation)));    
   }
 
-  newCustomer(customer: CustomerEdit) {
+  newCustomer(customer: CustomerEdit): Observable<CustomerEdit> {
     return this.customerEndpoint.getNewCustomerEndpoint<CustomerEdit>(customer).pipe<CustomerEdit>(
-      tap(() => this.onCustomerChanged(customer, CustomerService.customerAddedOperation)));
+      tap<CustomerEdit>(() => this.onCustomerChanged(customer, CustomerService.customerAddedOperation)));      
   }
 
   private onCustomersChanged(customers: CustomerGrid[] | string[], op: CustomerChangedOperation) {
@@ -49,6 +52,7 @@ export class CustomerService {
   }
 
   private onCustomerChanged(customer: CustomerEdit | string, op: CustomerChangedOperation) {
+    debugger;
     this.customerChanged.next({ customer, operation: op });
   }
 }

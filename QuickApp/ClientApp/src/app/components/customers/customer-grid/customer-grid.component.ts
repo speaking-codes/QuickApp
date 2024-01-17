@@ -192,6 +192,7 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   }
 
   addNewCustomerToList() {
+    debugger;
     if (this.sourceCustomer) {
         Object.assign(this.sourceCustomer, this.editedCustomer);
 
@@ -209,10 +210,10 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
         this.sourceCustomer = null;
     } else {
         const customer = new CustomerGrid();
-        //Object.assign(customer, this.editedCustomer);
+        customer.customerCode = this.editedCustomer.customerCode;
         customer.birthDate = this.editedCustomer.birthDate;
         customer.customerCode = this.editedCustomer.customerCode;
-        customer.fullName = this.editedCustomer.firstName + this.editedCustomer.lastName;
+        customer.fullName = this.editedCustomer.lastName + ' ' + this.editedCustomer.firstName;
         customer.gender = this.editedCustomer.gender.toString();
         customer.residence = this.editedCustomer.city + '(' + this.editedCustomer.province + ')';
         customer.isActive = true;

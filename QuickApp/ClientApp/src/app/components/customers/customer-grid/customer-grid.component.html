@@ -9,13 +9,13 @@
        <ul class="nav flex-column flex-lg-row justify-content-end">
          <li class="nav-item toolbaritem">
            <a class="nav-link" href="javascript:;" (click)="newCustomer()">
-             <i class="fa fa-plus-circle"></i> Nuovo Cliente
+             <i class="fa fa-plus-circle"></i> {{'customer.grid.NewCustomer' | translate }}
            </a>
          </li>
          <li class="nav-item toolbaritem">
            <a class="nav-link" href="javascript:;" (click)="showActiveCustomers()">
-             <span *ngIf="!hideDeletedCustomer"><i class="fa fa-eye-slash"></i> Visualizza Solo Attivi</span>
-             <span *ngIf="hideDeletedCustomer"><i class="fa fa-eye"></i> Visualizza Tutti</span>
+             <span *ngIf="!hideDeletedCustomer"><i class="fa fa-eye-slash"></i> {{'customer.grid.ViewOnlyActive' | translate}}</span>
+             <span *ngIf="hideDeletedCustomer"><i class="fa fa-eye"></i> {{'customer.grid.ViewAll' | translate}}</span>
            </a>
          </li>
        </ul>
@@ -35,35 +35,35 @@
          [columnMode]="'force'"
          [limit]="pageSize"
          [selectionType]="'single'">
-          <ngx-datatable-column name="Codice Cliente" prop="customerCode" [resizeable]="false" [maxWidth]="140">
+          <ngx-datatable-column name="{{'customer.grid.CustomerCode' | translate}}" prop="customerCode" [resizeable]="false" [sortable]="false" [maxWidth]="160">
             <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
           </ngx-datatable-column>
-              <ngx-datatable-column name="Nominativo" prop="fullName" [resizeable]="false">
+              <ngx-datatable-column name="{{'customer.grid.FullName' | translate}}" prop="fullName" [resizeable]="false">
              <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
              </ngx-datatable-column>
-             <ngx-datatable-column name="Data di Nascita" prop="birthDate" [resizeable]="false" [sortable]="false" [maxWidth]="120">
+             <ngx-datatable-column name="{{'customer.grid.BirthDate' | translate}}" prop="birthDate" [resizeable]="false" [sortable]="false" [maxWidth]="120">
              <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
              </ngx-datatable-column>
-             <ngx-datatable-column name="Sesso" prop="gender" [resizeable]="false" [sortable]="false" [maxWidth]="80">
+             <ngx-datatable-column name="{{'customer.grid.Gender' | translate}}" prop="gender" [resizeable]="false" [sortable]="false" [maxWidth]="80">
              <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
                  <p *ngIf="isCustomerMale(row)"><i class="fa fa-male"></i></p>
                  <p *ngIf="!isCustomerMale(row)"><i class="fa fa-female"></i></p>
              </ng-template>
              </ngx-datatable-column>
-             <ngx-datatable-column name="Residenza" prop="residence" [resizeable]="false" [maxWidth]="140">
+             <ngx-datatable-column name="{{'customer.grid.Residence' | translate}}" prop="residence" [resizeable]="false" [maxWidth]="140">
              <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
              </ngx-datatable-column> 
-             <ngx-datatable-column name="Stato" prop="state" [resizeable]="false" [sortable]="false" [maxWidth]="80">
+             <ngx-datatable-column name="{{'customer.grid.State' | translate}}" prop="state" [resizeable]="false" [sortable]="false" [maxWidth]="80">
              <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
                  <p *ngIf="isCustomerActive(row)"><i class="fa fa-check"></i></p>
                  <p *ngIf="!isCustomerActive(row)"><i class="fa fa-times"></i></p>
              </ng-template>
              </ngx-datatable-column>  
-             <ngx-datatable-column name="Azioni" sortable="false" prop="actions" [sortable]="false">
+             <ngx-datatable-column name="{{'customer.grid.Actions' | translate}}" sortable="false" prop="actions" [sortable]="false">
              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="editCustomer(row)"><i class="fa fa-pie-chart" aria-hidden="true"></i> Dashboard</a>
-               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="detailsCustomer(row)"><i class="fa fa-eye" aria-hidden="true"></i> Dettagli</a> 
-               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="deleteCustomer(row)"><i class="fa fa-trash-o" aria-hidden="true"></i> Rimuovi</a> 
+               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="editCustomer(row)"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{'customer.grid.DashboardCustomer' | translate}}</a>
+               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="detailsCustomer(row)"><i class="fa fa-eye" aria-hidden="true"></i> {{'customer.grid.DetailCustomer' | translate}}</a> 
+               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="deleteCustomer(row)"><i class="fa fa-trash-o" aria-hidden="true"></i> {{'customer.grid.RemoveCustomer' | translate}}</a> 
              </ng-template>
          </ngx-datatable-column>
          </ngx-datatable>  
@@ -72,8 +72,8 @@
  
      <ng-template #editorModal let-modal>
        <div class="modal-header">
-         <h4 *ngIf="isNewCustomer" class="modal-title"><i class="fa fa-user-plus"></i> {{'users.management.NewUser' | translate}}</h4>
-         <h4 *ngIf="!isNewCustomer" class="modal-title"><i class="fa fa-user-circle-o"></i> {{'users.management.EditUser' | translate:editingUserName}}</h4>
+         <h4 *ngIf="isNewCustomer" class="modal-title"><i class="fa fa-user-plus"></i> {{'customer.edit.NewCustomer' | translate}}</h4>
+         <h4 *ngIf="!isNewCustomer" class="modal-title"><i class="fa fa-user-circle-o"></i> {{'customer.edit.EditCustomer' | translate:editingCustomerName}}</h4>
          <button type="button" class="btn-close fs-sm" title="Close" (click)="modal.close()" tabindex="-1"></button>
        </div>
        <div class="modal-body">

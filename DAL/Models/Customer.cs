@@ -28,5 +28,7 @@ namespace DAL.Models
         public virtual IList<Delivery> Deliveries { get; set; }
 
         public virtual IList<Address> Addresses { get; set; }
+
+        public virtual IList<InsurancePolicy> InsurancePolicies { get; set; } 
     }
 }

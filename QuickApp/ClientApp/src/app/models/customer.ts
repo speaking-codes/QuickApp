@@ -14,7 +14,7 @@ export class CustomerGrid extends Customer{
 }    
 
 export class CustomerEdit extends Customer {
-    //customerCode: string;
+    customerCode: string;
     firstName: string;
     lastName: string;
     birthDate: string;
