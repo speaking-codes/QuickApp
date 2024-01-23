@@ -13,9 +13,8 @@ namespace DAL.Models
         public int Id { get; set; }
         public EnumAddressType AddressType { get; set; }    
         public string Location { get; set; }
-        public string City { get; set; }
-        public string PostalCode { get; set; }
-        public string Province { get; set; }
+        
+        public virtual Municipality Municipality { get; set; }
 
         public virtual Customer Customer { get; set; }
     }

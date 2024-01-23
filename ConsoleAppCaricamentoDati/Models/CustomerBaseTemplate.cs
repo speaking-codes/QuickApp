@@ -10,10 +10,11 @@ namespace ConsoleAppCaricamentoDati.Models
     {
         public IList<string> LastNames { get; set; }
         public IList<FirstNameTemplate> FirstNameTemplates { get; set; }
-        public IList<string> Addresses { get; set; }
-        public IList<CityTemplate> CityTemplates { get; set; }
+        public IList<string> AddressTemplates { get; set; }
+        //public IList<CityTemplate> CityTemplates { get; set; }
         public IList<byte> JobContractType { get; set; }
         public IList<JobTemplate> JobTemplates { get; set; }
+        public IList<string> ProviderMailTemplates { get; set; }
     }
 
     public class FirstNameTemplate

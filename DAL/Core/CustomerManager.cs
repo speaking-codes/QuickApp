@@ -52,11 +52,11 @@ namespace DAL.Core
             customer.LastName = customerToUpdate.LastName;
             customer.Gender = customerToUpdate.Gender;
             customer.BirthDate = customerToUpdate.BirthDate;
-            customer.BirthPlace = customerToUpdate.BirthPlace;
-            customer.BirthCounty = customerToUpdate.BirthCounty;
-            customer.Profession = customerToUpdate.Profession;
+            //customer.BirthPlace = customerToUpdate.BirthPlace;
+            //customer.BirthCounty = customerToUpdate.BirthCounty;
+            customer.JobTitle = customerToUpdate.JobTitle;
             customer.ContractType = customerToUpdate.ContractType;
-            customer.RAL = customerToUpdate.RAL;
+            customer.Ral = customerToUpdate.Ral;
 
             #region Address 
 
@@ -98,6 +98,11 @@ namespace DAL.Core
             _unitOfWork.Customers.Update(customer);
             _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Deleted, customer.CustomerCode));
             return _unitOfWork.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

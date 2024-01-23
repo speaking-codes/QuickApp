@@ -19,21 +19,51 @@ namespace DAL
     {
         public string CurrentUserId { get; set; }
 
+        #region Customer
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Address> Addresses { get; set; }
+
+        #endregion
+
+        #region Municipality
+
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<Municipality> Municipalities { get; set; }
+
+        #endregion
+
+        #region Pet
+
+        public DbSet<PetType> PetTypes { get; set; }
+        public DbSet<BreedPetType> BreedPetTypes { get; set; }
+        public DbSet<BreedPetDetailType> BreedPetDetailTypes { get; set; }
+
+        #endregion
+
+        #region Car-Byke
 
         public DbSet<BrandType> BrandTypes { get; set; }
         public DbSet<ModelType> ModelTypes { get; set; }
         public DbSet<PowerType> PowerTypes { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
-                public DbSet<ConfigurationModel> ConfigurationModels { get; set; }
+        public DbSet<ConfigurationModel> ConfigurationModels { get; set; }
+
+        #endregion
+
+        #region Insurance Policy
 
         public DbSet<SalesLineType> SalesLineTypes { get; set; }
         public DbSet<InsurancePolicyCategory> InsurancePolicyCategories { get; set; }
         public DbSet<InsurancePolicy> InsurancePolicies { get; set; }
         public DbSet<VehicleInsurancePolicy> VehicleInsurancePolicies { get; set; }
+
+        #endregion
+
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
@@ -70,8 +100,6 @@ namespace DAL
             builder.Entity<Customer>().HasIndex(c => c.LastName);
             builder.Entity<Customer>().Property(c => c.CustomerCode).IsRequired().HasMaxLength(16);
             builder.Entity<Customer>().HasIndex(c => c.CustomerCode).IsUnique();
-            builder.Entity<Customer>().Property(c => c.BirthPlace).IsRequired(false);
-            builder.Entity<Customer>().Property(c => c.BirthCounty).IsRequired(false);
             builder.Entity<Customer>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Customer>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Customer>().ToTable($"App{nameof(Customers)}");
@@ -83,12 +111,46 @@ namespace DAL
             builder.Entity<Delivery>().ToTable($"App{nameof(Deliveries)}");
 
             builder.Entity<Address>().Property(c => c.Location).HasMaxLength(80).IsRequired(false);
-            builder.Entity<Address>().Property(c => c.Province).HasMaxLength(5).IsRequired(false);
-            builder.Entity<Address>().Property(c => c.City).HasMaxLength(50).IsRequired(false);
-            builder.Entity<Address>().Property(c => c.PostalCode).HasMaxLength(10).IsRequired(false);
             builder.Entity<Address>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Address>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Address>().ToTable($"App{nameof(Addresses)}");
+
+            #endregion
+
+            #region Municipality
+
+            builder.Entity<Area>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<Area>().Property(c => c.AreaName).HasMaxLength(50).IsRequired();
+            builder.Entity<Area>().ToTable($"App{nameof(Areas)}");
+
+            builder.Entity<Region>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<Region>().Property(c => c.RegionName).HasMaxLength(50).IsRequired();
+            builder.Entity<Region>().ToTable($"App{nameof(Regions)}");
+
+            builder.Entity<Province>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<Province>().Property(c => c.ProvinceName).HasMaxLength(50).IsRequired();
+            builder.Entity<Province>().Property(c => c.ProvinceAbbreviation).HasMaxLength(50).IsRequired();
+            builder.Entity<Province>().ToTable($"App{nameof(Provinces)}");
+
+            builder.Entity<Municipality>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<Municipality>().Property(c => c.MunicipalityName).HasMaxLength(50).IsRequired();
+            builder.Entity<Municipality>().ToTable($"App{nameof(Municipalities)}");
+
+            #endregion
+
+            #region Pet
+
+            builder.Entity<PetType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<PetType>().Property(c => c.PetTypeDescription).HasMaxLength(50).IsRequired();
+            builder.Entity<PetType>().ToTable($"App{nameof(PetTypes)}");
+
+            builder.Entity<BreedPetType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<BreedPetType>().Property(c => c.BreedPetTypeDescription).HasMaxLength(50).IsRequired();
+            builder.Entity<BreedPetType>().ToTable($"App{nameof(BreedPetTypes)}");
+
+            builder.Entity<BreedPetDetailType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<BreedPetDetailType>().Property(c => c.BreedPetDetailTypeDescription).HasMaxLength(50).IsRequired();
+            builder.Entity<BreedPetDetailType>().ToTable($"App{nameof(BreedPetDetailTypes)}");
 
             #endregion
 

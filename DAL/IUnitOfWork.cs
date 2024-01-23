@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace DAL
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         ICustomerRepository Customers { get; }
 

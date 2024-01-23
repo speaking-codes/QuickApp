@@ -266,3 +266,7 @@ __pycache__/
 # Others
 QuickApp.sln.licenseheader
 Thumbs.db
+/DAL/ScriptsInizializzazione/SQLQueryBike.sql
+/DAL/ScriptsInizializzazione/SQLQueryCar.sql
+/DAL/ScriptsInizializzazione/SQLQueryMunicipality.sql
+/DAL/ScriptsInizializzazione/SQLQueryPet.sql

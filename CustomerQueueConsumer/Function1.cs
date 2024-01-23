@@ -1,6 +1,6 @@
 using System;
 using DAL;
-using DAL.Core;
+using DAL.Core.Interfaces;
 using DAL.ModelsRabbitMQ;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;

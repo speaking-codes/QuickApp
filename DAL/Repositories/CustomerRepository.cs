@@ -13,6 +13,8 @@ namespace DAL.Repositories
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
+        private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
+
         public CustomerRepository(ApplicationDbContext context) : base(context)
         { }
 
@@ -30,6 +32,8 @@ namespace DAL.Repositories
         {
             return _appContext.Customers
                 .Include(c => c.Addresses)
+                    .ThenInclude(a => a.Municipality)
+                        .ThenInclude(m => m.Province)
                 .AsSingleQuery()
                 .OrderBy(c => c.LastName)
                 .ThenBy(c => c.FirstName);
@@ -38,14 +42,22 @@ namespace DAL.Repositories
         public IQueryable<Customer> GetCustomer(string customerCode)
         {
             return _appContext.Customers
+                            .Include(c => c.BirthMunicipality)      
+                                .ThenInclude(m => m.Province)
+                                .AsSingleQuery()
                             .Include(c => c.Deliveries)
                             .Include(c => c.Addresses)
+                                .ThenInclude(a => a.Municipality)
+                                    .ThenInclude(m => m.Province)
                             .AsSingleQuery()
                             .Where(c => c.CustomerCode == customerCode);
         }
 
-        public int MaxId() => _appContext.Customers.Max(x => x.Id);
-
-        private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
+        public int MaxId()
+        {
+            if (!_appContext.Customers.Any())
+                return 0;
+            return _appContext.Customers.Max(x => x.Id);
+        }
     }
 }

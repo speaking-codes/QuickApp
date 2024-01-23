@@ -1,9 +1,10 @@
 ﻿using DAL.Models;
+using System;
 using System.Collections.Generic;
 
 namespace DAL.Core.Interfaces
 {
-    public interface ICustomerManager
+    public interface ICustomerManager : IDisposable
     {
         IList<Customer> GetCustomers();
         Customer GetCustomer(string customerCode);

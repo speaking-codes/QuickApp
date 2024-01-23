@@ -27,14 +27,14 @@ namespace QuickApp.ViewModels
 
             return new List<Address>()
             {
-                new Address
-                {
-                    AddressType = EnumAddressType.Residenza,
-                    Location = customerViewModel.Location,
-                    City = customerViewModel.City,
-                    PostalCode = customerViewModel.PostalCode,
-                    Province = customerViewModel.Province
-                }
+                //new Address
+                //{
+                //    AddressType = EnumAddressType.Residenza,
+                //    Location = customerViewModel.Location,
+                //    City = customerViewModel.City,
+                //    PostalCode = customerViewModel.PostalCode,
+                //    Province = customerViewModel.Province
+                //}
             };
         }
 
@@ -51,6 +51,19 @@ namespace QuickApp.ViewModels
                     Email= customerViewModel.Email
                 }
             };
+        }
+
+        private string getAddressString(IEnumerable<Address> addresses)
+        {
+            var returnValue=string.Empty;
+            if (addresses==null || !addresses.Any())
+                return returnValue;
+
+            var municipality = addresses.FirstOrDefault(x => x.AddressType == EnumAddressType.Residenza)?.Municipality;
+            if (municipality == null)
+                return returnValue;
+
+            return $"{municipality.MunicipalityName} ({municipality.Province.ProvinceAbbreviation})";
         }
 
         public AutoMapperProfile()
@@ -94,9 +107,9 @@ namespace QuickApp.ViewModels
             CreateMap<Customer, CustomerEditViewModel>()
                 .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetDefinition()))
                 .ForMember(d => d.Location, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().Location))
-                .ForMember(d => d.City, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().City))
-                .ForMember(d => d.PostalCode, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().PostalCode))
-                .ForMember(d => d.Province, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().Province))
+                //.ForMember(d => d.City, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().City))
+                //.ForMember(d => d.PostalCode, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().PostalCode))
+                //.ForMember(d => d.Province, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : s.Addresses.FirstOrDefault().Province))
                 .ForMember(d => d.PhoneNumber, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries.FirstOrDefault().PhoneNumber))
                 .ForMember(d => d.Email, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries.FirstOrDefault().Email))
                 .ReverseMap()
@@ -107,11 +120,11 @@ namespace QuickApp.ViewModels
                 .ForMember(d => d.FullName, map => map.MapFrom(s => $"{s.LastName} {s.FirstName}"))
                 .ForMember(d => d.BirthDate, map => map.MapFrom(s => s.BirthDate.ToString("dd MMM yyyy")))
                 .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetDefinition()))
-                .ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].City} ({s.Addresses[0].Province})"));
+                .ForMember(d => d.Residence, map => map.MapFrom(s => getAddressString(s.Addresses)));
 
             CreateMap<Customer, CustomerDetailHeaderViewModel>()
                 .ForMember(d => d.FullName, map => map.MapFrom(s => $"{s.LastName} {s.FirstName}"))
-                .ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].Location} - {s.Addresses[0].City} ({s.Addresses[0].Province})"))
+                //.ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].Location} - {s.Addresses[0].City} ({s.Addresses[0].Province})"))
                 .ForMember(d => d.PhoneNumber, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].PhoneNumber))
                 .ForMember(d => d.Email, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].Email));
         }

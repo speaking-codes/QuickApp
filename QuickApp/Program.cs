@@ -8,7 +8,10 @@ using DAL;
 using DAL.Core;
 using DAL.Core.Interfaces;
 using DAL.Models;
+using DAL.MongoDB;
 using DAL.QueueService;
+using DAL.RepositoryNoSql;
+using DAL.RepositoryNoSql.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,11 +24,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 using OpenIddict.Validation.AspNetCore;
 using Quartz;
 using QuickApp.Authorization;
 using QuickApp.Helpers;
-using QuickApp.Jobs;
 using QuickApp.OIDC;
 using System;
 using System.Reflection;
@@ -52,8 +55,9 @@ namespace QuickApp
 
         private static void AddServices(WebApplicationBuilder builder)
         {
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                            throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionStringNoSql = "mongodb://localhost:27017/"; 
+            var databaseNoSql = "datSampleDataBaseNoSql";
 
             var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name; //QuickApp
 
@@ -185,12 +189,18 @@ namespace QuickApp
 
             // Business Services
             builder.Services.AddScoped<IEmailSender, EmailSender>();
+      
+            builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionStringNoSql));
 
             // Repositories
             builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
             builder.Services.AddScoped<IAccountManager, AccountManager>();
             builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+            builder.Services.AddScoped<IDashboardManager, DashboardManager>();
             builder.Services.AddScoped<IMessageQueueProducer, MessageQueueProducer>();
+            builder.Services.AddScoped<IMongoDbContext, MongoDbContext>(x => new MongoDbContext(connectionStringNoSql, databaseNoSql));
+            builder.Services.AddScoped<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
+            builder.Services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
 
             // Auth Handlers
             builder.Services.AddSingleton<IAuthorizationHandler, ViewUserAuthorizationHandler>();
