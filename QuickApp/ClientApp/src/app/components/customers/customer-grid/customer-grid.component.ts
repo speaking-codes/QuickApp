@@ -2,7 +2,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppTranslationService } from 'src/app/services/app-translation.service';
 import { LocalStoreManager } from 'src/app/services/local-store-manager.service';
-
+import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy, Input, TemplateRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TableColumn } from '@swimlane/ngx-datatable';
@@ -34,6 +34,7 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   editingCustomerName: { name: string } | null = null;
   loadingIndicator = false;  
   loadGridStep: EnumLoadGridStep;
+  router: Router;
 
   @Input()
   verticalScrollbar = false;
@@ -289,5 +290,9 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   showActiveCustomers() { 
      this.updateLoadGridStep();
      this.rows = this.getCustomersFilterActive();     
-  } 
+  }
+
+  dashboardCustomer(data: CustomerGrid){
+    this.router.navigate(['dashboard']);
+  }
 }

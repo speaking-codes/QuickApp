@@ -21,6 +21,7 @@ namespace DAL.Core.Helpers
         {
             var preCode = firstName.Substring(0, 1) + lastName.Substring(0,1);
             var length = 16 - preCode.Length - progressive.ToString().Length - 2;
+            length = length < 6 ? 6 : length;
             return $"{preCode}-{generateRandomCode(length)}-{progressive}".ToUpper();
         }
     }

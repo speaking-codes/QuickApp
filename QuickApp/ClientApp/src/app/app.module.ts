@@ -60,6 +60,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CompanyInsuranceComponent } from './components/company-insurance/company-insurance.component';
 import { CustomerGridComponent } from './components/customers/customer-grid/customer-grid.component';
 import { CustomerEditorComponent } from './components/customers/customer-editor/customer-editor.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { CustomerEditorComponent } from './components/customers/customer-editor/
     CompanyInsuranceComponent,
     FooterComponent,
     CustomerGridComponent,
-    CustomerEditorComponent
+    CustomerEditorComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@
 
 namespace DAL.Enums
 {
-    public enum ContractType
+    public enum EnumContractType
     {
         [ValueInfo(Definition = "Non Specificato")]
         None,
@@ -13,7 +13,7 @@ namespace DAL.Enums
         Contratto_Apprendistato,
         [ValueInfo(Definition = "Partita IVA")]
         Partita_Iva,
-        [ValueInfo(Definition = "Contratto a Progetto - (Co.Co.Pro.")]
+        [ValueInfo(Definition = "Contratto a Progetto - (Co.Co.Pro.)")]
         Contratto_CO_CO_PRO,
         [ValueInfo(Definition = "Contratto di collaborazione coordinata e continuativa - (Co.Co.Co.)")]
         Contratto_CO_CO_CO,

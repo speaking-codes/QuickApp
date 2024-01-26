@@ -8,7 +8,6 @@ namespace DAL.Models
 {
     public class VehicleInsurancePolicy : InsurancePolicy
     {
-        public bool IsLuxuryPolicy { get; set; }
         public string LicensePlate { get; set; }
         public double CommercialValue { get; set; }
         public double InsuredValue { get; set; }

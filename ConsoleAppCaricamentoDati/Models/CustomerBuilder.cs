@@ -14,15 +14,14 @@ namespace ConsoleAppCaricamentoDati.Models
     {
         private Customer _customer;
         private Random _random;
-        private int _progressive;
         private readonly IList<Municipality> _municipalityList;
         private readonly CustomerBaseTemplate _template;
         private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private const string charsNumber = "0123456789";
+
         public CustomerBuilder(ServiceProvider provider, CustomerBaseTemplate template)
         {
             _random = new Random();
-            _progressive = 0;
             using (var scope = provider.CreateScope())
             {
                 var repository = provider.GetService<IRepositoryMunicipality>();
@@ -77,7 +76,7 @@ namespace ConsoleAppCaricamentoDati.Models
 
         public CustomerBuilder SetBirthDate()
         {
-            var age = _random.Next(20, 90);
+            var age = _random.Next(18, 90);
             var days = _random.Next(1, 365);
             _customer.BirthDate = DateTime.Now.AddYears(-age).AddDays(-days);
             return this;
@@ -90,17 +89,15 @@ namespace ConsoleAppCaricamentoDati.Models
             return this;
         }
 
-        public CustomerBuilder SetCustomerCode()
+        public CustomerBuilder SetMaritalStatus()
         {
-            if (string.IsNullOrEmpty(_customer.LastName))
-                setLastNameDefault();
+            _customer.MaritalStatus = (EnumMaritalStatus)_random.Next(0, 4);
+            return this;
+        }
 
-            if (string.IsNullOrEmpty(_customer.FirstName))
-                setFirstNameDefault();
-
-            var preCode = _customer.FirstName.Substring(0, 1) + _customer.LastName.Substring(0, 1);
-            var length = 16 - preCode.Length - _progressive.ToString().Length - 2;
-            _customer.CustomerCode = $"{preCode}-{generateRandomCode(length)}-{_progressive}".ToUpper();
+        public CustomerBuilder SetChildrenNumber()
+        {
+            _customer.ChildrenNumber = (byte)_random.Next(0, 7);
             return this;
         }
 
@@ -111,7 +108,7 @@ namespace ConsoleAppCaricamentoDati.Models
             _customer.Ral = _template.JobTemplates[i].Ral * (1 + _random.NextDouble());
 
             i = _random.Next(0, _template.JobContractType.Count - 1);
-            _customer.ContractType = (ContractType)_template.JobContractType[i];
+            _customer.ContractType = (EnumContractType)_template.JobContractType[i];
             return this;
         }
 
@@ -148,13 +145,6 @@ namespace ConsoleAppCaricamentoDati.Models
             return this;
         }
 
-        public Customer Build()
-        {
-            if (string.IsNullOrEmpty(_customer.CustomerCode))
-                SetCustomerCode();
-
-            _progressive++;
-            return _customer;
-        }
+        public Customer Build() => _customer;
     }
 }

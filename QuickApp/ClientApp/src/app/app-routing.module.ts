@@ -19,6 +19,7 @@ import { AppTitleService } from './services/app-title.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard';
 import { Utilities } from './services/utilities';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 
 
 @Injectable()
@@ -46,7 +47,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard], title: 'Home' },
   { path: 'login', component: LoginComponent, title: 'Login' },
-  { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard], title: 'Customers' },
+  { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard], title: 'Customers',
+          children:[{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], title: 'Dashboard'}] },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard], title: 'Products' },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard], title: 'Orders' },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard], title: 'Settings' },

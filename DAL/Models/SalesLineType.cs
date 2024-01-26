@@ -13,6 +13,7 @@ namespace DAL.Models
         public string SalesLineName { get; set; }
         public string SalesLineDescription { get; set; }
         public string SalesLineTitle { get; set; }
+        public string BackGroundColorCssClass { get; set; }
         public bool IsActive { get; set; }
 
         public virtual IList<InsurancePolicyCategory> InsurancePolicyCategories { get; set; }

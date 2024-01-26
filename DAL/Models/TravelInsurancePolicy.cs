@@ -10,7 +10,6 @@ namespace DAL.Models
 {
     public class TravelInsurancePolicy : InsurancePolicy
     {
-        public bool IsLuxuryPolicy { get; set; }
         public int? LuggageHeightMetres { get; set; }
         public int? LuggageLengthMetres { get; set; }
         public int? LuggageWidthMetres { get; set; }

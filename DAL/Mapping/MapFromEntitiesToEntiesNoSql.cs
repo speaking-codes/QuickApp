@@ -106,7 +106,7 @@ namespace DAL.Mapping
                 CustomerPhone = getPhone(value),
 
                 CustomerJobTitle = value.JobTitle,
-                CustomerRal = "€ " + value.Ral.ToString()
+                CustomerRal = value.Ral.HasValue ? "€ " + value.Ral.Value.ToString("C0") : string.Empty
             };
         }
 

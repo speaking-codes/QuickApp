@@ -13,7 +13,7 @@ namespace QuickApp.ViewModels
         public string BirthCounty { get; set; }
         public EnumGender Gender { get; set; }
         public string Profession { get; set; }
-        public ContractType ContractType { get; set; }
+        public EnumContractType ContractType { get; set; }
         public double? RAL { get; set; }
 
         public string Location { get; set; }

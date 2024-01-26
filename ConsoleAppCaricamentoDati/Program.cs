@@ -8,6 +8,7 @@ using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using DAL.Models;
 
 namespace ConsoleAppCaricamentoDati
 {
@@ -43,24 +44,25 @@ namespace ConsoleAppCaricamentoDati
                                                           .SetJob(jobPath)
                                                           .Build();
             var customBuilder = new CustomerBuilder(provider, customerTemplate);
+            var customerList = new List<Customer>();
 
-            using (var manger = provider.GetService<ICustomerManager>())
+            for (var i = 0; i < 4; i++)
             {
-                for (var i = 0; i < 4; i++)
-                {
-
-                    var customer = customBuilder.SetCustomer()
-                                                .SetFirstName()
-                                                .SetLastName()
-                                                .SetBirthDate()
-                                                .SetBirthPlace()
-                                                .SetAddress()
-                                                .SetDelivery()
-                                                .SetJob()
-                                                .Build();
-                    manger.AddCustomer(customer);
-                }
+                customerList.Add(customBuilder.SetCustomer()
+                                            .SetFirstName()
+                                            .SetLastName()
+                                            .SetMaritalStatus()
+                                            .SetChildrenNumber()
+                                            .SetBirthDate()
+                                            .SetBirthPlace()
+                                            .SetAddress()
+                                            .SetDelivery()
+                                            .SetJob()
+                                            .Build());
             }
+            //using (var manger = provider.GetService<ICustomerManager>())
+            //{
+            //}
             Console.WriteLine("Hello, World!");
         }
     }

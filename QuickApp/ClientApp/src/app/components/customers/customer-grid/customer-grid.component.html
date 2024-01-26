@@ -61,7 +61,7 @@
              </ngx-datatable-column>  
              <ngx-datatable-column name="{{'customer.grid.Actions' | translate}}" sortable="false" prop="actions" [sortable]="false">
              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="editCustomer(row)"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{'customer.grid.DashboardCustomer' | translate}}</a>
+               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="dashboardCustomer(row)"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{'customer.grid.DashboardCustomer' | translate}}</a>
                <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="detailsCustomer(row)"><i class="fa fa-eye" aria-hidden="true"></i> {{'customer.grid.DetailCustomer' | translate}}</a> 
                <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="deleteCustomer(row)"><i class="fa fa-trash-o" aria-hidden="true"></i> {{'customer.grid.RemoveCustomer' | translate}}</a> 
              </ng-template>

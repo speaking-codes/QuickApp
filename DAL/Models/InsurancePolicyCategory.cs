@@ -12,7 +12,6 @@ namespace DAL.Models
         public string InsurancePolicyCategoryCode { get; set; }
         public string InsurancePolicyCategoryName { get; set; }
         public string IconCssClass { get; set; }
-        public string BackGroundColorCssClass { get; set; }
 
         public virtual SalesLineType SalesLine { get; set; }
         public virtual IList<InsurancePolicy> InsurancePolicies { get; set; }

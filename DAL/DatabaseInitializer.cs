@@ -1,4 +1,5 @@
-﻿// ---------------------------------------
+﻿
+  // ---------------------------------------
 // Email: quickapp@ebenmonney.com
 // Templates: www.ebenmonney.com/templates
 // (c) 2023 www.ebenmonney.com/mit-license
@@ -37,9 +38,8 @@ namespace DAL
 
         public async Task SeedAsync()
         {
-            //await _context.Database.EnsureDeletedAsync();
-            //await _context.Database.EnsureCreatedAsync();
-            //await _context.Database.MigrateAsync().ConfigureAwait(false);
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.EnsureCreatedAsync();
             await SeedDefaultUsersAsync();
             await SeedDemoDataAsync();
         }
