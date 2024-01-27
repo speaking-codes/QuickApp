@@ -9,5 +9,7 @@ namespace DAL.Repositories.Interfaces
 {
     public interface IInsurancePolicyRepository:IRepository<InsurancePolicy>
     {
+        IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode);
+        IQueryable<InsurancePolicy> GetActiveInsurancePolicies(string customercode);
     }
 }

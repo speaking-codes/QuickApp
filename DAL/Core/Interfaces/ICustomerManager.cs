@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DAL.Core.Interfaces
 {
-    public interface ICustomerManager : IDisposable
+    public interface ICustomerManager : IManager
     {
         IList<Customer> GetCustomers();
         Customer GetCustomer(string customerCode);

@@ -192,21 +192,44 @@ namespace QuickApp
       
             builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionStringNoSql));
 
-            // Repositories
+            #region Unit of Work
+
             builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
+
+            #endregion
+
+            #region Manager
+
             builder.Services.AddScoped<IAccountManager, AccountManager>();
             builder.Services.AddScoped<ICustomerManager, CustomerManager>();
             builder.Services.AddScoped<IDashboardManager, DashboardManager>();
+            builder.Services.AddScoped<ICustomerRatingManager, CustomerRatingManager>();
+            builder.Services.AddScoped<IInsurancePolicyManager, InsurancePolicyManager>();
+
+            #endregion
+
+            #region Queue Manager
+
             builder.Services.AddScoped<IMessageQueueProducer, MessageQueueProducer>();
+
+            #endregion
+
+            #region Repositories NoSql
+
             builder.Services.AddScoped<IMongoDbContext, MongoDbContext>(x => new MongoDbContext(connectionStringNoSql, databaseNoSql));
             builder.Services.AddScoped<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
             builder.Services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
 
-            // Auth Handlers
+            #endregion
+
+            #region Auth Handlers
+
             builder.Services.AddSingleton<IAuthorizationHandler, ViewUserAuthorizationHandler>();
             builder.Services.AddSingleton<IAuthorizationHandler, ManageUserAuthorizationHandler>();
             builder.Services.AddSingleton<IAuthorizationHandler, ViewRoleAuthorizationHandler>();
             builder.Services.AddSingleton<IAuthorizationHandler, AssignRolesAuthorizationHandler>();
+
+            #endregion
 
             // DB Creation and Seeding
             builder.Services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();

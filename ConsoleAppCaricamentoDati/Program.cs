@@ -32,6 +32,8 @@ namespace ConsoleAppCaricamentoDati
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRepositoryMunicipality, RepositoryMunicipality>();
             services.AddScoped<ICustomerManager, CustomerManager>();
+            services.AddScoped<ICustomerRatingManager, CustomerRatingManager>();
+            services.AddScoped<IInsurancePolicyManager, InsurancePolicyManager>();
             services.AddScoped<IMessageQueueProducer, MessageQueueProducer>();
             var provider = services.BuildServiceProvider();
 
@@ -60,9 +62,12 @@ namespace ConsoleAppCaricamentoDati
                                             .SetJob()
                                             .Build());
             }
-            //using (var manger = provider.GetService<ICustomerManager>())
-            //{
-            //}
+            using (var manger = provider.GetService<ICustomerManager>())
+            {
+                manger.BeginTransaction();
+                for(var i=0;i<customerList.Count;i++)
+                    manger.AddCustomer(customerList[i]);
+            }
             Console.WriteLine("Hello, World!");
         }
     }

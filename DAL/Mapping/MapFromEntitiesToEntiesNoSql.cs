@@ -95,7 +95,7 @@ namespace DAL.Mapping
                 CustomerCode = value.CustomerCode,
 
                 CustomerName = $"{value.LastName} {value.FirstName}",
-                CustomerBirthDate = value.BirthDate.ToString("D"),
+                CustomerBirthDate =value.BirthDate.HasValue?  value.BirthDate.Value.ToString("D"):string.Empty,
                 CustomerBirthPlace = getCityDetail(value),
                 CustomerGender = value.Gender.GetDefinition(),
 

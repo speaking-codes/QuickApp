@@ -6,14 +6,24 @@
 
 using DAL.Repositories.Interfaces;
 using System;
-using System.Linq;
 
 namespace DAL
 {
     public interface IUnitOfWork : IDisposable
     {
         ICustomerRepository Customers { get; }
+        IRepositoryMunicipality Municipalities { get; }
+        IMaritalStatusTypeRepository MaritalStatusTypes { get; }
+        IJobRalRatingCoefficientRepository JobRalRatingCoefficients { get; }
+        IInsurancePolicyRepository InsurancePolicies { get; }
+        IInsurancePolicyCategoryRepository InsurancePolicyCategories { get; }
+        ICustomerInsuranceCategoryPolicyRatingRepository CustomerInsuranceCategoryPolicyRatings { get; }
+        IContractTypeRepository ContractTypes { get; }
+        IAgeRatingCoefficientRepository AgeRatingCoefficients { get; }
 
         int SaveChanges();
+        void BeginTransaction();
+        void CommitTransaction();
+        void RollbackTransaction();
     }
 }

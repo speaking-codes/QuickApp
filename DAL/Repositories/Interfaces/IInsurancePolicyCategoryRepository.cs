@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
-    public interface IInsurancePolicyCategoryRepository:IRepository<InsurancePolicyCategoryRepository>
+    public interface IInsurancePolicyCategoryRepository : IRepository<InsurancePolicyCategoryRepository>
     {
+        IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories();
+        IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(string insurancePolicyCategoryCode);
+        IQueryable<int> GetInsurancePolicyCategoryCount(string insurancePolicyCategoryCode);
     }
 }

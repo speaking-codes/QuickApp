@@ -12,5 +12,6 @@ namespace DAL.Models
         public int MinAge { get; set; }
         public int? MaxAge { get; set; }
         public float RatingCoefficient { get; set; }
+        public float ChildrenNumberRatingCoefficient { get; set; }
     }
 }

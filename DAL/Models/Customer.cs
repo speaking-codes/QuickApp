@@ -14,12 +14,12 @@ namespace DAL.Models
         public string CustomerCode { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public EnumGender Gender { get; set; }
-        public EnumMaritalStatus MaritalStatus { get; set; }
-        public byte ChildrenNumber { get; set; }
+        public EnumMaritalStatus? MaritalStatus { get; set; }
+        public byte? ChildrenNumber { get; set; }
         public string JobTitle { get; set; }
-        public EnumContractType ContractType { get; set; }
+        public EnumContractType? ContractType { get; set; }
         public double? Ral { get; set; }
         public bool IsActive { get; set; }
         public DateTime DateCreated { get; set; }

@@ -1,6 +1,6 @@
 ﻿using DAL.Enums;
 using DAL.Models;
-using DAL.Repositories;
+using DAL.Repositories.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
