@@ -34,7 +34,6 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   editingCustomerName: { name: string } | null = null;
   loadingIndicator = false;  
   loadGridStep: EnumLoadGridStep;
-  router: Router;
 
   @Input()
   verticalScrollbar = false;
@@ -49,7 +48,7 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   
   customerEditor: CustomerEditorComponent | null = null;
 
-  constructor(private customerService: CustomerService, private alertService: AlertService, private modalService: NgbModal){}
+  constructor(private customerService: CustomerService, private alertService: AlertService, private modalService: NgbModal, private router: Router){}
   
   get isNewCustomer() { return this.sourceCustomer == null; }
 
@@ -193,7 +192,6 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   }
 
   addNewCustomerToList() {
-    debugger;
     if (this.sourceCustomer) {
         Object.assign(this.sourceCustomer, this.editedCustomer);
 
@@ -293,6 +291,6 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   }
 
   dashboardCustomer(data: CustomerGrid){
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['/dashboard', data.customerCode ]);
   }
 }

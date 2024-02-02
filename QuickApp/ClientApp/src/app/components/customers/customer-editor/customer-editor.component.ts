@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Customer, CustomerEdit, CustomerGrid, CustomerDetailHeader } from 'src/app/models/customer';
+import { Customer, CustomerEdit, CustomerGrid } from 'src/app/models/customer';
 import { EnumGender } from 'src/app/models/enums';
 import { AlertService, MessageSeverity } from 'src/app/services/alert.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -153,6 +153,7 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
       console.log('Insert new customer');
       this.customerService.newCustomer(this.customerEdit)
         .subscribe({ next: () => this.saveSuccessHelper(this.customerEdit), error: error => this.saveFailedHelper(error) });
+       // .subscribe((resp) => {console.log(resp)});
     } else {
       console.log('Update customer');
       this.customerService.updateCustomer(this.customerEdit)
@@ -162,7 +163,6 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
 
   private saveSuccessHelper(customer: CustomerEdit)
   {
-    debugger;
     if (customer) {
       Object.assign(this.customerEdit, customer);
     }

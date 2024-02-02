@@ -74,7 +74,7 @@ namespace DAL.Core
                 //customer.BirthCounty = customerToUpdate.BirthCounty;
                 customer.JobTitle = customerToUpdate.JobTitle;
                 customer.ContractType = customerToUpdate.ContractType;
-                customer.Ral = customerToUpdate.Ral;
+                customer.Income = customerToUpdate.Income;
 
                 #region Address 
 
@@ -142,7 +142,7 @@ namespace DAL.Core
 
         public override void Dispose()
         {
-            if (IsMassiveWriter)
+            if (IsMassiveWriter && UnitOfWork.IsTransactionOpened)
             {
                 if (_countError > 0)
                     UnitOfWork.RollbackTransaction();

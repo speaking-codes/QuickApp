@@ -13,5 +13,8 @@ namespace DAL.Repositories
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
 
         public CustomerInsuranceCategoryPolicyRatingRepository(ApplicationDbContext context) : base(context) { }
+
+        public IQueryable<CustomerInsuranceCategoryPolicyRating> GetCustomerInsuranceCategoryPolicyRatings(string customerCode, string insurancePolicyCategoryCode) =>
+            _appContext.CustomerInsuranceCategoryPolicyRatings.Where(x => x.CustomerCode == customerCode && x.InsuranceCategoryPolicyCode == insurancePolicyCategoryCode);
     }
 }

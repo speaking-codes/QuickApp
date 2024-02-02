@@ -45,15 +45,17 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard], title: 'Home' },
+  //{ path: '', component: HomeComponent, canActivate: [AuthGuard], title: 'Home' },
+  { path: '', component: CustomersComponent, canActivate: [AuthGuard], title: 'Home'},
   { path: 'login', component: LoginComponent, title: 'Login' },
-  { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard], title: 'Customers',
-          children:[{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], title: 'Dashboard'}] },
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard], title: 'Products' },
-  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard], title: 'Orders' },
+  { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard], title: 'Customers'},
+  { path: 'dashboard/:customerCode', component: DashboardComponent, canActivate: [AuthGuard], title: 'Dashboard'},
+  //{ path: 'products', component: ProductsComponent, canActivate: [AuthGuard], title: 'Products' },
+  //{ path: 'orders', component: OrdersComponent, canActivate: [AuthGuard], title: 'Orders' },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard], title: 'Settings' },
   { path: 'about', component: AboutComponent, title: 'About Us' },
-  { path: 'home', redirectTo: '/', pathMatch: 'full' },
+  //{ path: 'home', redirectTo: '/', pathMatch: 'full' },
+  { path: 'customers', redirectTo: '/', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent, title: 'Page Not Found' }
 ];
 

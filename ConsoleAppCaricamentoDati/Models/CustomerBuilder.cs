@@ -25,7 +25,7 @@ namespace ConsoleAppCaricamentoDati.Models
             using (var scope = provider.CreateScope())
             {
                 var repository = provider.GetService<IRepositoryMunicipality>();
-                _municipalityList = repository.GetMunicipalities();
+                _municipalityList = repository.GetMunicipalities().ToList();
             }
             _template = template;
         }
@@ -105,7 +105,7 @@ namespace ConsoleAppCaricamentoDati.Models
         {
             var i = _random.Next(0, _template.JobTemplates.Count - 1);
             _customer.JobTitle = _template.JobTemplates[i].JobTitle;
-            _customer.Ral = _template.JobTemplates[i].Ral * (1 + _random.NextDouble());
+            _customer.Income = _template.JobTemplates[i].Ral * (1 + _random.NextDouble());
 
             i = _random.Next(0, _template.JobContractType.Count - 1);
             _customer.ContractType = (EnumContractType)_template.JobContractType[i];

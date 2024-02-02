@@ -123,6 +123,8 @@ namespace DAL
             }
         }
 
+        public bool IsTransactionOpened { get { return _transaction != null; } }
+
         #endregion
 
         #region Methods

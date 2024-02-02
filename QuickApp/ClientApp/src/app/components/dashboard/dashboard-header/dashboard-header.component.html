@@ -1,0 +1,49 @@
+<div class="row dash-header">
+    <div class="col-3">
+        <app-chart [showLeggend]="showChartLeggend" [heightChart]="heightChart"></app-chart>
+    </div>
+    <div class="col-9">
+        <div class="row title-section-header">
+            <div class="col-12">
+                <h3>Profilo</h3>
+            </div>
+           </div>
+           <div class="row">
+        <div class="col-12">
+            <app-customer-header [customerCode]="this.customerCode"></app-customer-header>
+        </div>
+       </div>
+       <div class="row title-section-header">
+            <div class="col-10">
+                <h3>Profilo Completo</h3> 
+            </div>
+            <div class="col-2">
+                <a *ngIf="!IsShowenCustomerDetail()" (click)="ShowCustomerDetail()" class="btn btn-link text-link btn-sm" href="javascript:;"><i class="fa fa-expand" aria-hidden="true"></i> Espandi</a> 
+                <a *ngIf="IsShowenCustomerDetail()" (click)="HideCustomerDetail()" class="btn btn-link text-link btn-sm" href="javascript:;"><i class="fa fa-compress" aria-hidden="true"></i> Comprimi</a> 
+            </div>
+       </div>
+       <div class="row">
+        <div class="col-12">
+            <app-customer-detail [customerCode]="this.customerCode" [showDetail]="this.showCustomerDetail"></app-customer-detail>
+        </div>
+       </div>
+    </div>
+</div>
+<div class="row dash-header">
+    <div class="col-12">
+    <div class="row title-section-header">
+    <div class="col-10">
+        <h3>Coperture Assicurative</h3>
+    </div>
+    <div class="col-2">
+        <a *ngIf="!IsShowenInsuranceCoverage()" (click)="ShowInsuranceCoverage()" class="btn btn-link text-link btn-sm" href="javascript:;"><i class="fa fa-expand" aria-hidden="true"></i> Espandi</a> 
+        <a *ngIf="IsShowenInsuranceCoverage()" (click)="HideInsuranceCoverage()" class="btn btn-link text-link btn-sm" href="javascript:;"><i class="fa fa-compress" aria-hidden="true"></i> Comprimi</a> 
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-12">
+        <app-insurance-coverage-summary [customerCode]="this.customerCode" [showDetail]="this.showInsuranceCoverage"></app-insurance-coverage-summary>
+    </div>
+   </div>
+    </div>
+</div>

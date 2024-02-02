@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DAL.Core.Interfaces;
+using DAL.ModelsNoSql;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,15 +28,24 @@ namespace QuickApp.Controllers
         [HttpGet("CustomerHeader/{customerCode}")]
         public IActionResult GetCustomerHeader(string customerCode)
         {
-            var allCustomers = _dashboardManager.GetCustomerHeader(customerCode);
-            return Ok(allCustomers);
+            var customer = _dashboardManager.GetCustomerHeader(customerCode.ToUpper());
+            return Ok(customer ?? new CustomerHeader());
         }
 
         [HttpGet("CustomerDetail/{customerCode}")]
         public IActionResult GetCustomerDetail(string customerCode)
         {
-            var allCustomers = _dashboardManager.GetCustomerDetail(customerCode);
-            return Ok(allCustomers);
+            var allCustomers = _dashboardManager.GetCustomerDetail(customerCode.ToUpper());
+            return Ok(allCustomers ?? new CustomerDetail());
+        }
+
+        [HttpGet("Title/{customerCode}")]
+        public IActionResult GetTitle(string customerCode)
+        {
+            var customer = _dashboardManager.GetCustomerHeader(customerCode.ToUpper());
+            if (customer == null) customer = new CustomerHeader();
+            customer.FullName = $"{customer.FullName} - Profilo Assicurativo";
+            return Ok(customer);
         }
     }
 }

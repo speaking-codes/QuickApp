@@ -1,13 +1,11 @@
 BEGIN TRAN
 
-Tipologia Veicolo
 INSERT INTO AppBrandTypes (Id, BrandTypeDescription, IsLuxury, IsByke, CreatedBy, UpdatedBy, CreatedDate, UpdatedDate) SELECT 1, 'BASE', 0, 0, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBrandTypes (Id, BrandTypeDescription, IsLuxury, IsByke, CreatedBy, UpdatedBy, CreatedDate, UpdatedDate) SELECT 2, 'LUSSO', 1, 0, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBrandTypes (Id, BrandTypeDescription, IsLuxury, IsByke, CreatedBy, UpdatedBy, CreatedDate, UpdatedDate) SELECT 3, 'PLUS', 0, 0, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBrandTypes (Id, BrandTypeDescription, IsLuxury, IsByke, CreatedBy, UpdatedBy, CreatedDate, UpdatedDate) SELECT 4, 'SUPER LUSSO', 1, 0, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBrandTypes (Id, BrandTypeDescription, IsLuxury, IsByke, CreatedBy, UpdatedBy, CreatedDate, UpdatedDate) SELECT 5, 'CICLO MOTORE', 0, 1, NULL, NULL, GETDATE(), GETDATE()
 
-Tipologia Alimentazione
 INSERT INTO AppPowerTypes (Id, PowerTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 'BENZINA', NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppPowerTypes (Id, PowerTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 'DIESEL', NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppPowerTypes (Id, PowerTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 3, 'ELETTRICA', NULL, NULL, GETDATE(), GETDATE()
@@ -16,7 +14,6 @@ INSERT INTO AppPowerTypes (Id, PowerTypeDescription, CreatedBy, UpdatedBy, Updat
 INSERT INTO AppPowerTypes (Id, PowerTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 6, 'METANO', NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppPowerTypes (Id, PowerTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 7, 'IDROGENO', NULL, NULL, GETDATE(), GETDATE()
 
-Tipologia Modello
 INSERT INTO AppModelTypes (Id, ModelTypeDescription, IsByke, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 'APERTA', 0, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppModelTypes (Id, ModelTypeDescription, IsByke, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 'SOFT TOP', 0, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppModelTypes (Id, ModelTypeDescription, IsByke, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 3, 'BERLINA 2 VOLUMI', 0, NULL, NULL, GETDATE(), GETDATE()
@@ -47,7 +44,6 @@ INSERT INTO AppModelTypes (Id, ModelTypeDescription, IsByke, CreatedBy, UpdatedB
 INSERT INTO AppModelTypes (Id, ModelTypeDescription, IsByke, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 28, 'MINICROSS', 1, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppModelTypes (Id, ModelTypeDescription, IsByke, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 29, 'QUADRICICLO', 1, NULL, NULL, GETDATE(), GETDATE()
 
-Marca
 INSERT INTO AppBrands(Id, BrandName, BrandTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 'MAZDA', 1, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBrands(Id, BrandName, BrandTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 'KIA', 1, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBrands(Id, BrandName, BrandTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 3, 'LADA', 1, NULL, NULL, GETDATE(), GETDATE()

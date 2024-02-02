@@ -13,24 +13,17 @@ namespace DAL.ModelsNoSql
     {
         [BsonId]
         public ObjectId Id { get; internal set; }
-        [BsonElement("CustomerCode")]
+        [BsonElement("Code")]
         public string CustomerCode { get; set; }
-        [BsonElement("CustomerName")]
-        public string CustomerName { get; set; }
-        [BsonElement("CustomerAddress")]
-        public string CustomerAddress { get; set; }
-        [BsonElement("CustomerPhone")]
-        public string CustomerPhone { get; set; }
-        [BsonElement("CustomerEmail")]
-        public string CustomerEmail { get; set; }
-        [BsonElement("IsDeleted")]
-        public bool IsDeleted { get; set; }
-        [BsonElement("InsurancePolicies")]
-        public IList<InsurancePolicyTypeChart> InsurancePolicies { get; set; }
-
-        public CustomerHeader()
-        {
-            InsurancePolicies=new List<InsurancePolicyTypeChart>();
-        }
+        [BsonElement("FullName")]
+        public string FullName { get; set; }
+        [BsonElement("Address")]
+        public string Address { get; set; }
+        [BsonElement("Phone")]
+        public string Phone { get; set; }
+        [BsonElement("Email")]
+        public string Email { get; set; }
+        
+        public CustomerHeader() { }
     }
 }

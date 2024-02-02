@@ -34,9 +34,25 @@ export class CustomerEdit extends Customer {
     phoneNumber: string;
 }
 
-export class CustomerDetailHeader extends Customer{
+export class CustomerHeader extends Customer{
     fullName: string;
-    residence: string;
-    phoneNumber: string;
+    address: string;
+    phone: string;
     email: string;
+}
+
+export class CustomerDetail extends Customer{
+    fullName: string;
+    gender: string;
+    birthDate: string;
+    birthPlace: string;
+    maritalStatus: string;
+    childrenNumber: string;
+    addressLocation: string;
+    addressCity: string;
+    phone: string;
+    email: string;
+    contractType: string;
+    jobTitle: string;
+    income: string;
 }

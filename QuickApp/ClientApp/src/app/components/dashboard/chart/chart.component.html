@@ -1,0 +1,29 @@
+<div class="row statistics-container">
+  <div class="col-md-12">
+    <div class="chart-container">
+      <canvas baseChart width="600" height="heightChart"
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [legend]="showLeggend"
+              [type]="chartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+  <div class="col-6 offset-3" style="display: none;">
+    <button class="refresh-btn" (click)="randomize();showMessage('Manual refresh!');">REFSH</button>
+    <div class="d-inline-block" ngbDropdown>
+      <button id="chartType" ngbDropdownToggle type="button" class="dropdown-toggle"><i class="fa fa-bar-chart"></i></button>
+      <div ngbDropdownMenu class="dropdown-menu">
+        <button [class.active]="chartType === 'bar'" (click)="changeChartType('bar')" ngbDropdownItem>Bar Chart</button>
+        <button [class.active]="chartType === 'pie'" (click)="changeChartType('pie')" ngbDropdownItem>Pie Chart</button>
+        <button [class.active]="chartType === 'doughnut'" (click)="changeChartType('doughnut')" ngbDropdownItem>Doughnut Chart</button>
+        <button [class.active]="chartType === 'polarArea'" (click)="changeChartType('polarArea')" ngbDropdownItem>Polar Area Chart</button>
+        <button [class.active]="chartType === 'radar'" (click)="changeChartType('radar')" ngbDropdownItem>Radar Chart</button>
+        <div class="dropdown-divider"></div>
+        <button [class.active]="chartType === 'line'" (click)="changeChartType('line')" ngbDropdownItem>Line Chart</button>
+      </div>
+    </div>    
+  </div>
+</div>

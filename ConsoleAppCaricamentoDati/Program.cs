@@ -46,9 +46,14 @@ namespace ConsoleAppCaricamentoDati
                                                           .SetJob(jobPath)
                                                           .Build();
             var customBuilder = new CustomerBuilder(provider, customerTemplate);
-            var customerList = new List<Customer>();
+            var insurancePolicyBuilder = new InsurancePolicyBuilder(provider);
 
-            for (var i = 0; i < 4; i++)
+            IList<Customer> customerList = new List<Customer>();
+            var insurancePolicyList = new List<InsurancePolicy>();
+
+            var random = new Random();
+
+            for (var i = 0; i < 2; i++)
             {
                 customerList.Add(customBuilder.SetCustomer()
                                             .SetFirstName()
@@ -65,9 +70,41 @@ namespace ConsoleAppCaricamentoDati
             using (var manger = provider.GetService<ICustomerManager>())
             {
                 manger.BeginTransaction();
-                for(var i=0;i<customerList.Count;i++)
+                for (var i = 0; i < customerList.Count; i++)
                     manger.AddCustomer(customerList[i]);
             }
+            return;
+            using (var manger = provider.GetService<ICustomerManager>())
+            {
+                customerList.Clear();
+                customerList = manger.GetActiveCustomers();
+            }
+
+            var maxCount = (int)Math.Round(customerList.Count * 1.5);
+
+            for (var i = 0; i < maxCount; i++)
+            {
+                var j = random.Next(0, customerList.Count);
+                if (j < customerList.Count)
+                {
+                    insurancePolicyList.Add(insurancePolicyBuilder.SetInsurancePolicy()
+                                                                  .SetIssueDate()
+                                                                  .SetExpireDate()
+                                                                  .SetInsurancePolicyCategory()
+                                                                  .SetCustomer(customerList[j])
+                                                                  .SetInsuredMaximum()
+                                                                  .SetTotalPrize()
+                                                                  .SetIsLuxuryPolicy()
+                                                                  .Build());
+                }
+            }
+            using (var manager = provider.GetService<IInsurancePolicyManager>())
+            {
+                manager.BeginTransaction();
+                for (var i = 0; i < insurancePolicyList.Count; i++)
+                    manager.AddInsurancePolicy(insurancePolicyList[i]);
+            }
+
             Console.WriteLine("Hello, World!");
         }
     }

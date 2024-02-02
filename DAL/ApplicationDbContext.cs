@@ -125,7 +125,10 @@ namespace DAL
             builder.Entity<Customer>().HasIndex(c => c.FirstName);
             builder.Entity<Customer>().Property(c => c.LastName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.LastName);
+
             builder.Entity<Customer>().Property(c => c.CustomerCode).IsRequired().HasMaxLength(100);
+            builder.Entity<Customer>().HasIndex(c => c.CustomerCode).IsUnique(true);
+            
             builder.Entity<Customer>().HasIndex(c => c.CustomerCode).IsUnique();
             builder.Entity<Customer>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Customer>().Property(c => c.UpdatedBy).IsRequired(false);
@@ -230,12 +233,17 @@ namespace DAL
             builder.Entity<SalesLineType>().ToTable($"App{nameof(SalesLineTypes)}");
 
             builder.Entity<InsurancePolicyCategory>().Property(c => c.Id).ValueGeneratedNever();
+
             builder.Entity<InsurancePolicyCategory>().Property(c => c.InsurancePolicyCategoryCode).HasMaxLength(10).IsFixedLength(false).IsRequired();
+            builder.Entity<InsurancePolicyCategory>().HasIndex(c => c.InsurancePolicyCategoryCode).IsUnique(true);
+
             builder.Entity<InsurancePolicyCategory>().Property(c => c.InsurancePolicyCategoryName).HasMaxLength(50).IsRequired();
             builder.Entity<InsurancePolicyCategory>().Property(c => c.IconCssClass).HasMaxLength(30).IsRequired(false);
             builder.Entity<InsurancePolicyCategory>().ToTable($"App{nameof(InsurancePolicyCategories)}");
 
             builder.Entity<InsurancePolicy>().Property(c => c.InsurancePolicyCode).HasMaxLength(150).IsFixedLength(false).IsRequired();
+            builder.Entity<InsurancePolicy>().HasIndex(c => c.InsurancePolicyCode).IsUnique(true);
+
             builder.Entity<InsurancePolicy>().UseTptMappingStrategy().ToTable($"App{nameof(InsurancePolicies)}");
 
             //builder.Entity<VehicleInsurancePolicy>().ToTable($"App{nameof(VehicleInsurancePolicies)}");

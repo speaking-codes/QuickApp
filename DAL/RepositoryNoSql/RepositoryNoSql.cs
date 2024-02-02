@@ -197,6 +197,16 @@ namespace DAL.RepositoryNoSql
         protected IMongoCollection<TDocument> GetCollection()
         {
             return Context.GetCollection<TDocument>(CollectionName);
+        }   
+        
+        public virtual DeleteResult DeleteOne(FilterDefinition<TDocument> filter)
+        {
+            return GetCollection().DeleteOne(filter);
+        }
+
+        public virtual async Task<DeleteResult> DeleteOneAsync(FilterDefinition<TDocument> filter)
+        {
+            return await GetCollection().DeleteOneAsync(filter);
         }
     }
 }

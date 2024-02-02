@@ -20,7 +20,7 @@ namespace DAL.Models
         public byte? ChildrenNumber { get; set; }
         public string JobTitle { get; set; }
         public EnumContractType? ContractType { get; set; }
-        public double? Ral { get; set; }
+        public double? Income { get; set; }
         public bool IsActive { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }

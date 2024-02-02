@@ -21,6 +21,8 @@ namespace DAL
         IContractTypeRepository ContractTypes { get; }
         IAgeRatingCoefficientRepository AgeRatingCoefficients { get; }
 
+        bool IsTransactionOpened { get; }
+
         int SaveChanges();
         void BeginTransaction();
         void CommitTransaction();

@@ -52,7 +52,6 @@ export class CustomerService {
   }
 
   private onCustomerChanged(customer: CustomerEdit | string, op: CustomerChangedOperation) {
-    debugger;
     this.customerChanged.next({ customer, operation: op });
   }
 }

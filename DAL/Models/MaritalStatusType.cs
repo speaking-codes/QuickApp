@@ -10,7 +10,6 @@ namespace DAL.Models
     {
         public byte Id { get; set; }
         public string MaritalStatusDescription { get; set; }
-        public string MaritalStatusTitle { get; set; }
         public float RatingCoefficient { get; set; }
     }
 }

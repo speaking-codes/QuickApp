@@ -39,6 +39,7 @@ var host = new HostBuilder()
         services.AddScoped<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
         services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IInsurancePolicyCategoryRepository, InsurancePolicyCategoryRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICustomerServerlessManager, CustomerServerlessManager>();
     })

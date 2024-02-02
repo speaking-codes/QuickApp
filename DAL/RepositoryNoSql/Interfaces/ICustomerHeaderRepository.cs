@@ -11,7 +11,7 @@ namespace DAL.RepositoryNoSql.Interfaces
     public interface ICustomerHeaderRepository : IRepositoryNoSql<CustomerHeader>
     {
         bool ReplaceOne(FilterDefinition<CustomerHeader> filter, CustomerHeader document);
-
         CustomerHeader GetCustomer(string customerCode);
+        bool DeleteCustomer(string customerCode);
     }
 }

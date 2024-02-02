@@ -15,20 +15,20 @@ namespace DAL.Repositories
 
         public RepositoryMunicipality(ApplicationDbContext context) : base(context) { }
 
-        public IList<Municipality> GetMunicipalities()=> _appContext.Municipalities.ToList();
+        public IQueryable<Municipality> GetMunicipalities() => _appContext.Municipalities;
 
-        public async Task<IList<Municipality>> GetMunicipalitiesAsync() => await _appContext.Municipalities.ToListAsync();
+        //public async Task<IList<Municipality>> GetMunicipalitiesAsync() => await _appContext.Municipalities.ToListAsync();
 
-        public Municipality GetMunicipality(int municipalityId)=>
+        public IQueryable<Municipality> GetMunicipality(int municipalityId) =>
             _appContext.Municipalities
                     .Include(m => m.Province)
-                    .Where(x => x.Id==municipalityId)
-                    .SingleOrDefault();
+                    .Where(x => x.Id == municipalityId);
 
-        public async Task<Municipality> GetMunicipalityAsync(int municipalityId)=>
-            await _appContext.Municipalities
-                    .Include(m => m.Province)
-                    .Where(x => x.Id == municipalityId)
-                    .SingleOrDefaultAsync();
+        //public async Task<Municipality> GetMunicipalityAsync(int municipalityId) =>
+        //    await _appContext.Municipalities
+        //            .Include(m => m.Province)
+        //            .Where(x => x.Id == municipalityId)
+        //            .SingleOrDefaultAsync();
+        
     }
 }

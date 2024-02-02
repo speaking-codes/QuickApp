@@ -81,10 +81,10 @@ namespace DAL.Mapping
             return new CustomerHeader
             {
                 CustomerCode = value.CustomerCode,
-                CustomerName = $"{value.LastName} {value.FirstName}",
-                CustomerAddress = getAddressHeader(value),
-                CustomerEmail = getEmail(value),
-                CustomerPhone = getPhone(value),
+                FullName = $"{value.LastName} {value.FirstName}",
+                Address = getAddressHeader(value),
+                Email = getEmail(value),
+                Phone = getPhone(value),
             };
         }
 
@@ -94,19 +94,22 @@ namespace DAL.Mapping
             {
                 CustomerCode = value.CustomerCode,
 
-                CustomerName = $"{value.LastName} {value.FirstName}",
-                CustomerBirthDate =value.BirthDate.HasValue?  value.BirthDate.Value.ToString("D"):string.Empty,
-                CustomerBirthPlace = getCityDetail(value),
-                CustomerGender = value.Gender.GetDefinition(),
+                FullName = $"{value.LastName} {value.FirstName}",
+                BirthDate = value.BirthDate.HasValue ? value.BirthDate.Value.ToString("D") : string.Empty,
+                BirthPlace = getCityDetail(value),
+                Gender = value.Gender.GetDefinition(),
+                MaritalStatus = value.MaritalStatus.HasValue? value.MaritalStatus.GetDefinition():string.Empty,
+                ChildrenNumber = value.ChildrenNumber.HasValue ? value.ChildrenNumber.ToString() : string.Empty,
 
-                CustomerAddressLocation = getAddressDetail(value),
-                CustomerAddressCity = getAddressCity(value),
+                AddressLocation = getAddressDetail(value),
+                AddressCity = getAddressCity(value),
 
-                CustomerEmail = getEmail(value),
-                CustomerPhone = getPhone(value),
+                Email = getEmail(value),
+                Phone = getPhone(value),
 
-                CustomerJobTitle = value.JobTitle,
-                CustomerRal = value.Ral.HasValue ? "€ " + value.Ral.Value.ToString("C0") : string.Empty
+                JobTitle = value.JobTitle,
+                ContractType = value.ContractType.HasValue ? value.ContractType.GetDefinition() : string.Empty,
+                Income = value.Income.HasValue ? "€ " + value.Income.Value.ToString("C0") : string.Empty
             };
         }
 

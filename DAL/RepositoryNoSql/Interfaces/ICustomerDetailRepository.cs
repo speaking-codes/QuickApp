@@ -11,7 +11,7 @@ namespace DAL.RepositoryNoSql.Interfaces
     public interface ICustomerDetailRepository : IRepositoryNoSql<CustomerDetail>
     {
         bool ReplaceOne(FilterDefinition<CustomerDetail> filter, CustomerDetail document);
-
         CustomerDetail GetCustomer(string customerCode);
-    }
+        bool DeleteCustomer(string customerCode);
+  }
 }

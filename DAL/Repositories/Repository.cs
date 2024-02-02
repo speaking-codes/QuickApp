@@ -59,9 +59,9 @@ namespace DAL.Repositories
             return _entities.Count();
         }
 
-        public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public virtual IList<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return _entities.Where(predicate);
+            return _entities.Where(predicate).ToList();
         }
 
         public virtual TEntity GetSingleOrDefault(Expression<Func<TEntity, bool>> predicate)
@@ -74,7 +74,7 @@ namespace DAL.Repositories
             return _entities.Find(id);
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual IList<TEntity> GetAll()
         {
             return _entities.ToList();
         }

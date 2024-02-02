@@ -1,0 +1,45 @@
+<div *ngIf="isShowCustomerDetail()">
+    <div class="row">
+        <div class="col-12">
+            <h6>Dati Anagrafici</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5"><p><strong>Nominativo: </strong>{{ this?.customerDetail?.fullName }}</p></div>
+        <div class="col-2"><p><strong>Sesso: </strong>{{ this?.customerDetail?.gender }}</p></div>
+        <div class="col-3"><p><strong>Stato civile: </strong>{{ this?.customerDetail?.maritalStatus }}</p></div>
+        <div class="col-2"><p><strong>Numero figli: </strong>{{ this?.customerDetail?.childrenNumber }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-5"><p><strong>Data di nascita: </strong>{{ this?.customerDetail?.birthDate }}</p></div>    
+        <div class="col-7"><p><strong>Luogo di nascita: </strong>{{ this?.customerDetail?.birthPlace }}</p></div>    
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h6>Residenza</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5"><p><strong>Indirizzo: </strong>{{ this?.customerDetail?.addressLocation }}</p></div>
+        <div class="col-7"><p><strong>Cap - Città (Prov.): </strong>{{ this?.customerDetail?.addressCity }}</p></div>    
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h6>Recapiti</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5"><p><strong>Telefono: </strong>{{ this?.customerDetail?.phone }}</p></div>    
+        <div class="col-7"><p><strong>Email: </strong>{{ this?.customerDetail?.email }}</p></div>        
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h6>Dati Reddituali</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5"><p><strong>Tipo contratto: </strong>{{ this?.customerDetail?.contractType }}</p></div>        
+        <div class="col-5"><p><strong>Posizione lavorativa: </strong>{{ this?.customerDetail?.jobTitle }}</p></div>
+        <div class="col-2"><p><strong>R.A.L.: </strong>{{ this?.customerDetail?.income }}</p></div>            
+    </div>
+</div>

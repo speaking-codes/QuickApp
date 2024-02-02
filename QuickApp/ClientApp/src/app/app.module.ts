@@ -61,6 +61,12 @@ import { CompanyInsuranceComponent } from './components/company-insurance/compan
 import { CustomerGridComponent } from './components/customers/customer-grid/customer-grid.component';
 import { CustomerEditorComponent } from './components/customers/customer-editor/customer-editor.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { CustomerHeaderComponent } from './components/dashboard/customer-header/customer-header.component';
+import { DashboardHeaderComponent } from './components/dashboard/dashboard-header/dashboard-header.component';
+import { DashTitleComponent } from './components/dashboard/dash-title/dash-title.component';
+import { ChartComponent } from './components/dashboard/chart/chart.component';
+import { CustomerDetailComponent } from './components/dashboard/customer-detail/customer-detail.component';
+import { InsuranceCoverageSummaryComponent } from './components/dashboard/insurance-coverage-summary/insurance-coverage-summary.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +92,13 @@ import { DashboardComponent } from './components/dashboard/dashboard/dashboard.c
     FooterComponent,
     CustomerGridComponent,
     CustomerEditorComponent,
-    DashboardComponent
+    DashboardComponent,
+    CustomerHeaderComponent,
+    DashboardHeaderComponent,
+    DashTitleComponent,
+    ChartComponent,
+    CustomerDetailComponent,
+    InsuranceCoverageSummaryComponent
   ],
   imports: [
     BrowserModule,

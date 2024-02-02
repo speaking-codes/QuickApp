@@ -7,6 +7,7 @@ import { catchError } from 'rxjs';
 import { error } from 'console';
 import { Observable } from 'rxjs';
 import { CustomerEdit } from '../models/customer';
+import { subscribe } from 'diagnostics_channel';
 
 @Injectable({
   providedIn: 'root'
@@ -50,8 +51,8 @@ export class CustomerEndpointService extends EndpointBase {
     return this.http.post<T>(endpointUrl, JSON.stringify(customer), this.requestHeaders).pipe(
       catchError(error => {
         return this.handleError(error, () => this.getNewCustomerEndpoint<T>(customer));
-      })      
-    );
+      })
+    )    
   }  
 
   getUpdateCustomerEndpoint<T>(customerCode: string, customer: CustomerEdit): Observable<T>{

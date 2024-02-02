@@ -76,14 +76,14 @@ INSERT INTO AppJobRalRatingCoefficients(Id, MinRal, MaxRal, RatingCoefficient, C
 INSERT INTO AppJobRalRatingCoefficients(Id, MinRal, MaxRal, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 14, 90001, 100000, 0.8, NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppJobRalRatingCoefficients(Id, MinRal, MaxRal, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 15, 100001, NULL, 0.9, NULL, NULL, GETDATE(), GETDATE()
 
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 0, 17, 0.5, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 18, 26, 0.15, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 3, 27, 35, 0.25, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 4, 36, 44, 0.5, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 5, 45, 53, 0.75, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 6, 54, 62, 0.75, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 7, 63, 71, 0.25, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 8, 72, 80, 0.15, NULL, NULL, GETDATE(), GETDATE()
-INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 9, 81, NULL, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 0, 17, 0.5, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 18, 26, 0.15, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 3, 27, 35, 0.25, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 4, 36, 44, 0.5, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 5, 45, 53, 0.75, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 6, 54, 62, 0.75, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 7, 63, 71, 0.25, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 8, 72, 80, 0.15, 0, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppAgeRatingCoefficients(Id, MinAge, MaxAge, RatingCoefficient, ChildrenNumberRatingCoefficient, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 9, 81, NULL, 0, 0, NULL, NULL, GETDATE(), GETDATE()
 
 commit TRAN

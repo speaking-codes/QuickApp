@@ -24,5 +24,12 @@ namespace DAL.RepositoryNoSql
             var filter = Builders<CustomerHeader>.Filter.Eq(c => c.CustomerCode, customerCode);
             return FindOne(filter);
         }
+
+        public bool DeleteCustomer(string customerCode)
+        {
+            var filter = Builders<CustomerHeader>.Filter.Eq(c => c.CustomerCode, customerCode);
+            var result = DeleteOne(filter);
+            return result.DeletedCount > 0;
+        }
     }
 }

@@ -23,10 +23,5 @@ namespace DAL.Repositories
             _appContext.InsurancePolicyCategories
                        .Include(x => x.SalesLine)
                        .Where(x => x.InsurancePolicyCategoryCode == insurancePolicyCategoryCode);
-
-        public IQueryable<int> GetInsurancePolicyCategoryCount(string insurancePolicyCategoryCode) =>
-            _appContext.InsurancePolicyCategories
-                       .Where(x => x.InsurancePolicyCategoryCode == insurancePolicyCategoryCode)
-                       .Select(x => x.InsurancePolicies.Count());
     }
 }

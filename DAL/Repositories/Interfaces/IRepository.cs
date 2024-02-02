@@ -24,9 +24,9 @@ namespace DAL.Repositories.Interfaces
 
         int Count();
 
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        IList<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         TEntity GetSingleOrDefault(Expression<Func<TEntity, bool>> predicate);
         TEntity Get(int id);
-        IEnumerable<TEntity> GetAll();
+        IList<TEntity> GetAll();
     }
 }
