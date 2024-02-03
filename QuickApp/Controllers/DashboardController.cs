@@ -29,14 +29,18 @@ namespace QuickApp.Controllers
         public IActionResult GetCustomerHeader(string customerCode)
         {
             var customer = _dashboardManager.GetCustomerHeader(customerCode.ToUpper());
-            return Ok(customer ?? new CustomerHeader());
+            if (customer == null) customer = new CustomerHeader();
+
+            return Ok(_mapper.Map<CustomerHeaderViewModel>(customer));
         }
 
         [HttpGet("CustomerDetail/{customerCode}")]
         public IActionResult GetCustomerDetail(string customerCode)
         {
-            var allCustomers = _dashboardManager.GetCustomerDetail(customerCode.ToUpper());
-            return Ok(allCustomers ?? new CustomerDetail());
+            var customer = _dashboardManager.GetCustomerDetail(customerCode.ToUpper());
+            if (customer == null) customer = new CustomerDetail();
+
+            return Ok(_mapper.Map<CustomerDetailViewModel>(customer));
         }
 
         [HttpGet("Title/{customerCode}")]
@@ -45,7 +49,65 @@ namespace QuickApp.Controllers
             var customer = _dashboardManager.GetCustomerHeader(customerCode.ToUpper());
             if (customer == null) customer = new CustomerHeader();
             customer.FullName = $"{customer.FullName} - Profilo Assicurativo";
-            return Ok(customer);
+            return Ok(_mapper.Map<CustomerHeaderViewModel>(customer));
+        }
+
+        [HttpGet("InsuranceCoverageSummary/{customerCode}")]
+        public IActionResult GetInsuranceCoverageSummary(string customerCode)
+        {
+            var insuranceCoverageCollection = new List<InsuranceCoverageSummaryViewModel>
+            {
+                new InsuranceCoverageSummaryViewModel
+                {
+                    CustomerCode= customerCode,
+                    Code = "V001-VC001-00000001",
+                    CategoryType = "Auto",
+                    ItemDescription = "Mazda 2 2° Serie, 1.3 86 CV",
+                    IssueDate = "12/05/2023",
+                    ExpiryDate = "12/05/2024",
+                    TotalPrice = "€ 1350,00"
+                },
+                new InsuranceCoverageSummaryViewModel{
+                    CustomerCode= customerCode,
+                    Code ="V001-VC001-00000002",
+                    CategoryType="Attività Lavorativa",
+                    ItemDescription="Mazda 2 2° Serie, 1.3 86 CV",
+                    IssueDate="12/05/2023",
+                    ExpiryDate="12/05/2024",
+                    TotalPrice="€ 1350,00"
+                },
+                new InsuranceCoverageSummaryViewModel
+                {
+                    CustomerCode=customerCode,
+                    Code = "V001-VC001-00000003",
+                    CategoryType="Animali Domestici",
+                    ItemDescription="Mazda 2 2° Serie, 1.3 86 CV",
+                    IssueDate="12/05/2023",
+                    ExpiryDate="12/05/2024",
+                    TotalPrice="€ 1350,00"
+                },
+                new InsuranceCoverageSummaryViewModel
+                {
+                    CustomerCode=customerCode,
+                    Code="V001-VC001-00000004",
+                    CategoryType="Grandi Interventi",
+                    ItemDescription="Mazda 2 2° Serie, 1.3 86 CV",
+                    IssueDate="12/05/2023",
+                    ExpiryDate="12/05/2024",
+                    TotalPrice="€ 1350,00"
+                },
+                new InsuranceCoverageSummaryViewModel
+                {
+                    CustomerCode=customerCode,
+                    Code="V001-VC001-00000005",
+                    CategoryType="Bagagli",
+                    ItemDescription="Mazda 2 2° Serie, 1.3 86 CV",
+                    IssueDate="12/05/2023",
+                    ExpiryDate="12/05/2024",
+                    TotalPrice="€ 1350,00"
+                }
+            };
+            return Ok(insuranceCoverageCollection);
         }
     }
 }

@@ -18,7 +18,7 @@ export class ChartComponent {
   heightChart: string;
  
   chartOptions: object | undefined;
-  chartType: ChartType = 'pie';//'line';//'bubble';//'scatter';//'polarArea';//'bar'; //'pie';
+  chartType: ChartType = 'bar';//'line';//'bubble';//'scatter';//'polarArea';//'bar'; //'pie';
   chartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
   chartData = [
     {

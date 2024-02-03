@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using QuickApp.Helpers;
+using DAL.ModelsNoSql;
 
 namespace QuickApp.ViewModels
 {
@@ -127,6 +128,9 @@ namespace QuickApp.ViewModels
                 //.ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].Location} - {s.Addresses[0].City} ({s.Addresses[0].Province})"))
                 .ForMember(d => d.PhoneNumber, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].PhoneNumber))
                 .ForMember(d => d.Email, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].Email));
+
+            CreateMap<CustomerHeader, CustomerHeaderViewModel>();
+            CreateMap<CustomerDetail, CustomerDetailViewModel>();
         }
     }
 }

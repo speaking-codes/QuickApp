@@ -13,11 +13,12 @@ export class DashboardEndpointServiceService extends EndpointBase {
     get dashboardCustomerHeaderUrl() { return this.configurations.baseUrl + '/api/Dashboard/CustomerHeader/';}
     get dashboardCustomerDetailUrl() { return this.configurations.baseUrl + '/api/Dashboard/CustomerDetail/';}
     get dashboardTitleUrl() { return this.configurations.baseUrl + '/api/Dashboard/Title/'; }
-
+    get dashboardInsuranceCoverageSummaryUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageSummary/'; }
+    
     constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) {  super(http, authService); }
 
     getCustomerHeaderEndpoint<T>(customerCode: string): Observable<T> {
-      const endpointUrl = `${this.dashboardCustomerHeaderUrl}/${customerCode}`;
+      const endpointUrl = `${this.dashboardCustomerHeaderUrl}${customerCode}`;
   
       return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
         catchError(error => {
@@ -26,7 +27,7 @@ export class DashboardEndpointServiceService extends EndpointBase {
     }
 
     getCustomerDetailEndpoint<T>(customerCode: string): Observable<T> {
-      const endpointUrl = `${this.dashboardCustomerDetailUrl}/${customerCode}`;
+      const endpointUrl = `${this.dashboardCustomerDetailUrl}${customerCode}`;
   
       return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
         catchError(error => {
@@ -35,11 +36,20 @@ export class DashboardEndpointServiceService extends EndpointBase {
     }
 
     getDashboardTitleEndpoint<T>(customerCode: string): Observable<T> {
-      const endpointUrl = `${this.dashboardTitleUrl}/${customerCode}`;
+      const endpointUrl = `${this.dashboardTitleUrl}${customerCode}`;
   
       return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
         catchError(error => {
           return this.handleError(error, () => this.getDashboardTitleEndpoint<T>(customerCode));
+        }));
+    }
+
+    getaDshboardInsuranceCoverageSummaryEndpoint<T>(customerCode: string){
+      const endpointUrl = `${this.dashboardInsuranceCoverageSummaryUrl}${customerCode}`;
+  
+      return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
+        catchError(error => {
+          return this.handleError(error, () => this.getaDshboardInsuranceCoverageSummaryEndpoint<T>(customerCode));
         }));
     }
 }

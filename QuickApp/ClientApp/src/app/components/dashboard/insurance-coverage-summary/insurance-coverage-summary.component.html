@@ -1,18 +1,31 @@
-<div *ngIf="isShowInsuranceCoverage()">
-    <div class="row">
-        <div class="col-2"><h6>Identificativo Polizza</h6></div>
-        <div class="col-2"><h6>Tipologia Polizza</h6></div>
-        <div class="col-4"><h6>Descrizione Oggetto Assicurato</h6></div>
-        <div class="col-1"><h6>Emissione</h6></div>
-        <div class="col-1"><h6>Scadenza</h6></div>
-        <div class="col-2"><h6>Premio Totale</h6></div>
-    </div>
-        <div class="row" *ngFor="let item of insuranceCoverageList; let i = index">
-            <div class="col-2">{{ item.code}}</div>
-            <div class="col-2">{{ item.categoryType }}</div>
-            <div class="col-4">{{ item.itemDescription }}</div>
-            <div class="col-1">{{ item.issueDate }}</div>
-            <div class="col-1">{{ item.expiryDate }}</div>
-            <div class="col-2">{{ item.totalPrice }}</div>
-        </div>    
+<div *ngIf="isShowInsuranceCoverage()">   
+    <ngx-datatable class="material colored-header sm table-x table-striped table-hover"
+    [loadingIndicator]="loadingIndicator"
+    [rows]="rows"
+    [rowHeight]="40"
+    [headerHeight]="45"
+    [footerHeight]="45"
+    [columnMode]="'force'"
+    [columns]="columns"
+    [scrollbarV]="verticalScrollbar"
+    [columnMode]="'force'"
+    [limit]="pageSize"
+    [selectionType]="'single'">
+    <ngx-datatable-column name="Identificativo Polizza" prop="code" [resizeable]="false" [maxWidth]="160">
+    <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+    </ngx-datatable-column>
+        <ngx-datatable-column name="Tipologia Polizza" prop="categoryType" [resizeable]="false" [maxWidth]="160">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Descrizione Oggetto Assicurato" prop="itemDescription" [resizeable]="false" [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Data Emissione" prop="issueDate" [resizeable]="false" [maxWidth]="140">   
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Data Scadenza" prop="expiryDate" [resizeable]="false" [maxWidth]="140">
+        <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="Premio Totale" prop="totalPrice" [resizeable]="false" [sortable]="false" [maxWidth]="140">   
+        </ngx-datatable-column>      
+    </ngx-datatable>          
 </div>

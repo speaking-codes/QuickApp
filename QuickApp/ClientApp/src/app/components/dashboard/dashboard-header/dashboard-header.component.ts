@@ -30,7 +30,7 @@ export class DashboardHeaderComponent implements OnInit {
 
   ShowCustomerDetail(): void {
     this.showCustomerDetail = true;
-    this.showChartLeggend = true;
+    this.showChartLeggend = false;
     this.heightChart = 600;
   }
 
