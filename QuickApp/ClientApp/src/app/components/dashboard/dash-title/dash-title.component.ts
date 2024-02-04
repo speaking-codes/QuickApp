@@ -15,7 +15,7 @@ export class DashTitleComponent implements OnInit{
   dashboradTitle: string;
 
   @Input()
-  customerCode = "";
+  customerFullName = "";
 
   constructor(private dashboardService: DashboardServiceService, private alertService: AlertService){ }
 
@@ -24,22 +24,18 @@ export class DashTitleComponent implements OnInit{
   }
 
   loadData(): void{
-    this.dashboardService.getDashboardTitle(this.customerCode)
-        .subscribe({
-          next: result => this.onDataLoadSuccessfull(result),
-          error: error => this.onDataLoadFailed(error)
-        });
+    this.dashboradTitle = this.customerFullName + " - Profilo Assicurativo";
   }
 
-  onDataLoadSuccessfull(data: CustomerDetail) {
-    this.dashboradTitle = data.fullName;
-  }
+  // onDataLoadSuccessfull(data: CustomerDetail) {
+  //   this.dashboradTitle = data.fullName;
+  // }
 
-  onDataLoadFailed(error: HttpErrorResponse) {
-    this.alertService.stopLoadingMessage();
+  // onDataLoadFailed(error: HttpErrorResponse) {
+  //   this.alertService.stopLoadingMessage();
 
-    this.alertService.showStickyMessage('Load Error',
-      `Unable to retrieve users from the server.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
-      MessageSeverity.error, error);
-  }
+  //   this.alertService.showStickyMessage('Load Error',
+  //     `Unable to retrieve users from the server.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
+  //     MessageSeverity.error, error);
+  // }
 }

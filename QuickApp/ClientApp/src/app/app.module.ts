@@ -67,6 +67,11 @@ import { DashTitleComponent } from './components/dashboard/dash-title/dash-title
 import { ChartComponent } from './components/dashboard/chart/chart.component';
 import { CustomerDetailComponent } from './components/dashboard/customer-detail/customer-detail.component';
 import { InsuranceCoverageSummaryComponent } from './components/dashboard/insurance-coverage-summary/insurance-coverage-summary.component';
+import { InsurancecoverageComponent } from './components/dashboard/insurancecoverage/insurancecoverage.component';
+import { InsuranceCoverageTitleComponent } from './components/controls/insurance-coverage-title/insurance-coverage-title.component';
+import { InsuranceCoverageRecommenderComponent } from './components/dashboard/insurance-coverage-recommender/insurance-coverage-recommender.component';
+import { InsuranceCoverageTopSellingComponent } from './components/dashboard/insurance-coverage-top-selling/insurance-coverage-top-selling.component';
+import { InsuranceCoverageOtherComponent } from './components/dashboard/insurance-coverage-other/insurance-coverage-other.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +103,12 @@ import { InsuranceCoverageSummaryComponent } from './components/dashboard/insura
     DashTitleComponent,
     ChartComponent,
     CustomerDetailComponent,
-    InsuranceCoverageSummaryComponent
+    InsuranceCoverageSummaryComponent,
+    InsurancecoverageComponent,
+    InsuranceCoverageTitleComponent,
+    InsuranceCoverageRecommenderComponent,
+    InsuranceCoverageTopSellingComponent,
+    InsuranceCoverageOtherComponent
   ],
   imports: [
     BrowserModule,

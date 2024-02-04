@@ -12,7 +12,6 @@ export class DashboardEndpointServiceService extends EndpointBase {
 
     get dashboardCustomerHeaderUrl() { return this.configurations.baseUrl + '/api/Dashboard/CustomerHeader/';}
     get dashboardCustomerDetailUrl() { return this.configurations.baseUrl + '/api/Dashboard/CustomerDetail/';}
-    get dashboardTitleUrl() { return this.configurations.baseUrl + '/api/Dashboard/Title/'; }
     get dashboardInsuranceCoverageSummaryUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageSummary/'; }
     
     constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) {  super(http, authService); }
@@ -32,15 +31,6 @@ export class DashboardEndpointServiceService extends EndpointBase {
       return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
         catchError(error => {
           return this.handleError(error, () => this.getCustomerDetailEndpoint<T>(customerCode));
-        }));
-    }
-
-    getDashboardTitleEndpoint<T>(customerCode: string): Observable<T> {
-      const endpointUrl = `${this.dashboardTitleUrl}${customerCode}`;
-  
-      return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
-        catchError(error => {
-          return this.handleError(error, () => this.getDashboardTitleEndpoint<T>(customerCode));
         }));
     }
 

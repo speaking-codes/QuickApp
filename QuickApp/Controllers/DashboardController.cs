@@ -43,14 +43,14 @@ namespace QuickApp.Controllers
             return Ok(_mapper.Map<CustomerDetailViewModel>(customer));
         }
 
-        [HttpGet("Title/{customerCode}")]
-        public IActionResult GetTitle(string customerCode)
-        {
-            var customer = _dashboardManager.GetCustomerHeader(customerCode.ToUpper());
-            if (customer == null) customer = new CustomerHeader();
-            customer.FullName = $"{customer.FullName} - Profilo Assicurativo";
-            return Ok(_mapper.Map<CustomerHeaderViewModel>(customer));
-        }
+        //[HttpGet("Title/{customerCode}")]
+        //public IActionResult GetTitle(string customerCode)
+        //{
+        //    var customer = _dashboardManager.GetCustomerHeader(customerCode.ToUpper());
+        //    if (customer == null) customer = new CustomerHeader();
+        //    customer.FullName = $"{customer.FullName} - Profilo Assicurativo";
+        //    return Ok(_mapper.Map<CustomerHeaderViewModel>(customer));
+        //}
 
         [HttpGet("InsuranceCoverageSummary/{customerCode}")]
         public IActionResult GetInsuranceCoverageSummary(string customerCode)

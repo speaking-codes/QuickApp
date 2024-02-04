@@ -1,3 +1,20 @@
-<app-dash-title [customerCode]="this.customerCode"></app-dash-title>
-<app-dashboard-header [customerCode]="this.customerCode"></app-dashboard-header>
+<!-- <div class="row">
+    <div class="col-12"> -->
+        <div class="row">
+            <div class="col-12">
+                <app-dash-title [customerFullName]="this.customerFullName" (loaded)="onLoad($event)"></app-dash-title>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <app-dashboard-header [customerCode]="this.customerCode"></app-dashboard-header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <app-insurancecoverage></app-insurancecoverage>
+            </div>
+        </div>
+    <!-- </div>
+</div> -->
 

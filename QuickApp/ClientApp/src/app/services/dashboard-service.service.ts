@@ -18,10 +18,6 @@ export class DashboardServiceService {
     return this.dashboardEndpoint.getCustomerDetailEndpoint<CustomerDetail>(customerCode);    
   }
 
-  getDashboardTitle(customerCode: string){
-    return this.dashboardEndpoint.getDashboardTitleEndpoint<CustomerDetail>(customerCode);
-  }
-
   getDashboardInsuranceCoverageSummary(customerCode: string){
     return this.dashboardEndpoint.getaDshboardInsuranceCoverageSummaryEndpoint<InsuranceCoverageSummary>(customerCode);
   }

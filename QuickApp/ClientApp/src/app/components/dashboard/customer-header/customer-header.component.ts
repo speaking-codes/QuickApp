@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { error } from 'console';
 import { CustomerHeader } from 'src/app/models/customer';
 import { AlertService, MessageSeverity } from 'src/app/services/alert.service';
@@ -17,6 +17,9 @@ export class CustomerHeaderComponent implements OnInit {
   @Input()
   customerCode = "";
 
+  @Output()
+  loaded =  new EventEmitter<string>();                                                                                                                                                                                                                                                                                                                                                                                                             
+
   constructor(private dashboardService: DashboardServiceService, private alertService: AlertService) { }
 
   ngOnInit(): void {
@@ -33,7 +36,8 @@ export class CustomerHeaderComponent implements OnInit {
 
   onDataLoadSuccessfull(data: CustomerHeader) {
     this.alertService.stopLoadingMessage();
-    this.customerHeader = data;
+    this.customerHeader = data;                                                                                                                                                                                                                            
+    this.loaded.emit(data.fullName);     
   }
 
   onDataLoadFailed(error: HttpErrorResponse) {
