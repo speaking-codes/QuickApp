@@ -8,3 +8,14 @@ export class InsuranceCoverageSummary {
     expiryDate: string;
     totalPrice: string;
 }
+
+export class InsuranceCategoryPolicyCard {
+    code: string;
+    name: string;
+    abstract: string;
+    iconCssClass: string;
+    salesLineCode: string;
+    salesLineName: string;
+    salesLineBackgroundColor: string;
+    salesLineBackgroundCssClass: string;
+}

@@ -12,14 +12,17 @@ namespace DAL
     public interface IUnitOfWork : IDisposable
     {
         ICustomerRepository Customers { get; }
+
         IRepositoryMunicipality Municipalities { get; }
+        IFamilyTypeRepository FamilyTypes { get; }
         IMaritalStatusTypeRepository MaritalStatusTypes { get; }
-        IJobRalRatingCoefficientRepository JobRalRatingCoefficients { get; }
+
+        IContractTypeRepository ContractTypes { get; }
+        IProfessionTypeRepository ProfessionTypes { get; }
+
         IInsurancePolicyRepository InsurancePolicies { get; }
         IInsurancePolicyCategoryRepository InsurancePolicyCategories { get; }
-        ICustomerInsuranceCategoryPolicyRatingRepository CustomerInsuranceCategoryPolicyRatings { get; }
-        IContractTypeRepository ContractTypes { get; }
-        IAgeRatingCoefficientRepository AgeRatingCoefficients { get; }
+        IInsurancePolicyCategoryStaticRepository InsurancePolicyCategoryStatics { get; }
 
         bool IsTransactionOpened { get; }
 

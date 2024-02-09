@@ -18,16 +18,19 @@ namespace DAL
         #region Private
 
         private readonly ApplicationDbContext _context;
+
         private ICustomerRepository _customers;
+
         private IRepositoryMunicipality _municipalities;
+        private IFamilyTypeRepository _familyTypes;
         private IMaritalStatusTypeRepository _maritalStatusTypes;
-        private IJobRalRatingCoefficientRepository _jobRalRatingCoefficients;
+
+        private IContractTypeRepository _contractTypes;
+        private IProfessionTypeRepository _professionTypes;
+
         private IInsurancePolicyRepository _insurancePolicies;
         private IInsurancePolicyCategoryRepository _insurancePolicyCategories;
-        private ICustomerInsuranceCategoryPolicyRatingRepository _customerInsuranceCategoryPolicyRatings;
-        private IContractTypeRepository _contractTypes;
-        private IAgeRatingCoefficientRepository _ageRatingCoefficients;
-
+        private IInsurancePolicyCategoryStaticRepository _insurancePolicyCategoryStatics;
 
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
@@ -60,6 +63,15 @@ namespace DAL
             }
         }
 
+        public IFamilyTypeRepository FamilyTypes
+        {
+            get
+            {
+                _familyTypes ??= new FamilyTypeRepository(_context);
+                return _familyTypes;
+            }
+        }
+
         public IMaritalStatusTypeRepository MaritalStatusTypes
         {
             get
@@ -69,12 +81,22 @@ namespace DAL
             }
         }
 
-        public IJobRalRatingCoefficientRepository JobRalRatingCoefficients
+
+        public IContractTypeRepository ContractTypes
         {
             get
             {
-                _jobRalRatingCoefficients ??= new JobRalRatingCoefficientRepository(_context);
-                return _jobRalRatingCoefficients;
+                _contractTypes ??= new ContractTypeRepository(_context);
+                return _contractTypes;
+            }
+        }
+
+        public IProfessionTypeRepository ProfessionTypes
+        {
+            get
+            {
+                _professionTypes ??= new ProfessionTypeRepository(_context);
+                return _professionTypes;
             }
         }
 
@@ -96,30 +118,12 @@ namespace DAL
             }
         }
 
-        public ICustomerInsuranceCategoryPolicyRatingRepository CustomerInsuranceCategoryPolicyRatings
+        public IInsurancePolicyCategoryStaticRepository InsurancePolicyCategoryStatics
         {
             get
             {
-                _customerInsuranceCategoryPolicyRatings ??= new CustomerInsuranceCategoryPolicyRatingRepository(_context);
-                return _customerInsuranceCategoryPolicyRatings;
-            }
-        }
-
-        public IContractTypeRepository ContractTypes
-        {
-            get
-            {
-                _contractTypes ??= new ContractTypeRepository(_context);
-                return _contractTypes;
-            }
-        }
-
-        public IAgeRatingCoefficientRepository AgeRatingCoefficients
-        {
-            get
-            {
-                _ageRatingCoefficients ??= new AgeRatingCoefficientRepository(_context);
-                return _ageRatingCoefficients;
+                _insurancePolicyCategoryStatics ??= new InsurancePolicyCategoryStaticRepository(_context);
+                return _insurancePolicyCategoryStatics;
             }
         }
 

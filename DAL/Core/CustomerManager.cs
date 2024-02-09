@@ -13,15 +13,13 @@ namespace DAL.Core
     public class CustomerManager : Manager, ICustomerManager
     {
         private const string _queueName = "customers";
-        private int _countError;
 
         private readonly IMessageQueueProducer _messageQueueProducer;
 
         public CustomerManager(IUnitOfWork unitOfWork, IMessageQueueProducer messageQueueProducer) : base(unitOfWork)
         {
-            _countError = -1;
-             _messageQueueProducer = messageQueueProducer;
-       }
+            _messageQueueProducer = messageQueueProducer;
+        }
 
         public IList<Customer> GetCustomers() => UnitOfWork.Customers.GetAllCustomers().ToList();
 
@@ -72,7 +70,7 @@ namespace DAL.Core
                 customer.BirthDate = customerToUpdate.BirthDate;
                 //customer.BirthPlace = customerToUpdate.BirthPlace;
                 //customer.BirthCounty = customerToUpdate.BirthCounty;
-                customer.JobTitle = customerToUpdate.JobTitle;
+                customer.ProfessionType = customerToUpdate.ProfessionType;
                 customer.ContractType = customerToUpdate.ContractType;
                 customer.Income = customerToUpdate.Income;
 

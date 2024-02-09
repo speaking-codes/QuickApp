@@ -1,3 +1,5 @@
+BEGIN TRAN
+
 INSERT INTO AppMaritalStatusTypes (Id, MaritalStatusDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 'Libero', NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppMaritalStatusTypes (Id, MaritalStatusDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 'Nubile', NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppMaritalStatusTypes (Id, MaritalStatusDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 3, 'Celibe', NULL, NULL, GETDATE(), GETDATE()
@@ -281,3 +283,5 @@ INSERT INTO AppProfessionType(Id, ProfessionTypeDescription, IsFreelancer) SELEC
 INSERT INTO AppIncomeType (Id, IncomeTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 'Dipendente', NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppIncomeType (Id, IncomeTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 'Autonomo', NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppIncomeType (Id, IncomeTypeDescription, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 3, 'Professionista', NULL, NULL, GETDATE(), GETDATE()
+
+ROLLBACK TRAN

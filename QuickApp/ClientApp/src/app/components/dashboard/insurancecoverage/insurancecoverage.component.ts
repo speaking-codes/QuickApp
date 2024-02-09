@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { InsuranceCoverageRecommenderComponent } from '../insurance-coverage-recommender/insurance-coverage-recommender.component';
-import { InsuranceCoverageTopSellingComponent } from '../insurance-coverage-top-selling/insurance-coverage-top-selling.component';
-import { InsuranceCoverageOtherComponent } from '../insurance-coverage-other/insurance-coverage-other.component';
+import { Component, Input } from '@angular/core';
+import { InsuranceCategoryPolicyCard } from 'src/app/models/insurance-coverage';
+import { CardComponent } from '../../controls/card/card.component';
 
 @Component({
   selector: 'app-insurancecoverage',
@@ -9,5 +8,24 @@ import { InsuranceCoverageOtherComponent } from '../insurance-coverage-other/ins
   styleUrls: ['./insurancecoverage.component.scss']
 })
 export class InsurancecoverageComponent {
+  isShowen: boolean;
 
+  @Input()
+  title = "";
+
+  @Input()
+  insuranceCoverageCards: InsuranceCategoryPolicyCard[] = null;
+
+  IsShowen():boolean {
+    return this.isShowen;
+  }
+
+  Show(): void { this.isShowen = true; }
+
+  Hide(): void { this.isShowen = false; }
+
+  selectItem(event):void { 
+    console.log(event.target.checked);
+    console.log(event.target.defaultValue);
+  }
 }

@@ -29,6 +29,9 @@ namespace DAL.ModelsNoSql
         [BsonElement("BirthPlace")]
         public string BirthPlace { get; set; }
 
+        [BsonElement("FamilyDescription")]
+        public string FamilyDescription { get; set; }
+
         [BsonElement("MaritalStatus")]
         public string MaritalStatus { get; set; }
 
@@ -50,8 +53,11 @@ namespace DAL.ModelsNoSql
         [BsonElement("JobTitle")]
         public string JobTitle { get; set; }
 
+        [BsonElement("IsFrelancer")]
+        public bool IsFrelancer { get; set; }
+
         [BsonElement("ContractType")]
-        public string ContractType { get; set; }
+        public string ContractTitle { get; set; }
 
         [BsonElement("Income")]
         public string Income { get; set; }        

@@ -10,6 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\AgeRatingCoefficient.cs" />
+    <Compile Remove="Models\CustomerInsuranceCategoryPolicyRating.cs" />
+    <Compile Remove="Models\JobRalRatingCoefficient.cs" />
+    <Compile Remove="Repositories\AgeRatingCoefficientRepository.cs" />
+    <Compile Remove="Repositories\CustomerInsuranceCategoryPolicyRatingRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\IAgeRatingCoefficientRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\ICustomerInsuranceCategoryPolicyRatingRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\IJobRalRatingCoefficientRepository.cs" />
+    <Compile Remove="Repositories\JobRalRatingCoefficientRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 

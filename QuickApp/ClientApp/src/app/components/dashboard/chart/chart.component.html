@@ -1,11 +1,11 @@
 <div class="row statistics-container">
   <div class="col-md-12">
     <div class="chart-container">
-      <canvas baseChart width="600" height="300"
+      <canvas baseChart width="600" height="220"
               [datasets]="chartData"
               [labels]="chartLabels"
               [options]="chartOptions"
-              [legend]="showLeggend"
+              [legend]="true"
               [type]="chartType"
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"></canvas>

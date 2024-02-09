@@ -16,16 +16,21 @@ namespace DAL.Models
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
         public EnumGender Gender { get; set; }
-        public EnumMaritalStatus? MaritalStatus { get; set; }
         public byte? ChildrenNumber { get; set; }
-        public string JobTitle { get; set; }
-        public EnumContractType? ContractType { get; set; }
         public double? Income { get; set; }
         public bool IsActive { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
 
+        public virtual FamilyType FamilyType { get; set; }
+
+        public virtual MaritalStatusType MaritalStatus { get; set; }
+        
         public virtual Municipality BirthMunicipality { get; set; }
+
+        public virtual ContractType ContractType { get; set; }
+
+        public virtual ProfessionType ProfessionType { get; set; }
 
         public virtual IList<Delivery> Deliveries { get; set; }
 

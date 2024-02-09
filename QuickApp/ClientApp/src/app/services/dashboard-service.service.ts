@@ -21,4 +21,16 @@ export class DashboardServiceService {
   getDashboardInsuranceCoverageSummary(customerCode: string){
     return this.dashboardEndpoint.getaDshboardInsuranceCoverageSummaryEndpoint<InsuranceCoverageSummary>(customerCode);
   }
+
+  getDashboardInsuranceCoverageRecommended(customerCode: string){
+    return this.dashboardEndpoint.getDashboardInsuranceCoverageRecommendedEndpoint(customerCode);
+  }
+
+  getDashboardInsuranceCoverageTopSelling(elementNumber: number, insuranceCoverageCodes: string){
+    return this.dashboardEndpoint.getDashboardInsuranceCoverageTopSellingEndpoint(elementNumber, insuranceCoverageCodes);
+  }
+
+  getDashboardInsuranceCoverageOther(insuranceCoverageCodes: string){
+    return this.dashboardEndpoint.getDashboardInsuranceCoverageOtherEndpoint(insuranceCoverageCodes);
+  }
 }

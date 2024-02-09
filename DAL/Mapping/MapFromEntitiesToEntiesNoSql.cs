@@ -98,7 +98,9 @@ namespace DAL.Mapping
                 BirthDate = value.BirthDate.HasValue ? value.BirthDate.Value.ToString("D") : string.Empty,
                 BirthPlace = getCityDetail(value),
                 Gender = value.Gender.GetDefinition(),
-                MaritalStatus = value.MaritalStatus.HasValue? value.MaritalStatus.GetDefinition():string.Empty,
+
+                MaritalStatus = value.MaritalStatus != null ? value.MaritalStatus.MaritalStatusDescription : string.Empty,
+                FamilyDescription = value.FamilyType != null ? value.FamilyType.FamilyTypeDescription : string.Empty,
                 ChildrenNumber = value.ChildrenNumber.HasValue ? value.ChildrenNumber.ToString() : string.Empty,
 
                 AddressLocation = getAddressDetail(value),
@@ -107,8 +109,9 @@ namespace DAL.Mapping
                 Email = getEmail(value),
                 Phone = getPhone(value),
 
-                JobTitle = value.JobTitle,
-                ContractType = value.ContractType.HasValue ? value.ContractType.GetDefinition() : string.Empty,
+                JobTitle = value.ProfessionType != null ? value.ProfessionType.ProfessionTypeDescription : string.Empty,
+                IsFrelancer = value.ProfessionType != null ? value.ProfessionType.IsFreelancer : false,
+                ContractTitle = value.ContractType != null ? value.ContractType.ContractTypeTitle : string.Empty,
                 Income = value.Income.HasValue ? "€ " + value.Income.Value.ToString("C0") : string.Empty
             };
         }

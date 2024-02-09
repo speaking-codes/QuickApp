@@ -219,7 +219,8 @@ namespace QuickApp
             builder.Services.AddScoped<IMongoDbContext, MongoDbContext>(x => new MongoDbContext(connectionStringNoSql, databaseNoSql));
             builder.Services.AddScoped<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
             builder.Services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
-
+            builder.Services.AddScoped<IInsuranceCategoryPolicyTopSellingRepository, InsuranceCategoryPolicyTopSellingRepository>(x => new InsuranceCategoryPolicyTopSellingRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyTopSelling"));
+            
             #endregion
 
             #region Auth Handlers

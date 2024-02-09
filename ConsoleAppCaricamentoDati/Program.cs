@@ -30,7 +30,6 @@ namespace ConsoleAppCaricamentoDati
             var services = new ServiceCollection();
             services.AddDbContext<ApplicationDbContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionStringDbContext));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IRepositoryMunicipality, RepositoryMunicipality>();
             services.AddScoped<ICustomerManager, CustomerManager>();
             services.AddScoped<ICustomerRatingManager, CustomerRatingManager>();
             services.AddScoped<IInsurancePolicyManager, InsurancePolicyManager>();
@@ -38,14 +37,14 @@ namespace ConsoleAppCaricamentoDati
             var provider = services.BuildServiceProvider();
 
             var customerTemplateBuilder = new CustomerBaseTemplateBuilder();
-            var customerTemplate = customerTemplateBuilder.SetJobContratType()
-                                                          .SetLastName(lastNamePath)
+            var customerTemplate = customerTemplateBuilder.SetLastName(lastNamePath)
                                                           .SetFirstName(firstNameMalePath, firstNameFemalePath)
                                                           .SetAddress(addressPath)
                                                           .SetProviderMail()
-                                                          .SetJob(jobPath)
+                                                          .SetIncomesBase()
                                                           .Build();
-            var customBuilder = new CustomerBuilder(provider, customerTemplate);
+
+            var customBuilder = new CustomerBuilder(provider.GetRequiredService<IUnitOfWork>(), customerTemplate);
             var insurancePolicyBuilder = new InsurancePolicyBuilder(provider);
 
             IList<Customer> customerList = new List<Customer>();
@@ -56,16 +55,19 @@ namespace ConsoleAppCaricamentoDati
             for (var i = 0; i < 2; i++)
             {
                 customerList.Add(customBuilder.SetCustomer()
-                                            .SetFirstName()
-                                            .SetLastName()
-                                            .SetMaritalStatus()
-                                            .SetChildrenNumber()
-                                            .SetBirthDate()
-                                            .SetBirthPlace()
-                                            .SetAddress()
-                                            .SetDelivery()
-                                            .SetJob()
-                                            .Build());
+                                                .SetFirstName()
+                                                .SetLastName()
+                                                .SetMaritalStatus()
+                                                .SetFamilyType()
+                                                .SetChildrenNumber()
+                                                .SetBirthDate()
+                                                .SetBirthPlace()
+                                                .SetAddress()
+                                                .SetDelivery()
+                                                .SetContractType()
+                                                .SetJob()
+                                                .SetIncome()
+                                                .Build());
             }
             using (var manger = provider.GetService<ICustomerManager>())
             {

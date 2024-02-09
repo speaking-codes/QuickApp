@@ -11,11 +11,13 @@ namespace DAL.Core
     {
         protected readonly IUnitOfWork UnitOfWork;
         protected bool IsMassiveWriter { get; private set; }
+        protected int _countError;
 
         public Manager(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
             IsMassiveWriter = false;
+            _countError = -1;
         }
 
         public void BeginTransaction()

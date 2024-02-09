@@ -68,10 +68,8 @@ import { ChartComponent } from './components/dashboard/chart/chart.component';
 import { CustomerDetailComponent } from './components/dashboard/customer-detail/customer-detail.component';
 import { InsuranceCoverageSummaryComponent } from './components/dashboard/insurance-coverage-summary/insurance-coverage-summary.component';
 import { InsurancecoverageComponent } from './components/dashboard/insurancecoverage/insurancecoverage.component';
-import { InsuranceCoverageTitleComponent } from './components/controls/insurance-coverage-title/insurance-coverage-title.component';
-import { InsuranceCoverageRecommenderComponent } from './components/dashboard/insurance-coverage-recommender/insurance-coverage-recommender.component';
-import { InsuranceCoverageTopSellingComponent } from './components/dashboard/insurance-coverage-top-selling/insurance-coverage-top-selling.component';
-import { InsuranceCoverageOtherComponent } from './components/dashboard/insurance-coverage-other/insurance-coverage-other.component';
+import { InsuranceCoverageFooterComponent } from './components/dashboard/insurance-coverage-footer/insurance-coverage-footer.component';
+import { CardComponent } from './components/controls/card/card.component';
 
 @NgModule({
   declarations: [
@@ -105,10 +103,8 @@ import { InsuranceCoverageOtherComponent } from './components/dashboard/insuranc
     CustomerDetailComponent,
     InsuranceCoverageSummaryComponent,
     InsurancecoverageComponent,
-    InsuranceCoverageTitleComponent,
-    InsuranceCoverageRecommenderComponent,
-    InsuranceCoverageTopSellingComponent,
-    InsuranceCoverageOtherComponent
+    InsuranceCoverageFooterComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

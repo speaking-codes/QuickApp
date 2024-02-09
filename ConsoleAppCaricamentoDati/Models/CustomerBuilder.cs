@@ -1,4 +1,5 @@
-﻿using DAL.Enums;
+﻿using DAL;
+using DAL.Enums;
 using DAL.Models;
 using DAL.Repositories.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,20 +15,29 @@ namespace ConsoleAppCaricamentoDati.Models
     {
         private Customer _customer;
         private Random _random;
+
         private readonly IList<Municipality> _municipalityList;
+        private readonly IList<MaritalStatusType> _maritalStatusList;
+        private readonly IList<FamilyType> _familyTypeList;
+
+        private readonly IList<ContractType> _contractTypeList;
+        private readonly IList<ProfessionType> _professionTypeList;
+
         private readonly CustomerBaseTemplate _template;
+
         private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private const string charsNumber = "0123456789";
 
-        public CustomerBuilder(ServiceProvider provider, CustomerBaseTemplate template)
+        public CustomerBuilder(IUnitOfWork unitOfWork, CustomerBaseTemplate template)
         {
             _random = new Random();
-            using (var scope = provider.CreateScope())
-            {
-                var repository = provider.GetService<IRepositoryMunicipality>();
-                _municipalityList = repository.GetMunicipalities().ToList();
-            }
             _template = template;
+
+            _municipalityList = unitOfWork.Municipalities.GetMunicipalities().ToList();
+            _maritalStatusList = unitOfWork.MaritalStatusTypes.GetAll();
+            _familyTypeList = unitOfWork.FamilyTypes.GetAll();
+            _contractTypeList = unitOfWork.ContractTypes.GetAll();
+            _professionTypeList = unitOfWork.ProfessionTypes.GetAll();
         }
 
 
@@ -89,26 +99,23 @@ namespace ConsoleAppCaricamentoDati.Models
             return this;
         }
 
+        public CustomerBuilder SetFamilyType()
+        {
+            var index = _random.Next(0, _familyTypeList.Count - 1);
+            _customer.FamilyType = _familyTypeList[index];
+            return this;
+        }
+
         public CustomerBuilder SetMaritalStatus()
         {
-            _customer.MaritalStatus = (EnumMaritalStatus)_random.Next(0, 4);
+            var index = _random.Next(0, _maritalStatusList.Count - 1);
+            _customer.MaritalStatus = _maritalStatusList[index];
             return this;
         }
 
         public CustomerBuilder SetChildrenNumber()
         {
             _customer.ChildrenNumber = (byte)_random.Next(0, 7);
-            return this;
-        }
-
-        public CustomerBuilder SetJob()
-        {
-            var i = _random.Next(0, _template.JobTemplates.Count - 1);
-            _customer.JobTitle = _template.JobTemplates[i].JobTitle;
-            _customer.Income = _template.JobTemplates[i].Ral * (1 + _random.NextDouble());
-
-            i = _random.Next(0, _template.JobContractType.Count - 1);
-            _customer.ContractType = (EnumContractType)_template.JobContractType[i];
             return this;
         }
 
@@ -142,6 +149,33 @@ namespace ConsoleAppCaricamentoDati.Models
 
             _customer.Deliveries = new List<Delivery>();
             _customer.Deliveries.Add(delivery);
+            return this;
+        }
+
+        public CustomerBuilder SetContractType()
+        {
+            var index = _random.Next(0, _contractTypeList.Count - 1);
+            _customer.ContractType = _contractTypeList[index];
+            return this;
+        }
+
+        public CustomerBuilder SetJob()
+        {
+            IList<ProfessionType> tempProfessionTypes = null;
+            if (_customer.ContractType.IsSubordinateEmployment)
+                tempProfessionTypes = _professionTypeList.Where(x => !x.IsFreelancer).ToList();
+            else
+                tempProfessionTypes = _professionTypeList.Where(x => x.IsFreelancer).ToList();
+
+            var index = _random.Next(0, tempProfessionTypes.Count - 1);
+            _customer.ProfessionType = tempProfessionTypes[index];
+            return this;
+        }
+
+        public CustomerBuilder SetIncome()
+        {
+            var index =_random.Next(0, _template.Incomes.Count - 1);
+            _customer.Income = _template.Incomes[index]*_random.NextDouble();
             return this;
         }
 

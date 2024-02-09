@@ -15,22 +15,13 @@ namespace ConsoleAppCaricamentoDati.Models
             _customerBaseTemplate = new CustomerBaseTemplate();
         }
 
-        public CustomerBaseTemplateBuilder SetJobContratType()
-        {
-            _customerBaseTemplate.JobContractType = new List<byte>();
-            for (var i = 0; i < 12; i++)
-                _customerBaseTemplate.JobContractType.Add((byte)i);
-
-            return this;
-        }
-
         public CustomerBaseTemplateBuilder SetLastName(string pathFile)
         {
             using (var reader = new StreamReader(pathFile))
                 _customerBaseTemplate.LastNames = reader.ReadToEnd().Split('\n').ToList();
 
-            for(var i=0;i< _customerBaseTemplate.LastNames.Count;i++)
-                _customerBaseTemplate.LastNames[i] = _customerBaseTemplate.LastNames[i].Replace('\r',' ').Trim();
+            for (var i = 0; i < _customerBaseTemplate.LastNames.Count; i++)
+                _customerBaseTemplate.LastNames[i] = _customerBaseTemplate.LastNames[i].Replace('\r', ' ').Trim();
 
             return this;
         }
@@ -42,7 +33,7 @@ namespace ConsoleAppCaricamentoDati.Models
                                                                  .Split('\n').Select(x =>
                                                                     new FirstNameTemplate
                                                                     {
-                                                                        FirstName = x.Replace('\r',' ').Trim(),
+                                                                        FirstName = x.Replace('\r', ' ').Trim(),
                                                                         IsMan = true
                                                                     }
                                                                   ).ToList();
@@ -73,21 +64,6 @@ namespace ConsoleAppCaricamentoDati.Models
             return this;
         }
 
-        public CustomerBaseTemplateBuilder SetJob(string pathFile)
-        {
-            using (var reader = new StreamReader(pathFile))
-                _customerBaseTemplate.JobTemplates = reader.ReadToEnd()
-                                                                 .Split('\n').Select(x =>
-                                                                    new JobTemplate
-                                                                    {
-                                                                        JobTitle = x.Split(";")[0],
-                                                                        Ral = double.Parse(x.Split(";")[1])
-                                                                    }
-                                                                  ).ToList();
-
-            return this;
-        }
-
         public CustomerBaseTemplateBuilder SetProviderMail()
         {
             _customerBaseTemplate.ProviderMailTemplates = new List<string>();
@@ -114,6 +90,19 @@ namespace ConsoleAppCaricamentoDati.Models
             return this;
         }
 
+        public CustomerBaseTemplateBuilder SetIncomesBase()
+        {
+            var random = new Random();
+            _customerBaseTemplate.Incomes = new List<double>();
+            double incomeBase = 15000;
+
+            while (incomeBase < 180000)
+            {
+                _customerBaseTemplate.Incomes.Add(incomeBase);
+                incomeBase = incomeBase + 2000 + (1000 * random.NextDouble());
+            }
+            return this;
+        }
         public CustomerBaseTemplate Build() => _customerBaseTemplate;
     }
 }

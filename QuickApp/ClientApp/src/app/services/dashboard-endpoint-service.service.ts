@@ -13,7 +13,10 @@ export class DashboardEndpointServiceService extends EndpointBase {
     get dashboardCustomerHeaderUrl() { return this.configurations.baseUrl + '/api/Dashboard/CustomerHeader/';}
     get dashboardCustomerDetailUrl() { return this.configurations.baseUrl + '/api/Dashboard/CustomerDetail/';}
     get dashboardInsuranceCoverageSummaryUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageSummary/'; }
-    
+    get dashboardInsuranceCoverageRecommendedUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageRecommended/'}
+    get dashboardInsuranceCoverageTopSellingUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageTopSelling/'; }
+    get dashboardInsuranceCoverageOtherUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageOther'; }
+
     constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) {  super(http, authService); }
 
     getCustomerHeaderEndpoint<T>(customerCode: string): Observable<T> {
@@ -36,10 +39,37 @@ export class DashboardEndpointServiceService extends EndpointBase {
 
     getaDshboardInsuranceCoverageSummaryEndpoint<T>(customerCode: string){
       const endpointUrl = `${this.dashboardInsuranceCoverageSummaryUrl}${customerCode}`;
-  
+      
       return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
         catchError(error => {
           return this.handleError(error, () => this.getaDshboardInsuranceCoverageSummaryEndpoint<T>(customerCode));
         }));
     }
+
+    getDashboardInsuranceCoverageRecommendedEndpoint<T>(customerCode: string) { 
+      const endpointUrl = `${this.dashboardInsuranceCoverageRecommendedUrl}${customerCode}`;
+      
+      return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
+       catchError(error => {
+         return this.handleError(error, () => this.getDashboardInsuranceCoverageRecommendedEndpoint<T>(customerCode));
+       }));
+    }
+
+    getDashboardInsuranceCoverageTopSellingEndpoint<T>(elementNumber: number, insuranceCoverageCodes: string) { 
+       const endpointUrl = `${this.dashboardInsuranceCoverageTopSellingUrl}/${elementNumber}` + '/?insuranceCategoryPolicyCodes='+ insuranceCoverageCodes;
+       
+       return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
+        catchError(error => {
+          return this.handleError(error, () => this.getDashboardInsuranceCoverageTopSellingEndpoint<T>(elementNumber, insuranceCoverageCodes));
+        }));
+    }
+
+    getDashboardInsuranceCoverageOtherEndpoint<T>(insuranceCoverageCodes: string) { 
+      const endpointUrl = this.dashboardInsuranceCoverageOtherUrl + '/?insuranceCategoryPolicyCodes='+ insuranceCoverageCodes;
+      
+      return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
+       catchError(error => {
+         return this.handleError(error, () => this.getDashboardInsuranceCoverageOtherEndpoint<T>(insuranceCoverageCodes));
+       }));
+   }
 }

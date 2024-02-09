@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuickApp.Helpers;
 using QuickApp.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace QuickApp.Controllers
@@ -42,15 +43,6 @@ namespace QuickApp.Controllers
 
             return Ok(_mapper.Map<CustomerDetailViewModel>(customer));
         }
-
-        //[HttpGet("Title/{customerCode}")]
-        //public IActionResult GetTitle(string customerCode)
-        //{
-        //    var customer = _dashboardManager.GetCustomerHeader(customerCode.ToUpper());
-        //    if (customer == null) customer = new CustomerHeader();
-        //    customer.FullName = $"{customer.FullName} - Profilo Assicurativo";
-        //    return Ok(_mapper.Map<CustomerHeaderViewModel>(customer));
-        //}
 
         [HttpGet("InsuranceCoverageSummary/{customerCode}")]
         public IActionResult GetInsuranceCoverageSummary(string customerCode)
@@ -108,6 +100,30 @@ namespace QuickApp.Controllers
                 }
             };
             return Ok(insuranceCoverageCollection);
+        }
+
+        [HttpGet("insurancecoveragerecommended/{customerCode}")]
+        public IActionResult GetInsuranceCoverageRecommended(string customerCode)
+        {
+            var currentYear = DateTime.Now.Year - 1;
+            var top = 6;
+            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetTopSellingInsuranceCategoryPolicyDashboardCards(currentYear, top, new List<string>());
+            return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCards));
+        }
+
+        [HttpGet("insurancecoveragetopselling/{top}")]
+        public IActionResult GetInsuranceCoverageTopSelling(int top, [FromQuery] string insuranceCategoryPolicyCodes)
+        {
+            var currentYear = DateTime.Now.Year - 1;
+            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetTopSellingInsuranceCategoryPolicyDashboardCards(currentYear, top,insuranceCategoryPolicyCodes.Split(new string[] { ";" }, System.StringSplitOptions.RemoveEmptyEntries));
+            return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCards));
+        }
+
+        [HttpGet("insurancecoverageother")]
+        public IActionResult GetInsuranceCoverageOther([FromQuery] string insuranceCategoryPolicyCodes)
+        {
+            var insuranceCategoryPolicyDashboardCard = _dashboardManager.GetOtherInsuranceCategoryPolicyDashboardCards(insuranceCategoryPolicyCodes.Split(new string[] {";"}, System.StringSplitOptions.RemoveEmptyEntries));
+            return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCard));
         }
     }
 }

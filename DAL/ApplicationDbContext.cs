@@ -21,11 +21,12 @@ namespace DAL
 
         #region Customer
 
+        public DbSet<FamilyType> FamilyTypes { get; set; }
+        public DbSet<ProfessionType> ProfessionTypes { get; set; }
+        public DbSet<IncomeType> IncomeTypes { get; set; }
         public DbSet<ContractType> ContractTypes { get; set; }
         public DbSet<GenderType> GenderTypes { get; set; }
         public DbSet<MaritalStatusType> MaritalStatusTypes { get; set; }
-        public DbSet<AgeRatingCoefficient> AgeRatingCoefficients { get; set; }
-        public DbSet<JobRalRatingCoefficient> JobRalRatingCoefficients { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
@@ -65,6 +66,7 @@ namespace DAL
 
         public DbSet<SalesLineType> SalesLineTypes { get; set; }
         public DbSet<InsurancePolicyCategory> InsurancePolicyCategories { get; set; }
+        public DbSet<InsurancePolicyCategoryStatic> InsurancePolicyCategoryStatics { get; set; }
         public DbSet<InsurancePolicy> InsurancePolicies { get; set; }
         //public DbSet<VehicleInsurancePolicy> VehicleInsurancePolicies { get; set; }
         //public DbSet<HealthInsurancePolicy> HealthInsurancePolicies { get; set; }
@@ -72,10 +74,8 @@ namespace DAL
         //public DbSet<TravelInsurancePolicy> TravelInsurancePolicies { get; set; }
         //public DbSet<PropertyInsurancePolicy> PropertyInsurancePolicies { get; set; }
         //public DbSet<FamilyInsurancePolicy> FamilyInsurancePolicies { get; set; }
-
+          
         #endregion
-
-        public DbSet<CustomerInsuranceCategoryPolicyRating> CustomerInsuranceCategoryPolicyRatings { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
@@ -115,11 +115,14 @@ namespace DAL
             builder.Entity<MaritalStatusType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<MaritalStatusType>().ToTable($"App{nameof(MaritalStatusTypes)}");
 
-            builder.Entity<AgeRatingCoefficient>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<AgeRatingCoefficient>().ToTable($"App{nameof(AgeRatingCoefficients)}");
+            builder.Entity<FamilyType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<FamilyType>().ToTable($"App{nameof(FamilyTypes)}");
 
-            builder.Entity<JobRalRatingCoefficient>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<JobRalRatingCoefficient>().ToTable($"App{nameof(JobRalRatingCoefficients)}");
+            builder.Entity<ProfessionType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<ProfessionType>().ToTable($"App{nameof(ProfessionTypes)}");
+
+            builder.Entity<IncomeType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<IncomeType>().ToTable($"App{nameof(IncomeTypes)}");
 
             builder.Entity<Customer>().Property(c => c.FirstName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.FirstName);
@@ -128,7 +131,7 @@ namespace DAL
 
             builder.Entity<Customer>().Property(c => c.CustomerCode).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.CustomerCode).IsUnique(true);
-            
+
             builder.Entity<Customer>().HasIndex(c => c.CustomerCode).IsUnique();
             builder.Entity<Customer>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Customer>().Property(c => c.UpdatedBy).IsRequired(false);
@@ -228,7 +231,7 @@ namespace DAL
 
             builder.Entity<SalesLineType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<SalesLineType>().Property(c => c.SalesLineCode).HasMaxLength(3).IsFixedLength().IsRequired();
-            builder.Entity<SalesLineType>().Property(c => c.SalesLineTitle).HasMaxLength(60).IsRequired();
+            builder.Entity<SalesLineType>().Property(c => c.BackGroundColor).HasMaxLength(60).IsRequired(false);
             builder.Entity<SalesLineType>().Property(c => c.BackGroundColorCssClass).HasMaxLength(30).IsRequired();
             builder.Entity<SalesLineType>().ToTable($"App{nameof(SalesLineTypes)}");
 
@@ -238,8 +241,11 @@ namespace DAL
             builder.Entity<InsurancePolicyCategory>().HasIndex(c => c.InsurancePolicyCategoryCode).IsUnique(true);
 
             builder.Entity<InsurancePolicyCategory>().Property(c => c.InsurancePolicyCategoryName).HasMaxLength(50).IsRequired();
+            builder.Entity<InsurancePolicyCategory>().Property(c => c.InsurancePolicyCategoryDescription).HasMaxLength(1000).IsRequired(false);
             builder.Entity<InsurancePolicyCategory>().Property(c => c.IconCssClass).HasMaxLength(30).IsRequired(false);
             builder.Entity<InsurancePolicyCategory>().ToTable($"App{nameof(InsurancePolicyCategories)}");
+
+            builder.Entity<InsurancePolicyCategoryStatic>().ToTable($"App{nameof(InsurancePolicyCategoryStatics)}");
 
             builder.Entity<InsurancePolicy>().Property(c => c.InsurancePolicyCode).HasMaxLength(150).IsFixedLength(false).IsRequired();
             builder.Entity<InsurancePolicy>().HasIndex(c => c.InsurancePolicyCode).IsUnique(true);
@@ -252,10 +258,10 @@ namespace DAL
             //builder.Entity<TravelInsurancePolicy>().ToTable($"App{nameof(TravelInsurancePolicies)}");
             //builder.Entity<PropertyInsurancePolicy>().ToTable($"App{nameof(PropertyInsurancePolicies)}");
             //builder.Entity<FamilyInsurancePolicy>().ToTable($"App{nameof(FamilyInsurancePolicies)}");
+            //builder.Entity<CustomerInsuranceCategoryPolicyRating>().ToTable($"App{nameof(CustomerInsuranceCategoryPolicyRatings)}");
 
             #endregion
 
-            builder.Entity<CustomerInsuranceCategoryPolicyRating>().ToTable($"App{nameof(CustomerInsuranceCategoryPolicyRatings)}");
 
         }
 

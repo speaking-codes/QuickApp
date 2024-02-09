@@ -1,5 +1,3 @@
-<!-- <div class="row">
-    <div class="col-12"> -->
         <div class="row">
             <div class="col-12">
                 <app-dash-title [customerFullName]="this.customerFullName" (loaded)="onLoad($event)"></app-dash-title>
@@ -10,11 +8,23 @@
                 <app-dashboard-header [customerCode]="this.customerCode"></app-dashboard-header>
             </div>
         </div>
-        <div class="row">
+        <div class="row back-style">
             <div class="col-12">
-                <app-insurancecoverage></app-insurancecoverage>
+                <app-insurancecoverage [title]="this.titleInsuranceCoverageRecommended" [insuranceCoverageCards]="this.insuranceCoverageRecommended"></app-insurancecoverage>
             </div>
         </div>
-    <!-- </div>
-</div> -->
-
+        <div class="row back-style">
+            <div class="col-12">
+                <app-insurancecoverage [title]="this.titleInsuranceCoverageTopSelling" [insuranceCoverageCards]="this.insuranceCoverageTopSelling"></app-insurancecoverage>
+            </div>
+        </div>
+        <div class="row back-style">
+            <div class="col-12">
+                <app-insurancecoverage [title]="this.titleInsuranceCoverageOther" [insuranceCoverageCards]="this.insuranceCoverageOthers"></app-insurancecoverage>
+            </div>
+        </div>
+        <div class="row back-style">
+            <div class="col-12">
+                <app-insurance-coverage-footer></app-insurance-coverage-footer>
+            </div>
+        </div>

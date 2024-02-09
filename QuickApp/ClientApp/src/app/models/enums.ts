@@ -40,3 +40,9 @@ export enum EnumLoadGridStep
     ShowAll,
     ShowOnlyActive
 }
+
+export enum EnumDashboardCall{
+    Recommended,
+    TopSelling,
+    Other
+}

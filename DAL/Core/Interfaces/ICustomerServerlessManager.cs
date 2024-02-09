@@ -10,6 +10,6 @@ namespace DAL.Core.Interfaces
     public interface ICustomerServerlessManager
     {
         void ManageCustomer(CustomerQueue customerQueue);
-        void ManageInsurancePolicy(CustomerInsurancePolicyQueue customerInsurancePolicyQueue);
+        //void ManageInsurancePolicy(CustomerInsurancePolicyQueue customerInsurancePolicyQueue);
     }
 }

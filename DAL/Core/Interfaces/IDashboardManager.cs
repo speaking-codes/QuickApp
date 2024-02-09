@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Core.Interfaces
 {
-    public interface IDashboardManager
+    public interface IDashboardManager : IManager
     {
         CustomerHeader GetCustomerHeader(string customerCode);
         CustomerDetail GetCustomerDetail(string customerCode);
+        IList<InsuranceCategoryPolicyDashboardCard> GetTopSellingInsuranceCategoryPolicyDashboardCards(int year, int top, IEnumerable<string> insuranceCategoryPolicyCodes);
+        IList<InsuranceCategoryPolicyDashboardCard> GetOtherInsuranceCategoryPolicyDashboardCards(IEnumerable<string> insuranceCategoryPolicyCodes);
     }
 }

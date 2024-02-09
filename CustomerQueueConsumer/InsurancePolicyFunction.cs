@@ -18,12 +18,12 @@ namespace CustomerQueueConsumer
             _customerServerlessManager= customerServerlessManager;
         }
 
-        [Function("InsurancePolicyFunction")]
-        public void Run([RabbitMQTrigger("insurancepolicies", ConnectionStringSetting = "localhost")] string myQueueItem)
-        {
-            _logger.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
-            var customerInsurancePolicyQueue = JsonConvert.DeserializeObject<CustomerInsurancePolicyQueue>(myQueueItem);
-            _customerServerlessManager.ManageInsurancePolicy(customerInsurancePolicyQueue);
-        }
+        //[Function("InsurancePolicyFunction")]
+        //public void Run([RabbitMQTrigger("insurancepolicies", ConnectionStringSetting = "localhost")] string myQueueItem)
+        //{
+        //    _logger.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
+        //    var customerInsurancePolicyQueue = JsonConvert.DeserializeObject<CustomerInsurancePolicyQueue>(myQueueItem);
+        //    _customerServerlessManager.ManageInsurancePolicy(customerInsurancePolicyQueue);
+        //}
     }
 }

@@ -286,3 +286,5 @@ Thumbs.db
 /ConsoleAppRecommenderSystemTrainer/RecommenderSystemInsurance.consumption.cs
 /ConsoleAppRecommenderSystemTrainer/RecommenderSystemInsurance.mbconfig
 /ConsoleAppRecommenderSystemTrainer/RecommenderSystemInsurance.training.cs
+/DAL/ScriptsInizializzazione/SQLQuery2.sql
+/DAL/ScriptsInizializzazione/SQLQuery21.sql
