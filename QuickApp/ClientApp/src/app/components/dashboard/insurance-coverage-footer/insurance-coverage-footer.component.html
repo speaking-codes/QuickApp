@@ -5,26 +5,10 @@
 </div>
 <div class="row">
     <div class="col-10 offset-1">
-       <div class="row">
-            <div class="col-3">
-                <div class="insurance-coverage-btn vehicle-insurance-coverage-btn"><i class="fa-solid fa-ship"></i> Imbarcazioni</div>
-            </div>
-            <div class="col-3">
-                <div class="insurance-coverage-btn health-insurance-coverage-btn"><i class="fa-solid fa-stethoscope"></i> Visita Specialistica</div>
-            </div>
-            <div class="col-3">
-                <div class="insurance-coverage-btn travel-insurance-coverage-btn"><i class="fa-solid fa-suitcase-rolling"></i> Bagaglio</div>
-            </div>
-            <div class="col-3">
-                <div class="insurance-coverage-btn family-insurance-coverage-btn"><i class="fa-solid fa-paw"></i> Animale Domestico</div>
-            </div>
-        </div>
         <div class="row">
-            <div class="col-3">
-                <div class="insurance-coverage-btn work-insurance-coverage-btn"><i class="fa-solid fa-industry"></i> Impianti Industriali</div>
+            <div class="col-3" *ngFor="let item of this.insuranceCoveragePolicies">
+                <div class="insurance-coverage-btn" [appDivStyle]="item?.salesLineBackgroundCssClass" data-code="item?.code">
+                    <i class="fa-solid" [appIconStyle]="item?.iconCssClass"></i> {{ item?.name }}</div>
             </div>
-            <div class="col-3">
-                <div class="insurance-coverage-btn heritage-insurance-coverage-btn"><i class="fa-solid fa-gem"></i> Bene di lusso</div>
-            </div>
-    </div>
+        </div>       
 </div>

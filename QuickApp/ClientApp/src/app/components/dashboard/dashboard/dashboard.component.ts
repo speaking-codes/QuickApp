@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit{
     }
 
     onDataLoadSuccessful(data: InsuranceCategoryPolicyCard[], callType: EnumDashboardCall){
-        debugger;
         if (data.length == 0) 
             return;
 

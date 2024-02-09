@@ -15,7 +15,7 @@
           <div class="col-sm-6" *ngFor="let item of insuranceCoverageCards">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">{{ item.name }} - <i>{{ item.salesLineName }}</i></h5>
+                <h5 class="card-title" style="border-top: 0; border-left: 0; border-right: 0; border-bottom: 1px #000000 solid;">{{ item.name }} - <i><small>Linea Prodotto: {{ item.salesLineName }}</small></i></h5>
                 <p class="card-text">{{ item.abstract }}</p>
                 <div class="form-check form-switch">
                   <input class="form-check-input" (change)="selectItem($event)" [value]="item.code" type="checkbox" id="flexSwitchCheckChecked">

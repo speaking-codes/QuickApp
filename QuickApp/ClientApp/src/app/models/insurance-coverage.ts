@@ -19,3 +19,17 @@ export class InsuranceCategoryPolicyCard {
     salesLineBackgroundColor: string;
     salesLineBackgroundCssClass: string;
 }
+
+export class InsuranceCoveragePolicyFooter {
+    code: string;
+    name: string;
+    iconCssClass: string;
+    salesLineBackgroundCssClass: string;
+
+    constructor(code: string, name: string, iconCssClass: string, salesLineBackgroundCssClass: string){
+        this.code = code;
+        this.name = name;
+        this.iconCssClass = iconCssClass;
+        this.salesLineBackgroundCssClass = salesLineBackgroundCssClass;
+    }
+}

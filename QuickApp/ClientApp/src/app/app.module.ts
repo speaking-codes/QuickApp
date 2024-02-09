@@ -70,6 +70,8 @@ import { InsuranceCoverageSummaryComponent } from './components/dashboard/insura
 import { InsurancecoverageComponent } from './components/dashboard/insurancecoverage/insurancecoverage.component';
 import { InsuranceCoverageFooterComponent } from './components/dashboard/insurance-coverage-footer/insurance-coverage-footer.component';
 import { CardComponent } from './components/controls/card/card.component';
+import { DivStyleDirective } from './directives/div-style.directive';
+import { IconStyleDirective } from './directives/icon-style.directive';
 
 @NgModule({
   declarations: [
@@ -104,7 +106,9 @@ import { CardComponent } from './components/controls/card/card.component';
     InsuranceCoverageSummaryComponent,
     InsurancecoverageComponent,
     InsuranceCoverageFooterComponent,
-    CardComponent
+    CardComponent,
+    DivStyleDirective,
+    IconStyleDirective
   ],
   imports: [
     BrowserModule,
