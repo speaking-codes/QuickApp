@@ -47,6 +47,8 @@ namespace QuickApp.Controllers
         [HttpGet("InsuranceCoverageSummary/{customerCode}")]
         public IActionResult GetInsuranceCoverageSummary(string customerCode)
         {
+            var insuranceCoverageSummaries = _dashboardManager.GetInsuranceCoverageSummaries(customerCode);
+            return Ok(_mapper.Map<IList<InsuranceCoverageSummaryViewModel>>(insuranceCoverageSummaries));
             var insuranceCoverageCollection = new List<InsuranceCoverageSummaryViewModel>
             {
                 new InsuranceCoverageSummaryViewModel
@@ -115,14 +117,14 @@ namespace QuickApp.Controllers
         public IActionResult GetInsuranceCoverageTopSelling(int top, [FromQuery] string insuranceCategoryPolicyCodes)
         {
             var currentYear = DateTime.Now.Year - 1;
-            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetTopSellingInsuranceCategoryPolicyDashboardCards(currentYear, top,insuranceCategoryPolicyCodes.Split(new string[] { ";" }, System.StringSplitOptions.RemoveEmptyEntries));
+            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetTopSellingInsuranceCategoryPolicyDashboardCards(currentYear, top, insuranceCategoryPolicyCodes.Split(new string[] { ";" }, System.StringSplitOptions.RemoveEmptyEntries));
             return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCards));
         }
 
         [HttpGet("insurancecoverageother")]
         public IActionResult GetInsuranceCoverageOther([FromQuery] string insuranceCategoryPolicyCodes)
         {
-            var insuranceCategoryPolicyDashboardCard = _dashboardManager.GetOtherInsuranceCategoryPolicyDashboardCards(insuranceCategoryPolicyCodes.Split(new string[] {";"}, System.StringSplitOptions.RemoveEmptyEntries));
+            var insuranceCategoryPolicyDashboardCard = _dashboardManager.GetOtherInsuranceCategoryPolicyDashboardCards(insuranceCategoryPolicyCodes.Split(new string[] { ";" }, System.StringSplitOptions.RemoveEmptyEntries));
             return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCard));
         }
     }

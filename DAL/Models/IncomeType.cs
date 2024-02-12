@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class IncomeType
+    public class IncomeType : AuditableEntity
     {
         public byte Id { get; set; }
         public string IncomeTypeDescription { get; set; }
+
+        public virtual IList<Customer> Customers { get; set; }
     }
 }

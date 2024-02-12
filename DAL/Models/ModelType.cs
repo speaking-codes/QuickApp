@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class ModelType:AuditableEntity
+    public class ModelType : AuditableEntity
     {
         public Byte Id { get; set; }
         public string ModelTypeDescription { get; set; }

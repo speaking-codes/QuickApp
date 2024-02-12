@@ -30,6 +30,8 @@ namespace DAL.Models
 
         public virtual ContractType ContractType { get; set; }
 
+        public virtual IncomeType IncomeType { get; set; }
+
         public virtual ProfessionType ProfessionType { get; set; }
 
         public virtual IList<Delivery> Deliveries { get; set; }

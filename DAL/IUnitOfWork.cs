@@ -24,6 +24,8 @@ namespace DAL
         IInsurancePolicyCategoryRepository InsurancePolicyCategories { get; }
         IInsurancePolicyCategoryStaticRepository InsurancePolicyCategoryStatics { get; }
 
+        IConfigurationModelRepository ConfigurationModels { get; }
+
         bool IsTransactionOpened { get; }
 
         int SaveChanges();

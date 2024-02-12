@@ -11,6 +11,7 @@ namespace DAL.Core.Interfaces
     {
         CustomerHeader GetCustomerHeader(string customerCode);
         CustomerDetail GetCustomerDetail(string customerCode);
+        IList<InsuranceCoverageSummary> GetInsuranceCoverageSummaries(string customerCode);
         IList<InsuranceCategoryPolicyDashboardCard> GetTopSellingInsuranceCategoryPolicyDashboardCards(int year, int top, IEnumerable<string> insuranceCategoryPolicyCodes);
         IList<InsuranceCategoryPolicyDashboardCard> GetOtherInsuranceCategoryPolicyDashboardCards(IEnumerable<string> insuranceCategoryPolicyCodes);
     }

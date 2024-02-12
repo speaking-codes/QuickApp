@@ -14,5 +14,24 @@ namespace DAL.Models
         public byte RiskCategory { get; set; }
 
         public virtual ConfigurationModel ConfigurationModel { get; set; }
+
+        public VehicleInsurancePolicy()
+        {
+
+        }
+
+        public VehicleInsurancePolicy(InsurancePolicy insurancePolicy)
+        {
+            this.InsurancePolicyCode = insurancePolicy.InsurancePolicyCode;
+            this.Progressive = insurancePolicy.Progressive;
+            this.IssueDate = insurancePolicy.IssueDate;
+            this.ExpiryDate = insurancePolicy.ExpiryDate;
+            this.InsuredMaximum = insurancePolicy.InsuredMaximum;
+            this.TotalPrize = insurancePolicy.TotalPrize;
+            this.IsLuxuryPolicy = insurancePolicy.IsLuxuryPolicy;
+
+            this.InsurancePolicyCategory = insurancePolicy.InsurancePolicyCategory;
+            this.Customer = insurancePolicy.Customer;
+    }
     }
 }

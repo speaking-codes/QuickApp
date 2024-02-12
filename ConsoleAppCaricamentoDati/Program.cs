@@ -46,6 +46,7 @@ namespace ConsoleAppCaricamentoDati
 
             var customBuilder = new CustomerBuilder(provider.GetRequiredService<IUnitOfWork>(), customerTemplate);
             var insurancePolicyBuilder = new InsurancePolicyBuilder(provider);
+            VehicleInsurancePolicyBuilder vehicleInsurancePolicyBuilder = null;
 
             IList<Customer> customerList = new List<Customer>();
             var insurancePolicyList = new List<InsurancePolicy>();
@@ -75,7 +76,7 @@ namespace ConsoleAppCaricamentoDati
                 for (var i = 0; i < customerList.Count; i++)
                     manger.AddCustomer(customerList[i]);
             }
-            return;
+
             using (var manger = provider.GetService<ICustomerManager>())
             {
                 customerList.Clear();
@@ -89,7 +90,7 @@ namespace ConsoleAppCaricamentoDati
                 var j = random.Next(0, customerList.Count);
                 if (j < customerList.Count)
                 {
-                    insurancePolicyList.Add(insurancePolicyBuilder.SetInsurancePolicy()
+                    var insurancePolicy = insurancePolicyBuilder.SetInsurancePolicy()
                                                                   .SetIssueDate()
                                                                   .SetExpireDate()
                                                                   .SetInsurancePolicyCategory()
@@ -97,7 +98,16 @@ namespace ConsoleAppCaricamentoDati
                                                                   .SetInsuredMaximum()
                                                                   .SetTotalPrize()
                                                                   .SetIsLuxuryPolicy()
-                                                                  .Build());
+                                                                  .Build();
+                    vehicleInsurancePolicyBuilder = new VehicleInsurancePolicyBuilder(provider, insurancePolicy);
+                    var vehicleInsurancePolicy = vehicleInsurancePolicyBuilder.SetConfigurationModel()
+                                                                             .SetLicensePlate()
+                                                                             .SetCommercialValue()
+                                                                             .SetInsuredValue()
+                                                                             .SetRiskCategory()
+                                                                             .Build();
+                    insurancePolicyList.Add(vehicleInsurancePolicy);
+
                 }
             }
             using (var manager = provider.GetService<IInsurancePolicyManager>())

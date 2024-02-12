@@ -11,6 +11,11 @@ export class IconStyleDirective implements OnInit{
   appIconStyle: string = "";
 
   ngOnInit(): void {
-    this.el.nativeElement.classList.add(this.appIconStyle);
+    if (this.appIconStyle == "")
+      return;
+    
+    var styleSplitted = this.appIconStyle.split(" ");
+    for(var i = 0; i < styleSplitted.length; i++)
+      this.el.nativeElement.classList.add(styleSplitted[i]);
   }
 }

@@ -1,4 +1,6 @@
 ﻿using DAL.Core.Interfaces;
+using DAL.Mapping;
+using DAL.Models;
 using DAL.ModelsNoSql;
 using DAL.RepositoryNoSql.Interfaces;
 using System;
@@ -13,21 +15,92 @@ namespace DAL.Core
     {
         private readonly ICustomerHeaderRepository _customerHeaderRepository;
         private readonly ICustomerDetailRepository _customerDetailRepository;
+        private readonly IInsuranceCategoryPolicyDashboardCardRepository _insuranceCategoryPolicyDashboardCardRepository;
         private readonly IInsuranceCategoryPolicyTopSellingRepository _insuranceCategoryPolicyTopSellingRepository;
 
         public DashboardManager(IUnitOfWork unitOfWork,
                                 ICustomerHeaderRepository customerHeaderRepository,
                                 ICustomerDetailRepository customerDetailRepository,
+                                IInsuranceCategoryPolicyDashboardCardRepository insuranceCategoryPolicyDashboardCardRepository,
                                 IInsuranceCategoryPolicyTopSellingRepository insuranceCategoryPolicyTopSellingRepository) : base(unitOfWork)
         {
             _customerHeaderRepository = customerHeaderRepository;
             _customerDetailRepository = customerDetailRepository;
+            _insuranceCategoryPolicyDashboardCardRepository = insuranceCategoryPolicyDashboardCardRepository;
             _insuranceCategoryPolicyTopSellingRepository = insuranceCategoryPolicyTopSellingRepository;
         }
 
-        public CustomerHeader GetCustomerHeader(string customerCode) => _customerHeaderRepository.GetCustomer(customerCode);
+        public CustomerHeader GetCustomerHeader(string customerCode)
+        {
+            var customerHeader = _customerHeaderRepository.GetCustomer(customerCode);
+            if (customerHeader != null)
+                return customerHeader;
 
-        public CustomerDetail GetCustomerDetail(string customerCode) => _customerDetailRepository.GetCustomer(customerCode);
+            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            if (customer == null)
+                return new CustomerHeader();
+
+            customerHeader = customer.ToNoSqlHeaderEntity();
+            _customerHeaderRepository.InsertOne(customerHeader);
+
+            return customerHeader;
+        }
+
+        public CustomerDetail GetCustomerDetail(string customerCode)
+        {
+            var customerDetail = _customerDetailRepository.GetCustomer(customerCode);
+            if (customerDetail != null)
+                return customerDetail;
+
+            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            if (customer == null)
+                return new CustomerDetail();
+
+            customerDetail = customer.ToNoSqlDetailEntity();
+            _customerDetailRepository.InsertOne(customerDetail);
+
+            return customerDetail;
+        }
+
+        public IList<InsuranceCoverageSummary> GetInsuranceCoverageSummaries(string customerCode)
+        {
+            var insuranceCoverages = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode)
+                                                                 .Select(x => new
+                                                                 {
+                                                                     Id = x.Id,
+                                                                     CategoryId = x.InsurancePolicyCategory.Id,
+                                                                     CategoryName = x.InsurancePolicyCategory.InsurancePolicyCategoryName
+                                                                 })
+                                                                 .ToList();
+            var insuranceCoverageSummaries = new List<InsuranceCoverageSummary>();
+            InsuranceCoverageSummary insuranceCoverageSummary = null;
+
+            foreach (var item in insuranceCoverages)
+            {
+                switch (item.CategoryId)
+                {
+                    case 1://Auto
+                    case 2://Moto
+                    case 3://Imbarcazioni
+                        var vehicleInsurancePolicy = (VehicleInsurancePolicy)UnitOfWork.InsurancePolicies.Get(item.Id);
+                        var configurationModel = UnitOfWork.ConfigurationModels.GetConfigurationsByInsurancePolicyVehicle(vehicleInsurancePolicy.Id).FirstOrDefault();
+                        insuranceCoverageSummary = new InsuranceCoverageSummary
+                        {
+                            CustomerCode = customerCode,
+                            Code = vehicleInsurancePolicy.InsurancePolicyCode,
+                            CategoryType = item.CategoryName,
+                            ItemDescription = $"{vehicleInsurancePolicy.LicensePlate} - {configurationModel.Model.Brand.BrandName} - {configurationModel.Model.ModelName} - {configurationModel.ConfigurationDescription}",
+                            IssueDate = vehicleInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
+                            ExpiryDate = vehicleInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
+                            TotalPrice = $"{vehicleInsurancePolicy.TotalPrize.ToString("#,##0.00")} - €"
+                        };
+                        insuranceCoverageSummaries.Add(insuranceCoverageSummary);
+                        break;
+                }
+            }
+
+            return insuranceCoverageSummaries;
+        }
 
         public IList<InsuranceCategoryPolicyDashboardCard> GetTopSellingInsuranceCategoryPolicyDashboardCards(int year, int top, IEnumerable<string> incuranceCoverageCodes)
         {
@@ -81,18 +154,31 @@ namespace DAL.Core
 
         public IList<InsuranceCategoryPolicyDashboardCard> GetOtherInsuranceCategoryPolicyDashboardCards(IEnumerable<string> insuranceCategoryPolicyCodes)
         {
-            var insuranceCategoryPolicyDashboardCards = UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories()
-                                                                  .Where(x => !insuranceCategoryPolicyCodes.Any(y => y == x.InsurancePolicyCategoryCode))
+            var insuranceCategoryPolicyDashboardCards = _insuranceCategoryPolicyDashboardCardRepository.GetAll();
+            if (insuranceCategoryPolicyDashboardCards != null && insuranceCategoryPolicyDashboardCards.Count != 0)
+                return insuranceCategoryPolicyDashboardCards
+                       .Where(x => !insuranceCategoryPolicyCodes.Any(y => y == x.Code))
+                       .ToList();
+
+            insuranceCategoryPolicyDashboardCards = UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories()
                                                                   .Select(x => new InsuranceCategoryPolicyDashboardCard
                                                                   {
                                                                       Code = x.InsurancePolicyCategoryCode,
                                                                       Name = x.InsurancePolicyCategoryName,
-                                                                      Abstract = x.InsurancePolicyCategoryDescription.Length > 200 ? x.InsurancePolicyCategoryDescription.Substring(0, 200) : x.InsurancePolicyCategoryDescription,
+                                                                      Abstract = x.InsurancePolicyCategoryDescription.Length > 170 ? x.InsurancePolicyCategoryDescription.Substring(0, 170) : x.InsurancePolicyCategoryDescription,
+                                                                      IconCssClass = x.IconCssClass,
+                                                                      SalesLineBackgroundColor = x.SalesLine.BackGroundColor,
+                                                                      SalesLineBackgroundCssClass = x.SalesLine.BackGroundColorCssClass,
                                                                       SalesLineCode = x.SalesLine.SalesLineCode,
                                                                       SalesLineName = x.SalesLine.SalesLineName
                                                                   })
                                                                   .ToList();
-            return insuranceCategoryPolicyDashboardCards;
+
+            _insuranceCategoryPolicyDashboardCardRepository.InsertMany(insuranceCategoryPolicyDashboardCards);
+
+            return insuranceCategoryPolicyDashboardCards
+                  .Where(x => !insuranceCategoryPolicyCodes.Any(y => y == x.Code))
+                  .ToList();
         }
 
         public override void Dispose()

@@ -72,6 +72,7 @@ import { InsuranceCoverageFooterComponent } from './components/dashboard/insuran
 import { CardComponent } from './components/controls/card/card.component';
 import { DivStyleDirective } from './directives/div-style.directive';
 import { IconStyleDirective } from './directives/icon-style.directive';
+import { TxtStyleDirective } from './directives/txt-style.directive';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { IconStyleDirective } from './directives/icon-style.directive';
     InsuranceCoverageFooterComponent,
     CardComponent,
     DivStyleDirective,
-    IconStyleDirective
+    IconStyleDirective,
+    TxtStyleDirective
   ],
   imports: [
     BrowserModule,

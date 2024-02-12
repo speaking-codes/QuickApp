@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { InsuranceCategoryPolicyCard } from 'src/app/models/insurance-coverage';
 import { CardComponent } from '../../controls/card/card.component';
+import { TxtStyleDirective } from 'src/app/directives/txt-style.directive';
+import { IconStyleDirective } from 'src/app/directives/icon-style.directive';
 
 @Component({
   selector: 'app-insurancecoverage',

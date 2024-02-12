@@ -1,6 +1,7 @@
 ﻿using Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,10 +31,11 @@ namespace DAL.Models
         public double? MinSaddleHeight { get; set; }
         public double StepMeters { get; set; }
         public double CurbMassKg { get; set; }
-        public double PowerToMassRatio { get; set; }
+        public double? PowerToMassRatio { get; set; }
         public double? Consumption { get; set; }
-        public double TankCapacity { get; set; }
+        public double? TankCapacity { get; set; }
         public double? LuggageCapacity { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual ModelType ModelType { get; set; }
         public virtual Model Model { get; set; }//Modello

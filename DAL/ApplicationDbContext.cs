@@ -22,8 +22,8 @@ namespace DAL
         #region Customer
 
         public DbSet<FamilyType> FamilyTypes { get; set; }
-        public DbSet<ProfessionType> ProfessionTypes { get; set; }
         public DbSet<IncomeType> IncomeTypes { get; set; }
+        public DbSet<ProfessionType> ProfessionTypes { get; set; }
         public DbSet<ContractType> ContractTypes { get; set; }
         public DbSet<GenderType> GenderTypes { get; set; }
         public DbSet<MaritalStatusType> MaritalStatusTypes { get; set; }
@@ -74,7 +74,13 @@ namespace DAL
         //public DbSet<TravelInsurancePolicy> TravelInsurancePolicies { get; set; }
         //public DbSet<PropertyInsurancePolicy> PropertyInsurancePolicies { get; set; }
         //public DbSet<FamilyInsurancePolicy> FamilyInsurancePolicies { get; set; }
-          
+
+        #endregion
+
+        #region Machine Learning
+
+        public DbSet<Temp> Temps { get; set; }
+
         #endregion
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
@@ -118,11 +124,11 @@ namespace DAL
             builder.Entity<FamilyType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<FamilyType>().ToTable($"App{nameof(FamilyTypes)}");
 
-            builder.Entity<ProfessionType>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<ProfessionType>().ToTable($"App{nameof(ProfessionTypes)}");
-
             builder.Entity<IncomeType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<IncomeType>().ToTable($"App{nameof(IncomeTypes)}");
+
+            builder.Entity<ProfessionType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<ProfessionType>().ToTable($"App{nameof(ProfessionTypes)}");
 
             builder.Entity<Customer>().Property(c => c.FirstName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.FirstName);
@@ -191,14 +197,17 @@ namespace DAL
 
             builder.Entity<BrandType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<BrandType>().Property(c => c.BrandTypeDescription).HasMaxLength(50).IsRequired();
+            builder.Entity<BrandType>().Property(c => c.IsActive).HasDefaultValue(true);
             builder.Entity<BrandType>().ToTable($"App{nameof(BrandTypes)}");
 
             builder.Entity<ModelType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<ModelType>().Property(c => c.ModelTypeDescription).HasMaxLength(50).IsRequired();
+            builder.Entity<ModelType>().Property(c => c.IsActive).HasDefaultValue(true);
             builder.Entity<ModelType>().ToTable($"App{nameof(ModelTypes)}");
 
             builder.Entity<PowerType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<PowerType>().Property(c => c.PowerTypeDescription).HasMaxLength(50).IsRequired();
+            builder.Entity<PowerType>().Property(c => c.IsActive).HasDefaultValue(true);
             builder.Entity<PowerType>().ToTable($"App{nameof(PowerTypes)}");
 
             //builder.Entity<CarArrangementCylinderType>().Property(c => c.Id).ValueGeneratedNever();
@@ -215,14 +224,17 @@ namespace DAL
 
             builder.Entity<Brand>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<Brand>().Property(c => c.BrandName).HasMaxLength(100).IsRequired();
+            builder.Entity<Brand>().Property(c => c.IsActive).HasDefaultValue(true);
             builder.Entity<Brand>().ToTable($"App{nameof(Brands)}");
 
             builder.Entity<Model>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<Model>().Property(c => c.ModelName).HasMaxLength(100).IsRequired();
+            builder.Entity<Model>().Property(c => c.IsActive).HasDefaultValue(true);
             builder.Entity<Model>().ToTable($"App{nameof(Models)}");
 
             builder.Entity<ConfigurationModel>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<ConfigurationModel>().Property(c => c.ConfigurationDescription).HasMaxLength(100).IsRequired();
+            builder.Entity<ConfigurationModel>().Property(c => c.IsActive).HasDefaultValue(true);
             builder.Entity<ConfigurationModel>().ToTable($"App{nameof(ConfigurationModels)}");
 
             #endregion
@@ -262,7 +274,30 @@ namespace DAL
 
             #endregion
 
+            #region Machine Learning
 
+            builder.Entity<Temp>().Property(c => c.Gender).IsRequired(false);
+
+            builder.Entity<Temp>().Property(c => c.MaritalStatusCode).IsRequired(false);
+            builder.Entity<Temp>().Property(c => c.MaritalStatusId).IsRequired().HasDefaultValue(0);
+
+            builder.Entity<Temp>().Property(c => c.FamilyTypeCode).IsRequired(false);
+            builder.Entity<Temp>().Property(c => c.FamilyTypeId).IsRequired().HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.ChildrenNumbers).IsRequired().HasDefaultValue(0);
+
+            builder.Entity<Temp>().Property(c => c.IncomeTypeCode).IsRequired(false);
+            builder.Entity<Temp>().Property(c => c.IncomeTypeId).IsRequired().HasDefaultValue(0);
+
+            builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
+            builder.Entity<Temp>().Property(c => c.ProfessionTypeId).IsRequired().HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.Income).IsRequired().HasDefaultValue(0.0);
+
+            builder.Entity<Temp>().Property(c => c.RegionCode).IsRequired(false);
+            builder.Entity<Temp>().Property(c => c.RegionId).IsRequired().HasDefaultValue(0);
+
+            builder.Entity<Temp>().ToTable($"App{nameof(Temp)}");
+
+            #endregion
         }
 
         public override int SaveChanges()

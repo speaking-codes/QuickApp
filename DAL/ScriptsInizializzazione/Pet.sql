@@ -288,7 +288,26 @@ BEGIN TRAN
 	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 279, 'Meticcio', 2, NULL, NULL, GETDATE(), GETDATE()
 	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 280, 'Altra razza', 2, NULL, NULL, GETDATE(), GETDATE()
 	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 281, 'Schnauzer Nano', 2, NULL, NULL, GETDATE(), GETDATE()
-
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 282, 'Purosangue Arabo', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 283, 'Quarter Horse', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 284, 'Frisone', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 285, 'Trotter Francese', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 286, 'Cavallo Andaluso', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 287, 'Tennessee Walking Horse', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 288, 'Appaloosa', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 289, 'Mustang', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 290, 'Thoroughbred', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 291, 'Cavallo Miniatura', 3, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 292, 'Coniglio', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 293, 'Cavia', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 294, 'Pappagallo', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 295, 'Pesce', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 296, 'Furetto', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 297, 'Tartaruga', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 298, 'Criceto', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 299, 'Iguana', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 300, 'Topo', 4, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetTypes(Id, BreedPetTypeDescription, PetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 301, 'Serpente', 4, NULL, NULL, GETDATE(), GETDATE()
 	--Breed Detail Pet Type
 	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 1, 'Abissino', 1,  NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 2, 'Affenpinscher', 1,  NULL, NULL, GETDATE(), GETDATE()
@@ -872,4 +891,37 @@ INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTy
 INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 580, 'Altra razza', 280,  NULL, NULL, GETDATE(), GETDATE()
 INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 581, 'Schnauzer Nano', 281,  NULL, NULL, GETDATE(), GETDATE()
 
-COMMIT TRAN
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 582, 'Purosangue Arabo', 282, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 583, 'Quarter Horse', 283, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 584, 'Frisone', 284, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 585, 'Trotter Francese', 285, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 586, 'Cavallo Andaluso', 286, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 587, 'Tennessee Walking Horse', 287, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 588, 'Appaloosa', 288, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 589, 'Mustang', 289, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 590, 'Thoroughbred', 290, NULL, NULL, GETDATE(), GETDATE()
+INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 591, 'Cavallo Miniatura', 291, NULL, NULL, GETDATE(), GETDATE()
+	
+
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 592, 'Coniglio', 292, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 593, 'Cavia', 293, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 594, 'Pappagallo', 294, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 595, 'Pesce', 295, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 596, 'Furetto', 296, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 597, 'Tartaruga', 297, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 598, 'Criceto', 298, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 599, 'Iguana', 299, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 600, 'Topo', 300, NULL, NULL, GETDATE(), GETDATE()
+	INSERT INTO AppBreedPetDetailTypes(Id, BreedPetDetailTypeDescription, BreedPetTypeId, CreatedBy, UpdatedBy, UpdatedDate, CreatedDate) SELECT 601, 'Serpente', 301, NULL, NULL, GETDATE(), GETDATE()
+	
+select	*
+from	AppPetTypes
+select	PetTypeId, COUNT(*)
+from	AppBreedPetTypes
+group	by PetTypeId
+select	PetTypeId, COUNT(*)
+from	AppBreedPetDetailTypes abpdt join AppBreedPetTypes abpt
+on		abpdt.BreedPetTypeId = abpt.Id
+group	by abpt.PetTypeId
+
+ROLLBACK TRAN

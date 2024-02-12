@@ -16,13 +16,13 @@ namespace DAL.Core
     public class CustomerServerlessManager : ICustomerServerlessManager
     {
         private readonly ICustomerRepository _customerRepository;
-        private readonly IInsurancePolicyCategoryRepository _insurancePolicyCategory;
+        private readonly Repositories.Interfaces.IInsurancePolicyCategoryRepository _insurancePolicyCategory;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomerHeaderRepository _customerHeaderRepositoryNoSql;
         private readonly ICustomerDetailRepository _customerDetailRepositoryNoSql;
 
         public CustomerServerlessManager(ICustomerRepository customerRepository,
-                                         IInsurancePolicyCategoryRepository insurancePolicyCategory,
+                                         Repositories.Interfaces.IInsurancePolicyCategoryRepository insurancePolicyCategory,
                                          IUnitOfWork unitOfWork,
                                          ICustomerHeaderRepository customerRepositoryNoSql,
                                          ICustomerDetailRepository customerDetailRepositoryNoSql)

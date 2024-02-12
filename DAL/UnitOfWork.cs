@@ -32,6 +32,8 @@ namespace DAL
         private IInsurancePolicyCategoryRepository _insurancePolicyCategories;
         private IInsurancePolicyCategoryStaticRepository _insurancePolicyCategoryStatics;
 
+        private IConfigurationModelRepository _configurationModels;
+
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
 
@@ -124,6 +126,15 @@ namespace DAL
             {
                 _insurancePolicyCategoryStatics ??= new InsurancePolicyCategoryStaticRepository(_context);
                 return _insurancePolicyCategoryStatics;
+            }
+        }
+
+        public IConfigurationModelRepository ConfigurationModels
+        {
+            get
+            {
+                _configurationModels ??= new ConfigurationModelRepository(_context);
+                return _configurationModels;
             }
         }
 

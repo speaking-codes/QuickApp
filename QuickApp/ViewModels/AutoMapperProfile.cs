@@ -132,6 +132,7 @@ namespace QuickApp.ViewModels
             CreateMap<CustomerHeader, CustomerHeaderViewModel>();
             CreateMap<CustomerDetail, CustomerDetailViewModel>();
             CreateMap<InsuranceCategoryPolicyDashboardCard, InsuranceCategoryPolicyDashboardCardViewModel>();
+            CreateMap<InsuranceCoverageSummary, InsuranceCoverageSummaryViewModel>();
         }
     }
 }

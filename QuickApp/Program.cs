@@ -56,7 +56,7 @@ namespace QuickApp
         private static void AddServices(WebApplicationBuilder builder)
         {
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            var connectionStringNoSql = "mongodb://localhost:27017/"; 
+            var connectionStringNoSql = "mongodb://localhost:27017/";
             var databaseNoSql = "datSampleDataBaseNoSql";
 
             var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name; //QuickApp
@@ -189,7 +189,7 @@ namespace QuickApp
 
             // Business Services
             builder.Services.AddScoped<IEmailSender, EmailSender>();
-      
+
             builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionStringNoSql));
 
             #region Unit of Work
@@ -220,7 +220,7 @@ namespace QuickApp
             builder.Services.AddScoped<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
             builder.Services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
             builder.Services.AddScoped<IInsuranceCategoryPolicyTopSellingRepository, InsuranceCategoryPolicyTopSellingRepository>(x => new InsuranceCategoryPolicyTopSellingRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyTopSelling"));
-            
+            builder.Services.AddScoped<IInsuranceCategoryPolicyDashboardCardRepository, InsuranceCategoryPolicyDashboardCardRepository>(x => new InsuranceCategoryPolicyDashboardCardRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyCard"));
             #endregion
 
             #region Auth Handlers

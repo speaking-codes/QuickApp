@@ -22,6 +22,11 @@ namespace DAL.Repositories
                                 .AsSingleQuery()
                                 .Where(x => x.Customer.CustomerCode == customerCode);
 
+        public IQueryable<InsurancePolicy> GetInsurancePolicy(int id)=>
+            _appContext.InsurancePolicies
+                       .Include(x => x.InsurancePolicyCategory)
+                       .Where(x => x.Id == id);
+
         public IQueryable<InsurancePolicy> GetActiveInsurancePolicies(string customerCode) =>
             _appContext.InsurancePolicies
                                 .Include(x => x.InsurancePolicyCategory)

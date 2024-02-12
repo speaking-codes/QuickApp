@@ -33,13 +33,13 @@ var host = new HostBuilder()
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
         services.AddDbContext<ApplicationDbContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionStringDbContext));
-        services.AddSingleton<IMongoClient>(new MongoClient(connectionStringNoSql));
+        services.AddSingleton((IMongoClient)new MongoClient(connectionStringNoSql));
 
         services.AddScoped<IMongoDbContext, MongoDbContext>(x => new MongoDbContext(connectionStringNoSql, databaseNoSql));
         services.AddScoped<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
         services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
         services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<IInsurancePolicyCategoryRepository, InsurancePolicyCategoryRepository>();
+        services.AddScoped<DAL.Repositories.Interfaces.IInsurancePolicyCategoryRepository, InsurancePolicyCategoryRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICustomerServerlessManager, CustomerServerlessManager>();
     })
