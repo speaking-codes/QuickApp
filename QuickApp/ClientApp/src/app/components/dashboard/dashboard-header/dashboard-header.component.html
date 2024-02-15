@@ -1,6 +1,6 @@
 <div class="row dash-header">
     <div class="col-3">
-        <app-chart [showLeggend]="showChartLeggend" [heightChart]="heightChart"></app-chart>
+        <app-chart [showLeggend]="showChartLeggend" [heightChart]="heightChart" [customerCode]="this.customerCode"></app-chart>
     </div>
     <div class="col-9">
         <div class="row title-section-header">
@@ -10,7 +10,7 @@
            </div>
            <div class="row">
         <div class="col-12">
-            <app-customer-header [customerCode]="this.customerCode"></app-customer-header>
+            <app-customer-header [customerCode]="this.customerCode" (loaded)="onLoad($event)"></app-customer-header>
         </div>
        </div>
        <div class="row title-section-header">

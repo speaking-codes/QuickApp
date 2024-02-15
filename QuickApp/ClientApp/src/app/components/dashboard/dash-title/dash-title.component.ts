@@ -11,31 +11,9 @@ import { Utilities } from 'src/app/services/utilities';
   templateUrl: './dash-title.component.html',
   styleUrls: ['./dash-title.component.scss']
 })
-export class DashTitleComponent implements OnInit{
-  dashboradTitle: string;
-
+export class DashTitleComponent {
   @Input()
-  customerFullName = "";
+  customerFullName: string;
 
-  constructor(private dashboardService: DashboardServiceService, private alertService: AlertService){ }
-
-  ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData(): void{
-    this.dashboradTitle = this.customerFullName + " - Profilo Assicurativo";
-  }
-
-  // onDataLoadSuccessfull(data: CustomerDetail) {
-  //   this.dashboradTitle = data.fullName;
-  // }
-
-  // onDataLoadFailed(error: HttpErrorResponse) {
-  //   this.alertService.stopLoadingMessage();
-
-  //   this.alertService.showStickyMessage('Load Error',
-  //     `Unable to retrieve users from the server.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
-  //     MessageSeverity.error, error);
-  // }
+  constructor(){ }
 }

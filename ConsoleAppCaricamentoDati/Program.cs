@@ -70,12 +70,12 @@ namespace ConsoleAppCaricamentoDati
                                                 .SetIncome()
                                                 .Build());
             }
-            using (var manger = provider.GetService<ICustomerManager>())
-            {
-                manger.BeginTransaction();
-                for (var i = 0; i < customerList.Count; i++)
-                    manger.AddCustomer(customerList[i]);
-            }
+            //using (var manger = provider.GetService<ICustomerManager>())
+            //{
+            //    manger.BeginTransaction();
+            //    for (var i = 0; i < customerList.Count; i++)
+            //        manger.AddCustomer(customerList[i]);
+            //}
 
             using (var manger = provider.GetService<ICustomerManager>())
             {
@@ -83,7 +83,7 @@ namespace ConsoleAppCaricamentoDati
                 customerList = manger.GetActiveCustomers();
             }
 
-            var maxCount = (int)Math.Round(customerList.Count * 1.5);
+            var maxCount = customerList.Count*3;// (int)Math.Round(customerList.Count * 1);
 
             for (var i = 0; i < maxCount; i++)
             {
@@ -99,14 +99,24 @@ namespace ConsoleAppCaricamentoDati
                                                                   .SetTotalPrize()
                                                                   .SetIsLuxuryPolicy()
                                                                   .Build();
-                    vehicleInsurancePolicyBuilder = new VehicleInsurancePolicyBuilder(provider, insurancePolicy);
-                    var vehicleInsurancePolicy = vehicleInsurancePolicyBuilder.SetConfigurationModel()
-                                                                             .SetLicensePlate()
-                                                                             .SetCommercialValue()
-                                                                             .SetInsuredValue()
-                                                                             .SetRiskCategory()
-                                                                             .Build();
-                    insurancePolicyList.Add(vehicleInsurancePolicy);
+                    switch (insurancePolicy.InsurancePolicyCategory.Id)
+                    {
+                        case 1://Auto
+                        case 2://Moto
+                        case 3://Imbarcazioni
+                            vehicleInsurancePolicyBuilder = new VehicleInsurancePolicyBuilder(provider, insurancePolicy);
+                            var vehicleInsurancePolicy = vehicleInsurancePolicyBuilder.SetConfigurationModel()
+                                                                                     .SetLicensePlate()
+                                                                                     .SetCommercialValue()
+                                                                                     .SetInsuredValue()
+                                                                                     .SetRiskCategory()
+                                                                                     .Build();
+                            insurancePolicyList.Add(vehicleInsurancePolicy);
+                            break;
+                        default:
+                            insurancePolicyList.Add(insurancePolicy);
+                            break;
+                    }
 
                 }
             }

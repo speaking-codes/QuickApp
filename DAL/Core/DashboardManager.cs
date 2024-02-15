@@ -17,17 +17,23 @@ namespace DAL.Core
         private readonly ICustomerDetailRepository _customerDetailRepository;
         private readonly IInsuranceCategoryPolicyDashboardCardRepository _insuranceCategoryPolicyDashboardCardRepository;
         private readonly IInsuranceCategoryPolicyTopSellingRepository _insuranceCategoryPolicyTopSellingRepository;
+        private readonly IInsuranceCoverageSummaryRepository _insuranceCoverageSummaryRepository;
+        private readonly IInsuranceCoverageChartRepository _insuranceCoverageChartRepository;
 
         public DashboardManager(IUnitOfWork unitOfWork,
                                 ICustomerHeaderRepository customerHeaderRepository,
                                 ICustomerDetailRepository customerDetailRepository,
                                 IInsuranceCategoryPolicyDashboardCardRepository insuranceCategoryPolicyDashboardCardRepository,
-                                IInsuranceCategoryPolicyTopSellingRepository insuranceCategoryPolicyTopSellingRepository) : base(unitOfWork)
+                                IInsuranceCategoryPolicyTopSellingRepository insuranceCategoryPolicyTopSellingRepository,
+                                IInsuranceCoverageSummaryRepository insuranceCoverageSummaryRepository,
+                                IInsuranceCoverageChartRepository insuranceCoverageChartRepository) : base(unitOfWork)
         {
             _customerHeaderRepository = customerHeaderRepository;
             _customerDetailRepository = customerDetailRepository;
             _insuranceCategoryPolicyDashboardCardRepository = insuranceCategoryPolicyDashboardCardRepository;
             _insuranceCategoryPolicyTopSellingRepository = insuranceCategoryPolicyTopSellingRepository;
+            _insuranceCoverageSummaryRepository = insuranceCoverageSummaryRepository;
+            _insuranceCoverageChartRepository = insuranceCoverageChartRepository;
         }
 
         public CustomerHeader GetCustomerHeader(string customerCode)
@@ -62,8 +68,46 @@ namespace DAL.Core
             return customerDetail;
         }
 
-        public IList<InsuranceCoverageSummary> GetInsuranceCoverageSummaries(string customerCode)
+        public IList<SalesLineChart> GetSalesLineChart(string customerCode)
         {
+            var insuranceCoverageChart = _insuranceCoverageChartRepository.GetInsuranceCoverageChart(customerCode);
+            if (insuranceCoverageChart != null)
+                return insuranceCoverageChart.SalesLineCharts;
+            var rnd = new Random();
+            var salesLineCharts = UnitOfWork.InsurancePolicyCategories
+                                       .GetSalesLineTypes(customerCode)
+                                       .Select(x => new// SalesLineChart
+                                       {
+                                           SalesLineId = x.SalesLine.Id,
+                                           SalesLineCode = x.SalesLine.SalesLineCode,
+                                           SalesLineName = x.SalesLine.SalesLineName,
+                                           BackGroundColor = x.SalesLine.BackGroundColor,
+                                       })
+                                       .GroupBy(x => new { x.SalesLineId, x.SalesLineCode, x.SalesLineName, x.BackGroundColor })
+                                       .Select(x => new SalesLineChart
+                                       {
+                                           SalesLineCode = x.Key.SalesLineCode,
+                                           SalesLineName = x.Key.SalesLineName,
+                                           BackGroundColor = x.Key.BackGroundColor,
+                                           //TotalPrice = $"{x.Sum(y => y.TotalPrice).ToString("#,##0.00")} €",
+                                           TotalCount = rnd.Next(2, 7)
+                                       })
+                                       .ToList();
+
+            insuranceCoverageChart = new InsuranceCoverageChart();
+            insuranceCoverageChart.CustomerCode = customerCode;
+            insuranceCoverageChart.SalesLineCharts = salesLineCharts;
+            _insuranceCoverageChartRepository.InsertOne(insuranceCoverageChart);
+
+            return insuranceCoverageChart.SalesLineCharts;
+        }
+
+        public IList<InsuranceCoverageGrid> GetInsuranceCoverageGridSummaries(string customerCode)
+        {
+            var insuranceCoverageSummary = _insuranceCoverageSummaryRepository.GetInsuranceCoverageSummary(customerCode);
+            if (insuranceCoverageSummary != null)
+                return insuranceCoverageSummary.InsuranceCoverageGrids;
+
             var insuranceCoverages = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode)
                                                                  .Select(x => new
                                                                  {
@@ -72,8 +116,9 @@ namespace DAL.Core
                                                                      CategoryName = x.InsurancePolicyCategory.InsurancePolicyCategoryName
                                                                  })
                                                                  .ToList();
-            var insuranceCoverageSummaries = new List<InsuranceCoverageSummary>();
-            InsuranceCoverageSummary insuranceCoverageSummary = null;
+            insuranceCoverageSummary = new InsuranceCoverageSummary();
+            insuranceCoverageSummary.CustomerCode = customerCode;
+            InsuranceCoverageGrid insuranceCoverageGrid = null;
 
             foreach (var item in insuranceCoverages)
             {
@@ -84,22 +129,22 @@ namespace DAL.Core
                     case 3://Imbarcazioni
                         var vehicleInsurancePolicy = (VehicleInsurancePolicy)UnitOfWork.InsurancePolicies.Get(item.Id);
                         var configurationModel = UnitOfWork.ConfigurationModels.GetConfigurationsByInsurancePolicyVehicle(vehicleInsurancePolicy.Id).FirstOrDefault();
-                        insuranceCoverageSummary = new InsuranceCoverageSummary
+                        insuranceCoverageGrid = new InsuranceCoverageGrid
                         {
-                            CustomerCode = customerCode,
                             Code = vehicleInsurancePolicy.InsurancePolicyCode,
                             CategoryType = item.CategoryName,
                             ItemDescription = $"{vehicleInsurancePolicy.LicensePlate} - {configurationModel.Model.Brand.BrandName} - {configurationModel.Model.ModelName} - {configurationModel.ConfigurationDescription}",
                             IssueDate = vehicleInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
                             ExpiryDate = vehicleInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
-                            TotalPrice = $"{vehicleInsurancePolicy.TotalPrize.ToString("#,##0.00")} - €"
+                            TotalPrice = $"{vehicleInsurancePolicy.TotalPrize.ToString("#,##0.00")} €"
                         };
-                        insuranceCoverageSummaries.Add(insuranceCoverageSummary);
+                        insuranceCoverageSummary.InsuranceCoverageGrids.Add(insuranceCoverageGrid);
                         break;
                 }
             }
 
-            return insuranceCoverageSummaries;
+            _insuranceCoverageSummaryRepository.InsertOne(insuranceCoverageSummary);
+            return insuranceCoverageSummary.InsuranceCoverageGrids;
         }
 
         public IList<InsuranceCategoryPolicyDashboardCard> GetTopSellingInsuranceCategoryPolicyDashboardCards(int year, int top, IEnumerable<string> incuranceCoverageCodes)
@@ -143,7 +188,7 @@ namespace DAL.Core
             if (insuranceCategoryPolicyTopSelling.InsuranceCategoryPolicies.Count == 0)
                 return insuranceCategoryPolicyTopSelling.InsuranceCategoryPolicies;
 
-            _insuranceCategoryPolicyTopSellingRepository.InsertOne(insuranceCategoryPolicyTopSelling);
+            _insuranceCategoryPolicyTopSellingRepository.InsertOne(insuranceCategoryPolicyTopSelling, false);
 
             return insuranceCategoryPolicyTopSelling.InsuranceCategoryPolicies
                                                     .Where(x => !incuranceCoverageCodes.Any(y => y == x.Code))

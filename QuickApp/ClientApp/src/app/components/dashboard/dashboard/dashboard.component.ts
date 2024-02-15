@@ -5,7 +5,7 @@ import { DashTitleComponent } from '../dash-title/dash-title.component';
 import { InsurancecoverageComponent } from '../insurancecoverage/insurancecoverage.component';
 import { InsuranceCoverageFooterComponent } from '../insurance-coverage-footer/insurance-coverage-footer.component';
 import { DashboardServiceService } from 'src/app/services/dashboard-service.service';
-import { InsuranceCategoryPolicyCard } from 'src/app/models/insurance-coverage';
+import { InsuranceCategoryPolicyCard, InsuranceCoveragePolicyFooter } from 'src/app/models/insurance-coverage';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertService, MessageSeverity } from 'src/app/services/alert.service';
 import { Utilities } from 'src/app/services/utilities';
@@ -29,7 +29,8 @@ export class DashboardComponent implements OnInit{
     insuranceCoverageRecommended: InsuranceCategoryPolicyCard[] = [];
     insuranceCoverageTopSelling: InsuranceCategoryPolicyCard[] = [];
     insuranceCoverageOthers: InsuranceCategoryPolicyCard[] = [];
-
+    insuranceCoveragePolicyFooters: InsuranceCoveragePolicyFooter[] = [];
+    
     constructor(private dashboardService: DashboardServiceService, private readonly route: ActivatedRoute, private alertService: AlertService){}
 
     ngOnInit(): void {
@@ -92,7 +93,18 @@ export class DashboardComponent implements OnInit{
           MessageSeverity.error, error);
     }
 
-    onLoad($event): void{
-      this.customerFullName = $event;
+    onInsuranceCoverageAdded(selectedItem: InsuranceCategoryPolicyCard){ 
+        debugger;
+        var newInsuranceCoveragePolicy = new InsuranceCoveragePolicyFooter(selectedItem.code, selectedItem.name, selectedItem.iconCssClass, selectedItem.salesLineBackgroundCssClass);
+        this.insuranceCoveragePolicyFooters.push(newInsuranceCoveragePolicy);
+    }
+
+    onInsuranceCoverageRemoved(selectedValue: string){ 
+        this.insuranceCoveragePolicyFooters = this.insuranceCoveragePolicyFooters.filter(x => x.code != selectedValue);
+     }
+
+     onLoad(customerName: string){
+      debugger;
+      this.customerFullName = customerName;
     }
 }

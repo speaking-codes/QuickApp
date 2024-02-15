@@ -16,6 +16,7 @@ export class DashboardEndpointServiceService extends EndpointBase {
     get dashboardInsuranceCoverageRecommendedUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageRecommended/'}
     get dashboardInsuranceCoverageTopSellingUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageTopSelling/'; }
     get dashboardInsuranceCoverageOtherUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageOther'; }
+    get dashboardInsuranceCoverageChartUrl() { return this.configurations.baseUrl + '/api/Dashboard/InsuranceCoverageChart/'; }
 
     constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) {  super(http, authService); }
 
@@ -71,5 +72,14 @@ export class DashboardEndpointServiceService extends EndpointBase {
        catchError(error => {
          return this.handleError(error, () => this.getDashboardInsuranceCoverageOtherEndpoint<T>(insuranceCoverageCodes));
        }));
+    }
+
+    getDashboardInsuranceCoverageChartEndpoint<T>(customerCode: string) { 
+      const endpointUrl = `${this.dashboardInsuranceCoverageChartUrl}${customerCode}`;
+   
+    return this.http.get<T>(endpointUrl, this.requestHeaders).pipe(
+      catchError(error => {
+        return this.handleError(error, () => this.getDashboardInsuranceCoverageChartEndpoint<T>(customerCode));
+      }));
    }
 }

@@ -1,6 +1,6 @@
 <div class="row title-background">
     <div class="title-background-col">
-        <h5>Beni selezionati</h5>
+        <h2>Beni selezionati</h2>
     </div>
 </div>
 <div class="row">
@@ -11,4 +11,9 @@
                     <i class="fa-solid" [appIconStyle]="item?.iconCssClass"></i> {{ item?.name }}</div>
             </div>
         </div>       
+</div>
+<div class="row">
+    <div class="col-12">
+        <a *ngIf="IsShowButton()" class="btn btn-social insurance-coverage-btn btn-footer" href="javascript:;"><i class="fa-solid fa-circle-arrow-right"></i> Avvia Emissione</a>   
+    </div>
 </div>

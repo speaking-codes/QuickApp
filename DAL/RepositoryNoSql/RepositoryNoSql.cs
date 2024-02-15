@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace DAL.RepositoryNoSql
 {
@@ -48,8 +49,20 @@ namespace DAL.RepositoryNoSql
             await GetCollection().InsertOneAsync(document);
         }
 
-        public virtual void InsertOne(TDocument document)
+        public virtual void InsertOne(TDocument document, bool insertTimeToLive = true, int timeToLiveSeconds = 7200)
         {
+            if (insertTimeToLive)
+            {
+                var indexModel = new CreateIndexModel<TDocument>(
+                keys: Builders<TDocument>.IndexKeys.Ascending("ExpireAt"),
+                options: new CreateIndexOptions
+                {
+                    ExpireAfter = TimeSpan.FromSeconds(timeToLiveSeconds),
+                    Name = "ExpireAtIndex"
+                });
+                GetCollection().Indexes.CreateOne(indexModel);
+            }
+
             GetCollection().InsertOne(document);
         }
 

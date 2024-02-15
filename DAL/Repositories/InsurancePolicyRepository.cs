@@ -15,14 +15,14 @@ namespace DAL.Repositories
 
         public InsurancePolicyRepository(ApplicationDbContext context) : base(context) { }
 
-        public IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode)=>
+        public IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode) =>
             _appContext.InsurancePolicies
                                 .Include(x => x.InsurancePolicyCategory)
                                     .ThenInclude(y => y.SalesLine)
                                 .AsSingleQuery()
                                 .Where(x => x.Customer.CustomerCode == customerCode);
 
-        public IQueryable<InsurancePolicy> GetInsurancePolicy(int id)=>
+        public IQueryable<InsurancePolicy> GetInsurancePolicy(int id) =>
             _appContext.InsurancePolicies
                        .Include(x => x.InsurancePolicyCategory)
                        .Where(x => x.Id == id);
@@ -42,8 +42,8 @@ namespace DAL.Repositories
         public bool IsExistingInsurancePolicyCategory(string customerCode, string insurancePolicyCategoryCode, DateTime issueDate, DateTime expiryDate) =>
             _appContext.InsurancePolicies
                        .Where(x => x.Customer.CustomerCode == customerCode &&
-                                   x.InsurancePolicyCategory.InsurancePolicyCategoryCode == insurancePolicyCategoryCode && 
-                                   x.IssueDate <= expiryDate && 
+                                   x.InsurancePolicyCategory.InsurancePolicyCategoryCode == insurancePolicyCategoryCode &&
+                                   x.IssueDate <= expiryDate &&
                                    x.ExpiryDate <= issueDate)
                        .Any();
     }

@@ -33,4 +33,8 @@ export class DashboardServiceService {
   getDashboardInsuranceCoverageOther(insuranceCoverageCodes: string){
     return this.dashboardEndpoint.getDashboardInsuranceCoverageOtherEndpoint(insuranceCoverageCodes);
   }
+
+  getDashboardInsuranceCoverageChart(customerCode: string){
+    return this.dashboardEndpoint.getDashboardInsuranceCoverageChartEndpoint(customerCode);
+  }
 }

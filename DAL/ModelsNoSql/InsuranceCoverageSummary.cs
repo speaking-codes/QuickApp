@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DAL.Models.Interfaces;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +9,20 @@ using System.Threading.Tasks;
 
 namespace DAL.ModelsNoSql
 {
-    public class InsuranceCoverageSummary
+    public class InsuranceCoverageSummary: IDocument
     {
+        [BsonId]
+        public ObjectId Id { get; internal set; }
+
+        [BsonElement("CustomerCode")]
         public string CustomerCode { get; set; }
-        public string Code { get; set; }
-        public string CategoryType { get; set; }
-        public string ItemDescription { get; set; }
-        public string IssueDate { get; set; }
-        public string ExpiryDate { get; set; }
-        public string TotalPrice { get; set; }
+
+        [BsonElement("InsuranceCoverageGrids")]
+        public IList<InsuranceCoverageGrid> InsuranceCoverageGrids { get; set; }
+
+        public InsuranceCoverageSummary()
+        {
+            this.InsuranceCoverageGrids = new List<InsuranceCoverageGrid>();
+        }
     }
 }

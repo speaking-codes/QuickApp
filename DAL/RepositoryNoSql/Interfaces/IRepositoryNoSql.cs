@@ -21,7 +21,7 @@ namespace DAL.RepositoryNoSql.Interfaces
 
         Task InsertOneAsync(TDocument document);
 
-        void InsertOne(TDocument document);
+        void InsertOne(TDocument document, bool insertTimeToLive=true, int timeToLiveSeconds=7200);
 
         Task InsertManyAsync(IEnumerable<TDocument> documents);
 

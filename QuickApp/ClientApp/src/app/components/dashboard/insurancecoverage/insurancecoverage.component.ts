@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { InsuranceCategoryPolicyCard } from 'src/app/models/insurance-coverage';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { InsuranceCategoryPolicyCard, InsuranceCoveragePolicyFooter } from 'src/app/models/insurance-coverage';
 import { CardComponent } from '../../controls/card/card.component';
 import { TxtStyleDirective } from 'src/app/directives/txt-style.directive';
 import { IconStyleDirective } from 'src/app/directives/icon-style.directive';
@@ -18,6 +18,15 @@ export class InsurancecoverageComponent {
   @Input()
   insuranceCoverageCards: InsuranceCategoryPolicyCard[] = null;
 
+  @Output()
+  insuranceCoverageAdded = new EventEmitter<InsuranceCategoryPolicyCard>();
+
+  @Output()
+  insuranceCoverageRemoved = new EventEmitter<string>();
+
+  @ViewChild('flexSwitchCheckChecked')
+  searchInput!: ElementRef;
+
   IsShowen():boolean {
     return this.isShowen;
   }
@@ -27,7 +36,16 @@ export class InsurancecoverageComponent {
   Hide(): void { this.isShowen = false; }
 
   selectItem(event):void { 
-    console.log(event.target.checked);
-    console.log(event.target.defaultValue);
+    var isChecked = event.target.checked;
+    var selectedValue = event.target.defaultValue;
+    if (isChecked){
+        var indexSelected = this.insuranceCoverageCards.findIndex(x => x.code == selectedValue);
+        this.insuranceCoverageAdded.emit(this.insuranceCoverageCards[indexSelected]);
+    }
+    else
+    {
+        debugger;
+        this.insuranceCoverageRemoved.emit(selectedValue);
+    }
   }
 }

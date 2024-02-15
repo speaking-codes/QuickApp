@@ -29,5 +29,11 @@ namespace DAL.Repositories
                        .Include(x => x.SalesLine)
                        .Include(x => x.InsurancePolicyCategoryStatics)
                        .Where(x => x.InsurancePolicyCategoryStatics.Any(y => y.Year == year));
+
+        public IQueryable<InsurancePolicyCategory> GetSalesLineTypes(string customerCode)=>
+            _appContext.InsurancePolicyCategories
+                       .Include(x => x.SalesLine)
+                       .Include(x => x.InsurancePolicies)
+                       .Where(x => x.InsurancePolicies.Any(y => y.Customer.CustomerCode == customerCode));
     }
 }

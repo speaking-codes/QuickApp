@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CustomerHeaderComponent } from '../customer-header/customer-header.component';
 import { ChartComponent } from '../chart/chart.component';
 import { CustomerDetail } from 'src/app/models/customer';
@@ -12,6 +12,9 @@ export class DashboardHeaderComponent implements OnInit {
   @Input()
   customerCode = "";
 
+  @Output()
+  loaded =  new EventEmitter<string>();  
+  
   showCustomerDetail: boolean;
   showInsuranceCoverage: boolean;
   showChartLeggend: boolean;
@@ -50,5 +53,10 @@ export class DashboardHeaderComponent implements OnInit {
   
   HideInsuranceCoverage(): void {
     this.showInsuranceCoverage = false;
+  }
+
+  onLoad(customerName: string){
+    debugger;
+    this.loaded.emit(customerName);
   }
 }

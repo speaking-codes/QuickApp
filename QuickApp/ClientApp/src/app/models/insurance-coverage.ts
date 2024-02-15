@@ -33,3 +33,24 @@ export class InsuranceCoveragePolicyFooter {
         this.salesLineBackgroundCssClass = salesLineBackgroundCssClass;
     }
 }
+
+export class InsuranceCoverageSalesLineChart {
+    salesLineCode: string;
+    salesLineName: string;
+    backGroundColor: string;
+    totalPrice: number;
+    totalCount: number;
+}
+
+export class ChartData {
+    data: number[];
+    label: string;
+    fill: string;
+
+    constructor(value: number, label: string, fill: string)
+    {
+        this.data = [value];
+        this.label = label;
+        this.fill = fill;
+    }
+}

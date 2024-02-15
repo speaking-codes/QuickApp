@@ -1,30 +1,43 @@
         <div class="row">
             <div class="col-12">
-                <app-dash-title [customerFullName]="this.customerFullName" (loaded)="onLoad($event)"></app-dash-title>
+                <app-dash-title [customerFullName]="this.customerFullName"></app-dash-title>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <app-dashboard-header [customerCode]="this.customerCode"></app-dashboard-header>
+                <app-dashboard-header [customerCode]="this.customerCode" (loaded)="onLoad($event)"></app-dashboard-header>
             </div>
         </div>
         <div class="row back-style">
             <div class="col-12">
-                <app-insurancecoverage [title]="this.titleInsuranceCoverageRecommended" [insuranceCoverageCards]="this.insuranceCoverageRecommended"></app-insurancecoverage>
+                <app-insurancecoverage 
+                            [title]="this.titleInsuranceCoverageRecommended" 
+                            [insuranceCoverageCards]="this.insuranceCoverageRecommended"
+                            (insuranceCoverageAdded)="onInsuranceCoverageAdded($event)"
+                            (insuranceCoverageRemoved)="onInsuranceCoverageRemoved($event)">
+                </app-insurancecoverage>
             </div>
         </div>
         <div class="row back-style">
             <div class="col-12">
-                <app-insurancecoverage [title]="this.titleInsuranceCoverageTopSelling" [insuranceCoverageCards]="this.insuranceCoverageTopSelling"></app-insurancecoverage>
+                <app-insurancecoverage 
+                        [title]="this.titleInsuranceCoverageTopSelling" 
+                        [insuranceCoverageCards]="this.insuranceCoverageTopSelling"
+                        (insuranceCoverageAdded)="onInsuranceCoverageAdded($event)"
+                        (insuranceCoverageRemoved)="onInsuranceCoverageRemoved($event)">></app-insurancecoverage>
             </div>
         </div>
         <div class="row back-style">
             <div class="col-12">
-                <app-insurancecoverage [title]="this.titleInsuranceCoverageOther" [insuranceCoverageCards]="this.insuranceCoverageOthers"></app-insurancecoverage>
+                <app-insurancecoverage 
+                        [title]="this.titleInsuranceCoverageOther" 
+                        [insuranceCoverageCards]="this.insuranceCoverageOthers"       
+                        (insuranceCoverageAdded)="onInsuranceCoverageAdded($event)"
+                        (insuranceCoverageRemoved)="onInsuranceCoverageRemoved($event)">></app-insurancecoverage>
             </div>
-        </div>
+        </div>      
         <div class="row back-style">
             <div class="col-12">
-                <app-insurance-coverage-footer></app-insurance-coverage-footer>
+                <app-insurance-coverage-footer [insuranceCoveragePolicies]="this.insuranceCoveragePolicyFooters"></app-insurance-coverage-footer>
             </div>
         </div>

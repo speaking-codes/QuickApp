@@ -1,8 +1,10 @@
 .title-background {
     background-color: #0066CC;
     color: #E6E6E6;
-    margin: 5px auto;
-    padding: 8px;
+}
+
+.title-background-col {
+    padding: 10px;
 }
 
 .insurance-coverage-btn {
@@ -39,4 +41,10 @@
 
 .heritage-insurance-coverage-btn {
     background-color: #FF8000;
+}
+
+.btn-footer{
+    background-color: #0066CC;
+    float: right;
+    margin-right: 0;
 }

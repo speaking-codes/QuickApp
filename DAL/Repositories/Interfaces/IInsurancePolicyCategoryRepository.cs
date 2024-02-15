@@ -12,5 +12,6 @@ namespace DAL.Repositories.Interfaces
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories();
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(string insurancePolicyCategoryCode);
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategoryStatistics(int year);
+        IQueryable<InsurancePolicyCategory> GetSalesLineTypes(string customerCode);
     }
 }

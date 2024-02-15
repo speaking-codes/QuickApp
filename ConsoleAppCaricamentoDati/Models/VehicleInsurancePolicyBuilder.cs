@@ -67,23 +67,23 @@ namespace ConsoleAppCaricamentoDati.Models
             {
                 case 1://   BASE
                     _vehicleInsurancePolicy.IsLuxuryPolicy = false;
-                    _vehicleInsurancePolicy.CommercialValue = 26000 * _random.NextDouble();
+                    _vehicleInsurancePolicy.CommercialValue = 21000 * (1 + _random.NextDouble());
                     break;
                 case 2://   LUSSO
                     _vehicleInsurancePolicy.IsLuxuryPolicy = true;
-                    _vehicleInsurancePolicy.CommercialValue = 100000 * _random.NextDouble();
+                    _vehicleInsurancePolicy.CommercialValue = 100000 * (1 + _random.NextDouble());
                     break;
                 case 3:// PLUS
                     _vehicleInsurancePolicy.IsLuxuryPolicy = false;
-                    _vehicleInsurancePolicy.CommercialValue = 52000 * _random.NextDouble();
+                    _vehicleInsurancePolicy.CommercialValue = 42000 * (1 + _random.NextDouble());
                     break;
                 case 4: //  SUPER LUSSO
                     _vehicleInsurancePolicy.IsLuxuryPolicy = true;
-                    _vehicleInsurancePolicy.CommercialValue = 150000 * _random.NextDouble();
+                    _vehicleInsurancePolicy.CommercialValue = 150000 * (1 + _random.NextDouble());
                     break;
                 case 5://   CICLO MOTORE
                     _vehicleInsurancePolicy.IsLuxuryPolicy = false;
-                    _vehicleInsurancePolicy.CommercialValue = 18000 * _random.NextDouble();
+                    _vehicleInsurancePolicy.CommercialValue = 15000 * (1 + _random.NextDouble());
                     break;
                 default:
                     break;
@@ -93,7 +93,7 @@ namespace ConsoleAppCaricamentoDati.Models
 
         public VehicleInsurancePolicyBuilder SetInsuredValue()
         {
-            _vehicleInsurancePolicy.InsuredValue = _vehicleInsurancePolicy.CommercialValue * _random.NextDouble();
+            _vehicleInsurancePolicy.InsuredValue = _vehicleInsurancePolicy.CommercialValue * 0.85;
             return this;
         }
 

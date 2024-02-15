@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
-    public interface IInsurancePolicyRepository:IRepository<InsurancePolicy>
+    public interface IInsurancePolicyRepository : IRepository<InsurancePolicy>
     {
         IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode);
         IQueryable<InsurancePolicy> GetInsurancePolicy(int id);
         IQueryable<InsurancePolicy> GetActiveInsurancePolicies(string customercode);
         int GetInsurancePolicyCategoryCount(string insurancePolicyCategoryCode);
-        bool IsExistingInsurancePolicyCategory(string customerCode, string insurancePolicyCategoryCode,DateTime createdDate, DateTime expiryDate);
+        bool IsExistingInsurancePolicyCategory(string customerCode, string insurancePolicyCategoryCode, DateTime createdDate, DateTime expiryDate);
     }
 }

@@ -221,6 +221,9 @@ namespace QuickApp
             builder.Services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
             builder.Services.AddScoped<IInsuranceCategoryPolicyTopSellingRepository, InsuranceCategoryPolicyTopSellingRepository>(x => new InsuranceCategoryPolicyTopSellingRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyTopSelling"));
             builder.Services.AddScoped<IInsuranceCategoryPolicyDashboardCardRepository, InsuranceCategoryPolicyDashboardCardRepository>(x => new InsuranceCategoryPolicyDashboardCardRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyCard"));
+            builder.Services.AddScoped<IInsuranceCoverageSummaryRepository, InsuranceCoverageSummaryRepository>(x => new InsuranceCoverageSummaryRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCoverageSummary"));
+            builder.Services.AddScoped<IInsuranceCoverageChartRepository, InsuranceCoverageChartRepository>(x => new InsuranceCoverageChartRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCoverageChart"));
+
             #endregion
 
             #region Auth Handlers
