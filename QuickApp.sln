@@ -18,9 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerQueueConsumer", "Cu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppCaricamentoDati", "ConsoleAppCaricamentoDati\ConsoleAppCaricamentoDati.csproj", "{7C92BCBB-02FD-46CD-8033-DB7372839543}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppRecommenderSystemTrainer", "ConsoleAppRecommenderSystemTrainer\ConsoleAppRecommenderSystemTrainer.csproj", "{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecommenderSystemInsurance_WebApi1", "RecommenderSystemInsurance_WebApi1\RecommenderSystemInsurance_WebApi1.csproj", "{4B8C2943-A83D-4629-B61B-88BE5C58861C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppRecommenderSystemTrainer", "ConsoleAppRecommenderSystemTrainer\ConsoleAppRecommenderSystemTrainer.csproj", "{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +46,6 @@ Global
 		{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B8C2943-A83D-4629-B61B-88BE5C58861C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B8C2943-A83D-4629-B61B-88BE5C58861C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B8C2943-A83D-4629-B61B-88BE5C58861C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B8C2943-A83D-4629-B61B-88BE5C58861C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

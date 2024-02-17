@@ -15,6 +15,11 @@ namespace DAL.Repositories
 
         public InsurancePolicyRepository(ApplicationDbContext context) : base(context) { }
 
+        public IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode, byte salesLineId) =>
+            _appContext.InsurancePolicies
+                       .Where(x => x.Customer.CustomerCode == customerCode &&
+                                  x.InsurancePolicyCategory.SalesLine.Id == salesLineId);
+
         public IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode) =>
             _appContext.InsurancePolicies
                                 .Include(x => x.InsurancePolicyCategory)

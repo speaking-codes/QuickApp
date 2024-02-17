@@ -6,7 +6,7 @@
         None,
         [ValueInfo(Definition = "Zaino da Viaggio")]
         TravleBackpack,
-        [ValueInfo(Definition = "Zaino da Campeggio")]
+        [ValueInfo(Definition = "Zaino da campeggio")]
         CampingBackpack,
         [ValueInfo(Definition = "Valigia")]
         Suitcase,

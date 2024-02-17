@@ -40,11 +40,13 @@ namespace DAL
 
         public async Task SeedAsync()
         {
-            //await _context.Database.EnsureDeletedAsync();
-            //await _context.Database.EnsureCreatedAsync();
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.EnsureCreatedAsync();
             await SeedDefaultUsersAsync();
-            //await LoadTypologicalTableData();
+            await LoadTypologicalTableData();
+            await LoadLearningTableData();
         }
+
 
         private async Task SeedDefaultUsersAsync()
         {
@@ -140,20 +142,20 @@ namespace DAL
             var endMonth = 13;
 
             var random = new Random();
-            for(var currentYear=startYear;currentYear<endYear;currentYear++)
+            for (var currentYear = startYear; currentYear < endYear; currentYear++)
             {
-                for(var currentMonth = startMonth; currentMonth < endMonth; currentMonth++)
+                for (var currentMonth = startMonth; currentMonth < endMonth; currentMonth++)
                 {
-                    for(var i=0;i<insurancePolicyCategories.Count;i++)
+                    for (var i = 0; i < insurancePolicyCategories.Count; i++)
                     {
                         var statistic = new InsurancePolicyCategoryStatic();
                         statistic.InsurancePolicyCategory = insurancePolicyCategories[i];
-                        statistic.Month =(byte) currentMonth;
-                        statistic.Year =(short) currentYear;
+                        statistic.Month = (byte)currentMonth;
+                        statistic.Year = (short)currentYear;
                         statistic.TotalCount = random.Next(51, 152440);
                         statistic.CreatedBy = null;
                         statistic.UpdatedBy = null;
-                        statistic.CreatedDate= DateTime.Now;
+                        statistic.CreatedDate = DateTime.Now;
                         statistic.UpdatedDate = DateTime.Now;
 
                         _context.InsurancePolicyCategoryStatics.Add(statistic);
@@ -180,7 +182,92 @@ namespace DAL
                 }
             }
 
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task LoadLearningTableData()
+        {
+            var filePath = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\DAL\ScriptsInizializzazione\LearningScript.txt";
+            using (var reader = new StreamReader(filePath))
+            {
+                try
+                {
+                    await _context.Database.BeginTransactionAsync();
+
+                    var line = reader.ReadLine();
+                    while (!string.IsNullOrEmpty(line))
+                    {
+                        await _context.Database.ExecuteSqlRawAsync(line);
+                        line = reader.ReadLine();
+                    }
+
+                    await LoadLearningTableDataForMatrix();
+
+                    await _context.Database.CommitTransactionAsync();
+                }
+                catch (Exception ex)
+                {
+                    await _context.Database.RollbackTransactionAsync();
+                }
+            }
+        }
+
+        private async Task LoadLearningTableDataForMatrix()
+        {
+            var insurancePolicyCategories = await _context.InsurancePolicyCategories.Select(x => x.Id).ToListAsync();
+            var temps = await _context.Temps.ToListAsync();
+            var rnd = new Random();
+            LearningTraining learningTraining = null;
+            DateTime dataNascite;
+            var minRenewvalNumber = int.MaxValue;
+            var maxRenewvalNumber = int.MinValue;
+            var current = 0;
+            double renewalNumber = 0.0;
+            double normalizedRenewalNumber = 0.0;
+            foreach (var itemCategory in insurancePolicyCategories)
+            {
+                foreach (var item in temps)
+                {
+                    if (string.IsNullOrEmpty(item.Gender))
+                        continue;
+
+                    learningTraining = new LearningTraining();
+                    learningTraining.CustomerId = item.Id;
+                    learningTraining.Gender = item.Gender;
+
+                    if (DateTime.TryParse(item.BirthDate, out dataNascite))
+                        learningTraining.Age = (int)Math.Ceiling(DateTime.Now.Subtract(dataNascite).TotalDays / 365);
+                    else
+                        learningTraining.Age = 0;
+
+                    learningTraining.MaritalStatusId = item.MaritalStatusId ?? 0;
+                    learningTraining.FamilyTypeId = item.FamilyTypeId ?? 0;
+                    learningTraining.ChildrenNumbers = item.ChildrenNumbers ?? 0;
+                    learningTraining.IncomeTypeId = item.IncomeTypeId ?? 0;
+                    learningTraining.ProfessionTypeId = item.ProfessionTypeId ?? 0;
+                    learningTraining.Income = item.Income ?? 0;
+                    learningTraining.RegionId = item.RegionId ?? 0;
+                    learningTraining.InsurancePolicyCategoryId = itemCategory;
+
+                    current = rnd.Next(1, 121);
+                    if (current < minRenewvalNumber)
+                        minRenewvalNumber = current;
+                    if (current > maxRenewvalNumber)
+                        maxRenewvalNumber = current;
+                    learningTraining.RenewalNumber = current;
+
+                    await _context.LearningTrainings.AddAsync(learningTraining);
+                }
+            }
+            await _context.SaveChangesAsync();
+            float differenceMaxMin = maxRenewvalNumber - minRenewvalNumber;
+            foreach (var item in _context.LearningTrainings)
+            {
+                renewalNumber= item.RenewalNumber;
+                normalizedRenewalNumber = (double)((renewalNumber-minRenewvalNumber)/differenceMaxMin);
+                item.NormalizedRenewalNumber = normalizedRenewalNumber;
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

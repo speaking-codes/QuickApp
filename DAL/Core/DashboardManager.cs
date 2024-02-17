@@ -3,11 +3,13 @@ using DAL.Mapping;
 using DAL.Models;
 using DAL.ModelsNoSql;
 using DAL.RepositoryNoSql.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DAL.Core
 {
@@ -73,32 +75,26 @@ namespace DAL.Core
             var insuranceCoverageChart = _insuranceCoverageChartRepository.GetInsuranceCoverageChart(customerCode);
             if (insuranceCoverageChart != null)
                 return insuranceCoverageChart.SalesLineCharts;
-            var rnd = new Random();
-            var salesLineCharts = UnitOfWork.InsurancePolicyCategories
-                                       .GetSalesLineTypes(customerCode)
-                                       .Select(x => new// SalesLineChart
-                                       {
-                                           SalesLineId = x.SalesLine.Id,
-                                           SalesLineCode = x.SalesLine.SalesLineCode,
-                                           SalesLineName = x.SalesLine.SalesLineName,
-                                           BackGroundColor = x.SalesLine.BackGroundColor,
-                                       })
-                                       .GroupBy(x => new { x.SalesLineId, x.SalesLineCode, x.SalesLineName, x.BackGroundColor })
-                                       .Select(x => new SalesLineChart
-                                       {
-                                           SalesLineCode = x.Key.SalesLineCode,
-                                           SalesLineName = x.Key.SalesLineName,
-                                           BackGroundColor = x.Key.BackGroundColor,
-                                           //TotalPrice = $"{x.Sum(y => y.TotalPrice).ToString("#,##0.00")} €",
-                                           TotalCount = rnd.Next(2, 7)
-                                       })
-                                       .ToList();
 
             insuranceCoverageChart = new InsuranceCoverageChart();
             insuranceCoverageChart.CustomerCode = customerCode;
-            insuranceCoverageChart.SalesLineCharts = salesLineCharts;
-            _insuranceCoverageChartRepository.InsertOne(insuranceCoverageChart);
+            insuranceCoverageChart.SalesLineCharts = new List<SalesLineChart>();
 
+            var salesLines = UnitOfWork.SalesLines.GetSalesLineTypes(customerCode).ToList();
+            foreach (var item in salesLines)
+            {
+                var insurancePolicies = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode, item.Id).ToList();
+                insuranceCoverageChart.SalesLineCharts.Add(new SalesLineChart
+                {
+                    SalesLineCode = item.SalesLineCode,
+                    SalesLineName = item.SalesLineName,
+                    BackGroundColor = item.BackGroundColor,
+                    TotalCount = insurancePolicies.Count,
+                    TotalPrice=insurancePolicies.Sum(x => x.TotalPrize)
+                }) ;
+            }
+
+            _insuranceCoverageChartRepository.InsertOne(insuranceCoverageChart);
             return insuranceCoverageChart.SalesLineCharts;
         }
 

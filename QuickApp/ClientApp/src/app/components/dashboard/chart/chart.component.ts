@@ -32,49 +32,7 @@ export class ChartComponent {
   chartOptions: object | undefined;
   chartType: ChartType = 'bar';//'line';//'bubble';//'scatter';//'polarArea';//'bar'; //'pie';
   chartLabels = ['2023'];//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-  chartData = [
-    {
-        data: [2],
-        label: 'Veicoli',
-        fill: 'Origin'
-    },
-    {
-        data: [5],
-        label: 'Relax',
-        fill: 'Origin'
-    },
-    {
-        data: [1],
-        label: 'Attività Lavorativa',
-        fill: 'Origin'
-    },
-    {
-        data: [4],
-        label: 'Famiglia',
-        fill: 'Origin'
-    },
-    {
-        data: [3],
-        label: 'Salute',
-        fill: 'Origin'
-  }];
-  //   {
-  //     data: [1],//, 59, 80, 81, 56, 55],
-  //     label: 'Series A',
-  //     fill: 'origin',
-  //   },
-  //   {
-  //     data: [3],//, 48, 40, 19, 86, 27],
-  //     label: 'Series B',
-  //     fill: 'origin',
-  //   },
-  //   {
-  //     data: [2],//, 48, 77, 9, 100, 27],
-  //     label: 'Series C',
-  //     fill: 'origin',
-  //   }
-  // ];
-  lineChartColors: Color[] = [];
+  chartData = [];
   
   timerReference: ReturnType<typeof setInterval> | undefined;
 
@@ -84,42 +42,34 @@ export class ChartComponent {
   constructor(private alertService: AlertService, private dashboardService: DashboardServiceService) { }
 
   ngOnInit() {
-    debugger;
     this.refreshChartOptions();
-    this.timerReference = setInterval(() => this.randomize(), 5000);
+    this.loadData();    
   }
 
   ngOnDestroy() {
     clearInterval(this.timerReference);
   }
 
-  // loadData(): void{
-  //   this.dashboardService.getDashboardInsuranceCoverageChart(this.customerCode)
-  //   .subscribe({
-  //       next: results => this.onDataLoadSuccessful(results),
-  //       error: error => this.onDataLoadFailed(error)
-  //   });
-  // }
+  loadData(): void{
+    this.dashboardService.getDashboardInsuranceCoverageChart(this.customerCode)
+    .subscribe({
+        next: results => this.onDataLoadSuccessful(results),
+        error: error => this.onDataLoadFailed(error)
+    });
+  }
 
-  // onDataLoadSuccessful(data: InsuranceCoverageSalesLineChart[]){
-  //   debugger;
-  //   this.salesLines = data;
-  //   for(var i = 0; i < this.salesLines.length -1; i++){
-  //       //this.chartData.push(new ChartData(this.salesLines[i].totalCount, this.salesLines[i].salesLineName, 'origin'));      
-  //       this.chartData = [
-  //         {
-  //           data: [this.salesLines[i].totalCount],
-  //           label: this.salesLines[i].salesLineName, 
-  //           fill: this.salesLines[i].backGroundColor
-  //         },
-  //         {
-  //           data: [this.salesLines[i+1].totalCount],
-  //           label: this.salesLines[i+1].salesLineName, 
-  //           fill: this.salesLines[i+1].backGroundColor
-  //         }
-  //       ];
-  //   }
-  // }
+  onDataLoadSuccessful(data: InsuranceCoverageSalesLineChart[]){
+    this.salesLines = data;
+    for(let i = 0; i < data.length; i++){
+      this.chartData.push({
+        data: [data[i].totalCount],
+        label: data[i].salesLineName,
+        fill: 'Origin',
+        backgroundColor: [data[i].backGroundColor]
+      });
+    }
+    this.chart.update();
+  }
 
   onDataLoadFailed(error: HttpErrorResponse) {
     this.alertService.stopLoadingMessage();
@@ -137,32 +87,42 @@ export class ChartComponent {
         display: true,
         fontSize: 16,
         text: 'Important Stuff'
+      },
+      leggend: {
+        position: 'left'
       }
     };
 
-    if (this.chartType != 'line') {
-      this.chartOptions = baseOptions;
-    }
-    else {
-      const lineChartOptions = {
-        elements: {
-          line: {
-            tension: 0.5
+    // if (this.chartType != 'line') {
+      const barChartOption: any = {
+        legend: {
+          position: 'bottom',
+          labels: {
+            fontSize: 10
           }
         }
-      };
+      }
+      this.chartOptions = {...baseOptions, ...barChartOption };
+    // }
+    // else {
+    //   const lineChartOptions = {
+    //     elements: {
+    //       line: {
+    //         tension: 0.5
+    //       }
+    //     }
+    //   };
 
-      this.chartOptions = { ...baseOptions, ...lineChartOptions };
-    }
+    //   this.chartOptions = { ...baseOptions, ...lineChartOptions };
+    // }
   }
 
   randomize(): void {
     for (let i = 0; i < this.chartData.length; i++) {
       for (let j = 0; j < this.chartData[i].data.length; j++) {
         this.chartData[i].data[j] = Math.floor((Math.random() * 0.5) + 1);
-      }
+      }      
     }
-
     this.chart.update();
   }
 

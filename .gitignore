@@ -288,3 +288,5 @@ Thumbs.db
 /ConsoleAppRecommenderSystemTrainer/RecommenderSystemInsurance.training.cs
 /DAL/ScriptsInizializzazione/SQLQuery2.sql
 /DAL/ScriptsInizializzazione/SQLQuery21.sql
+/DAL/MachineLearning/RegressionPredictionModel.zip
+/ModelTrained/RegressionPredictionModel.zip

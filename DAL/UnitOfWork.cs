@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -34,6 +35,9 @@ namespace DAL
         private ISalesLineRepository _salesLines;
 
         private IConfigurationModelRepository _configurationModels;
+
+        private ILearningTrainingRepository _learningTrainings;
+        private IMatrixCustomerInsurancePolicyRepository _matrixCustomerInsurancePolicies;
 
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
@@ -148,20 +152,38 @@ namespace DAL
             }
         }
 
+        public ILearningTrainingRepository LearningTrainings
+        {
+            get
+            {
+                _learningTrainings ??= new LearningTrainingRepository(_context);
+                return _learningTrainings;
+            }
+        }
+
+        public IMatrixCustomerInsurancePolicyRepository MatrixCustomerInsurancePolicies
+        {
+            get
+            {
+                _matrixCustomerInsurancePolicies ??= new MatrixCustomerInsurancePolicyRepository(_context);
+                return _matrixCustomerInsurancePolicies;
+            }
+        }
+
         public bool IsTransactionOpened { get { return _transaction != null; } }
 
         #endregion
 
         #region Methods
 
-        public int SaveChanges()
-        {
-            return _context.SaveChanges();
-        }
+        public int SaveChanges() => _context.SaveChanges();
+        public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
 
         public void BeginTransaction() => _transaction = _context.Database.BeginTransaction();
+        public async Task BeginTransactionAsync() => _transaction = await _context.Database.BeginTransactionAsync();
 
         public void CommitTransaction() => _transaction.Commit();
+        public async Task CommitTransactionAsync() => await _transaction.CommitAsync();
 
         public void RollbackTransaction() => _transaction.Rollback();
 

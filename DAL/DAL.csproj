@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Version>7.6.1</Version>
@@ -8,7 +7,6 @@
     <PackageProjectUrl>https://www.ebenmonney.com/quickapp</PackageProjectUrl>
     <Company>EBENMONNEY</Company>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Models\AgeRatingCoefficient.cs" />
     <Compile Remove="Models\CustomerInsuranceCategoryPolicyRating.cs" />
@@ -20,20 +18,31 @@
     <Compile Remove="Repositories\Interfaces\IJobRalRatingCoefficientRepository.cs" />
     <Compile Remove="Repositories\JobRalRatingCoefficientRepository.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.ML" Version="1.7.1" />
+    <PackageReference Include="Microsoft.ML.LightGbm" Version="1.7.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
   </ItemGroup>
-
+  <ItemGroup Label="RegressionPredictionModel">
+    <None Include="RegressionPredictionModel.consumption.cs">
+      <DependentUpon>RegressionPredictionModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="RegressionPredictionModel.training.cs">
+      <DependentUpon>RegressionPredictionModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="RegressionPredictionModel.zip">
+      <DependentUpon>RegressionPredictionModel.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

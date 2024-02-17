@@ -18,5 +18,11 @@ namespace DAL.Models
         public virtual IList<Customer> Customers { get; set; }
 
         public virtual IList<Address> Addresses { get; set; }
+
+        public virtual IList<VacationInsurancePolicy> VacationInsurancePolicies { get; set; }
+
+        public virtual IList<TravelInsurancePolicy> DepartureTravelInsurancePolicies { get; set; }
+
+        public virtual IList<TravelInsurancePolicy> ArrivalTravelInsurancePolicies { get; set; }
     }
 }

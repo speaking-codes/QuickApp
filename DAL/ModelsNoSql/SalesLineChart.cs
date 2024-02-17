@@ -24,7 +24,7 @@ namespace DAL.ModelsNoSql
         public string BackGroundColor { get; set; }
 
         [BsonElement("TotalPrice")]
-        public string TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
 
         [BsonElement("TotalCount")]
         public int TotalCount { get; set; }

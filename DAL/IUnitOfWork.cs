@@ -6,6 +6,7 @@
 
 using DAL.Repositories.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -27,11 +28,20 @@ namespace DAL
 
         IConfigurationModelRepository ConfigurationModels { get; }
 
+        ILearningTrainingRepository LearningTrainings { get; }
+        IMatrixCustomerInsurancePolicyRepository MatrixCustomerInsurancePolicies { get; }
+
         bool IsTransactionOpened { get; }
 
         int SaveChanges();
+        Task SaveChangesAsync();
+
         void BeginTransaction();
+        Task BeginTransactionAsync();
+
         void CommitTransaction();
+        Task CommitTransactionAsync();
+
         void RollbackTransaction();
     }
 }

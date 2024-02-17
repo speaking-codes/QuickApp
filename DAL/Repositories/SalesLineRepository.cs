@@ -1,6 +1,7 @@
 ﻿using DAL.Models;
 using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,10 @@ namespace DAL.Repositories
         public SalesLineRepository(ApplicationDbContext context) : base(context) { }
 
         public IQueryable<SalesLineType> GetSalesLineTypes(string customerCode) =>
-            _appContext.SalesLineTypes
-                       .Include(x => x.InsurancePolicyCategories)
-                            .ThenInclude(y => y.InsurancePolicies)
-                       .Where(x => x.InsurancePolicyCategories.Any(y => y.InsurancePolicies.Any(z => z.Customer.CustomerCode == customerCode)));
+                    _appContext.SalesLineTypes
+                               .Where(x => x.InsurancePolicyCategories
+                                            .Any(y => y.InsurancePolicies
+                                                       .Any(z => z.Customer.CustomerCode == customerCode))
+                                     );
     }
 }

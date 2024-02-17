@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using System;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -64,22 +65,51 @@ namespace DAL
 
         #region Insurance Policy
 
+        #region General
+
         public DbSet<SalesLineType> SalesLineTypes { get; set; }
         public DbSet<InsurancePolicyCategory> InsurancePolicyCategories { get; set; }
         public DbSet<InsurancePolicyCategoryStatic> InsurancePolicyCategoryStatics { get; set; }
         public DbSet<InsurancePolicy> InsurancePolicies { get; set; }
-        //public DbSet<VehicleInsurancePolicy> VehicleInsurancePolicies { get; set; }
-        //public DbSet<HealthInsurancePolicy> HealthInsurancePolicies { get; set; }
-        //public DbSet<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
-        //public DbSet<TravelInsurancePolicy> TravelInsurancePolicies { get; set; }
-        //public DbSet<PropertyInsurancePolicy> PropertyInsurancePolicies { get; set; }
-        //public DbSet<FamilyInsurancePolicy> FamilyInsurancePolicies { get; set; }
+
+        #endregion
+
+        #region Vehicle
+
+        public DbSet<VehicleInsurancePolicy> VehicleInsurancePolicies { get; set; }
+
+        #endregion
+
+        #region Relax
+
+        public DbSet<StructureType> StructureTypes { get; set; }
+        public DbSet<BaggageType> BaggageTypes { get; set; }
+        public DbSet<TravelMeansType> TravelMeansTypes { get; set; }
+
+        public DbSet<VacationInsurancePolicy> VacationInsurancePolicies { get; set; }
+        public DbSet<BaggageLossInsurancePolicy> BaggageLossInsurancePolicies { get; set; }
+        public DbSet<TravelInsurancePolicy> TravelInsurancePolicies { get; set; }
+
+        #endregion
+
+        #region Family
+
+        public DbSet<FamilyInsurancePolicy> FamilyInsurancePolicies { get; set; }
+        public DbSet<PetInsurancePolicy> PetInsurancePolicies { get; set; }
+
+        public DbSet<KinshipRelationshipType> KinshipRelationshipTypes { get; set; }
+
+        #endregion
 
         #endregion
 
         #region Machine Learning
 
         public DbSet<Temp> Temps { get; set; }
+        
+        public DbSet<LearningTraining> LearningTrainings { get; set; }
+
+        public DbSet<MatrixCustomerInsurancePolicy> MatrixUsersItems { get; set; }
 
         #endregion
 
@@ -241,6 +271,8 @@ namespace DAL
 
             #region Insurance Policy
 
+            #region General
+
             builder.Entity<SalesLineType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<SalesLineType>().Property(c => c.SalesLineCode).HasMaxLength(3).IsFixedLength().IsRequired();
             builder.Entity<SalesLineType>().Property(c => c.BackGroundColor).HasMaxLength(60).IsRequired(false);
@@ -264,38 +296,86 @@ namespace DAL
 
             builder.Entity<InsurancePolicy>().UseTptMappingStrategy().ToTable($"App{nameof(InsurancePolicies)}");
 
-            //builder.Entity<VehicleInsurancePolicy>().ToTable($"App{nameof(VehicleInsurancePolicies)}");
+            #endregion
+
+            #region Vehicle
+
+            builder.Entity<VehicleInsurancePolicy>().ToTable($"App{nameof(VehicleInsurancePolicies)}");
+
             //builder.Entity<HealthInsurancePolicy>().ToTable($"App{nameof(HealthInsurancePolicies)}");
             //builder.Entity<WorkActivityInsurancePolicy>().ToTable($"App{nameof(WorkActivityInsurancePolicies)}");
-            //builder.Entity<TravelInsurancePolicy>().ToTable($"App{nameof(TravelInsurancePolicies)}");
+
+            #endregion
+
+            #region Relax
+
+            builder.Entity<StructureType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<StructureType>().ToTable($"App{nameof(StructureTypes)}");
+
+            builder.Entity<BaggageType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<BaggageType>().ToTable($"App{nameof(BaggageTypes)}");
+          
+            builder.Entity<TravelMeansType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<TravelMeansType>().ToTable($"App{nameof(TravelMeansTypes)}");
+
+            builder.Entity<VacationInsurancePolicy>().ToTable($"App{nameof(VacationInsurancePolicies)}");
+            builder.Entity<BaggageLossInsurancePolicy>().ToTable($"App{nameof(BaggageLossInsurancePolicies)}");
+            
+            builder.Entity<TravelInsurancePolicy>().ToTable($"App{nameof(TravelInsurancePolicies)}");
+            builder.Entity<TravelInsurancePolicy>().HasOne(c => c.DepartureMunicipality)
+                                                   .WithMany(m => m.DepartureTravelInsurancePolicies)
+                                                   .HasForeignKey(c => c.DepartureMunicipalityId)
+                                                   .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<TravelInsurancePolicy>().HasOne(c => c.ArrivalMunicipality)
+                                                   .WithMany(m => m.ArrivalTravelInsurancePolicies)
+                                                   .HasForeignKey(c => c.ArrivalMunicipalityId)
+                                                   .OnDelete(DeleteBehavior.NoAction);
+
             //builder.Entity<PropertyInsurancePolicy>().ToTable($"App{nameof(PropertyInsurancePolicies)}");
-            //builder.Entity<FamilyInsurancePolicy>().ToTable($"App{nameof(FamilyInsurancePolicies)}");
             //builder.Entity<CustomerInsuranceCategoryPolicyRating>().ToTable($"App{nameof(CustomerInsuranceCategoryPolicyRatings)}");
+
+            #endregion
+
+            #region Family
+
+            builder.Entity<KinshipRelationshipType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<KinshipRelationshipType>().ToTable($"App{nameof(KinshipRelationshipTypes)}");
+
+            builder.Entity<FamilyInsurancePolicy>().ToTable($"App{nameof(FamilyInsurancePolicies)}");
+            builder.Entity<PetInsurancePolicy>().ToTable($"App{nameof(PetInsurancePolicies)}");
+
+            #endregion
 
             #endregion
 
             #region Machine Learning
 
+            builder.Entity<Temp>().Property(c => c.BirthDate).IsRequired(false);
+
             builder.Entity<Temp>().Property(c => c.Gender).IsRequired(false);
 
             builder.Entity<Temp>().Property(c => c.MaritalStatusCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.MaritalStatusId).IsRequired().HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.MaritalStatusId).IsRequired(false).HasDefaultValue(0);
 
             builder.Entity<Temp>().Property(c => c.FamilyTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.FamilyTypeId).IsRequired().HasDefaultValue(0);
-            builder.Entity<Temp>().Property(c => c.ChildrenNumbers).IsRequired().HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.FamilyTypeId).IsRequired(false).HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.ChildrenNumbers).IsRequired(false).HasDefaultValue(0);
 
             builder.Entity<Temp>().Property(c => c.IncomeTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.IncomeTypeId).IsRequired().HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.IncomeTypeId).IsRequired(false).HasDefaultValue(0);
 
             builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.ProfessionTypeId).IsRequired().HasDefaultValue(0);
-            builder.Entity<Temp>().Property(c => c.Income).IsRequired().HasDefaultValue(0.0);
+            builder.Entity<Temp>().Property(c => c.ProfessionTypeId).IsRequired(false).HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.Income).IsRequired(false).HasDefaultValue(0.0);
 
             builder.Entity<Temp>().Property(c => c.RegionCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.RegionId).IsRequired().HasDefaultValue(0);
+            builder.Entity<Temp>().Property(c => c.RegionId).IsRequired(false).HasDefaultValue(0);
 
             builder.Entity<Temp>().ToTable($"App{nameof(Temp)}");
+
+            builder.Entity<LearningTraining>().ToTable($"App{nameof(LearningTrainings)}");
+
+            builder.Entity<MatrixCustomerInsurancePolicy>().ToTable($"App{nameof(MatrixUsersItems)}");
 
             #endregion
         }

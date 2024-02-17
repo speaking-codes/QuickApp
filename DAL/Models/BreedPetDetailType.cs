@@ -12,5 +12,7 @@ namespace DAL.Models
         public string BreedPetDetailTypeDescription { get; set; }
 
         public virtual BreedPetType BreedPetType { get; set; }
+
+        public virtual IList<PetInsurancePolicy> PetInsurancePolicies { get; set; }
     }
 }

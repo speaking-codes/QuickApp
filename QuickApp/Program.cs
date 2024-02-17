@@ -205,6 +205,7 @@ namespace QuickApp
             builder.Services.AddScoped<IDashboardManager, DashboardManager>();
             builder.Services.AddScoped<ICustomerRatingManager, CustomerRatingManager>();
             builder.Services.AddScoped<IInsurancePolicyManager, InsurancePolicyManager>();
+            builder.Services.AddScoped<ILearningManager, LearningManager>();
 
             #endregion
 
