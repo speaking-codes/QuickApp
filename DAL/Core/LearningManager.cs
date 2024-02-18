@@ -1,11 +1,8 @@
 ﻿using DAL.Core.Interfaces;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using MachineLearningModel;
 using System.Threading.Tasks;
-using static DAL.RegressionPredictionModel;
+using static MachineLearningModel.RegressionPredictionModel;
 
 namespace DAL.Core
 {
@@ -52,16 +49,30 @@ namespace DAL.Core
                         Rating = modelOutput.Score
                     };
                     UnitOfWork.MatrixCustomerInsurancePolicies.Add(matrixCustomerInsurancePolicy);
-                    await UnitOfWork.SaveChangesAsync();
                 }
 
-                await UnitOfWork.SaveChangesAsync();
+                UnitOfWork.SaveChanges();
                 await UnitOfWork.CommitTransactionAsync();
             }
             catch
             {
                 UnitOfWork.RollbackTransaction();
             }
+        }
+
+        public RecommenderSystemModel.ModelOutput GetRecommendation(int customerId, byte insurancePolicyCategory)
+        {
+            //Load sample data
+            var sampleData = new RecommenderSystemModel.ModelInput()
+            {
+                Id = customerId,
+                CustomerId = customerId,
+                InsurancePolicyCategoryId = insurancePolicyCategory,
+            };
+
+            //Load model and predict output
+            var result = RecommenderSystemModel.Predict(sampleData);
+            return result;
         }
 
         public override void Dispose()

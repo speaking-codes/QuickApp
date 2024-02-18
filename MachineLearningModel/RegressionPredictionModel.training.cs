@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML.Data;
-using Microsoft.ML.Trainers.LightGbm;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
 using Microsoft.ML;
 
-namespace DAL
+namespace MachineLearningModel
 {
     public partial class RegressionPredictionModel
     {
@@ -39,7 +38,8 @@ namespace DAL
             var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(@"Gender", @"Gender", outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
                                     .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"CustomerId", @"CustomerId"),new InputOutputColumnPair(@"Age", @"Age"),new InputOutputColumnPair(@"MaritalStatusId", @"MaritalStatusId"),new InputOutputColumnPair(@"FamilyTypeId", @"FamilyTypeId"),new InputOutputColumnPair(@"ChildrenNumbers", @"ChildrenNumbers"),new InputOutputColumnPair(@"IncomeTypeId", @"IncomeTypeId"),new InputOutputColumnPair(@"ProfessionTypeId", @"ProfessionTypeId"),new InputOutputColumnPair(@"Income", @"Income"),new InputOutputColumnPair(@"RegionId", @"RegionId"),new InputOutputColumnPair(@"InsurancePolicyCategoryId", @"InsurancePolicyCategoryId")}))      
                                     .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Gender",@"CustomerId",@"Age",@"MaritalStatusId",@"FamilyTypeId",@"ChildrenNumbers",@"IncomeTypeId",@"ProfessionTypeId",@"Income",@"RegionId",@"InsurancePolicyCategoryId"}))      
-                                    .Append(mlContext.Regression.Trainers.LightGbm(new LightGbmRegressionTrainer.Options(){NumberOfLeaves=9,NumberOfIterations=4,MinimumExampleCountPerLeaf=22,LearningRate=0.456685041864419,LabelColumnName=@"NormalizedRenewalNumber",FeatureColumnName=@"Features",ExampleWeightColumnName=null,Booster=new GradientBooster.Options(){SubsampleFraction=0.999999776672986,FeatureFraction=0.726508289876741,L1Regularization=1.7903161472974E-09,L2Regularization=0.818695278839977},MaximumBinCountPerFeature=114}));
+                                    .Append(mlContext.Transforms.NormalizeMinMax(@"Features", @"Features"))      
+                                    .Append(mlContext.Regression.Trainers.LbfgsPoissonRegression(new LbfgsPoissonRegressionTrainer.Options(){L1Regularization=0.03125F,L2Regularization=0.04586596F,LabelColumnName=@"NormalizedRenewalNumber",FeatureColumnName=@"Features"}));
 
             return pipeline;
         }

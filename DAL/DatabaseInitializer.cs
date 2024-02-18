@@ -40,11 +40,11 @@ namespace DAL
 
         public async Task SeedAsync()
         {
-            await _context.Database.EnsureDeletedAsync();
-            await _context.Database.EnsureCreatedAsync();
+            //await _context.Database.EnsureDeletedAsync();
+            //await _context.Database.EnsureCreatedAsync();
             await SeedDefaultUsersAsync();
-            await LoadTypologicalTableData();
-            await LoadLearningTableData();
+            //await LoadTypologicalTableData();
+            //await LoadLearningTableData();
         }
 
 

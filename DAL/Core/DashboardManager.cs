@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MachineLearningModel.RecommenderSystemModel;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DAL.Core
@@ -21,6 +22,7 @@ namespace DAL.Core
         private readonly IInsuranceCategoryPolicyTopSellingRepository _insuranceCategoryPolicyTopSellingRepository;
         private readonly IInsuranceCoverageSummaryRepository _insuranceCoverageSummaryRepository;
         private readonly IInsuranceCoverageChartRepository _insuranceCoverageChartRepository;
+        private readonly ILearningManager _learningManager;
 
         public DashboardManager(IUnitOfWork unitOfWork,
                                 ICustomerHeaderRepository customerHeaderRepository,
@@ -28,7 +30,8 @@ namespace DAL.Core
                                 IInsuranceCategoryPolicyDashboardCardRepository insuranceCategoryPolicyDashboardCardRepository,
                                 IInsuranceCategoryPolicyTopSellingRepository insuranceCategoryPolicyTopSellingRepository,
                                 IInsuranceCoverageSummaryRepository insuranceCoverageSummaryRepository,
-                                IInsuranceCoverageChartRepository insuranceCoverageChartRepository) : base(unitOfWork)
+                                IInsuranceCoverageChartRepository insuranceCoverageChartRepository,
+                                ILearningManager learningManager) : base(unitOfWork)
         {
             _customerHeaderRepository = customerHeaderRepository;
             _customerDetailRepository = customerDetailRepository;
@@ -36,6 +39,7 @@ namespace DAL.Core
             _insuranceCategoryPolicyTopSellingRepository = insuranceCategoryPolicyTopSellingRepository;
             _insuranceCoverageSummaryRepository = insuranceCoverageSummaryRepository;
             _insuranceCoverageChartRepository = insuranceCoverageChartRepository;
+            _learningManager = learningManager;
         }
 
         public CustomerHeader GetCustomerHeader(string customerCode)
@@ -90,8 +94,8 @@ namespace DAL.Core
                     SalesLineName = item.SalesLineName,
                     BackGroundColor = item.BackGroundColor,
                     TotalCount = insurancePolicies.Count,
-                    TotalPrice=insurancePolicies.Sum(x => x.TotalPrize)
-                }) ;
+                    TotalPrice = insurancePolicies.Sum(x => x.TotalPrize)
+                });
             }
 
             _insuranceCoverageChartRepository.InsertOne(insuranceCoverageChart);
@@ -141,6 +145,48 @@ namespace DAL.Core
 
             _insuranceCoverageSummaryRepository.InsertOne(insuranceCoverageSummary);
             return insuranceCoverageSummary.InsuranceCoverageGrids;
+        }
+
+        public IList<InsuranceCategoryPolicyDashboardCard> GetRecommendationInsuranceCategoryPolicyDashboardCards(string customerCode)
+        {
+            var customer = UnitOfWork.Customers.Find(x => x.CustomerCode == customerCode);
+            if (customer == null || customer.Count == 0)
+                return new List<InsuranceCategoryPolicyDashboardCard>();
+
+            var insurancePolicyCategoryIds = UnitOfWork.InsurancePolicyCategories
+                                                       .GetInsurancePolicyCategories()
+                                                       .Select(x => x.Id)
+                                                       .ToList();
+
+            var modelOutputRecommendationCollection = new List<ModelOutput>();
+            ModelOutput modelOutput = null;
+            foreach (var itemId in insurancePolicyCategoryIds)
+            {
+                modelOutput = _learningManager.GetRecommendation(customer[0].Id, itemId);
+                modelOutputRecommendationCollection.Add(modelOutput);
+            }
+
+            var insuranceCategoryPolicyDashboardCards = new List<InsuranceCategoryPolicyDashboardCard>();
+            foreach (var itemOutput in modelOutputRecommendationCollection)
+            {
+                var categoryPolicyCard = UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategory((int)itemOutput.InsurancePolicyCategoryId).SingleOrDefault();
+                insuranceCategoryPolicyDashboardCards.Add(new InsuranceCategoryPolicyDashboardCard
+                {
+                    Code = categoryPolicyCard.InsurancePolicyCategoryCode,
+                    Name = categoryPolicyCard.InsurancePolicyCategoryName,
+                    Abstract = categoryPolicyCard.InsurancePolicyCategoryDescription.Length > 170 ?
+                                                 categoryPolicyCard.InsurancePolicyCategoryDescription.Substring(0, 170) :
+                                                 categoryPolicyCard.InsurancePolicyCategoryDescription,
+                    IconCssClass = categoryPolicyCard.IconCssClass,
+                    SalesLineBackgroundColor = categoryPolicyCard.SalesLine.BackGroundColor,
+                    SalesLineBackgroundCssClass = categoryPolicyCard.SalesLine.BackGroundColorCssClass,
+                    SalesLineCode = categoryPolicyCard.SalesLine.SalesLineCode,
+                    SalesLineName = categoryPolicyCard.SalesLine.SalesLineName
+                });
+                if (insuranceCategoryPolicyDashboardCards.Count >= 6)
+                    break;
+            }
+            return insuranceCategoryPolicyDashboardCards;
         }
 
         public IList<InsuranceCategoryPolicyDashboardCard> GetTopSellingInsuranceCategoryPolicyDashboardCards(int year, int top, IEnumerable<string> incuranceCoverageCodes)

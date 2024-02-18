@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
-namespace DAL
+namespace MachineLearningModel
 {
     public partial class RegressionPredictionModel
     {
@@ -119,7 +119,7 @@ namespace DAL
 
         #endregion
 
-        private static string MLNetModelPath = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\ModelTrained\RegressionPredictionModel.zip"; //Path.GetFullPath("RegressionPredictionModel.zip");
+        private static string MLNetModelPath = Path.GetFullPath("RegressionPredictionModel.zip");
 
         public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 

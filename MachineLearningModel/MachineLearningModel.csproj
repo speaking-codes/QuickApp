@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" Version="1.7.1" />
+    <PackageReference Include="Microsoft.ML.Recommender" Version="0.19.1" />
+  </ItemGroup>
+  <ItemGroup Label="RegressionPredictionModel">
+    <None Include="RegressionPredictionModel.consumption.cs">
+      <DependentUpon>RegressionPredictionModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="RegressionPredictionModel.training.cs">
+      <DependentUpon>RegressionPredictionModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="RegressionPredictionModel.zip">
+      <DependentUpon>RegressionPredictionModel.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="RecommenderSystemModel">
+    <None Include="RecommenderSystemModel.consumption.cs">
+      <DependentUpon>RecommenderSystemModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="RecommenderSystemModel.training.cs">
+      <DependentUpon>RecommenderSystemModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="RecommenderSystemModel.zip">
+      <DependentUpon>RecommenderSystemModel.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

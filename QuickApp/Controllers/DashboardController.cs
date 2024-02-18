@@ -61,9 +61,7 @@ namespace QuickApp.Controllers
         [HttpGet("insurancecoveragerecommended/{customerCode}")]
         public IActionResult GetInsuranceCoverageRecommended(string customerCode)
         {
-            var currentYear = DateTime.Now.Year - 1;
-            var top = 6;
-            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetTopSellingInsuranceCategoryPolicyDashboardCards(currentYear, top, new List<string>());
+            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetRecommendationInsuranceCategoryPolicyDashboardCards(customerCode);
             return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCards));
         }
 

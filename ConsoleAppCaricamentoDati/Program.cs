@@ -34,98 +34,73 @@ namespace ConsoleAppCaricamentoDati
             services.AddScoped<ICustomerRatingManager, CustomerRatingManager>();
             services.AddScoped<IInsurancePolicyManager, InsurancePolicyManager>();
             services.AddScoped<IMessageQueueProducer, MessageQueueProducer>();
+            services.AddScoped<ILearningManager, LearningManager>();
             var provider = services.BuildServiceProvider();
 
-            var customerTemplateBuilder = new CustomerBaseTemplateBuilder();
-            var customerTemplate = customerTemplateBuilder.SetLastName(lastNamePath)
-                                                          .SetFirstName(firstNameMalePath, firstNameFemalePath)
-                                                          .SetAddress(addressPath)
-                                                          .SetProviderMail()
-                                                          .SetIncomesBase()
-                                                          .Build();
-
-            var customBuilder = new CustomerBuilder(provider.GetRequiredService<IUnitOfWork>(), customerTemplate);
             var insurancePolicyBuilder = new InsurancePolicyBuilder(provider);
             VehicleInsurancePolicyBuilder vehicleInsurancePolicyBuilder = null;
-
-            IList<Customer> customerList = new List<Customer>();
             var insurancePolicyList = new List<InsurancePolicy>();
-
             var random = new Random();
 
-            for (var i = 0; i < 2; i++)
+            using(var builder= new CustomerBuilderManager(provider.GetRequiredService<IUnitOfWork>(), provider.GetRequiredService<ICustomerManager>(), 3))
             {
-                customerList.Add(customBuilder.SetCustomer()
-                                                .SetFirstName()
-                                                .SetLastName()
-                                                .SetMaritalStatus()
-                                                .SetFamilyType()
-                                                .SetChildrenNumber()
-                                                .SetBirthDate()
-                                                .SetBirthPlace()
-                                                .SetAddress()
-                                                .SetDelivery()
-                                                .SetContractType()
-                                                .SetJob()
-                                                .SetIncome()
-                                                .Build());
+                builder.Run();
             }
+
+            using(var manager = provider.GetRequiredService<ILearningManager>())
+            {
+                manager.LoadMatrixUserItems();
+            }
+
             //using (var manger = provider.GetService<ICustomerManager>())
             //{
-            //    manger.BeginTransaction();
-            //    for (var i = 0; i < customerList.Count; i++)
-            //        manger.AddCustomer(customerList[i]);
+            //    customerList.Clear();
+            //    customerList = manger.GetActiveCustomers();
             //}
 
-            using (var manger = provider.GetService<ICustomerManager>())
-            {
-                customerList.Clear();
-                customerList = manger.GetActiveCustomers();
-            }
+            //var maxCount = customerList.Count*3;// (int)Math.Round(customerList.Count * 1);
 
-            var maxCount = customerList.Count*3;// (int)Math.Round(customerList.Count * 1);
+            //for (var i = 0; i < maxCount; i++)
+            //{
+            //    var j = random.Next(0, customerList.Count);
+            //    if (j < customerList.Count)
+            //    {
+            //        var insurancePolicy = insurancePolicyBuilder.SetInsurancePolicy()
+            //                                                      .SetIssueDate()
+            //                                                      .SetExpireDate()
+            //                                                      .SetInsurancePolicyCategory()
+            //                                                      .SetCustomer(customerList[j])
+            //                                                      .SetInsuredMaximum()
+            //                                                      .SetTotalPrize()
+            //                                                      .SetIsLuxuryPolicy()
+            //                                                      .Build();
+            //        switch (insurancePolicy.InsurancePolicyCategory.Id)
+            //        {
+            //            case 1://Auto
+            //            case 2://Moto
+            //            case 3://Imbarcazioni
+            //                vehicleInsurancePolicyBuilder = new VehicleInsurancePolicyBuilder(provider, insurancePolicy);
+            //                var vehicleInsurancePolicy = vehicleInsurancePolicyBuilder.SetConfigurationModel()
+            //                                                                         .SetLicensePlate()
+            //                                                                         .SetCommercialValue()
+            //                                                                         .SetInsuredValue()
+            //                                                                         .SetRiskCategory()
+            //                                                                         .Build();
+            //                insurancePolicyList.Add(vehicleInsurancePolicy);
+            //                break;
+            //            default:
+            //                insurancePolicyList.Add(insurancePolicy);
+            //                break;
+            //        }
 
-            for (var i = 0; i < maxCount; i++)
-            {
-                var j = random.Next(0, customerList.Count);
-                if (j < customerList.Count)
-                {
-                    var insurancePolicy = insurancePolicyBuilder.SetInsurancePolicy()
-                                                                  .SetIssueDate()
-                                                                  .SetExpireDate()
-                                                                  .SetInsurancePolicyCategory()
-                                                                  .SetCustomer(customerList[j])
-                                                                  .SetInsuredMaximum()
-                                                                  .SetTotalPrize()
-                                                                  .SetIsLuxuryPolicy()
-                                                                  .Build();
-                    switch (insurancePolicy.InsurancePolicyCategory.Id)
-                    {
-                        case 1://Auto
-                        case 2://Moto
-                        case 3://Imbarcazioni
-                            vehicleInsurancePolicyBuilder = new VehicleInsurancePolicyBuilder(provider, insurancePolicy);
-                            var vehicleInsurancePolicy = vehicleInsurancePolicyBuilder.SetConfigurationModel()
-                                                                                     .SetLicensePlate()
-                                                                                     .SetCommercialValue()
-                                                                                     .SetInsuredValue()
-                                                                                     .SetRiskCategory()
-                                                                                     .Build();
-                            insurancePolicyList.Add(vehicleInsurancePolicy);
-                            break;
-                        default:
-                            insurancePolicyList.Add(insurancePolicy);
-                            break;
-                    }
-
-                }
-            }
-            using (var manager = provider.GetService<IInsurancePolicyManager>())
-            {
-                manager.BeginTransaction();
-                for (var i = 0; i < insurancePolicyList.Count; i++)
-                    manager.AddInsurancePolicy(insurancePolicyList[i]);
-            }
+            //    }
+            //}
+            //using (var manager = provider.GetService<IInsurancePolicyManager>())
+            //{
+            //    manager.BeginTransaction();
+            //    for (var i = 0; i < insurancePolicyList.Count; i++)
+            //        manager.AddInsurancePolicy(insurancePolicyList[i]);
+            //}
 
             Console.WriteLine("Hello, World!");
         }

@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerQueueConsumer", "Cu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppCaricamentoDati", "ConsoleAppCaricamentoDati\ConsoleAppCaricamentoDati.csproj", "{7C92BCBB-02FD-46CD-8033-DB7372839543}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppRecommenderSystemTrainer", "ConsoleAppRecommenderSystemTrainer\ConsoleAppRecommenderSystemTrainer.csproj", "{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineLearningModel", "MachineLearningModel\MachineLearningModel.csproj", "{26602E01-9508-4E18-B8D2-2475062D2550}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +42,10 @@ Global
 		{7C92BCBB-02FD-46CD-8033-DB7372839543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C92BCBB-02FD-46CD-8033-DB7372839543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C92BCBB-02FD-46CD-8033-DB7372839543}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C03F2500-2F89-4367-9F70-85FE9A8BFAC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26602E01-9508-4E18-B8D2-2475062D2550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26602E01-9508-4E18-B8D2-2475062D2550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26602E01-9508-4E18-B8D2-2475062D2550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26602E01-9508-4E18-B8D2-2475062D2550}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
