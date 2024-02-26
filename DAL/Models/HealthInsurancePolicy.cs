@@ -13,8 +13,10 @@ namespace DAL.Models
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
         public EnumGender Gender { get; set; }
-        public EnumKinshipRelationship KinshipRelationship { get; set; }
-        public string TipologiaPrestazione { get; set; }
-        public IList<string> PrestazioniCoperte { get; set; }
+
+        public virtual KinshipRelationshipType KinshipRelationship { get; set; }
+
+        //public string TipologiaPrestazione { get; set; }
+        //public IList<string> PrestazioniCoperte { get; set; }
     }
 }

@@ -20,5 +20,9 @@ namespace DAL.Models
 
         public virtual InsurancePolicyCategory InsurancePolicyCategory { get; set; }
         public virtual Customer Customer { get; set; }
+
+        public virtual IList<BaggageLoss> BaggageLosses { get; set; }
+
+        public virtual IList<Travel> Travels { get; set; }
     }
 }

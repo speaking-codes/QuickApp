@@ -13,5 +13,7 @@ namespace DAL.Models
         public bool IsFreelancer { get; set; }
 
         public virtual IList<Customer> Customers { get; set; }
+
+        public virtual IList<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
     }
 }

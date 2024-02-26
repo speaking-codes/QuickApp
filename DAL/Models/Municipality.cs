@@ -11,7 +11,7 @@ namespace DAL.Models
         public short Id { get; set; }
         public string MunicipalityName { get; set; }
         public string PostalCode { get; set; }
-        public bool IsRegionalCapital { get; set; }
+        public bool HasAirport { get; set; }
 
         public virtual Province Province { get; set; }
 
@@ -21,8 +21,12 @@ namespace DAL.Models
 
         public virtual IList<VacationInsurancePolicy> VacationInsurancePolicies { get; set; }
 
-        public virtual IList<TravelInsurancePolicy> DepartureTravelInsurancePolicies { get; set; }
+        public virtual IList<Travel> DepartureTravels { get; set; }
 
-        public virtual IList<TravelInsurancePolicy> ArrivalTravelInsurancePolicies { get; set; }
+        public virtual IList<Travel> ArrivalTravels { get; set; }
+
+        public virtual IList<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
+
+        public virtual IList<HouseInsurancePolicy> PropertyInsurancePolicies { get; set; }        
     }
 }

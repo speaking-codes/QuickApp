@@ -11,7 +11,7 @@ namespace DAL.Models
         public byte Id { get; set; }
         public string BaggageTypeName { get; set; }
 
-        public virtual IList<BaggageLossInsurancePolicy> BaggageLossInsurancePolicies  { get; set; }
+        public virtual IList<BaggageLoss> BaggageLossInsurancePolicies  { get; set; }
 
     }
 }

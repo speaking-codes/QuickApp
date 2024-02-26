@@ -40,10 +40,9 @@ namespace DAL.Models
         public virtual ModelType ModelType { get; set; }
         public virtual Model Model { get; set; }//Modello
         public virtual PowerType PowerType { get; set; }//Tipo Combustibile
-        //public virtual CarArrangementCylinderType ArrangementCylinderType { get; set; }//Disposizione Cilindri
-        //public virtual CarTractionType TractionType { get; set; }//Trazione
-        //public virtual GearboxType GearboxType { get; set; }//Tipo Cambio
 
         public virtual IList<VehicleInsurancePolicy> VehicleInsurancePolicies { get; set; }
+
+        public virtual IList<ConfigurationModel> ConfigurationModels { get; set; }
     }
 }

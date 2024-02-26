@@ -85,10 +85,11 @@ namespace DAL
         public DbSet<StructureType> StructureTypes { get; set; }
         public DbSet<BaggageType> BaggageTypes { get; set; }
         public DbSet<TravelMeansType> TravelMeansTypes { get; set; }
+        public DbSet<TravelClassType> TravelClassTypes { get; set; }
 
         public DbSet<VacationInsurancePolicy> VacationInsurancePolicies { get; set; }
-        public DbSet<BaggageLossInsurancePolicy> BaggageLossInsurancePolicies { get; set; }
-        public DbSet<TravelInsurancePolicy> TravelInsurancePolicies { get; set; }
+        public DbSet<BaggageLoss> BaggageLosses { get; set; }
+        public DbSet<Travel> Travels { get; set; }
 
         #endregion
 
@@ -318,16 +319,20 @@ namespace DAL
             builder.Entity<TravelMeansType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<TravelMeansType>().ToTable($"App{nameof(TravelMeansTypes)}");
 
+            builder.Entity<TravelClassType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<TravelClassType>().ToTable($"App{nameof(TravelClassTypes)}");
+
             builder.Entity<VacationInsurancePolicy>().ToTable($"App{nameof(VacationInsurancePolicies)}");
-            builder.Entity<BaggageLossInsurancePolicy>().ToTable($"App{nameof(BaggageLossInsurancePolicies)}");
             
-            builder.Entity<TravelInsurancePolicy>().ToTable($"App{nameof(TravelInsurancePolicies)}");
-            builder.Entity<TravelInsurancePolicy>().HasOne(c => c.DepartureMunicipality)
-                                                   .WithMany(m => m.DepartureTravelInsurancePolicies)
+            builder.Entity<BaggageLoss>().ToTable($"App{nameof(BaggageLosses)}");
+            
+            builder.Entity<Travel>().ToTable($"App{nameof(Travels)}");
+            builder.Entity<Travel>().HasOne(c => c.DepartureMunicipality)
+                                                   .WithMany(m => m.DepartureTravels)
                                                    .HasForeignKey(c => c.DepartureMunicipalityId)
                                                    .OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<TravelInsurancePolicy>().HasOne(c => c.ArrivalMunicipality)
-                                                   .WithMany(m => m.ArrivalTravelInsurancePolicies)
+            builder.Entity<Travel>().HasOne(c => c.ArrivalMunicipality)
+                                                   .WithMany(m => m.ArrivalTravels)
                                                    .HasForeignKey(c => c.ArrivalMunicipalityId)
                                                    .OnDelete(DeleteBehavior.NoAction);
 

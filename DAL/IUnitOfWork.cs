@@ -31,6 +31,9 @@ namespace DAL
         ILearningTrainingRepository LearningTrainings { get; }
         IMatrixCustomerInsurancePolicyRepository MatrixCustomerInsurancePolicies { get; }
 
+        IBaggageTypeRepository BaggageTypes { get; }
+        ITravelMeansTypeRepository TravelMeansTypes { get; }
+
         bool IsTransactionOpened { get; }
 
         int SaveChanges();

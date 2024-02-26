@@ -12,5 +12,7 @@ namespace DAL.Models
         public string KinshipRelationshipTypeName { get; set; }
 
         public virtual IList<FamilyInsurancePolicy> FamilyInsurancePolicies { get; set; }
+
+        public virtual IList<HealthInsurancePolicy> HealthInsurancePolicies { get; set; }
     }
 }

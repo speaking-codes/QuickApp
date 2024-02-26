@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class BaggageLossInsurancePolicy: InsurancePolicy
+    public class BaggageLoss
     {
-        public int LuggageHeightMetres { get; set; }
-        public int LuggageLengthMetres { get; set; }
-        public int LuggageWidthMetres { get; set; }
-        public int LuggageWeightKg { get; set; }
+        public int Id { get; set; }
+        public double HeightMetres { get; set; }
+        public double LengthMetres { get; set; }
+        public double WidthMetres { get; set; }
+        public double WeightKg { get; set; }
 
         public virtual BaggageType BaggageType { get; set; }
+
+        public virtual InsurancePolicy InsurancePolicy { get; set; }
     }
 }

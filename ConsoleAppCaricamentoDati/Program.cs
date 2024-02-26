@@ -9,6 +9,10 @@ using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using DAL.Models;
+using ConsoleAppCaricamentoDati.BuilderManager;
+using ConsoleAppCaricamentoDati.Builder;
+using System.Collections.Generic;
+using DAL.Core.Helpers;
 
 namespace ConsoleAppCaricamentoDati
 {
@@ -37,70 +41,27 @@ namespace ConsoleAppCaricamentoDati
             services.AddScoped<ILearningManager, LearningManager>();
             var provider = services.BuildServiceProvider();
 
-            var insurancePolicyBuilder = new InsurancePolicyBuilder(provider);
-            VehicleInsurancePolicyBuilder vehicleInsurancePolicyBuilder = null;
-            var insurancePolicyList = new List<InsurancePolicy>();
-            var random = new Random();
+            using (var customerBuilder = new CustomerBuilderManager(provider.GetRequiredService<IUnitOfWork>(), provider.GetRequiredService<ICustomerManager>(), 3))
+                customerBuilder.Run();
 
-            using(var builder= new CustomerBuilderManager(provider.GetRequiredService<IUnitOfWork>(), provider.GetRequiredService<ICustomerManager>(), 3))
+            IList<InsurancePolicy> insurancePolicies = new List<InsurancePolicy>();
+
+            using (var builder = new StateInsurancePolicyBuildManager(provider.GetRequiredService<IUnitOfWork>()))
             {
-                builder.Run();
+                var customers = builder.GetCustomers();
+
+                foreach (var item in customers)
+                {
+                    var insurancePolicyBuilders = builder.GetInsurancePolicyBuilderManagers(item);
+                    insurancePolicies.AddRange(builder.GetInsurancePolicies(insurancePolicyBuilders));
+                }
             }
 
-            using(var manager = provider.GetRequiredService<ILearningManager>())
-            {
-                manager.LoadMatrixUserItems();
-            }
-
-            //using (var manger = provider.GetService<ICustomerManager>())
+            //using (var manager = provider.GetRequiredService<ILearningManager>())
             //{
-            //    customerList.Clear();
-            //    customerList = manger.GetActiveCustomers();
+            //    manager.LoadMatrixUserItems();
             //}
 
-            //var maxCount = customerList.Count*3;// (int)Math.Round(customerList.Count * 1);
-
-            //for (var i = 0; i < maxCount; i++)
-            //{
-            //    var j = random.Next(0, customerList.Count);
-            //    if (j < customerList.Count)
-            //    {
-            //        var insurancePolicy = insurancePolicyBuilder.SetInsurancePolicy()
-            //                                                      .SetIssueDate()
-            //                                                      .SetExpireDate()
-            //                                                      .SetInsurancePolicyCategory()
-            //                                                      .SetCustomer(customerList[j])
-            //                                                      .SetInsuredMaximum()
-            //                                                      .SetTotalPrize()
-            //                                                      .SetIsLuxuryPolicy()
-            //                                                      .Build();
-            //        switch (insurancePolicy.InsurancePolicyCategory.Id)
-            //        {
-            //            case 1://Auto
-            //            case 2://Moto
-            //            case 3://Imbarcazioni
-            //                vehicleInsurancePolicyBuilder = new VehicleInsurancePolicyBuilder(provider, insurancePolicy);
-            //                var vehicleInsurancePolicy = vehicleInsurancePolicyBuilder.SetConfigurationModel()
-            //                                                                         .SetLicensePlate()
-            //                                                                         .SetCommercialValue()
-            //                                                                         .SetInsuredValue()
-            //                                                                         .SetRiskCategory()
-            //                                                                         .Build();
-            //                insurancePolicyList.Add(vehicleInsurancePolicy);
-            //                break;
-            //            default:
-            //                insurancePolicyList.Add(insurancePolicy);
-            //                break;
-            //        }
-
-            //    }
-            //}
-            //using (var manager = provider.GetService<IInsurancePolicyManager>())
-            //{
-            //    manager.BeginTransaction();
-            //    for (var i = 0; i < insurancePolicyList.Count; i++)
-            //        manager.AddInsurancePolicy(insurancePolicyList[i]);
-            //}
 
             Console.WriteLine("Hello, World!");
         }

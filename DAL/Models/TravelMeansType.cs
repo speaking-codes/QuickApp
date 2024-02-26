@@ -11,6 +11,8 @@ namespace DAL.Models
         public byte Id { get; set; }
         public string TravelMeansTypeName { get; set; }
 
-        public virtual IList<TravelInsurancePolicy> TravelInsurancePolicies { get; set; }
+        public virtual IList<TravelClassType> TravelClassTypes { get; set; }
+
+        public virtual IList<Travel> Travels { get; set; }
     }
 }

@@ -39,15 +39,22 @@ namespace DAL
         private ILearningTrainingRepository _learningTrainings;
         private IMatrixCustomerInsurancePolicyRepository _matrixCustomerInsurancePolicies;
 
+        private IBaggageTypeRepository _baggageTypes;
+        private ITravelMeansTypeRepository _travelMeansTypes;
+
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
 
         #endregion
 
+        #region Ctor
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
+
+        #endregion
 
         #region Properties 
 
@@ -167,6 +174,24 @@ namespace DAL
             {
                 _matrixCustomerInsurancePolicies ??= new MatrixCustomerInsurancePolicyRepository(_context);
                 return _matrixCustomerInsurancePolicies;
+            }
+        }
+
+        public IBaggageTypeRepository BaggageTypes
+        {
+            get
+            {
+                _baggageTypes ??= new BaggageTypeRepository(_context);
+                return _baggageTypes;
+            }
+        }
+
+        public ITravelMeansTypeRepository TravelMeansTypes
+        {
+            get
+            {
+                _travelMeansTypes ??= new TravelMeansTypeRepository(_context);
+                return _travelMeansTypes;
             }
         }
 

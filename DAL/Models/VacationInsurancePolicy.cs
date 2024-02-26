@@ -9,7 +9,6 @@ namespace DAL.Models
 {
     public class VacationInsurancePolicy : InsurancePolicy
     {
-        //public EnumStructureType? StructureType { get; set; }
         public string StructureName { get; set; }
         public string StructureAddres { get; set; }
         public DateTime CheckInDate { get; set; }
