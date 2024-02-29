@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppCaricamentoDati.Helpers
 {
-    public static class Utility
+    public static class Utils
     {
         public static string Chars => "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static string Digit => "0123456789";

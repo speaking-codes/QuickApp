@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using ConsoleAppCaricamentoDati.Helpers;
+using DAL;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,13 @@ namespace ConsoleAppCaricamentoDati.Builder
 {
     public class PetInsurancePolicyBuilder : InsurancePolicyBuilder
     {
-        public PetInsurancePolicyBuilder(InsurancePolicyCategory insurancePolicyCategory, Customer customer, IUnitOfWork unitOfWork) : 
-            base(insurancePolicyCategory, customer, unitOfWork) { }
+        private readonly IList<BreedPetDetailType> _breedPetDetailTypes;
+
+        public PetInsurancePolicyBuilder(InsurancePolicyCategory insurancePolicyCategory, Customer customer, IUnitOfWork unitOfWork) :
+            base(insurancePolicyCategory, customer, unitOfWork)
+        {
+            _breedPetDetailTypes = UnitOfWork.BreedPetDetailTypes.GetAll();
+        }
 
         protected override InsurancePolicy NewInsurancePolicy() => new PetInsurancePolicy();
 
@@ -23,7 +29,16 @@ namespace ConsoleAppCaricamentoDati.Builder
 
         public override InsurancePolicyBuilder SetDetailItem()
         {
-            throw new NotImplementedException();
+            var indexBreedPetDetail = Random.Next(0, _breedPetDetailTypes.Count);
+            var age = Random.Next(0, 3);
+            var days = Random.Next(1, 365);
+
+            ((PetInsurancePolicy)InsurancePolicy).PetIdentificationCode = Utils.GenerateRandomCode(10, Utils.Digit, Random);
+            ((PetInsurancePolicy)InsurancePolicy).PetName = Random.NextDouble().ToString();
+            ((PetInsurancePolicy)InsurancePolicy).PetBirthDate = DateTime.Now.AddYears(-age).AddDays(-days);
+            ((PetInsurancePolicy)InsurancePolicy).BreedPetDetailType = _breedPetDetailTypes[indexBreedPetDetail];
+
+            return this;
         }
     }
 }

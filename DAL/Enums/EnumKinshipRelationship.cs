@@ -3,14 +3,16 @@
     public enum EnumKinshipRelationship
     {
         [ValueInfo(Definition = "Non Specificato")]
-        None,
+        None=0,
         [ValueInfo(Definition = "Genitore")]
-        Parent,
+        Parent=1,
         [ValueInfo(Definition = "Coniuge")]
-        Spouse,
-        [ValueInfo(Definition = "Figlio")]
-        Son,
+        Spouse=2,
+        [ValueInfo(Definition = "Figlio/a")]
+        Son=3,
+        [ValueInfo(Definition ="Fratello/Sorella")]
+        Brother=4,
         [ValueInfo(Definition = "Altro Familiare")]
-        Other_Family_Member
+        Other_Family_Member=5
     }
 }

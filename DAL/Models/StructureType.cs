@@ -11,6 +11,6 @@ namespace DAL.Models
         public byte Id { get; set; }
         public string StructureTypeName { get; set; }
 
-        public virtual IList<VacationInsurancePolicy> VacationInsurancePolicies { get; set; }
+        public virtual IList<Vacation> Vacations { get; set; }
     }
 }

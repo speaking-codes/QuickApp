@@ -38,9 +38,9 @@ namespace ConsoleAppCaricamentoDati.Builder
             _index = Random.Next(0, _configurationModels.Count);
             var commercialValue = 25000 * (1 + Random.NextDouble());
 
-            ((VehicleInsurancePolicy)InsurancePolicy).LicensePlate = Utility.GenerateRandomCode(2,Utility.Chars, Random) + 
-                                                                     Utility.GenerateRandomCode(3,Utility.Digit, Random) +
-                                                                     Utility.GenerateRandomCode(2, Utility.Chars, Random);
+            ((VehicleInsurancePolicy)InsurancePolicy).LicensePlate = Utils.GenerateRandomCode(2,Utils.Chars, Random) + 
+                                                                     Utils.GenerateRandomCode(3,Utils.Digit, Random) +
+                                                                     Utils.GenerateRandomCode(2, Utils.Chars, Random);
 
             ((VehicleInsurancePolicy)InsurancePolicy).ConfigurationModel = _configurationModels[_index];
             ((VehicleInsurancePolicy)InsurancePolicy).CommercialValue = commercialValue;

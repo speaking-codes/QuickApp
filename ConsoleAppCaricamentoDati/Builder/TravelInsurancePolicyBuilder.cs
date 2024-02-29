@@ -57,7 +57,7 @@ namespace ConsoleAppCaricamentoDati.Builder
                 var indexMeansType = Random.Next(0, _travelMeansTypes.Count);
                 var indexClassType = Random.Next(0, _travelMeansTypes[indexMeansType].TravelClassTypes.Count);
                 var indexConfigurationModel = Random.Next(0, _configurationModels.Count);
-         
+
                 var indexDepartureMunicipality = Random.Next(0, _municipalities.Count);
                 var indexArrivalMunicipality = Random.Next(0, _municipalities.Count);
                 while (indexDepartureMunicipality == indexArrivalMunicipality)
@@ -110,6 +110,9 @@ namespace ConsoleAppCaricamentoDati.Builder
                     travel.ArrivalMunicipality = _municipalities[indexArrivalMunicipality];
                 }
 
+                var totalDays = (int)InsurancePolicy.IssueDate.Subtract(DateTime.Now).TotalDays;
+                travel.DepartureDate = DateTime.Now.AddDays(Random.Next(-totalDays + 5, totalDays + 60));
+                travel.ArrivalDate = travel.DepartureDate.AddDays(2);
                 InsurancePolicy.Travels.Add(travel);
             }
             return this;

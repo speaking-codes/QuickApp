@@ -23,7 +23,7 @@ namespace ConsoleAppCaricamentoDati.Builder
 
         public override InsurancePolicyBuilder SetDetailItem()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

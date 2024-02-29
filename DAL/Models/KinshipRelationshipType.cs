@@ -11,7 +11,7 @@ namespace DAL.Models
         public byte Id { get; set; }
         public string KinshipRelationshipTypeName { get; set; }
 
-        public virtual IList<FamilyInsurancePolicy> FamilyInsurancePolicies { get; set; }
+        public virtual IList<FamilyInsurancePolicy > FamilyInsurancePolicies { get; set; }
 
         public virtual IList<HealthInsurancePolicy> HealthInsurancePolicies { get; set; }
     }

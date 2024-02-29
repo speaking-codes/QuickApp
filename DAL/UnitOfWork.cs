@@ -41,6 +41,9 @@ namespace DAL
 
         private IBaggageTypeRepository _baggageTypes;
         private ITravelMeansTypeRepository _travelMeansTypes;
+        private IKinshipRelationshipTypeRepository _kinshipRelationshipTypes;
+        private IStructureTypeRepository _structureTypes;
+        private IBreedPetDetailTypeRepository _breedPetDetailTypes;
 
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
@@ -192,6 +195,33 @@ namespace DAL
             {
                 _travelMeansTypes ??= new TravelMeansTypeRepository(_context);
                 return _travelMeansTypes;
+            }
+        }
+
+        public IKinshipRelationshipTypeRepository KinshipRelationshipTypes
+        {
+            get
+            {
+                _kinshipRelationshipTypes ??= new KinshipRelationshipTypeRepository(_context);
+                return _kinshipRelationshipTypes;
+            }
+        }
+
+        public IStructureTypeRepository StructureTypes
+        {
+            get
+            {
+                _structureTypes ??= new StructureTypeRepository(_context);
+                return _structureTypes;
+            }
+        }
+
+        public IBreedPetDetailTypeRepository BreedPetDetailTypes
+        {
+            get
+            {
+                _breedPetDetailTypes ??= new BreedPetDetailTypeRepository(_context);
+                return _breedPetDetailTypes;
             }
         }
 

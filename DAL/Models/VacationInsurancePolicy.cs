@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class VacationInsurancePolicy : InsurancePolicy
+    public class Vacation
     {
+        public int Id { get; set; }
         public string StructureName { get; set; }
         public string StructureAddres { get; set; }
         public DateTime CheckInDate { get; set; }
@@ -17,5 +18,7 @@ namespace DAL.Models
         public virtual Municipality PlaceStructure { get; set; }
 
         public virtual StructureType StructureType { get; set; }
+
+        public virtual InsurancePolicy InsurancePolicy { get; set; }
     }
 }

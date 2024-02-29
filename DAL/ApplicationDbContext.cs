@@ -87,7 +87,7 @@ namespace DAL
         public DbSet<TravelMeansType> TravelMeansTypes { get; set; }
         public DbSet<TravelClassType> TravelClassTypes { get; set; }
 
-        public DbSet<VacationInsurancePolicy> VacationInsurancePolicies { get; set; }
+        public DbSet<Vacation> Vacations { get; set; }
         public DbSet<BaggageLoss> BaggageLosses { get; set; }
         public DbSet<Travel> Travels { get; set; }
 
@@ -322,7 +322,7 @@ namespace DAL
             builder.Entity<TravelClassType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<TravelClassType>().ToTable($"App{nameof(TravelClassTypes)}");
 
-            builder.Entity<VacationInsurancePolicy>().ToTable($"App{nameof(VacationInsurancePolicies)}");
+            builder.Entity<Vacation>().ToTable($"App{nameof(Vacations)}");
             
             builder.Entity<BaggageLoss>().ToTable($"App{nameof(BaggageLosses)}");
             

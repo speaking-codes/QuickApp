@@ -55,9 +55,9 @@ namespace ConsoleAppCaricamentoDati.Builder
                     break;               
             }
 
-           ((VehicleInsurancePolicy)InsurancePolicy).LicensePlate = Utility.GenerateRandomCode(2, Utility.Chars, Random) +
-                                                                     Utility.GenerateRandomCode(3, Utility.Chars, Random) + 
-                                                                     Utility.GenerateRandomCode(2, Utility.Chars, Random);
+           ((VehicleInsurancePolicy)InsurancePolicy).LicensePlate = Utils.GenerateRandomCode(2, Utils.Chars, Random) +
+                                                                     Utils.GenerateRandomCode(3, Utils.Chars, Random) + 
+                                                                     Utils.GenerateRandomCode(2, Utils.Chars, Random);
 
             ((VehicleInsurancePolicy)InsurancePolicy).ConfigurationModel = _configurationModels[_index];
             ((VehicleInsurancePolicy)InsurancePolicy).CommercialValue = commercialValue;

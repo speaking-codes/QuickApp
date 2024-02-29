@@ -18,7 +18,6 @@ namespace ConsoleAppCaricamentoDati.BuilderManager
         private string _firstNameMalePath => $"{_basePath}NomiMaschili.txt";
         private string _firstNameFemalePath => $"{_basePath}NomiFemminili.txt";
         private string _addressPath => $"{_basePath}Indirizzi.txt";
-        private string _jobPath => $"{_basePath}Professioni.txt";
 
         private readonly int _customerCount;
 

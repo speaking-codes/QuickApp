@@ -24,5 +24,7 @@ namespace DAL.Models
         public virtual IList<BaggageLoss> BaggageLosses { get; set; }
 
         public virtual IList<Travel> Travels { get; set; }
+
+        public virtual IList<Vacation> Vacations { get; set; }
     }
 }

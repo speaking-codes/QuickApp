@@ -19,7 +19,7 @@ namespace DAL.Models
 
         public virtual IList<Address> Addresses { get; set; }
 
-        public virtual IList<VacationInsurancePolicy> VacationInsurancePolicies { get; set; }
+        public virtual IList<Vacation> Vacations { get; set; }
 
         public virtual IList<Travel> DepartureTravels { get; set; }
 

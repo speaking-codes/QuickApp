@@ -15,6 +15,7 @@
     <Compile Remove="Repositories\CustomerInsuranceCategoryPolicyRatingRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IAgeRatingCoefficientRepository.cs" />
     <Compile Remove="Repositories\Interfaces\ICustomerInsuranceCategoryPolicyRatingRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\IHealthcareProvisionTypeRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IJobRalRatingCoefficientRepository.cs" />
     <Compile Remove="Repositories\JobRalRatingCoefficientRepository.cs" />
   </ItemGroup>
