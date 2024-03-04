@@ -16,7 +16,7 @@ namespace ConsoleAppCaricamentoDati.BuilderManager
         public BuilderManager(IUnitOfWork unitOfWork, ICustomerManager customerManager)
         {
             UnitOfWork = unitOfWork;
-            customerManager = customerManager;
+            CustomerManager = customerManager;
         }
 
         public void Dispose()

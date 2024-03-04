@@ -56,7 +56,6 @@ export class DashboardHeaderComponent implements OnInit {
   }
 
   onLoad(customerName: string){
-    debugger;
     this.loaded.emit(customerName);
   }
 }

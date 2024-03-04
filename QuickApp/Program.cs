@@ -61,7 +61,7 @@ namespace QuickApp
 
             var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name; //QuickApp
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly(migrationsAssembly));
                 options.UseOpenIddict();

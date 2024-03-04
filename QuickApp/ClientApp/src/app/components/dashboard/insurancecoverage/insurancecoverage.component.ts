@@ -44,7 +44,6 @@ export class InsurancecoverageComponent {
     }
     else
     {
-        debugger;
         this.insuranceCoverageRemoved.emit(selectedValue);
     }
   }

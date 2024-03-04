@@ -1,100 +1,89 @@
-﻿Via Roma, 123
-Via Milano, 456
-Corso Vittorio Emanuele, 789
-Via Dante Alighieri, 101
-Piazza Garibaldi, 202
-Via Verdi, 303
-Corso Umberto I, 404
-Via De Gasperi, 505
-Piazza Mazzini, 606
-Via Manzoni, 707
-Corso Cavour, 808
-Via Leonardo da Vinci, 909
-Piazza del Popolo, 111
-Via Carducci, 222
-Corso Galileo Galilei, 333
-Piazza Venezia, 444
-Via Petrarchi, 555
-Corso Sempione, 666
-Piazza Navona, 777
-Via Garibaldini, 888
-Corso Magenta, 999
-Via Mazzarri, 1212
-Piazza Colombo, 1313
-Via San Martino, 1414
-Corso Buonarroti, 1515
-Via Pascoli, 1616
-Piazza Vittoria, 1717
-Via Foscolo, 1818
-Corso Leopardi, 1919
-Piazza Puccini, 2020
-Via Monteverdi, 2121
-Corso Rossini, 2222
-Piazza Bellini, 2323
-Via Vivaldi, 2424
-Corso Donizetti, 2525
-Piazza Dante, 2626
-Via Goldoni, 2727
-Corso Alfieri, 2828
-Piazza Boccaccio, 2929
-Via Leopardi, 3030
-Corso Manzoni, 3131
-Piazza Verdi, 3232
-Via Tasso, 3333
-Corso Dante Alighieri, 3434
-Piazza Machiavelli, 3535
-Via Montale, 3636
-Corso Carducci, 3737
-Piazza Petrarca, 3838
-Via Boccaccio, 3939
-Corso Goldoni, 4040
-Piazza Foscolo, 4141
-Via Pasolini, 4242
-Corso Vivaldi, 4343
-Piazza Puccini, 4444
-Via Bellini, 4545
-Corso Donizetti, 4646
-Piazza Rossini, 4747
-Via Verdi, 4848
-Corso Mozart, 4949
-Piazza Beethoven, 5050
-Via Chopin, 5151
-Corso Bach, 5252
-Piazza Brahms, 5353
-Via Schubert, 5454
-Corso Haydn, 5555
-Piazza Liszt, 5656
-Via Wagner, 5757
-Corso Handel, 5858
-Piazza Mendelssohn, 5959
-Via Debussy, 6060
-Corso Ravel, 6161
-Piazza Stravinsky, 6262
-Via Tchaikovsky, 6363
-Corso Rachmaninoff, 6464
-Piazza Shostakovich, 6565
-Via Prokofiev, 6666
-Corso Bartok, 6767
-Piazza Gershwin, 6868
-Via Ellington, 6969
-Corso Armstrong, 7070
-Piazza Holiday, 7171
-Via Fitzgerald, 7272
-Corso Sinatra, 7373
-Piazza Presley, 7474
-Via Lennon, 7575
-Corso Marley, 7676
-Piazza Hendrix, 7777
-Via Joplin, 7878
-Corso Morrison, 7979
-Piazza Mercury, 8080
-Via Winehouse, 8181
-Corso Bowie, 8282
-Piazza Prince, 8383
-Via Madonna, 8484
-Corso Jackson, 8585
-Piazza Springsteen, 8686
-Via Dylan, 8787
-Corso Cohen, 8888
-Piazza Clapton, 8989
-Via B.B. King, 9090
+﻿Roma
+Milano
+Vittorio Emanuele
+Dante Alighieri
+Piazza Garibaldi
+Giuseeppe Verdi
+Umberto I
+Alcide De Gasperi
+Piazza Giuseppe Mazzini
+Alessandro Manzoni
+Camillo Benso Conte di Cavour
+Leonardo da Vinci
+Piazza del Popolo
+Giosuè Carducci
+Galileo Galilei
+Piazza Venezia
+Piazza Navona
+Garibaldini
+Piazza Cristoforo Colombo
+San Martino
+Giovanni Pascoli
+Piazza Vittoria
+Ugo Foscolo
+Giacomo Leopardi
+Piazza Vittorio Puccini
+Monteverdi
+Giacomo Rossini
+Antonio Vivaldi
+Piazza Dante Alighieri
+Goldoni
+Vittorio Alfieri
+Piazza Boccaccio
+Giacomo Leopardi
+Torquato Tasso
+Dante Alighieri
+Piazza Machiavelli
+Ennio Montale
+Piazza Francesco Petrarca
+Boccaccio
+Goldoni
+Pasolini
+Vivaldi
+Piazza Puccini
+Bellini
+Donizetti
+Piazza Rossini
+Verdi
+Mozart
+Piazza Beethoven
+Chopin
+Bach
+Piazza Brahms
+Schubert
+Haydn
+Piazza Liszt
+Wagner
+Handel
+Piazza Mendelssohn
+Debussy
+Ravel
+Piazza Stravinsky
+Tchaikovsky
+Rachmaninoff
+Piazza Shostakovich
+Prokofiev
+Bartok
+Piazza Gershwin
+Ellington
+Armstrong
+Piazza Holiday
+Fitzgerald
+Sinatra
+Piazza Presley
+Lennon
+Marley
+Piazza Hendrix
+Joplin
+Morrison
+Piazza Mercury
+Winehouse
+Bowie
+Piazza Prince
+Madonna
+Jackson
+Piazza Springsteen
+Dylan
+Cohen
+Piazza Clapton
+B.B. King

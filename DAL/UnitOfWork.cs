@@ -4,6 +4,7 @@
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
 
+using DAL.Models;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace DAL
     {
         #region Private
 
-        private readonly ApplicationDbContext _context;
+        protected readonly ApplicationDbContext _context;
 
         private ICustomerRepository _customers;
 
@@ -44,6 +45,7 @@ namespace DAL
         private IKinshipRelationshipTypeRepository _kinshipRelationshipTypes;
         private IStructureTypeRepository _structureTypes;
         private IBreedPetDetailTypeRepository _breedPetDetailTypes;
+        private IIncomeTypeRepository _incomeTypes;
 
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
@@ -52,9 +54,13 @@ namespace DAL
 
         #region Ctor
 
-        public UnitOfWork(ApplicationDbContext context)
+        //public UnitOfWork(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        public UnitOfWork(IDbContextFactory<ApplicationDbContext> contextFactory)
         {
-            _context = context;
+            _context = contextFactory.CreateDbContext();
         }
 
         #endregion
@@ -225,6 +231,15 @@ namespace DAL
             }
         }
 
+        public IIncomeTypeRepository IncomeTypes
+        {
+            get
+            {
+                _incomeTypes ??= new IncomeTypeRepository(_context);
+                return _incomeTypes;
+            }
+        }
+
         public bool IsTransactionOpened { get { return _transaction != null; } }
 
         #endregion
@@ -262,6 +277,7 @@ namespace DAL
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
                 // TODO: set large fields to null
                 _disposedValue = true;
+                _context.Dispose();
             }
         }
 

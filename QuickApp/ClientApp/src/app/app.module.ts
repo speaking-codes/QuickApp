@@ -73,6 +73,7 @@ import { CardComponent } from './components/controls/card/card.component';
 import { DivStyleDirective } from './directives/div-style.directive';
 import { IconStyleDirective } from './directives/icon-style.directive';
 import { TxtStyleDirective } from './directives/txt-style.directive';
+import { TextMultilineDirective } from './directives/text-multiline.directive';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { TxtStyleDirective } from './directives/txt-style.directive';
     CardComponent,
     DivStyleDirective,
     IconStyleDirective,
-    TxtStyleDirective
+    TxtStyleDirective,
+    TextMultilineDirective
   ],
   imports: [
     BrowserModule,

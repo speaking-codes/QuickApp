@@ -111,7 +111,7 @@ namespace ConsoleAppCaricamentoDati.Builder
                 }
 
                 var totalDays = (int)InsurancePolicy.IssueDate.Subtract(DateTime.Now).TotalDays;
-                travel.DepartureDate = DateTime.Now.AddDays(Random.Next(-totalDays + 5, totalDays + 60));
+                travel.DepartureDate = DateTime.Now.AddDays(Random.Next(5, 60));
                 travel.ArrivalDate = travel.DepartureDate.AddDays(2);
                 InsurancePolicy.Travels.Add(travel);
             }

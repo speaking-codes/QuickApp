@@ -102,6 +102,10 @@ namespace DAL
 
         #endregion
 
+        public DbSet<HealthInsurancePolicy> HealthInsurancePolicies { get; set; }
+
+        //public DbSet<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
+
         #endregion
 
         #region Machine Learning
@@ -350,6 +354,10 @@ namespace DAL
             builder.Entity<PetInsurancePolicy>().ToTable($"App{nameof(PetInsurancePolicies)}");
 
             #endregion
+
+            builder.Entity<HealthInsurancePolicy>().ToTable("HealthInsurancePolicy");//.ToTable($"App{nameof(HealthInsurancePolicies)}");
+
+            //builder.Entity<WorkActivityInsurancePolicy>().ToTable($"App{nameof(WorkActivityInsurancePolicies)}");
 
             #endregion
 

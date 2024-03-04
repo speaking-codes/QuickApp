@@ -18,6 +18,10 @@ namespace DAL.Repositories
         public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories() =>
             _appContext.InsurancePolicyCategories
                        .Include(x => x.SalesLine);
+        public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories(string customerCode) =>
+            _appContext.InsurancePolicyCategories
+                       .Include(x => x.InsurancePolicies)
+                       .Where(x => x.InsurancePolicies.Any(y => y.Customer.CustomerCode == customerCode));
 
         public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(string insurancePolicyCategoryCode) =>
             _appContext.InsurancePolicyCategories

@@ -15,7 +15,7 @@ namespace DAL.Models
         public EnumGender Gender { get; set; }
         public string TipologiaPrestazione { get; set; }
 
-        public virtual KinshipRelationshipType KinshipRelationship { get; set; }
+        public virtual KinshipRelationshipType KinshipRelationshipType { get; set; }
 
         //public HealthcareProvisionType HealthcareProvisionType { get; set; }
     }

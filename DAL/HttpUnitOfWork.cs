@@ -6,6 +6,7 @@
 
 using DAL.Core;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -13,9 +14,9 @@ namespace DAL
 {
     public class HttpUnitOfWork : UnitOfWork
     {
-        public HttpUnitOfWork(ApplicationDbContext context, IHttpContextAccessor httpAccessor) : base(context)
+        public HttpUnitOfWork(IDbContextFactory<ApplicationDbContext> contextFactory, IHttpContextAccessor httpAccessor) : base(contextFactory)
         {
-            context.CurrentUserId = httpAccessor.HttpContext?.User.FindFirst(ClaimConstants.Subject)?.Value?.Trim();
+            _context.CurrentUserId = httpAccessor.HttpContext?.User.FindFirst(ClaimConstants.Subject)?.Value?.Trim();
         }
     }
 }

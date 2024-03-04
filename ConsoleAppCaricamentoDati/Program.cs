@@ -1,24 +1,18 @@
-﻿using ConsoleAppCaricamentoDati.Models;
+﻿using ConsoleAppCaricamentoDati.BuilderManager;
 using DAL;
-using DAL.Core.Interfaces;
 using DAL.Core;
-using DAL.MongoDB;
+using DAL.Core.Helpers;
+using DAL.Core.Interfaces;
+using DAL.Models;
 using DAL.QueueService;
-using DAL.Repositories;
-using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using DAL.Models;
-using ConsoleAppCaricamentoDati.BuilderManager;
-using ConsoleAppCaricamentoDati.Builder;
-using System.Collections.Generic;
-using DAL.Core.Helpers;
 
 namespace ConsoleAppCaricamentoDati
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var basePath = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\ConsoleAppCaricamentoDati\DatiBase\";
             var lastNamePath = $"{basePath}Cognomi.txt";
@@ -41,7 +35,7 @@ namespace ConsoleAppCaricamentoDati
             services.AddScoped<ILearningManager, LearningManager>();
             var provider = services.BuildServiceProvider();
 
-            using (var customerBuilder = new CustomerBuilderManager(provider.GetRequiredService<IUnitOfWork>(), provider.GetRequiredService<ICustomerManager>(), 3))
+            using (var customerBuilder = new CustomerBuilderManager(provider.GetRequiredService<IUnitOfWork>(), provider.GetRequiredService<ICustomerManager>(), 1))
                 customerBuilder.Run();
 
             IList<InsurancePolicy> insurancePolicies = new List<InsurancePolicy>();
@@ -55,6 +49,13 @@ namespace ConsoleAppCaricamentoDati
                     var insurancePolicyBuilders = builder.GetInsurancePolicyBuilderManagers(item);
                     insurancePolicies.AddRange(builder.GetInsurancePolicies(insurancePolicyBuilders));
                 }
+            }
+            
+            using (var insurancePolicyManager = provider.GetRequiredService<IInsurancePolicyManager>())
+            {
+                insurancePolicyManager.BeginTransaction();
+                foreach (var item in insurancePolicies)
+                    insurancePolicyManager.AddInsurancePolicy(item);
             }
 
             //using (var manager = provider.GetRequiredService<ILearningManager>())

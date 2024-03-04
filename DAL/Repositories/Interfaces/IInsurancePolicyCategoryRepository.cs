@@ -10,6 +10,7 @@ namespace DAL.Repositories.Interfaces
     public interface IInsurancePolicyCategoryRepository : IRepository<InsurancePolicyCategoryRepository>
     {
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories();
+        IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories(string customerCode);
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(string insurancePolicyCategoryCode);
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(int insurancePolicyCategoryId);
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategoryStatistics(int year);

@@ -94,7 +94,6 @@ export class DashboardComponent implements OnInit{
     }
 
     onInsuranceCoverageAdded(selectedItem: InsuranceCategoryPolicyCard){ 
-        debugger;
         var newInsuranceCoveragePolicy = new InsuranceCoveragePolicyFooter(selectedItem.code, selectedItem.name, selectedItem.iconCssClass, selectedItem.salesLineBackgroundCssClass);
         this.insuranceCoveragePolicyFooters.push(newInsuranceCoveragePolicy);
     }
@@ -104,7 +103,6 @@ export class DashboardComponent implements OnInit{
      }
 
      onLoad(customerName: string){
-      debugger;
       this.customerFullName = customerName;
     }
 }

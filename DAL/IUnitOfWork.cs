@@ -36,6 +36,7 @@ namespace DAL
         IKinshipRelationshipTypeRepository KinshipRelationshipTypes { get; }
         IStructureTypeRepository StructureTypes { get; }
         IBreedPetDetailTypeRepository BreedPetDetailTypes { get; }
+        IIncomeTypeRepository IncomeTypes { get; }
 
         bool IsTransactionOpened { get; }
 

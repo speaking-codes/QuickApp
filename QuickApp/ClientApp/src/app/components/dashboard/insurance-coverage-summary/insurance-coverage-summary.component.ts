@@ -5,6 +5,7 @@ import { InsuranceCoverageSummary } from 'src/app/models/insurance-coverage';
 import { AlertService, MessageSeverity } from 'src/app/services/alert.service';
 import { DashboardServiceService } from 'src/app/services/dashboard-service.service';
 import { Utilities } from 'src/app/services/utilities';
+import { TextMultilineDirective } from 'src/app/directives/text-multiline.directive';
 
 @Component({
   selector: 'app-insurance-coverage-summary',

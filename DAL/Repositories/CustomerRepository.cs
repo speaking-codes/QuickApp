@@ -22,7 +22,11 @@ namespace DAL.Repositories
         {
             return _appContext.Customers
                 .Include(c => c.Addresses)
-                .AsSingleQuery()
+                    .ThenInclude(a => a.Municipality)
+                .Include(c => c.FamilyType)
+                .Include(c => c.MaritalStatus)
+                .Include(c => c.ContractType)
+                .Include(c => c.ProfessionType)
                 .Where(x => x.IsActive)
                 .OrderBy(c => c.LastName)
                 .ThenBy(c => c.FirstName);

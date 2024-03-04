@@ -16,7 +16,6 @@ namespace ConsoleAppCaricamentoDati.Builder
         private const string _lastNamePath = $"{_basePath}Cognomi.txt";
         private const string _firstNameMalePath = $"{_basePath}NomiMaschili.txt";
         private const string _firstNameFemalePath = $"{_basePath}NomiFemminili.txt";
-        private const string _addressPath = $"{_basePath}Indirizzi.txt";
 
         private IList<string> _lastNames { get; set; }
         private IList<FirstNameTemplate> _firstNameTemplates { get; set; }
