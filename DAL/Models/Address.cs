@@ -13,7 +13,8 @@ namespace DAL.Models
         public int Id { get; set; }
         public EnumAddressType AddressType { get; set; }    
         public string Location { get; set; }
-        
+
+        public short? MunicipalityId { get; set; }
         public virtual Municipality Municipality { get; set; }
 
         public virtual Customer Customer { get; set; }

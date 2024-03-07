@@ -24,7 +24,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         //services.AddScoped<ICustomerRatingManager, CustomerRatingManager>();
         //services.AddScoped<IInsurancePolicyManager, InsurancePolicyManager>();
 
-        services.AddScoped<IMessageQueueProducer, MessageQueueProducer>();
+        services.AddSingleton<IMessageQueueProducer, MessageQueueProducer>();
 
         //services.AddScoped<ILearningManager, LearningManager>();
         //var provider = services.BuildServiceProvider();

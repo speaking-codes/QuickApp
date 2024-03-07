@@ -4,15 +4,21 @@ namespace DAL.Enums
 {
     public enum EnumMaritalStatus
     {
-        [ValueInfo(Definition ="Celibe/Nubile")]
-        Celibate,
-        [ValueInfo(Definition = "Coniugato/a")]
-        Married,
-        [ValueInfo(Definition = "Separato/a")]
-        Separate,
-        [ValueInfo(Definition = "Divorziato/a")]
-        Divorced,
-        [ValueInfo(Definition = "Vedovo/a")]
-        Widower
+        [ValueInfo(Definition = "Libero")]
+        Libero = 1,
+        [ValueInfo(Definition = "Nubile")]
+        Nubile = 2,
+        [ValueInfo(Definition = "Celibe")]
+        Celibe = 3,
+        [ValueInfo(Definition = "Coniugato")]
+        Coniugato = 4,
+        [ValueInfo(Definition = "Vedovo")]
+        Vedovo = 5,
+        [ValueInfo(Definition = "Separato")]
+        Separato = 6,
+        [ValueInfo(Definition = "Divorziato")]
+        Divorziato = 7,
+        [ValueInfo(Definition = "Convivente")]
+        Convivente = 8,
     }
 }

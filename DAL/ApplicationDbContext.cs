@@ -176,6 +176,41 @@ namespace DAL
             builder.Entity<Customer>().HasIndex(c => c.CustomerCode).IsUnique();
             builder.Entity<Customer>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Customer>().Property(c => c.UpdatedBy).IsRequired(false);
+
+            builder.Entity<Customer>().HasOne(c => c.BirthMunicipality)
+                                                  .WithMany(m => m.Customers)
+                                                  .HasForeignKey(c => c.BirthMunicipalityId)
+                                                  .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Customer>().HasOne(c => c.FamilyType)
+                                      .WithMany(m => m.Customers)
+                                      .HasForeignKey(c => c.FamilyTypeId)
+                                      .OnDelete(DeleteBehavior.NoAction);
+        
+            builder.Entity<Customer>().HasOne(c => c.MaritalStatus)
+                                      .WithMany(m => m.Customers)
+                                      .HasForeignKey(c => c.MaritalStatusId)
+                                      .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Customer>().HasOne(c => c.BirthMunicipality)
+                                      .WithMany(m => m.Customers)
+                                      .HasForeignKey(c => c.BirthMunicipalityId)
+                                      .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Customer>().HasOne(c => c.ContractType)
+                                      .WithMany(m => m.Customers)
+                                      .HasForeignKey(c => c.ContractTypeId)
+                                      .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Customer>().HasOne(c => c.IncomeType)
+                                      .WithMany(m => m.Customers)
+                                      .HasForeignKey(c => c.IncomeTypeId)
+                                      .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Customer>().HasOne(c => c.ProfessionType)
+                                      .WithMany(m => m.Customers)
+                                      .HasForeignKey(c => c.ProfessionTypeId)
+                                      .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<Customer>().ToTable($"App{nameof(Customers)}");
 
             builder.Entity<Delivery>().Property(c => c.Email).HasMaxLength(100).IsRequired(false);
@@ -187,6 +222,12 @@ namespace DAL
             builder.Entity<Address>().Property(c => c.Location).HasMaxLength(80).IsRequired(false);
             builder.Entity<Address>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Address>().Property(c => c.UpdatedBy).IsRequired(false);
+
+            builder.Entity<Address>().HasOne(c => c.Municipality)
+                                    .WithMany(m => m.Addresses)
+                                    .HasForeignKey(c => c.MunicipalityId)
+                                    .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<Address>().ToTable($"App{nameof(Addresses)}");
 
             #endregion

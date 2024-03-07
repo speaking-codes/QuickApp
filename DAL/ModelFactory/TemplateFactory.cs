@@ -78,6 +78,19 @@ namespace DAL.ModelFactory
         private IList<ContractType> GetContractTypes() => _unitOfWork.ContractTypes.GetAll();
         private IList<IncomeType> GetIncomeTypes() => _unitOfWork.IncomeTypes.GetAll();
         private IList<ProfessionType> GetProfessionTypes() => _unitOfWork.ProfessionTypes.GetAll();
+        private IList<double> GetIncomes()
+        {
+            var random = new Random();
+            var incomes = new List<double>();
+            double incomeBase = 9000;
+
+            while (incomeBase < 180000)
+            {
+                incomes.Add(incomeBase);
+                incomeBase = incomeBase + 1500 + 1000 * random.NextDouble();
+            }
+            return incomes;
+        }
 
         public TemplateFactory(IUnitOfWork unitOfWork)
         {
@@ -95,14 +108,18 @@ namespace DAL.ModelFactory
         public CustomerModelTemplate CreateCustomerModelTemplate()
         {
             var _customerModel = new CustomerModelTemplate();
+          
             _customerModel.LastNames = getLastName(_lastNamePath);
             _customerModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
             _customerModel.FamilyTypes = GetFamilyTypes();
             _customerModel.MaritalStatuses = GetMaritalStatusTypes();
             _customerModel.BirthMunicipalities = GetMunicipalities();
+
             _customerModel.ContractTypes = GetContractTypes();
             _customerModel.IncomeTypes = GetIncomeTypes();
             _customerModel.ProfessionTypes = GetProfessionTypes();
+            _customerModel.Incomes = GetIncomes();
+
             _customerModel.DeliveryModelTemplate = getDeliveryModel();
             _customerModel.AddressTemplate = CreateAddressModelTemplate();
 
