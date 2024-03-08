@@ -1,4 +1,6 @@
-﻿using DAL.BuilderModelTemplate;
+﻿using DAL.BuilderModel.Interfaces;
+using DAL.BuilderModelTemplate;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +13,7 @@ namespace DAL.ModelFactory.Interfaces
     {
         AdressModelTemplate CreateAddressModelTemplate();
         CustomerModelTemplate CreateCustomerModelTemplate();
+        InsurancePolicyTemplate CreateInsurancePolicyTemplate();
+        IList<IInsurancePolicyBuilder> CreateInsurancePolicyBuilders(int count, IList<InsurancePolicyCategory> insurancePolicyCategories, Random random);
     }
 }

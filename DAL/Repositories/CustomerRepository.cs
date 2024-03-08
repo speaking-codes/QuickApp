@@ -42,6 +42,9 @@ namespace DAL.Repositories
                 .OrderBy(c => c.LastName)
                 .ThenBy(c => c.FirstName);
         }
+        
+        public IQueryable<Customer> GetCustomersWithoutInsurancePolicies()=>
+            _appContext.Customers.Where(x => !x.InsurancePolicies.Any());        
 
         public IQueryable<Customer> GetCustomer(string customerCode)
         {

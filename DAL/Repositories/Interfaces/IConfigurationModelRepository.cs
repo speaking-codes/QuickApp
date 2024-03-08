@@ -10,6 +10,8 @@ namespace DAL.Repositories.Interfaces
     public interface IConfigurationModelRepository : IRepository<ConfigurationModel>
     {
         IQueryable<ConfigurationModel> GetConfigurationModels();
+        IQueryable<ConfigurationModel> GetCarConfigurationModels();
+        IQueryable<ConfigurationModel> GetBykeConfigurationModels();
         IQueryable<ConfigurationModel> GetConfigurationsByInsurancePolicyVehicle(int idPolicy);
     }
 }

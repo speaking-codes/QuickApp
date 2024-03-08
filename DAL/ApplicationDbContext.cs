@@ -97,15 +97,14 @@ namespace DAL
 
         public DbSet<FamilyInsurancePolicy> FamilyInsurancePolicies { get; set; }
         public DbSet<PetInsurancePolicy> PetInsurancePolicies { get; set; }
-
         public DbSet<KinshipRelationshipType> KinshipRelationshipTypes { get; set; }
 
         #endregion
 
         public DbSet<HealthInsurancePolicy> HealthInsurancePolicies { get; set; }
-
-        //public DbSet<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
-
+        public DbSet<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
+        public DbSet<HouseInsurancePolicy> HouseInsurancePolicies { get; set; }
+        
         #endregion
 
         #region Machine Learning
@@ -396,9 +395,11 @@ namespace DAL
 
             #endregion
 
-            builder.Entity<HealthInsurancePolicy>().ToTable("HealthInsurancePolicy");//.ToTable($"App{nameof(HealthInsurancePolicies)}");
+            builder.Entity<HealthInsurancePolicy>().ToTable($"App{nameof(HealthInsurancePolicies)}");
 
-            //builder.Entity<WorkActivityInsurancePolicy>().ToTable($"App{nameof(WorkActivityInsurancePolicies)}");
+            builder.Entity<WorkActivityInsurancePolicy>().ToTable($"App{nameof(WorkActivityInsurancePolicies)}");
+
+            builder.Entity<HouseInsurancePolicy>().ToTable($"App{nameof(HouseInsurancePolicies)}");
 
             #endregion
 

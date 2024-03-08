@@ -27,6 +27,8 @@ namespace DAL.Core
 
         public IList<Customer> GetActiveCustomers() => UnitOfWork.Customers.GetActiveCustomers().ToList();
 
+        public IList<Customer> GetCustomersWithoutInsurancePolicies() => UnitOfWork.Customers.GetCustomersWithoutInsurancePolicies().ToList();
+
         public string AddCustomer(Customer customer)
         {
             try

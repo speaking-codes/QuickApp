@@ -20,7 +20,24 @@ namespace DAL.Repositories
                            .Include(x => x.Model)
                                 .ThenInclude(x => x.Brand)
                                     .ThenInclude(x => x.BrandType)
-                           .Include(x => x.ModelType);
+                           .Include(x => x.ModelType)
+                           .Where(x => x.IsActive);
+
+        public IQueryable<ConfigurationModel> GetCarConfigurationModels() =>
+                _appContext.ConfigurationModels
+                           .Include(x => x.Model)
+                                .ThenInclude(x => x.Brand)
+                                    .ThenInclude(x => x.BrandType)
+                           .Include(x => x.ModelType)
+                           .Where(x => !x.ModelType.IsByke && !x.Model.Brand.BrandType.IsByke && x.IsActive);
+
+        public IQueryable<ConfigurationModel> GetBykeConfigurationModels()=>
+            _appContext.ConfigurationModels
+                       .Include(x => x.Model)
+                                .ThenInclude(x => x.Brand)
+                                    .ThenInclude(x => x.BrandType)
+                           .Include(x => x.ModelType)
+                       .Where(x => x.ModelType.IsByke && x.Model.Brand.BrandType.IsByke && x.IsActive);
 
         public IQueryable<ConfigurationModel> GetConfigurationsByInsurancePolicyVehicle(int idPolicy) =>
             _appContext.ConfigurationModels

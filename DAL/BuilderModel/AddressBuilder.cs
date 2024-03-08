@@ -20,16 +20,21 @@ namespace DAL.BuilderModel
             _random = new Random();
         }
 
+        public IAddressBuilder SetAddress(Address address)
+        {
+            address ??= new Address();
+            _address = address;
+            return this;
+        }
+
         public IAddressBuilder SetAddressType(EnumAddressType addressType)
         {
-            _address ??= new Address();
             _address.AddressType = addressType;
             return this;
         }
 
         public IAddressBuilder SetLocation(IList<string> streetNames)
         {
-            _address ??= new Address();
             var i = _random.Next(streetNames.Count);
             var houseNumber = _random.Next(1, 5999);
             _address.Location = $"{streetNames[i]}, {houseNumber}";
@@ -38,7 +43,6 @@ namespace DAL.BuilderModel
 
         public IAddressBuilder SetMunicipality(IList<Municipality> municipalities)
         {
-            _address ??= new Address();
             var i = _random.Next(municipalities.Count);
             _address.MunicipalityId = municipalities[i].Id;
             return this;

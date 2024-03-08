@@ -42,6 +42,7 @@ namespace DAL
 
         private IBaggageTypeRepository _baggageTypes;
         private ITravelMeansTypeRepository _travelMeansTypes;
+        private ITravelClassTypeRepository _travelClassTypes;
         private IKinshipRelationshipTypeRepository _kinshipRelationshipTypes;
         private IStructureTypeRepository _structureTypes;
         private IBreedPetDetailTypeRepository _breedPetDetailTypes;
@@ -201,6 +202,15 @@ namespace DAL
             {
                 _travelMeansTypes ??= new TravelMeansTypeRepository(_context);
                 return _travelMeansTypes;
+            }
+        }
+
+        public ITravelClassTypeRepository TravelClassTypes
+        {
+            get
+            {
+                _travelClassTypes ??= new TravelClassTypeRepository(_context);
+                return _travelClassTypes;
             }
         }
 

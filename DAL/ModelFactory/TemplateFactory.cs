@@ -1,6 +1,9 @@
-﻿using DAL.BuilderModelTemplate;
+﻿using DAL.BuilderModel;
+using DAL.BuilderModel.Interfaces;
+using DAL.BuilderModelTemplate;
 using DAL.ModelFactory.Interfaces;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -91,6 +94,15 @@ namespace DAL.ModelFactory
             }
             return incomes;
         }
+        private IList<InsurancePolicyCategory> GetInsurancePolicyCategories() => _unitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories().ToList();
+        private IList<ConfigurationModel> GetCarConfigurationModels() => _unitOfWork.ConfigurationModels.GetCarConfigurationModels().ToList();
+        private IList<ConfigurationModel> GetBykeConfigurationModels() => _unitOfWork.ConfigurationModels.GetBykeConfigurationModels().ToList();
+        private IList<TravelMeansType> GetTravelMeansTypes() => _unitOfWork.TravelMeansTypes.GetTravelMeansTypes().ToList();
+        private IList<TravelClassType> GetTravelClassTypes() => _unitOfWork.TravelClassTypes.GetAll();
+        private IList<StructureType> GetStructureTypes() => _unitOfWork.StructureTypes.GetAll();
+        private IList<BaggageType> GetBaggageTypes() => _unitOfWork.BaggageTypes.GetAll();
+        private IList<KinshipRelationshipType> GetKinshipRelationshipTypes() => _unitOfWork.KinshipRelationshipTypes.GetAll();
+        private IList<BreedPetDetailType> GetBreedPetDetailTypes() => _unitOfWork.BreedPetDetailTypes.GetAll();
 
         public TemplateFactory(IUnitOfWork unitOfWork)
         {
@@ -107,28 +119,123 @@ namespace DAL.ModelFactory
 
         public CustomerModelTemplate CreateCustomerModelTemplate()
         {
-            var _customerModel = new CustomerModelTemplate();
-          
-            _customerModel.LastNames = getLastName(_lastNamePath);
-            _customerModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
-            _customerModel.FamilyTypes = GetFamilyTypes();
-            _customerModel.MaritalStatuses = GetMaritalStatusTypes();
-            _customerModel.BirthMunicipalities = GetMunicipalities();
+            var customerModel = new CustomerModelTemplate();
 
-            _customerModel.ContractTypes = GetContractTypes();
-            _customerModel.IncomeTypes = GetIncomeTypes();
-            _customerModel.ProfessionTypes = GetProfessionTypes();
-            _customerModel.Incomes = GetIncomes();
+            customerModel.LastNames = getLastName(_lastNamePath);
+            customerModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
+            customerModel.FamilyTypes = GetFamilyTypes();
+            customerModel.MaritalStatuses = GetMaritalStatusTypes();
+            customerModel.BirthMunicipalities = GetMunicipalities();
 
-            _customerModel.DeliveryModelTemplate = getDeliveryModel();
-            _customerModel.AddressTemplate = CreateAddressModelTemplate();
+            customerModel.ContractTypes = GetContractTypes();
+            customerModel.IncomeTypes = GetIncomeTypes();
+            customerModel.ProfessionTypes = GetProfessionTypes();
+            customerModel.Incomes = GetIncomes();
 
-            return _customerModel;
+            customerModel.DeliveryModelTemplate = getDeliveryModel();
+            customerModel.AddressTemplate = CreateAddressModelTemplate();
+
+            return customerModel;
+        }
+
+        public InsurancePolicyTemplate CreateInsurancePolicyTemplate()
+        {
+            var insurancePolicyModel = new InsurancePolicyTemplate();
+            insurancePolicyModel.LastNames = getLastName(_lastNamePath);
+            insurancePolicyModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
+            insurancePolicyModel.InsurancePolicyCategories = GetInsurancePolicyCategories();
+            insurancePolicyModel.CarConfigurationModels = GetCarConfigurationModels();
+            insurancePolicyModel.BykeConfigurationModels = GetBykeConfigurationModels();
+            insurancePolicyModel.Municipalities = GetMunicipalities();
+            insurancePolicyModel.TravelMeansTypes = GetTravelMeansTypes();
+            insurancePolicyModel.TravelClassTypes = GetTravelClassTypes();
+            insurancePolicyModel.StructureTypes = GetStructureTypes();
+            insurancePolicyModel.ProfessionTypes = GetProfessionTypes();
+            insurancePolicyModel.BaggageTypes = GetBaggageTypes();
+            insurancePolicyModel.KinshipRelationshipTypes = GetKinshipRelationshipTypes();
+            insurancePolicyModel.BreedPetDetailTypes = GetBreedPetDetailTypes();
+            return insurancePolicyModel;
+        }
+
+        public IList<IInsurancePolicyBuilder> CreateInsurancePolicyBuilders(int count, IList<InsurancePolicyCategory> insurancePolicyCategories, Random random)
+        {
+            var insurancePolicyBuilders = new List<IInsurancePolicyBuilder>();
+            for (var i = 0; i < count ; i++)
+            {
+                var j = random.Next(insurancePolicyCategories.Count);
+                var enumInsurancePolicyCategory = (EnumInsurancePolicyCategory)insurancePolicyCategories[j].Id;
+
+                switch (enumInsurancePolicyCategory)
+                {
+                    case EnumInsurancePolicyCategory.None:
+                        break;
+                    case EnumInsurancePolicyCategory.Auto:
+                        insurancePolicyBuilders.Add(new CarInsurancePolicyBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.Moto:
+                        insurancePolicyBuilders.Add(new BykeInsurancePolicyBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.Imbarcazione:
+                        break;
+                    //case EnumInsurancePolicyCategory.Viaggi:
+                    //    insurancePolicyBuilders.Add(new TravelInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.Vacanza:
+                    //    insurancePolicyBuilders.Add(new VacationInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.PerditaBagaglio:
+                    //    insurancePolicyBuilders.Add(new BaggageLossInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.AttivitàProfessionale:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.ImmobileAziendale:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.AttivitàCommerciale:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.AttivitàAgricola:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.AllevamentoBestiame:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    case EnumInsurancePolicyCategory.FamiliareeCongiunto:
+                        insurancePolicyBuilders.Add(new FamilyInsurancePolicyBuilder());
+                        break;
+                    //case EnumInsurancePolicyCategory.AnimaleDomestico:
+                    //    insurancePolicyBuilders.Add(new PetInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.Casa:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.Infortunio:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.Malattia:
+                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.VisiteSpecialistiche:
+                    //    insurancePolicyBuilders.Add(new SpecialisticExaminationsInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.GrandiInterventi:
+                    //    insurancePolicyBuilders.Add(new GreatInterventionsInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.CureOdontoiatriche:
+                    //    insurancePolicyBuilders.Add(new DentalCareInsurancePolicyBuilder());
+                    //    break;
+                    default:
+                        break;                        
+                }
+            }
+
+            return insurancePolicyBuilders;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _unitOfWork.Dispose();
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class InsurancePolicyCategoryRepository : Repository<InsurancePolicyCategoryRepository>, IInsurancePolicyCategoryRepository
+    public class InsurancePolicyCategoryRepository : Repository<InsurancePolicyCategory>, IInsurancePolicyCategoryRepository
     {
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
 
@@ -17,7 +17,9 @@ namespace DAL.Repositories
 
         public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories() =>
             _appContext.InsurancePolicyCategories
-                       .Include(x => x.SalesLine);
+                       .Include(x => x.SalesLine)
+                       .Where(x => x.IsActive);
+
         public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories(string customerCode) =>
             _appContext.InsurancePolicyCategories
                        .Include(x => x.InsurancePolicies)

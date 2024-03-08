@@ -20,25 +20,27 @@ namespace DAL.BuilderModel
             _random = new Random();
         }
 
+        public IDeliveryBuilder SetDelivery(Delivery delivery)
+        {
+            delivery ??= new Delivery();
+            _delivery= delivery;
+            return this;
+        }
         public IDeliveryBuilder SetDeliveryType(EnumDeliveryType deliveryType)
         {
-            _delivery ??= new Delivery();
             _delivery.DeliveryType = deliveryType;
             return this;
         }
 
         public IDeliveryBuilder SetEmail(IList<string> providerMails, string lastName, string firstName)
         {
-            _delivery ??= new Delivery();
-
             var i = _random.Next(providerMails.Count);
-            _delivery.Email = Utilities.GetEmail(providerMails[i], lastName, firstName);
+            _delivery.Email = Utilities.GetEmail(providerMails[i], lastName, firstName, _random);
             return this;
         }
 
         public IDeliveryBuilder SetPhoneNumber()
         {
-            _delivery ??= new Delivery();
             _delivery.PhoneNumber = Utilities.GetPhoneNumber(_random);
             return this;
         }

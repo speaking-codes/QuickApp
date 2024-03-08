@@ -243,11 +243,16 @@ namespace DAL.BuilderModel
         public ICustomerBuilder SetDeliveries(DeliveryModelTemplate deliveryTemplate)
         {
             _customer.Deliveries = new List<Delivery>();
-            _customer.Deliveries.Add(_deliveryBuilder.SetDeliveryType(EnumDeliveryType.Privato)
+            Delivery delivery = null;
+            _customer.Deliveries.Add(_deliveryBuilder.SetDelivery(delivery)
+                                                     .SetDeliveryType(EnumDeliveryType.Privato)
                                                      .SetEmail(deliveryTemplate.ProviderMails, _customer.LastName, _customer.FirstName)
                                                      .SetPhoneNumber()
                                                      .Build());
-            _customer.Deliveries.Add(_deliveryBuilder.SetDeliveryType(EnumDeliveryType.Lavorativo)
+
+            delivery = null;
+            _customer.Deliveries.Add(_deliveryBuilder.SetDelivery(delivery)
+                                                     .SetDeliveryType(EnumDeliveryType.Lavorativo)
                                                      .SetEmail(deliveryTemplate.ProviderMails, _customer.LastName, _customer.FirstName)
                                                      .SetPhoneNumber()
                                                      .Build());
@@ -257,16 +262,24 @@ namespace DAL.BuilderModel
         public ICustomerBuilder SetAddresses(AdressModelTemplate adressTemplate)
         {
             _customer.Addresses = new List<Address>();
+            
+            Address address = null;
+            _customer.Addresses.Add(_addressBuilder.SetAddress(address)
+                                                   .SetAddressType(EnumAddressType.Residenza)
+                                                   .SetLocation(adressTemplate.StreetNames)
+                                                   .SetMunicipality(adressTemplate.Municipalities)
+                                                   .Build());
 
-            _customer.Addresses.Add(_addressBuilder.SetAddressType(EnumAddressType.Residenza)
+            address = null;
+            _customer.Addresses.Add(_addressBuilder.SetAddress(address)
+                                                   .SetAddressType(EnumAddressType.Lavoro)
                                                    .SetLocation(adressTemplate.StreetNames)
                                                    .SetMunicipality(adressTemplate.Municipalities)
                                                    .Build());
-            _customer.Addresses.Add(_addressBuilder.SetAddressType(EnumAddressType.Lavoro)
-                                                   .SetLocation(adressTemplate.StreetNames)
-                                                   .SetMunicipality(adressTemplate.Municipalities)
-                                                   .Build());
-            _customer.Addresses.Add(_addressBuilder.SetAddressType(EnumAddressType.Domicilio)
+
+            address = null;
+            _customer.Addresses.Add(_addressBuilder.SetAddress(address)
+                                                   .SetAddressType(EnumAddressType.Domicilio)
                                                    .SetLocation(adressTemplate.StreetNames)
                                                    .SetMunicipality(adressTemplate.Municipalities)
                                                    .Build());

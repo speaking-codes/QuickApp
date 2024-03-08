@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppCaricamentoDati",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachineLearningModel", "MachineLearningModel\MachineLearningModel.csproj", "{26602E01-9508-4E18-B8D2-2475062D2550}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceCustomer", "WorkerServiceCustomer\WorkerServiceCustomer.csproj", "{2E75E817-83F9-4309-9B1B-50B7E13131EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceCustomer", "WorkerServiceCustomer\WorkerServiceCustomer.csproj", "{2E75E817-83F9-4309-9B1B-50B7E13131EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceInsurancePolicyIussue", "WorkerServiceInsurancePolicyIussue\WorkerServiceInsurancePolicyIussue.csproj", "{6A8BA432-B23C-41CA-8EA8-FB43360C2601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{2E75E817-83F9-4309-9B1B-50B7E13131EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E75E817-83F9-4309-9B1B-50B7E13131EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E75E817-83F9-4309-9B1B-50B7E13131EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A8BA432-B23C-41CA-8EA8-FB43360C2601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A8BA432-B23C-41CA-8EA8-FB43360C2601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A8BA432-B23C-41CA-8EA8-FB43360C2601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A8BA432-B23C-41CA-8EA8-FB43360C2601}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

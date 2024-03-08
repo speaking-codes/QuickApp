@@ -21,13 +21,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<ICustomerManager, CustomerManager>();
 
-        //services.AddScoped<ICustomerRatingManager, CustomerRatingManager>();
-        //services.AddScoped<IInsurancePolicyManager, InsurancePolicyManager>();
-
         services.AddSingleton<IMessageQueueProducer, MessageQueueProducer>();
-
-        //services.AddScoped<ILearningManager, LearningManager>();
-        //var provider = services.BuildServiceProvider();
 
         services.AddTransient<IAddressBuilder, AddressBuilder>();
         services.AddTransient<IDeliveryBuilder, DeliveryBuilder>();

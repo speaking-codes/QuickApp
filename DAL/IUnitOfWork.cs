@@ -33,6 +33,7 @@ namespace DAL
 
         IBaggageTypeRepository BaggageTypes { get; }
         ITravelMeansTypeRepository TravelMeansTypes { get; }
+        ITravelClassTypeRepository TravelClassTypes { get; }
         IKinshipRelationshipTypeRepository KinshipRelationshipTypes { get; }
         IStructureTypeRepository StructureTypes { get; }
         IBreedPetDetailTypeRepository BreedPetDetailTypes { get; }
