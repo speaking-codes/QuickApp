@@ -50,7 +50,7 @@ namespace DAL.Core
             if (customerHeader != null)
                 return customerHeader;
 
-            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 return new CustomerHeader();
 
@@ -66,7 +66,7 @@ namespace DAL.Core
             if (customerDetail != null)
                 return customerDetail;
 
-            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 return new CustomerDetail();
 

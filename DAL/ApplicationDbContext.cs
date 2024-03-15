@@ -214,13 +214,13 @@ namespace DAL
 
             builder.Entity<Delivery>().Property(c => c.Email).HasMaxLength(100).IsRequired(false);
             builder.Entity<Delivery>().Property(c => c.PhoneNumber).IsUnicode(false).IsRequired(false).HasMaxLength(30);
-            builder.Entity<Delivery>().Property(c => c.IsPrincipal).IsRequired(true).HasDefaultValue(false);
+            builder.Entity<Delivery>().Property(c => c.IsPrimary).IsRequired(true).HasDefaultValue(false);
            builder.Entity<Delivery>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Delivery>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Delivery>().ToTable($"App{nameof(Deliveries)}");
 
             builder.Entity<Address>().Property(c => c.Location).HasMaxLength(80).IsRequired(false);
-            builder.Entity<Address>().Property(c => c.IsPrincipal).IsRequired(true).HasDefaultValue(false);
+            builder.Entity<Address>().Property(c => c.IsPrimary).IsRequired(true).HasDefaultValue(false);
             builder.Entity<Address>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Address>().Property(c => c.UpdatedBy).IsRequired(false);
 

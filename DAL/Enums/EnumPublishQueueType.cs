@@ -2,7 +2,7 @@
 {
     public enum EnumPublishQueueType
     {
-        Created,
+        Added,
         Updated, 
         Deleted
     }

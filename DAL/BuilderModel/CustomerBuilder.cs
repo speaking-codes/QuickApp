@@ -244,7 +244,9 @@ namespace DAL.BuilderModel
         {
             _customer.Deliveries = new List<Delivery>();
             Delivery delivery = null;
+            var isPrimary = _random.Next() % 2 == 0;
             _customer.Deliveries.Add(_deliveryBuilder.SetDelivery(delivery)
+                                                     .SetIsPrimary(isPrimary)
                                                      .SetDeliveryType(EnumDeliveryType.Privato)
                                                      .SetEmail(deliveryTemplate.ProviderMails, _customer.LastName, _customer.FirstName)
                                                      .SetPhoneNumber()
@@ -252,6 +254,7 @@ namespace DAL.BuilderModel
 
             delivery = null;
             _customer.Deliveries.Add(_deliveryBuilder.SetDelivery(delivery)
+                                                     .SetIsPrimary(!isPrimary)
                                                      .SetDeliveryType(EnumDeliveryType.Lavorativo)
                                                      .SetEmail(deliveryTemplate.ProviderMails, _customer.LastName, _customer.FirstName)
                                                      .SetPhoneNumber()
@@ -262,9 +265,10 @@ namespace DAL.BuilderModel
         public ICustomerBuilder SetAddresses(AdressModelTemplate adressTemplate)
         {
             _customer.Addresses = new List<Address>();
-            
+            var valueModuleThree = _random.Next() % 3;
             Address address = null;
             _customer.Addresses.Add(_addressBuilder.SetAddress(address)
+                                                   .SetIsPrimary(valueModuleThree == 0)
                                                    .SetAddressType(EnumAddressType.Residenza)
                                                    .SetLocation(adressTemplate.StreetNames)
                                                    .SetMunicipality(adressTemplate.Municipalities)
@@ -272,6 +276,7 @@ namespace DAL.BuilderModel
 
             address = null;
             _customer.Addresses.Add(_addressBuilder.SetAddress(address)
+                                                   .SetIsPrimary(valueModuleThree == 1)
                                                    .SetAddressType(EnumAddressType.Lavoro)
                                                    .SetLocation(adressTemplate.StreetNames)
                                                    .SetMunicipality(adressTemplate.Municipalities)
@@ -279,6 +284,7 @@ namespace DAL.BuilderModel
 
             address = null;
             _customer.Addresses.Add(_addressBuilder.SetAddress(address)
+                                                   .SetIsPrimary(valueModuleThree == 2)
                                                    .SetAddressType(EnumAddressType.Domicilio)
                                                    .SetLocation(adressTemplate.StreetNames)
                                                    .SetMunicipality(adressTemplate.Municipalities)

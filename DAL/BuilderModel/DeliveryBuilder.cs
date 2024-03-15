@@ -26,6 +26,11 @@ namespace DAL.BuilderModel
             _delivery= delivery;
             return this;
         }
+        public IDeliveryBuilder SetIsPrimary(bool isPrimary)
+        {
+            _delivery.IsPrimary = isPrimary;
+            return this;
+        }
         public IDeliveryBuilder SetDeliveryType(EnumDeliveryType deliveryType)
         {
             _delivery.DeliveryType = deliveryType;

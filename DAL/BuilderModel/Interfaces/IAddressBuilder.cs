@@ -11,6 +11,7 @@ namespace DAL.BuilderModel.Interfaces
     public interface IAddressBuilder : IDisposable
     {
         IAddressBuilder SetAddress(Address address);
+        IAddressBuilder SetIsPrimary(bool isPrimary);
         IAddressBuilder SetAddressType(EnumAddressType addressType);
         IAddressBuilder SetLocation(IList<string> streetNames);
         IAddressBuilder SetMunicipality(IList<Municipality> municipalities);

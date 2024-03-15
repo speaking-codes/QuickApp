@@ -49,7 +49,7 @@ namespace DAL.Repositories
         public IQueryable<Customer> GetActiveCustomersWithoutInsurancePolicies()=>
             _appContext.Customers.Where(x => !x.InsurancePolicies.Any() && x.IsActive);
 
-        public IQueryable<Customer> GetCustomer(string customerCode)
+        public IQueryable<Customer> GetCustomerForServerLessManager(string customerCode)
         {
             return _appContext.Customers
                             .Include(c => c.BirthMunicipality)      
@@ -59,7 +59,6 @@ namespace DAL.Repositories
                             .Include(c => c.Addresses)
                                 .ThenInclude(a => a.Municipality)
                                     .ThenInclude(m => m.Province)
-                            .AsSingleQuery()
                             .Where(c => c.CustomerCode == customerCode);
         }
 

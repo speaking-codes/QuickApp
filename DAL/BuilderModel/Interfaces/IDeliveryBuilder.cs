@@ -11,6 +11,7 @@ namespace DAL.BuilderModel.Interfaces
     public interface IDeliveryBuilder : IDisposable
     {
         IDeliveryBuilder SetDelivery(Delivery delivery);
+        IDeliveryBuilder SetIsPrimary(bool isPrimary);
         IDeliveryBuilder SetDeliveryType(EnumDeliveryType deliveryType);
         IDeliveryBuilder SetEmail(IList<string> providerMails, string lastName, string firstName);
         IDeliveryBuilder SetPhoneNumber();

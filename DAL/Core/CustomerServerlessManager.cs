@@ -16,33 +16,27 @@ namespace DAL.Core
     public class CustomerServerlessManager : ICustomerServerlessManager
     {
         private readonly ICustomerRepository _customerRepository;
-        private readonly Repositories.Interfaces.IInsurancePolicyCategoryRepository _insurancePolicyCategory;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomerHeaderRepository _customerHeaderRepositoryNoSql;
         private readonly ICustomerDetailRepository _customerDetailRepositoryNoSql;
 
         public CustomerServerlessManager(ICustomerRepository customerRepository,
-                                         Repositories.Interfaces.IInsurancePolicyCategoryRepository insurancePolicyCategory,
-                                         IUnitOfWork unitOfWork,
                                          ICustomerHeaderRepository customerRepositoryNoSql,
                                          ICustomerDetailRepository customerDetailRepositoryNoSql)
         {
             _customerRepository = customerRepository;
-            _insurancePolicyCategory = insurancePolicyCategory;
-            _unitOfWork = unitOfWork;
 
             _customerHeaderRepositoryNoSql = customerRepositoryNoSql;
             _customerDetailRepositoryNoSql = customerDetailRepositoryNoSql;
         }
 
-        public void ManageCustomer(CustomerQueue customerQueue)
+        public void Manage(CustomerQueue customerQueue)
         {
             try
             {
                 CustomerNoSqlManager customerNoSqlManager = null;
                 switch (customerQueue.PublishQueueType)
                 {
-                    case Enums.EnumPublishQueueType.Created:
+                    case Enums.EnumPublishQueueType.Added:
                         customerNoSqlManager = new CustomerNoSqlManagerAdded(_customerRepository, _customerHeaderRepositoryNoSql, _customerDetailRepositoryNoSql, customerQueue);
                         break;
                     case Enums.EnumPublishQueueType.Updated:

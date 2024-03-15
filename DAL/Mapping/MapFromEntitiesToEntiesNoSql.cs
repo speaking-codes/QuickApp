@@ -19,7 +19,7 @@ namespace DAL.Mapping
 
             if (customer.Deliveries == null || customer.Deliveries.Count == 0) return null;
 
-            return customer.Deliveries.FirstOrDefault(x => x.DeliveryType == Enums.EnumDeliveryType.Privato);
+            return customer.Deliveries.FirstOrDefault(x => x.IsPrimary);
         }
 
         private static string getPhone(Customer customer)
@@ -46,34 +46,69 @@ namespace DAL.Mapping
 
             if (customer.Addresses == null || customer.Addresses.Count == 0) return string.Empty;
 
-            var address = customer.Addresses.FirstOrDefault(x => x.AddressType == Enums.EnumAddressType.Residenza);
+            var address = customer.Addresses.FirstOrDefault(x => x.IsPrimary);
             if (address == null) return string.Empty;
 
             return $"{address.Location}; {address.Municipality.MunicipalityName} ({address.Municipality.Province.ProvinceAbbreviation})";
         }
 
-        private static string getAddressDetail(Customer customer)
+        private static string getCityDetail(this Customer customer)
         {
-            if (customer == null) return string.Empty;
-
-            if (customer.Addresses == null || customer.Addresses.Count == 0) return string.Empty;
-
-            var address = customer.Addresses.FirstOrDefault(x => x.AddressType == Enums.EnumAddressType.Residenza);
-            if (address == null) return string.Empty;
-
-            return address.Location;
+            return $"{customer.BirthMunicipality.PostalCode} - {customer.BirthMunicipality.MunicipalityName} ({customer.BirthMunicipality.Province.ProvinceAbbreviation})";
         }
 
-        private static string getAddressCity(Customer customer)
+        private static AddressDetail getAddressDetail(this Address address)
         {
-            if (customer == null) return string.Empty;
+            return new AddressDetail
+            {
+                AddressType = address.AddressType.GetDefinition(),
+                City = address.Municipality.MunicipalityName,
+                Country = address.Municipality.Province.ProvinceAbbreviation,
+                PostalCode = address.Municipality.PostalCode,
+                Location = address.Location,
+                IsPrimary = address.IsPrimary
+            };
+        }
 
-            if (customer.Addresses == null || customer.Addresses.Count == 0) return string.Empty;
+        private static IList<AddressDetail> getAddressDetails(this Customer customer)
+        {
+            if (customer == null)
+                return new List<AddressDetail>();
 
-            var address = customer.Addresses.FirstOrDefault(x => x.AddressType == Enums.EnumAddressType.Residenza);
-            if (address == null) return string.Empty;
+            if (customer.Addresses == null || customer.Addresses.Count == 0)
+                return new List<AddressDetail>();
 
-            return $"{address.Municipality.PostalCode} - {address.Municipality.MunicipalityName} ({address.Municipality.Province.ProvinceAbbreviation})";
+            var addressDetails = new List<AddressDetail>();
+            foreach (var item in customer.Addresses)
+                addressDetails.Add(item.getAddressDetail());
+
+            return addressDetails;
+        }
+
+        private static DeliveryDetail getDeliveryDetail(this Delivery delivery)
+        {
+            return new DeliveryDetail
+            {
+                DeliveryType = delivery.DeliveryType.GetDefinition(),
+                Email = delivery.Email,
+                Phone = delivery.PhoneNumber,
+                IsPrimary = delivery.IsPrimary
+            };
+        }
+
+        private static IList<DeliveryDetail> getDeliveryDetails(this Customer customer)
+        {
+            if (customer == null)
+                return new List<DeliveryDetail>();
+
+            if (customer.Deliveries == null || customer.Deliveries.Count == 0)
+                return new List<DeliveryDetail>();
+
+            var deliveryDetails = new List<DeliveryDetail>();
+            foreach (var item in customer.Deliveries)
+                deliveryDetails.Add(item.getDeliveryDetail());
+
+            return deliveryDetails;
         }
 
         public static CustomerHeader ToNoSqlHeaderEntity(this Customer value)
@@ -96,29 +131,21 @@ namespace DAL.Mapping
 
                 FullName = $"{value.LastName} {value.FirstName}",
                 BirthDate = value.BirthDate.HasValue ? value.BirthDate.Value.ToString("D") : string.Empty,
-                BirthPlace = getCityDetail(value),
+                BirthPlace = value.getCityDetail(),
                 Gender = value.Gender.GetDefinition(),
 
                 MaritalStatus = value.MaritalStatus != null ? value.MaritalStatus.MaritalStatusDescription : string.Empty,
                 FamilyDescription = value.FamilyType != null ? value.FamilyType.FamilyTypeDescription : string.Empty,
                 ChildrenNumber = value.ChildrenNumber.HasValue ? value.ChildrenNumber.ToString() : string.Empty,
 
-                AddressLocation = getAddressDetail(value),
-                AddressCity = getAddressCity(value),
-
-                Email = getEmail(value),
-                Phone = getPhone(value),
+                AddressDetails = value.getAddressDetails(),
+                DeliveryDetails = value.getDeliveryDetails(),
 
                 JobTitle = value.ProfessionType != null ? value.ProfessionType.ProfessionTypeDescription : string.Empty,
                 IsFrelancer = value.ProfessionType != null ? value.ProfessionType.IsFreelancer : false,
                 ContractTitle = value.ContractType != null ? value.ContractType.ContractTypeTitle : string.Empty,
                 Income = value.Income.HasValue ? "€ " + value.Income.Value.ToString("C0") : string.Empty
             };
-        }
-
-        private static string getCityDetail(Customer customer)
-        {
-            return $"{customer.BirthMunicipality.PostalCode} - {customer.BirthMunicipality.MunicipalityName} ({customer.BirthMunicipality.Province.ProvinceAbbreviation})";
         }
     }
 }

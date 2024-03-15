@@ -32,16 +32,16 @@ var host = new HostBuilder()
 
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
-        services.AddDbContext<ApplicationDbContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionStringDbContext));
+        services.AddDbContextFactory<ApplicationDbContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionStringDbContext));
         services.AddSingleton((IMongoClient)new MongoClient(connectionStringNoSql));
 
-        services.AddScoped<IMongoDbContext, MongoDbContext>(x => new MongoDbContext(connectionStringNoSql, databaseNoSql));
-        services.AddScoped<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
-        services.AddScoped<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<DAL.Repositories.Interfaces.IInsurancePolicyCategoryRepository, InsurancePolicyCategoryRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<ICustomerServerlessManager, CustomerServerlessManager>();
+        services.AddTransient<IMongoDbContext, MongoDbContext>(x => new MongoDbContext(connectionStringNoSql, databaseNoSql));
+        services.AddTransient<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
+        services.AddTransient<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
+        services.AddTransient<ICustomerRepository, CustomerRepository>();
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddTransient<ICustomerServerlessManager, CustomerServerlessManager>();
+        services.AddTransient<IInsurancePolicyServerlessManager, InsurancePolicyServerlessManager>();
     })
     .Build();
 

@@ -34,7 +34,7 @@ namespace DAL.Core
 
         private void GetCustomerFromDb()
         {
-            Customer = _customerRepository.GetCustomer (_customerQueue.CustomerCode).FirstOrDefault();
+            Customer = _customerRepository.GetCustomerForServerLessManager (_customerQueue.CustomerCode).FirstOrDefault();
         }
 
         protected abstract void Run();
@@ -42,6 +42,9 @@ namespace DAL.Core
         public void Execute()
         {
             GetCustomerFromDb();
+            if (Customer == null)
+                return;
+            
             CustomerHeader = Customer.ToNoSqlHeaderEntity();
             CustomerDetail = Customer.ToNoSqlDetailEntity();
             Run();

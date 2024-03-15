@@ -55,7 +55,7 @@ namespace DAL.Core
 
                 if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
 
-                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(Enums.EnumPublishQueueType.Created, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
+                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(Enums.EnumPublishQueueType.Added, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
 
                 return insurancePolicy.InsurancePolicyCode;
             }

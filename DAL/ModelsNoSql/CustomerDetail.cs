@@ -16,7 +16,7 @@ namespace DAL.ModelsNoSql
 
         [BsonElement("Code")]
         public string CustomerCode { get; set; }
-        
+
         [BsonElement("FullName")]
         public string FullName { get; set; }
 
@@ -38,18 +38,12 @@ namespace DAL.ModelsNoSql
         [BsonElement("ChildrenNumber")]
         public string ChildrenNumber { get; set; }
 
-        [BsonElement("AddressLocation")]
-        public string AddressLocation { get; set; }
+        [BsonElement("AddressDetails")]
+        public IList<AddressDetail> AddressDetails { get; set; }
 
-        [BsonElement("AddressCity")]
-        public string AddressCity { get; set; }
+        [BsonElement("DeliveryDetails")]
+        public IList<DeliveryDetail> DeliveryDetails { get; set; }
 
-        [BsonElement("Phone")]
-        public string Phone { get; set; }
-        
-        [BsonElement("Email")]
-        public string Email { get; set; }
-        
         [BsonElement("JobTitle")]
         public string JobTitle { get; set; }
 
@@ -60,6 +54,6 @@ namespace DAL.ModelsNoSql
         public string ContractTitle { get; set; }
 
         [BsonElement("Income")]
-        public string Income { get; set; }        
+        public string Income { get; set; }
     }
 }

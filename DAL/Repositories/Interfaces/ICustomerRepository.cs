@@ -15,7 +15,7 @@ namespace DAL.Repositories.Interfaces
         IQueryable<Customer> GetAllCustomers();
         IQueryable<Customer> GetCustomersWithoutInsurancePolicies();
         IQueryable<Customer> GetActiveCustomersWithoutInsurancePolicies();
-        IQueryable<Customer> GetCustomer(string customerCode);
+        IQueryable<Customer> GetCustomerForServerLessManager(string customerCode);
         int MaxId();
     }
 }

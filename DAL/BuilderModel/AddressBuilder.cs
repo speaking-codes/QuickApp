@@ -27,6 +27,12 @@ namespace DAL.BuilderModel
             return this;
         }
 
+        public IAddressBuilder SetIsPrimary(bool isPrimary)
+        {
+            _address.IsPrimary = isPrimary;
+            return this;
+        }
+
         public IAddressBuilder SetAddressType(EnumAddressType addressType)
         {
             _address.AddressType = addressType;

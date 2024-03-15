@@ -24,7 +24,7 @@ namespace CustomerQueueConsumer
         {
             _logger.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
             var customerQueue = JsonConvert.DeserializeObject<CustomerQueue>(myQueueItem);
-            _customerServerlessManager.ManageCustomer(customerQueue);
+            _customerServerlessManager.Manage(customerQueue);
         }
     }
 }

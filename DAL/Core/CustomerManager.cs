@@ -23,7 +23,7 @@ namespace DAL.Core
 
         public IList<Customer> GetCustomers() => UnitOfWork.Customers.GetAllCustomers().ToList();
 
-        public Customer GetCustomer(string customerCode) => UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+        public Customer GetCustomer(string customerCode) => UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
 
         public IList<Customer> GetActiveCustomers() => UnitOfWork.Customers.GetActiveCustomers().ToList();
 
@@ -44,7 +44,7 @@ namespace DAL.Core
 
                 if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
 
-                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Created, customer.CustomerCode));
+                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Added, customer.CustomerCode));
 
                 return customer.CustomerCode;
             }
@@ -58,7 +58,7 @@ namespace DAL.Core
 
         public string UpdateCustomer(string customerCode, Customer customerToUpdate)
         {
-            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
 
@@ -123,7 +123,7 @@ namespace DAL.Core
 
         public int activateCustomer(string customerCode)
         {
-            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
 
@@ -133,7 +133,7 @@ namespace DAL.Core
 
                 customer.IsActive = true;
                 UnitOfWork.Customers.Update(customer);
-                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Deleted, customer.CustomerCode));
+                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Added, customer.CustomerCode));
                 var countRow = UnitOfWork.SaveChanges();
 
                 if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
@@ -150,7 +150,7 @@ namespace DAL.Core
 
         public int DeleteCustomer(string customerCode)
         {
-            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
 
