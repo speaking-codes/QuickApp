@@ -17,6 +17,7 @@ namespace DAL.Models
         public double InsuredMaximum { get; set; }
         public double TotalPrize { get; set; }
         public bool IsLuxuryPolicy { get; set; }
+        public bool IsTransferForMachineLearning { get; set; }
 
         public virtual InsurancePolicyCategory InsurancePolicyCategory { get; set; }
         public virtual Customer Customer { get; set; }

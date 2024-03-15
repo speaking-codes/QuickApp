@@ -48,7 +48,7 @@ namespace QuickApp
             var app = builder.Build();
             ConfigureRequestPipeline(app); // Configure the HTTP request pipeline.
 
-            await SeedDatabase(app); //Seed initial database
+            await SeedDatabase(app,false); //Seed initial database
 
             await app.RunAsync();
         }
@@ -292,14 +292,14 @@ namespace QuickApp
             app.MapFallbackToFile("index.html");
         }
 
-        private static async Task SeedDatabase(WebApplication app)
+        private static async Task SeedDatabase(WebApplication app, bool isRestart)
         {
             using (var scope = app.Services.CreateScope())
             {
                 try
                 {
                     var databaseInitializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
-                    await databaseInitializer.SeedAsync();
+                    await databaseInitializer.SeedAsync(isRestart);
 
                     await OidcServerManager.RegisterApplicationsAsync(scope.ServiceProvider);
                 }

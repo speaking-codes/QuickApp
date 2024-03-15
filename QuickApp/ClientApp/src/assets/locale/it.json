@@ -398,6 +398,8 @@
       "edit":{
         "NewCustomer": "Nuovo Cliente",
         "EditCustomer": "Modifica Cliente \"{{name}}\"",
+        "Registry": "Anagrafica",
+        "Income": "Reddito",
         "CustomerCode":"Codice Cliente",
         "FirstName": "Nome",
         "FirstNamePlaceHolder": "Inserire il nome del cliente",
@@ -414,7 +416,26 @@
         "JobTitle": "Professione",
         "JobTitlePlaceHolder": "Seleziona la professione",
         "ContractType": "Tipo Contratto",
-        "ContractTypePlaceHolder": "Seleziona la tipologia di contratto"
+        "ContractTypePlaceHolder": "Seleziona la tipologia di contratto",
+        "Ral": "R.A.L.",
+        "RalPlaceHolder": "Inserisci la R.A.L. (Reddito Annuo Lordo)",
+        "Delivery": "Recapito",
+        "Email": "E-mail",
+        "EmailPlaceholder": "Inserisci l'indirizzo mail",
+        "PhoneNumber": "Telefono",
+        "PhoneNumberPlaceHolder": "Inserisci il numero di telefono",
+        "Address": "Indirizzo",
+        "AddressPlaceHolder": "Inserisci l'indirizzo",
+        "City": "Città",
+        "CityPlaceHolder": "Inserisci la città",
+        "Cap": "C.A.P.",
+        "CapPlaceHolder": "Inserisci il C.A.P.",
+        "Province": "Prov.",
+        "ProvincePlaceHolder": "Inserisci la sigla della provincia",
+        "Close": "Chiudi",
+        "Edit": "Modifica",
+        "CancelAndClose": "Annulla e Chiudi",
+        "SaveAndClose": "Salva e Chiudi"
       }
     }
   }

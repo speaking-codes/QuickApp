@@ -10,8 +10,10 @@ namespace DAL.Core.Interfaces
         Customer GetCustomer(string customerCode);
         IList<Customer> GetActiveCustomers();
         IList<Customer> GetCustomersWithoutInsurancePolicies();
+        IList<Customer> GetActiveCustomersWithoutInsurancePolicies();
         string AddCustomer(Customer customer);
         string UpdateCustomer(string customerCode, Customer customer);
+        int activateCustomer(string customerCode);
         int DeleteCustomer(string customerCode);
     }
 }

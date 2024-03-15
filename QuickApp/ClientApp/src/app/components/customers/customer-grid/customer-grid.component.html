@@ -7,7 +7,7 @@
      </div>
      <div class="col-lg-4">
        <ul class="nav flex-column flex-lg-row justify-content-end">
-         <li class="nav-item toolbaritem">
+         <li class="nav-item toolbaritem" *ngIf="  canAddNewCustomer">
            <a class="nav-link" href="javascript:;" (click)="newCustomer()">
              <i class="fa fa-plus-circle"></i> {{'customer.grid.NewCustomer' | translate }}
            </a>
@@ -61,9 +61,9 @@
              </ngx-datatable-column>  
              <ngx-datatable-column name="{{'customer.grid.Actions' | translate}}" sortable="false" prop="actions" [sortable]="false">
              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="dashboardCustomer(row)"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{'customer.grid.DashboardCustomer' | translate}}</a>
+               <a *ngIf="isCanViewDashboardCustomers(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="dashboardCustomer(row)"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{'customer.grid.DashboardCustomer' | translate}}</a>
                <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="detailsCustomer(row)"><i class="fa fa-eye" aria-hidden="true"></i> {{'customer.grid.DetailCustomer' | translate}}</a> 
-               <a *ngIf="isCustomerActive(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="deleteCustomer(row)"><i class="fa fa-trash-o" aria-hidden="true"></i> {{'customer.grid.RemoveCustomer' | translate}}</a> 
+               <a *ngIf="isCanManageCustomers(row)" class="btn btn-link text-link btn-sm" href="javascript:;" (click)="deleteCustomer(row)"><i class="fa fa-trash-o" aria-hidden="true"></i> {{'customer.grid.RemoveCustomer' | translate}}</a> 
              </ng-template>
          </ngx-datatable-column>
          </ngx-datatable>  

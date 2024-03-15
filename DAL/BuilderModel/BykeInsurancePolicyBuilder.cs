@@ -14,12 +14,6 @@ namespace DAL.BuilderModel
     {
         private VehicleInsurancePolicy _vehicleInsurancePolicy;
 
-        public override IInsurancePolicyBuilder SetInsurancePolicy(InsurancePolicy insurancePolicy)
-        {
-            base.SetInsurancePolicy(insurancePolicy);
-            _vehicleInsurancePolicy = (VehicleInsurancePolicy)InsurancePolicy;
-            return this;
-        }
 
         public IBykeInsurancePolicyBuilder SetConfigurationModel(IList<ConfigurationModel> bykeConfigurationModels)
         {
@@ -49,6 +43,19 @@ namespace DAL.BuilderModel
         public IBykeInsurancePolicyBuilder SetRiskCategory()
         {
             _vehicleInsurancePolicy.RiskCategory = (byte)Random.Next(1, 14);
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsurancePolicy(InsurancePolicy insurancePolicy)
+        {
+            base.SetInsurancePolicy(insurancePolicy);
+            _vehicleInsurancePolicy =new VehicleInsurancePolicy(InsurancePolicy);
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
+        {
+            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Moto).FirstOrDefault();
             return this;
         }
 

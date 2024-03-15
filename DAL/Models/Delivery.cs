@@ -9,6 +9,7 @@ namespace DAL.Models
         public EnumDeliveryType DeliveryType { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public bool IsPrincipal { get; set; }
 
         public virtual Customer Customer { get; set; }
     }

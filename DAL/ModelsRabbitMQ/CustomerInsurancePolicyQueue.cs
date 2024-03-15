@@ -11,13 +11,13 @@ namespace DAL.ModelsRabbitMQ
     {
         public EnumPublishQueueType PublishQueueType { get; set; }
         public string CustomerCode { get; set; }
-public string InsurancePolicyCategoryCode { get; set; }
+        public string InsurancePolicyCode { get; set; }
 
-        public CustomerInsurancePolicyQueue(EnumPublishQueueType publishQueueType, string customerCode, string insurancePolicyCategoryCode)
+        public CustomerInsurancePolicyQueue(EnumPublishQueueType publishQueueType, string customerCode, string insurancePolicyCode)
         {
             PublishQueueType = publishQueueType;
             CustomerCode = customerCode;
-            InsurancePolicyCategoryCode = insurancePolicyCategoryCode;
+            InsurancePolicyCode = insurancePolicyCode;
         }
     }
 }

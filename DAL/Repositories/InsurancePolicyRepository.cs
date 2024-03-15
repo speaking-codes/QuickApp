@@ -32,12 +32,21 @@ namespace DAL.Repositories
                        .Include(x => x.InsurancePolicyCategory)
                        .Where(x => x.Id == id);
 
+        public IQueryable<InsurancePolicy> GetInsurancePolicy(string insurancePolicyCode) =>
+            _appContext.InsurancePolicies
+                       .Where(x => x.InsurancePolicyCode == insurancePolicyCode);
+
         public IQueryable<InsurancePolicy> GetActiveInsurancePolicies(string customerCode) =>
             _appContext.InsurancePolicies
                                 .Include(x => x.InsurancePolicyCategory)
                                     .ThenInclude(y => y.SalesLine)
                                 .AsSingleQuery()
                                 .Where(x => x.Customer.CustomerCode == customerCode && x.IssueDate <= DateTime.Now && x.ExpiryDate > DateTime.Now);
+
+        public IQueryable<InsurancePolicy> GetExiperedInsurancePolicies(DateTime expireDate)=>
+            _appContext.InsurancePolicies
+                       .Include(x => x.Customer)
+                       .Where(x => x.ExpiryDate<= expireDate);
 
         public int GetInsurancePolicyCategoryCount(string insurancePolicyCategoryCode) =>
             _appContext.InsurancePolicies

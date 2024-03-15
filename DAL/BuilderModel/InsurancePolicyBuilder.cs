@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.BuilderModel
 {
-    public class InsurancePolicyBuilder : IInsurancePolicyBuilder
+    public abstract class InsurancePolicyBuilder : IInsurancePolicyBuilder
     {
         protected virtual InsurancePolicy InsurancePolicy { get; private set; }
         protected readonly Random Random;
@@ -34,7 +34,7 @@ namespace DAL.BuilderModel
 
         public virtual IInsurancePolicyBuilder SetExpiryDate()
         {
-            InsurancePolicy.ExpiryDate = InsurancePolicy.IssueDate.AddDays(360);
+            InsurancePolicy.ExpiryDate = InsurancePolicy.IssueDate.AddDays(Random.Next(10, 180));
             return this;
         }
 
@@ -56,7 +56,7 @@ namespace DAL.BuilderModel
             return this;
         }
 
-        public virtual IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories) => this;
+        public abstract IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories);
 
         public virtual IInsurancePolicyBuilder SetCustomer(Customer customer)
         {

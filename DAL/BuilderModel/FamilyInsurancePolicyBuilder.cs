@@ -14,12 +14,6 @@ namespace DAL.BuilderModel
     {
         private FamilyInsurancePolicy _familyInsurancePolicy;
 
-        public override IInsurancePolicyBuilder SetInsurancePolicy(InsurancePolicy insurancePolicy)
-        {
-            base.SetInsurancePolicy(insurancePolicy);
-            _familyInsurancePolicy = (FamilyInsurancePolicy)insurancePolicy;
-            return this;
-        }
         public IFamilyInsurancePolicyBuilder SetFirstNameAndGender(IList<FirstNameTemplate> firstNameTemplates)
         {
             var i = Random.Next(firstNameTemplates.Count);
@@ -55,6 +49,19 @@ namespace DAL.BuilderModel
         {
             var i = Random.Next(kinshipRelationshipTypes.Count);
             _familyInsurancePolicy.KinshipRelationshipType = kinshipRelationshipTypes[i];
+            return this;
+        }
+
+         public override IInsurancePolicyBuilder SetInsurancePolicy(InsurancePolicy insurancePolicy)
+        {
+            base.SetInsurancePolicy(insurancePolicy);
+            _familyInsurancePolicy = new FamilyInsurancePolicy(InsurancePolicy);
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
+        {
+            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.FamiliareeCongiunto).FirstOrDefault();
             return this;
         }
 

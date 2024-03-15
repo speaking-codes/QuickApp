@@ -29,6 +29,8 @@ namespace DAL.Core
 
         public IList<Customer> GetCustomersWithoutInsurancePolicies() => UnitOfWork.Customers.GetCustomersWithoutInsurancePolicies().ToList();
 
+        public IList<Customer> GetActiveCustomersWithoutInsurancePolicies()=> UnitOfWork.Customers.GetActiveCustomersWithoutInsurancePolicies().ToList();
+
         public string AddCustomer(Customer customer)
         {
             try
@@ -70,11 +72,15 @@ namespace DAL.Core
                 customer.LastName = customerToUpdate.LastName;
                 customer.Gender = customerToUpdate.Gender;
                 customer.BirthDate = customerToUpdate.BirthDate;
-                //customer.BirthPlace = customerToUpdate.BirthPlace;
-                //customer.BirthCounty = customerToUpdate.BirthCounty;
-                customer.ProfessionType = customerToUpdate.ProfessionType;
-                customer.ContractType = customerToUpdate.ContractType;
+                customer.FamilyTypeId = customerToUpdate.FamilyTypeId;
+                customer.MaritalStatusId = customerToUpdate.MaritalStatusId;
+                customer.BirthMunicipalityId = customerToUpdate.BirthMunicipalityId;
+
+                customer.ContractTypeId = customerToUpdate.ContractTypeId;
+                customer.IncomeTypeId = customerToUpdate.IncomeTypeId;
                 customer.Income = customerToUpdate.Income;
+
+                customer.IsActive = customer.IsActive;
 
                 #region Address 
 
@@ -115,6 +121,33 @@ namespace DAL.Core
             }
         }
 
+        public int activateCustomer(string customerCode)
+        {
+            var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
+            if (customer == null)
+                throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
+
+            try
+            {
+                if (!IsMassiveWriter) UnitOfWork.BeginTransaction();
+
+                customer.IsActive = true;
+                UnitOfWork.Customers.Update(customer);
+                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Deleted, customer.CustomerCode));
+                var countRow = UnitOfWork.SaveChanges();
+
+                if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
+
+                return countRow;
+            }
+            catch
+            {
+                if (!IsMassiveWriter) UnitOfWork.RollbackTransaction();
+                _countError++;
+                throw;
+            }
+        }
+
         public int DeleteCustomer(string customerCode)
         {
             var customer = UnitOfWork.Customers.GetCustomer(customerCode).FirstOrDefault();
@@ -128,9 +161,11 @@ namespace DAL.Core
                 customer.IsActive = false;
                 UnitOfWork.Customers.Update(customer);
                 _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Deleted, customer.CustomerCode));
-                return UnitOfWork.SaveChanges();
+                var countRow= UnitOfWork.SaveChanges();
 
                 if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
+
+                return countRow;
             }
             catch
             {

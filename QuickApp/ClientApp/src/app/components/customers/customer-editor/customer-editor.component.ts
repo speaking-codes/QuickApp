@@ -9,6 +9,8 @@ import { error } from 'console';
 import { Utilities } from 'src/app/services/utilities';
 import { TableColumn } from '@swimlane/ngx-datatable';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AccountService } from 'src/app/services/account.service';
+import { Permission } from 'src/app/models/permission.model';
 
 @Component({
   selector: 'app-customer-editor',
@@ -46,7 +48,7 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
   
   get IsFieldReadOnly() { return !this.isEditMode; }
 
-  constructor(private customerService: CustomerService, private alertService: AlertService) { }
+  constructor(private customerService: CustomerService, private accountService: AccountService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.afterOnInit.emit(this);
@@ -196,17 +198,11 @@ export class CustomerEditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  // deleteAddress(data: Address){
-  //   this.addressRows.forEach((value,index)=>{
-  //     if(value.$$index == data.$$index) 
-  //         this.addressRows.splice(index,1);
-  //   });
-  // }
-
-  // deleteDelivery(data: Delivery){
-  //   this.deliveryRows.forEach((value,index)=>{
-  //     if(value.$$index == data.$$index) 
-  //         this.deliveryRows.splice(index,1);
-  //   });
-  // }
+  get isCanEditMode(){
+    return this.canManageCustomers() && !this.isEditMode;
+  }
+  
+  private canManageCustomers(){
+    return this.accountService.userHasPermission(Permission.manageCustomers);    
+  }
 }

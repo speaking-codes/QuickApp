@@ -23,7 +23,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <h3>Anagrafica</h3>
+          <h3>{{'customer.edit.Registry' | translate}}</h3>
         </div>
       </div>
       
@@ -89,7 +89,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <h3>Anagrafica</h3>
+          <h3>{{'customer.edit.Income' | translate}}</h3>
         </div>
       </div>
       <div class="row">
@@ -115,9 +115,9 @@
                   <ng-option [value]="4">CO. CO. PRO.</ng-option>
                 </ng-select>
               </div>    
-              <label class="col-form-label col-lg-2" for="ral">R.A.L.</label>
+              <label class="col-form-label col-lg-2" for="ral">{{'customer.edit.Ral' | translate}}</label>
                 <div class="col-lg-4">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="ral" name="ral" placeholder="Inserisci la R.A.L. (Reddito Annuo Lordo\)" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="ral" name="ral" placeholder="{{'customer.edit.RalPlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.ral" #ral="ngModel" required />
                 </div>                    
             </div>
@@ -131,20 +131,20 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <h3>Recapito</h3>
+          <h3>{{'customer.edit.Delivery' | translate}}</h3>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
           <div class="row">
-            <label class="col-form-label col-lg-2" for="email">E-mail</label>
+            <label class="col-form-label col-lg-2" for="email">{{'customer.edit.Email' | translate}}</label>
             <div class="col-lg-4">
-                <input [readonly]="IsFieldReadOnly" type="text" id="email" name="email" placeholder="Inserisci l'indirizzo mail" class="form-control"
+                <input [readonly]="IsFieldReadOnly" type="text" id="email" name="email" placeholder="{{'customer.edit.EmailPlaceHolder' | translate}}" class="form-control"
                 [(ngModel)]="customerEdit.email" #email="ngModel" required />
             </div>                    
-            <label class="col-form-label col-lg-2" for="phoneNumber">Telefono</label>
+            <label class="col-form-label col-lg-2" for="phoneNumber">{{'customer.edit.PhoneNumber' | translate}}</label>
             <div class="col-lg-4">
-                <input [readonly]="IsFieldReadOnly" type="text" id="phoneNumber" name="phoneNumber" placeholder="Inserisci il numero di telefono" class="form-control"
+                <input [readonly]="IsFieldReadOnly" type="text" id="phoneNumber" name="phoneNumber" placeholder="{{'customer.edit.PhoneNumber' | translate}}" class="form-control"
                 [(ngModel)]="customerEdit.phoneNumber" #phoneNumber="ngModel" required minlength="2" maxlength="10" />
             </div>                    
         </div>
@@ -157,7 +157,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <h3>Indirizzo</h3>
+          <h3>{{'customer.edit.Address' | translate}}</h3>
         </div>
       </div>
       <div class="row">
@@ -165,9 +165,9 @@
           <div class="row">
             <div class="col-sm-12">
                 <div class="row">
-                    <label class="col-form-label col-lg-2" for="location">Indirizzo</label>
+                    <label class="col-form-label col-lg-2" for="location">{{'customer.edit.Address' | translate}}</label>
                     <div class="col-lg-10">
-                        <input [readonly]="IsFieldReadOnly" type="text" id="location" name="location" placeholder="Inserisci l'indirizzo" class="form-control"
+                        <input [readonly]="IsFieldReadOnly" type="text" id="location" name="location" placeholder="{{'customer.edit.AddressPlaceHolder' | translate}}" class="form-control"
                         [(ngModel)]="customerEdit.location" #location="ngModel" />
                     </div>    
                 </div>
@@ -178,19 +178,19 @@
       <div class="row">
         <div class="col-sm-12">
             <div class="row">
-                <label class="col-form-label col-lg-2" for="city">Città</label>
+                <label class="col-form-label col-lg-2" for="city">{{'customer.edit.City' | translate}}</label>
                 <div class="col-lg-4">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="city" name="city" placeholder="Inserisci la città" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="city" name="city" placeholder="{{'customer.edit.CityPlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.city" #birthPlace="ngModel" required />
                 </div>                    
-                <label class="col-form-label col-lg-1" for="postalCode">C.A.P.</label>
+                <label class="col-form-label col-lg-1" for="postalCode">{{'customer.edit.Cap' | translate}}</label>
                 <div class="col-lg-2">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="postalCode" name="postalCode" placeholder="Inserisci il C.A.P." class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="postalCode" name="postalCode" placeholder="{{'customer.edit.CapPlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.postalCode" #birthCounty="ngModel" required minlength="2" maxlength="6" />
                 </div>                    
-                <label class="col-form-label col-lg-1" for="province">Prov.</label>
+                <label class="col-form-label col-lg-1" for="province">{{'customer.edit.Province' | translate}}</label>
                 <div class="col-lg-2">
-                    <input [readonly]="IsFieldReadOnly" type="text" id="province" name="province" placeholder="Inserisci la Provincia" class="form-control"
+                    <input [readonly]="IsFieldReadOnly" type="text" id="province" name="province" placeholder="{{'customer.edit.ProvincePlaceHolder' | translate}}" class="form-control"
                     [(ngModel)]="customerEdit.province" #province="ngModel" required minlength="2" maxlength="6" />
                 </div>    
             </div>
@@ -204,11 +204,11 @@
 
         <div class="col-7">
           <div ngPreserveWhitespaces class="float-end">
-            <button *ngIf="!isEditMode" type="button" (click)="cancel()" class="btn btn-outline-secondary"><i class='fa fa-times'></i> Chiudi</button>
-            <button *ngIf="!isEditMode" type="button" (click)="editCustomer()" class="btn btn-primary"><i class='fa fa-edit'></i> Modifica</button>
-            <button *ngIf="isEditMode" type="button" (click)="cancel()" class="btn btn-danger" [disabled]="isSaving"><i class='fa fa-times'></i> Annulla e Chiudi</button>
+            <button *ngIf="!isEditMode" type="button" (click)="cancel()" class="btn btn-outline-secondary"><i class='fa fa-times'></i> {{'customer.edit.Close' | translate}}</button>
+            <button *ngIf="isCanEditMode" type="button" (click)="editCustomer()" class="btn btn-primary"><i class='fa fa-edit'></i> {{'customer.edit.Edit' | translate}}</button>
+            <button *ngIf="isEditMode" type="button" (click)="cancel()" class="btn btn-danger" [disabled]="isSaving"><i class='fa fa-times'></i> {{'customer.edit.CancelAndClose' | translate}}</button>
             <button *ngIf="isEditMode" type="submit" class="btn btn-primary" [disabled]="isSaving">
-              <i *ngIf="!isSaving" class='fa fa-save'></i><i *ngIf="isSaving" class='fa fa-circle-o-notch fa-spin'></i> Salva e Chiudi</button>
+              <i *ngIf="!isSaving" class='fa fa-save'></i><i *ngIf="isSaving" class='fa fa-circle-o-notch fa-spin'></i> {{'customer.edit.SaveAndClose' | translate}}</button>
           </div>
         </div>     
     </form>

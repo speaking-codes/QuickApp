@@ -9,15 +9,15 @@ namespace DAL.Core
 {
     public abstract class Manager : IManager
     {
-        protected readonly IUnitOfWork UnitOfWork;
         protected bool IsMassiveWriter { get; private set; }
+        protected readonly IUnitOfWork UnitOfWork;
         protected int _countError;
 
         public Manager(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
-            IsMassiveWriter = false;
             _countError = -1;
+            IsMassiveWriter = false;
         }
 
         public void BeginTransaction()
@@ -25,7 +25,15 @@ namespace DAL.Core
             UnitOfWork.BeginTransaction();
             IsMassiveWriter = true;
         }
+        public async Task BeginTransactionAsync()
+        {
+            await UnitOfWork.BeginTransactionAsync();
+            IsMassiveWriter = true;
+        }
+        public void CommitTransaction() => UnitOfWork.CommitTransaction();
+        public async Task CommitTransactionAsync() => await UnitOfWork.CommitTransactionAsync();
+        public void RollbackTransaction() => UnitOfWork.RollbackTransaction();
 
-        public abstract void Dispose();        
+        public abstract void Dispose();
     }
 }

@@ -307,7 +307,7 @@ namespace DAL.Core
 
         public override void Dispose()
         {
-            if (IsMassiveWriter && UnitOfWork.IsTransactionOpened)
+            if (UnitOfWork.IsTransactionOpened)
             {
                 if (_countError > 0)
                     UnitOfWork.RollbackTransaction();

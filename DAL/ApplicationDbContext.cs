@@ -214,11 +214,13 @@ namespace DAL
 
             builder.Entity<Delivery>().Property(c => c.Email).HasMaxLength(100).IsRequired(false);
             builder.Entity<Delivery>().Property(c => c.PhoneNumber).IsUnicode(false).IsRequired(false).HasMaxLength(30);
-            builder.Entity<Delivery>().Property(c => c.CreatedBy).IsRequired(false);
+            builder.Entity<Delivery>().Property(c => c.IsPrincipal).IsRequired(true).HasDefaultValue(false);
+           builder.Entity<Delivery>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Delivery>().Property(c => c.UpdatedBy).IsRequired(false);
             builder.Entity<Delivery>().ToTable($"App{nameof(Deliveries)}");
 
             builder.Entity<Address>().Property(c => c.Location).HasMaxLength(80).IsRequired(false);
+            builder.Entity<Address>().Property(c => c.IsPrincipal).IsRequired(true).HasDefaultValue(false);
             builder.Entity<Address>().Property(c => c.CreatedBy).IsRequired(false);
             builder.Entity<Address>().Property(c => c.UpdatedBy).IsRequired(false);
 
@@ -337,6 +339,7 @@ namespace DAL
             builder.Entity<InsurancePolicyCategoryStatic>().ToTable($"App{nameof(InsurancePolicyCategoryStatics)}");
 
             builder.Entity<InsurancePolicy>().Property(c => c.InsurancePolicyCode).HasMaxLength(150).IsFixedLength(false).IsRequired();
+            builder.Entity<InsurancePolicy>().Property(c => c.IsTransferForMachineLearning).IsRequired(true).HasDefaultValue(false);
             builder.Entity<InsurancePolicy>().HasIndex(c => c.InsurancePolicyCode).IsUnique(true);
 
             builder.Entity<InsurancePolicy>().UseTptMappingStrategy().ToTable($"App{nameof(InsurancePolicies)}");

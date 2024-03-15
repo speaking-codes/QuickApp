@@ -32,6 +32,6 @@ namespace DAL.Models
 
             this.InsurancePolicyCategory = insurancePolicy.InsurancePolicyCategory;
             this.Customer = insurancePolicy.Customer;
-    }
+        }
     }
 }

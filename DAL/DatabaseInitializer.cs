@@ -22,7 +22,7 @@ namespace DAL
 {
     public interface IDatabaseInitializer
     {
-        Task SeedAsync();
+        Task SeedAsync(bool isRestart);
     }
 
     public class DatabaseInitializer : IDatabaseInitializer
@@ -38,13 +38,21 @@ namespace DAL
             _logger = logger;
         }
 
-        public async Task SeedAsync()
+        public async Task SeedAsync(bool isRestart)
         {
-            await _context.Database.EnsureDeletedAsync();
-            await _context.Database.EnsureCreatedAsync();
+            if (isRestart)
+            {
+                await _context.Database.EnsureDeletedAsync();
+                await _context.Database.EnsureCreatedAsync();
+            }
+
             await SeedDefaultUsersAsync();
-            await LoadTypologicalTableData();
-            //await LoadLearningTableData();
+
+            if (isRestart)
+            {
+                await LoadTypologicalTableData();
+                await LoadLearningTableData();
+            }
         }
 
 
@@ -55,19 +63,22 @@ namespace DAL
                 _logger.LogInformation("Generating inbuilt accounts");
 
                 const string adminRoleName = "administrator";
-                const string userRoleName = "user";
+                const string editorRoleName = "editor";
+                const string agentRoleName = "agent";
 
                 await EnsureRoleAsync(adminRoleName, "Default administrator", ApplicationPermissions.GetAllPermissionValues());
-                await EnsureRoleAsync(userRoleName, "Default user", new string[] { });
+                await EnsureRoleAsync(editorRoleName, "Default user editor", ApplicationPermissions.GetEditorPermissionValues());
+                await EnsureRoleAsync(agentRoleName, "Default user agent", ApplicationPermissions.GetAgentPermissionValues());
 
-                await CreateUserAsync("admin", "tempP@ss123", "Inbuilt Administrator", "admin@ebenmonney.com", "+1 (123) 000-0000", new string[] { adminRoleName });
-                await CreateUserAsync("user", "tempP@ss123", "Inbuilt Standard User", "user@ebenmonney.com", "+1 (123) 000-0001", new string[] { userRoleName });
+                await CreateUserAsync("admin", "tempP@ss123", "Inbuilt Administrator", "admin@datassicurazioni.com", "+1 (123) 000-0000", new string[] { adminRoleName });
+                await CreateUserAsync("editor", "tempP@ss123", "Inbuilt Standard User Editor", "editor@datassicurazioni.com", "+1 (123) 000-0001", new string[] { editorRoleName });
+                await CreateUserAsync("agent", "tempP@ss123", "Inbuilt Standard User agent", "agent@datassicurazioni.com", "+1 (123) 000-0000", new string[] { agentRoleName });
 
                 _logger.LogInformation("Inbuilt account generation completed");
             }
         }
 
-        private async Task EnsureRoleAsync(string roleName, string description, string[] claims)
+        private async Task EnsureRoleAsync(string roleName, string description, IEnumerable<string> claims)
         {
             if ((await _accountManager.GetRoleByNameAsync(roleName)) == null)
             {
@@ -263,8 +274,8 @@ namespace DAL
             float differenceMaxMin = maxRenewvalNumber - minRenewvalNumber;
             foreach (var item in _context.LearningTrainings)
             {
-                renewalNumber= item.RenewalNumber;
-                normalizedRenewalNumber = (double)((renewalNumber-minRenewvalNumber)/differenceMaxMin);
+                renewalNumber = item.RenewalNumber;
+                normalizedRenewalNumber = (double)((renewalNumber - minRenewvalNumber) / differenceMaxMin);
                 item.NormalizedRenewalNumber = normalizedRenewalNumber;
             }
             await _context.SaveChangesAsync();

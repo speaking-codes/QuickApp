@@ -17,5 +17,24 @@ namespace DAL.Models
         public bool IsDisabled { get; set; }
 
         public virtual KinshipRelationshipType KinshipRelationshipType { get; set; }
+
+        public FamilyInsurancePolicy()
+        {
+
+        }
+
+        public FamilyInsurancePolicy(InsurancePolicy insurancePolicy)
+        {
+            this.InsurancePolicyCode = insurancePolicy.InsurancePolicyCode;
+            this.Progressive = insurancePolicy.Progressive;
+            this.IssueDate = insurancePolicy.IssueDate;
+            this.ExpiryDate = insurancePolicy.ExpiryDate;
+            this.InsuredMaximum = insurancePolicy.InsuredMaximum;
+            this.TotalPrize = insurancePolicy.TotalPrize;
+            this.IsLuxuryPolicy = insurancePolicy.IsLuxuryPolicy;
+
+            this.InsurancePolicyCategory = insurancePolicy.InsurancePolicyCategory;
+            this.Customer = insurancePolicy.Customer;
+        }
     }
 }

@@ -46,6 +46,9 @@ namespace DAL.Repositories
         public IQueryable<Customer> GetCustomersWithoutInsurancePolicies()=>
             _appContext.Customers.Where(x => !x.InsurancePolicies.Any());        
 
+        public IQueryable<Customer> GetActiveCustomersWithoutInsurancePolicies()=>
+            _appContext.Customers.Where(x => !x.InsurancePolicies.Any() && x.IsActive);
+
         public IQueryable<Customer> GetCustomer(string customerCode)
         {
             return _appContext.Customers

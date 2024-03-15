@@ -35,17 +35,19 @@ namespace DAL.Core
 
         public IList<InsurancePolicy> GetActiveInsurancePolicy(string customerCode) => UnitOfWork.InsurancePolicies.GetActiveInsurancePolicies(customerCode).ToList();
 
+        public IList<InsurancePolicy> GetExpiredInsurancePolicy(DateTime expireDate) => UnitOfWork.InsurancePolicies.GetExiperedInsurancePolicies(expireDate).ToList();
+
         public string AddInsurancePolicy(InsurancePolicy insurancePolicy)
         {
             try
             {
                 if (!IsMassiveWriter) UnitOfWork.BeginTransaction();
 
-                if (UnitOfWork.InsurancePolicies.IsExistingInsurancePolicyCategory(insurancePolicy.Customer.CustomerCode,
-                                                                                   insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryCode, 
-                                                                                   insurancePolicy.IssueDate, 
-                                                                                   insurancePolicy.ExpiryDate))
-                    return string.Empty;
+                //if (UnitOfWork.InsurancePolicies.IsExistingInsurancePolicyCategory(insurancePolicy.Customer.CustomerCode,
+                //                                                                   insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryCode, 
+                //                                                                   insurancePolicy.IssueDate, 
+                //                                                                   insurancePolicy.ExpiryDate))
+                //    return string.Empty;
 
                 insurancePolicy.InsurancePolicyCode = getInsurancePolicyCode(insurancePolicy);
                 UnitOfWork.InsurancePolicies.Add(insurancePolicy);
@@ -53,9 +55,37 @@ namespace DAL.Core
 
                 if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
 
-                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(Enums.EnumPublishQueueType.Created, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryCode));
+                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(Enums.EnumPublishQueueType.Created, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
 
                 return insurancePolicy.InsurancePolicyCode;
+            }
+            catch
+            {
+                if (!IsMassiveWriter) UnitOfWork.RollbackTransaction();
+                _countError++;
+                throw;
+            }
+        }
+
+        public int DeleteInsurancePolicy(string insurancePolicyCode)
+        {
+            try
+            {
+                int countRow = 0;
+                var insurancePolicy = UnitOfWork.InsurancePolicies.GetInsurancePolicy(insurancePolicyCode).FirstOrDefault();
+                if (insurancePolicy == null)
+                    return countRow;
+
+                if (!IsMassiveWriter) UnitOfWork.BeginTransaction();
+
+                UnitOfWork.InsurancePolicies.Remove(insurancePolicy);
+                countRow = UnitOfWork.SaveChanges();
+
+                if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
+
+                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(Enums.EnumPublishQueueType.Deleted, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
+
+                return countRow;
             }
             catch
             {

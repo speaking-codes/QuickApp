@@ -18,7 +18,7 @@ namespace ConsoleAppCaricamentoDati.Builder
 
         public InsurancePolicyBuilder(InsurancePolicyCategory insurancePolicyCategory, Customer customer, IUnitOfWork unitOfWork)
         {
-            InsurancePolicy = NewInsurancePolicy();
+            InsurancePolicy = new InsurancePolicy();
             InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategory;
             InsurancePolicy.Customer = customer;
             Random = new Random();

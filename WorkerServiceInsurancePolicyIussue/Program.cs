@@ -22,10 +22,12 @@ namespace WorkerServiceInsurancePolicyIussue
                 .ConfigureServices(services =>
                 {
                     services.AddDbContextFactory<ApplicationDbContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionStringDbContext), ServiceLifetime.Singleton);
-                    services.AddTransient<IUnitOfWork, UnitOfWork>();
-                    services.AddTransient<ICustomerManager, CustomerManager>();
+                    services.AddSingleton<IUnitOfWork, UnitOfWork>();
 
-                    services.AddSingleton<IMessageQueueProducer, MessageQueueProducer>();
+                    services.AddTransient<ICustomerManager, CustomerManager>();
+                    services.AddTransient<IInsurancePolicyManager, InsurancePolicyManager>();
+
+                    services.AddTransient<IMessageQueueProducer, MessageQueueProducer>();
 
                     services.AddTransient<IAddressBuilder, AddressBuilder>();
                     services.AddTransient<IDeliveryBuilder, DeliveryBuilder>();

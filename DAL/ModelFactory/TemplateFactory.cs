@@ -18,6 +18,7 @@ namespace DAL.ModelFactory
         private const string _basePath = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\ConsoleAppCaricamentoDati\DatiBase\";
         private const string _lastNamePath = $"{_basePath}Cognomi.txt";
         private const string _firstNameMalePath = $"{_basePath}NomiMaschili.txt";
+        private const string _petNamePath = $"{_basePath}Pets.txt";
         private const string _firstNameFemalePath = $"{_basePath}NomiFemminili.txt";
         private const string _addressPath = $"{_basePath}Indirizzi.txt";
         private const string _jobPath = $"{_basePath}Professioni.txt";
@@ -62,6 +63,18 @@ namespace DAL.ModelFactory
 
 
             return firstNameTemplates;
+        }
+        private IList<string> getPetNames(string pathFile)
+        {
+            IList<string> petNames;
+
+            using (var reader = new StreamReader(pathFile))
+                petNames = reader.ReadToEnd().Split('\n').ToList();
+
+            for (var i = 0; i < petNames.Count; i++)
+                petNames[i] = petNames[i].Replace('\r', ' ').Trim();
+
+            return petNames;
         }
         private IList<string> GetStreetNames(string pathFileStreet)
         {
@@ -143,6 +156,7 @@ namespace DAL.ModelFactory
             var insurancePolicyModel = new InsurancePolicyTemplate();
             insurancePolicyModel.LastNames = getLastName(_lastNamePath);
             insurancePolicyModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
+            insurancePolicyModel.PetNames = getPetNames(_petNamePath);
             insurancePolicyModel.InsurancePolicyCategories = GetInsurancePolicyCategories();
             insurancePolicyModel.CarConfigurationModels = GetCarConfigurationModels();
             insurancePolicyModel.BykeConfigurationModels = GetBykeConfigurationModels();
@@ -154,6 +168,7 @@ namespace DAL.ModelFactory
             insurancePolicyModel.BaggageTypes = GetBaggageTypes();
             insurancePolicyModel.KinshipRelationshipTypes = GetKinshipRelationshipTypes();
             insurancePolicyModel.BreedPetDetailTypes = GetBreedPetDetailTypes();
+            insurancePolicyModel.AddressTemplate = CreateAddressModelTemplate();
             return insurancePolicyModel;
         }
 
@@ -204,12 +219,12 @@ namespace DAL.ModelFactory
                     case EnumInsurancePolicyCategory.FamiliareeCongiunto:
                         insurancePolicyBuilders.Add(new FamilyInsurancePolicyBuilder());
                         break;
-                    //case EnumInsurancePolicyCategory.AnimaleDomestico:
-                    //    insurancePolicyBuilders.Add(new PetInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.Casa:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
+                    case EnumInsurancePolicyCategory.AnimaleDomestico:
+                        insurancePolicyBuilders.Add(new PetInsurancePolicyBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.Casa:
+                        insurancePolicyBuilders.Add(new HouseInsurancePolicyBuilder());
+                        break;
                     //case EnumInsurancePolicyCategory.Infortunio:
                     //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
                     //    break;

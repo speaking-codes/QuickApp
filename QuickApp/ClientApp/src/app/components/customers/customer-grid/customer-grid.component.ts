@@ -18,6 +18,8 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { AlertService, DialogType, MessageSeverity } from 'src/app/services/alert.service';
 import { Utilities } from 'src/app/services/utilities';
 import { EnumLoadGridStep } from 'src/app/models/enums';
+import { AccountService } from 'src/app/services/account.service';
+import { Permission } from 'src/app/models/permission.model';
 
 @Component({
   selector: 'app-customer-grid',
@@ -48,7 +50,7 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   
   customerEditor: CustomerEditorComponent | null = null;
 
-  constructor(private customerService: CustomerService, private alertService: AlertService, private modalService: NgbModal, private router: Router){}
+  constructor(private customerService: CustomerService, private accountService: AccountService, private alertService: AlertService, private modalService: NgbModal, private router: Router){}
   
   get isNewCustomer() { return this.sourceCustomer == null; }
 
@@ -70,9 +72,7 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
         break;
     }
   }
-
-  isCustomerActive(data: CustomerGrid) { return data.isActive; }
-
+  
   isCustomerMale(data: CustomerGrid) { return data.gender.toLowerCase() === "uomo"; }
 
   ngOnInit(): void {
@@ -293,4 +293,29 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
   dashboardCustomer(data: CustomerGrid){
     this.router.navigate(['/dashboard', data.customerCode ]);
   }
+
+  isCustomerActive(data: CustomerGrid) { return data.isActive; }
+
+  isCanManageCustomers(data: CustomerGrid){
+    return this.isCustomerActive(data) && this.canManageCustomers();
+  }
+
+  isCanViewDashboardCustomers(data: CustomerGrid){
+    return this.isCustomerActive(data) && this.canViewDashboardCustomers();
+  }
+
+  canViewCustomers() {
+    return this.accountService.userHasPermission(Permission.viewCustomers); 
+  }
+
+  get canAddNewCustomer(){
+    return this.accountService.userHasPermission(Permission.manageCustomers);    
+  }
+  canManageCustomers(){
+    return this.accountService.userHasPermission(Permission.manageCustomers);    
+  }
+
+  canViewDashboardCustomers() {
+    return this.accountService.userHasPermission(Permission.viewDashboardCustomers); 
+  } 
 }

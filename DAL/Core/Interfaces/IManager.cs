@@ -9,5 +9,11 @@ namespace DAL.Core.Interfaces
     public interface IManager : IDisposable
     {
         void BeginTransaction();
+        Task BeginTransactionAsync();
+
+        void CommitTransaction();
+        Task CommitTransactionAsync();
+
+        void RollbackTransaction();
     }
 }

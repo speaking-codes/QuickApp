@@ -24,6 +24,11 @@ namespace DAL.Core
         public static ApplicationPermission ManageRoles = new ApplicationPermission("Manage Roles", "roles.manage", RolesPermissionGroupName, "Permission to create, delete and modify roles");
         public static ApplicationPermission AssignRoles = new ApplicationPermission("Assign Roles", "roles.assign", RolesPermissionGroupName, "Permission to assign roles to users");
 
+        public const string CustomerPermissionGroupName = "Customer Permissions";
+        public static ApplicationPermission ViewCustomers = new ApplicationPermission("View Customers", "customers.view", CustomerPermissionGroupName, "Permission to view customers registered");
+        public static ApplicationPermission ManageCustomers = new ApplicationPermission("Manage Customers", "customers.manage", CustomerPermissionGroupName, "Permission to create, delete and modify customers");
+        public static ApplicationPermission ViewDashboardCustomers = new ApplicationPermission("View Dashboard Customers", "customers.viewdashboard", CustomerPermissionGroupName, "Permission to view the customers' dashboard");
+
         static ApplicationPermissions()
         {
             var allPermissions = new List<ApplicationPermission>
@@ -33,7 +38,11 @@ namespace DAL.Core
 
                 ViewRoles,
                 ManageRoles,
-                AssignRoles
+                AssignRoles,
+
+                ViewCustomers,
+                ManageCustomers,
+                ViewDashboardCustomers
             };
 
             AllPermissions = allPermissions.AsReadOnly();
@@ -49,12 +58,22 @@ namespace DAL.Core
             return AllPermissions.SingleOrDefault(p => p.Value == permissionValue);
         }
 
-        public static string[] GetAllPermissionValues()
+        public static IList<string> GetAllPermissionValues()
         {
             return AllPermissions.Select(p => p.Value).ToArray();
         }
 
-        public static string[] GetAdministrativePermissionValues()
+        public static IList<string> GetEditorPermissionValues()
+        {
+            return new List<string> { ViewCustomers, ManageCustomers };
+        }
+
+        public static IList<string> GetAgentPermissionValues()
+        {
+            return new List<string> { ViewCustomers, ViewDashboardCustomers };
+        }
+
+        public static IList<string> GetAdministrativePermissionValues()
         {
             return new string[] { ManageUsers, ManageRoles, AssignRoles };
         }

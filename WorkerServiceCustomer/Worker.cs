@@ -52,7 +52,8 @@ namespace WorkerServiceCustomer
 
                                                .Build();
                     _customerManager.AddCustomer(customer);
-                    await Task.Delay(1000, stoppingToken);
+        
+                    await Task.Delay(5000, stoppingToken);
                 }
                 catch (Exception ex)
                 {

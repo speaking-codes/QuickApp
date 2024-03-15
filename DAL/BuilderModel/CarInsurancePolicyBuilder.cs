@@ -14,12 +14,6 @@ namespace DAL.BuilderModel
     {
         private VehicleInsurancePolicy _vehicleInsurancePolicy;
 
-        public override IInsurancePolicyBuilder SetInsurancePolicy(InsurancePolicy insurancePolicy)
-        {
-            base.SetInsurancePolicy(insurancePolicy);
-            _vehicleInsurancePolicy = (VehicleInsurancePolicy)InsurancePolicy;
-            return this;
-        }
 
         public ICarInsurancePolicyBuilder SetConfigurationModel(IList<ConfigurationModel> carConfigurationModels)
         {
@@ -27,7 +21,7 @@ namespace DAL.BuilderModel
             _vehicleInsurancePolicy.ConfigurationModel = carConfigurationModels[i];
             return this;
         }
-      
+
         public ICarInsurancePolicyBuilder SetLicensePlate()
         {
             _vehicleInsurancePolicy.LicensePlate = Utilities.GenerateLicensePlate(Random);
@@ -63,6 +57,19 @@ namespace DAL.BuilderModel
         public ICarInsurancePolicyBuilder SetRiskCategory()
         {
             _vehicleInsurancePolicy.RiskCategory = (byte)Random.Next(1, 14);
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsurancePolicy(InsurancePolicy insurancePolicy)
+        {
+            base.SetInsurancePolicy(insurancePolicy);
+            _vehicleInsurancePolicy = new VehicleInsurancePolicy(InsurancePolicy);
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
+        {
+            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Auto).FirstOrDefault();
             return this;
         }
 

@@ -1,4 +1,6 @@
 ﻿using DAL.BuilderModel.Interfaces;
+using DAL.BuilderModelTemplate;
+using DAL.Helpers;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -8,9 +10,56 @@ using System.Threading.Tasks;
 
 namespace DAL.BuilderModel
 {
-    public class PetInsurancePolicyBuilder:InsurancePolicyBuilder, IPetInsurancePolicyBuilder
+    public class PetInsurancePolicyBuilder : InsurancePolicyBuilder, IPetInsurancePolicyBuilder
     {
-        public IPetInsurancePolicyBuilder SetBreedPetDetailType(IList<BreedPetDetailType> breedPetDetailTypes)=>this;
-        public new PetInsurancePolicy Build() => new PetInsurancePolicy();
+        private PetInsurancePolicy _petInsurancePolicy;
+
+        public IPetInsurancePolicyBuilder SetPetIdentificationCode()
+        {
+            _petInsurancePolicy.PetIdentificationCode = Utilities.GeneratePetIdentificationCode(Random);
+            return this;
+        }
+        public IPetInsurancePolicyBuilder SetPetName(IList<string> petNames)
+        {
+            var i = Random.Next(petNames.Count);
+            _petInsurancePolicy.PetName = petNames[i];
+            return this;
+        }
+        public IPetInsurancePolicyBuilder SetPetBirthDate()
+        {
+            var age = Random.Next(0, 3);
+            var days = Random.Next(1, 365);
+            _petInsurancePolicy.PetBirthDate = DateTime.Now.AddYears(-age).AddDays(-days);
+            return this;
+        }
+        public IPetInsurancePolicyBuilder SetBreedPetDetailType(IList<BreedPetDetailType> breedPetDetailTypes)
+        {
+            var i = Random.Next(breedPetDetailTypes.Count);
+            _petInsurancePolicy.BreedPetDetailType = breedPetDetailTypes[i];
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsurancePolicy(InsurancePolicy insurancePolicy)
+        {
+            base.SetInsurancePolicy(insurancePolicy);
+            _petInsurancePolicy = new PetInsurancePolicy(InsurancePolicy);
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
+        {
+            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.AnimaleDomestico).FirstOrDefault();
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetDetailItem(InsurancePolicyTemplate insurancePolicyTemplate)
+        {
+            return this.SetPetIdentificationCode()
+                       .SetPetName(insurancePolicyTemplate.PetNames)
+                       .SetPetBirthDate()
+                       .SetBreedPetDetailType(insurancePolicyTemplate.BreedPetDetailTypes);
+
+        }
+        public new PetInsurancePolicy Build() => _petInsurancePolicy;
     }
 }

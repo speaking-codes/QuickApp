@@ -12,7 +12,9 @@ namespace DAL.Repositories.Interfaces
         IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode, byte salesLineId);
         IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode);
         IQueryable<InsurancePolicy> GetInsurancePolicy(int id);
+        IQueryable<InsurancePolicy> GetInsurancePolicy(string insurancePolicyCode);
         IQueryable<InsurancePolicy> GetActiveInsurancePolicies(string customercode);
+        IQueryable<InsurancePolicy> GetExiperedInsurancePolicies(DateTime expireDate);
         int GetInsurancePolicyCategoryCount(string insurancePolicyCategoryCode);
         bool IsExistingInsurancePolicyCategory(string customerCode, string insurancePolicyCategoryCode, DateTime createdDate, DateTime expiryDate);
 

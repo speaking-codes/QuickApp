@@ -9,7 +9,7 @@ namespace DAL.BuilderModelTemplate
 {
     public class AdressModelTemplate
     {
-        public readonly IList<string> StreetTypes;
+        public IList<string> StreetTypes { get; private set; }
         public IList<string> StreetNames { get; set; }
         public IList<Municipality> Municipalities { get; set; }
 

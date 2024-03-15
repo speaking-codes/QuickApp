@@ -10,10 +10,11 @@ namespace DAL.Helpers
 {
     public static class Utilities
     {
+        private static IList<string> separators => new List<string> { "", ".", "-", "_" };
+        private static string CharsAndDigits => "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
         public static string Chars => "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static string Digits => "0123456789";
-
-        private static IList<string> separators => new List<string> { "", ".", "-", "_" };
 
         private static string generateRandomCode(string baseDictionary, int length, Random random) =>
             new string(Enumerable.Repeat(baseDictionary, length).Select(s => s[random.Next(s.Length)]).ToArray());
@@ -32,5 +33,16 @@ namespace DAL.Helpers
 
         public static string GenerateLicensePlate(Random random) =>
             $"{generateRandomCode(Chars, 2, random)} {generateRandomCode(Digits, 3, random)} {generateRandomCode(Chars, 2, random)}";
+
+        public static string GeneratePetIdentificationCode(Random random) =>
+            new string(Enumerable.Repeat(CharsAndDigits, 12).Select(s => s[random.Next(s.Length)]).ToArray());
+
+        public static string GenerateFullStreetName(IList<string> streetTypeNames, IList<string> streetNames, Random random)
+        {
+            var i = random.Next(streetTypeNames.Count);
+            var j = random.Next(streetNames.Count);
+            var houseNumber = random.Next(1, 599);
+            return $"{streetTypeNames[i]} {streetNames[j]}, {houseNumber}";
+        }
     }
 }

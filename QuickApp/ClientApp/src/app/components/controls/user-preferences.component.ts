@@ -100,14 +100,14 @@ export class UserPreferencesComponent {
   }
 
   get canViewCustomers() {
-    return this.accountService.userHasPermission(Permission.viewUsers); // eg. viewCustomersPermission
+    return this.accountService.userHasPermission(Permission.viewCustomers);
   }
 
-  get canViewProducts() {
-    return this.accountService.userHasPermission(Permission.viewUsers); // eg. viewProductsPermission
+  get canManageCustomers(){
+    return this.accountService.userHasPermission(Permission.manageCustomers);
   }
 
-  get canViewOrders() {
-    return true; // eg. viewOrdersPermission
+  get canViewDashboardCustomers() {
+    return this.accountService.userHasPermission(Permission.viewDashboardCustomers); 
   }
 }

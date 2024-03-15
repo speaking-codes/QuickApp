@@ -11,6 +11,8 @@ namespace DAL.Core.Interfaces
     {
         IList<InsurancePolicy> GetInsurancePolicy(string customerCode);
         IList<InsurancePolicy> GetActiveInsurancePolicy(string customerCode);
+        IList<InsurancePolicy> GetExpiredInsurancePolicy(DateTime expireDate);
         string AddInsurancePolicy(InsurancePolicy insurancePolicy);
+        int DeleteInsurancePolicy(string insurancePolicyCode);
     }
 }

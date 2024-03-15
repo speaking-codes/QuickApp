@@ -19,7 +19,6 @@ namespace ConsoleAppCaricamentoDati.Builder
             _breedPetDetailTypes = UnitOfWork.BreedPetDetailTypes.GetAll();
         }
 
-        protected override InsurancePolicy NewInsurancePolicy() => new PetInsurancePolicy();
 
         public override InsurancePolicyBuilder SetIsLuxuryPolicy()
         {
