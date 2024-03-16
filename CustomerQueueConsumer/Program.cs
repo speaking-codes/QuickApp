@@ -38,7 +38,10 @@ var host = new HostBuilder()
         services.AddTransient<IMongoDbContext, MongoDbContext>(x => new MongoDbContext(connectionStringNoSql, databaseNoSql));
         services.AddTransient<ICustomerHeaderRepository, CustomerHeaderRepository>(x => new CustomerHeaderRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerHeaderCollection"));
         services.AddTransient<ICustomerDetailRepository, CustomerDetailRepository>(x => new CustomerDetailRepository(x.GetRequiredService<IMongoDbContext>(), "CustomerDetailCollection"));
-        services.AddTransient<ICustomerRepository, CustomerRepository>();
+        services.AddTransient<IInsuranceCategoryPolicyTopSellingRepository, InsuranceCategoryPolicyTopSellingRepository>(x => new InsuranceCategoryPolicyTopSellingRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyTopSelling"));
+        services.AddTransient<IInsuranceCategoryPolicyDashboardCardRepository, InsuranceCategoryPolicyDashboardCardRepository>(x => new InsuranceCategoryPolicyDashboardCardRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyCard"));
+        services.AddTransient<IInsuranceCoverageSummaryRepository, InsuranceCoverageSummaryRepository>(x => new InsuranceCoverageSummaryRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCoverageSummary"));
+        services.AddTransient<IInsuranceCoverageChartRepository, InsuranceCoverageChartRepository>(x => new InsuranceCoverageChartRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCoverageChart"));
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<ICustomerServerlessManager, CustomerServerlessManager>();
         services.AddTransient<IInsurancePolicyServerlessManager, InsurancePolicyServerlessManager>();

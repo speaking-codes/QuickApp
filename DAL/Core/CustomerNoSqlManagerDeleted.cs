@@ -19,10 +19,7 @@ namespace DAL.Core
 
         protected override void Run()
         {
-            var filterHeader = Builders<CustomerHeader>.Filter.Eq(x => x.CustomerCode, CustomerHeader.CustomerCode);
             _customerHeaderRepositoryNoSql.DeleteCustomer(CustomerHeader.CustomerCode);
-
-            var filterDetail = Builders<CustomerDetail>.Filter.Eq(x => x.CustomerCode, CustomerDetail.CustomerCode);
             _customerDetailRepositoryNoSql.DeleteCustomer(CustomerDetail.CustomerCode);
         }
     }

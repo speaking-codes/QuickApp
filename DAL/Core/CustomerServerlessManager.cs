@@ -19,12 +19,11 @@ namespace DAL.Core
         private readonly ICustomerHeaderRepository _customerHeaderRepositoryNoSql;
         private readonly ICustomerDetailRepository _customerDetailRepositoryNoSql;
 
-        public CustomerServerlessManager(ICustomerRepository customerRepository,
+        public CustomerServerlessManager(IUnitOfWork unitOfWork,
                                          ICustomerHeaderRepository customerRepositoryNoSql,
                                          ICustomerDetailRepository customerDetailRepositoryNoSql)
         {
-            _customerRepository = customerRepository;
-
+            _customerRepository = unitOfWork.Customers;
             _customerHeaderRepositoryNoSql = customerRepositoryNoSql;
             _customerDetailRepositoryNoSql = customerDetailRepositoryNoSql;
         }

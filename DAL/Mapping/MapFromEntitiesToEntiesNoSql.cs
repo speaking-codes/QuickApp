@@ -111,6 +111,18 @@ namespace DAL.Mapping
             return deliveryDetails;
         }
 
+        private static SalesLineChart ToSalesLineChart(this Tuple<SalesLineType, IList<InsurancePolicy>> customerInsuranceCoverage)
+        {
+            return new SalesLineChart
+            {
+                SalesLineCode = customerInsuranceCoverage.Item1.SalesLineCode,
+                SalesLineName = customerInsuranceCoverage.Item1.SalesLineName,
+                BackGroundColor = customerInsuranceCoverage.Item1.BackGroundColor,
+                TotalCount = customerInsuranceCoverage.Item2.Count,
+                TotalPrice = customerInsuranceCoverage.Item2.Sum(x => x.TotalPrize)
+            };
+        }
+
         public static CustomerHeader ToNoSqlHeaderEntity(this Customer value)
         {
             return new CustomerHeader
@@ -146,6 +158,17 @@ namespace DAL.Mapping
                 ContractTitle = value.ContractType != null ? value.ContractType.ContractTypeTitle : string.Empty,
                 Income = value.Income.HasValue ? "€ " + value.Income.Value.ToString("C0") : string.Empty
             };
+        }
+
+        public static InsuranceCoverageChart ToInsuranceCoverageChart(this IList<Tuple<SalesLineType, IList<InsurancePolicy>>> customerInsuranceCoverages, string customerCode)
+        {
+            var insuranceCoverageChart = new InsuranceCoverageChart();
+            insuranceCoverageChart.CustomerCode = customerCode;
+            insuranceCoverageChart.SalesLineCharts = new List<SalesLineChart>();
+            foreach(var item in customerInsuranceCoverages)
+                insuranceCoverageChart.SalesLineCharts.Add(item.ToSalesLineChart());
+
+            return insuranceCoverageChart;
         }
     }
 }

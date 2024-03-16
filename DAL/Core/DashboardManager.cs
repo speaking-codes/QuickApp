@@ -50,14 +50,15 @@ namespace DAL.Core
             if (customerHeader != null)
                 return customerHeader;
 
-            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
-            if (customer == null)
-                return new CustomerHeader();
+            return new CustomerHeader();
+            //var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
+            //if (customer == null)
+            //    return new CustomerHeader();
 
-            customerHeader = customer.ToNoSqlHeaderEntity();
-            _customerHeaderRepository.InsertOne(customerHeader);
+            //customerHeader = customer.ToNoSqlHeaderEntity();
+            //_customerHeaderRepository.InsertOne(customerHeader);
 
-            return customerHeader;
+            //return customerHeader;
         }
 
         public CustomerDetail GetCustomerDetail(string customerCode)
@@ -66,14 +67,15 @@ namespace DAL.Core
             if (customerDetail != null)
                 return customerDetail;
 
-            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
-            if (customer == null)
-                return new CustomerDetail();
+            return new CustomerDetail();
+            //var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
+            //if (customer == null)
+            //    return new CustomerDetail();
 
-            customerDetail = customer.ToNoSqlDetailEntity();
-            _customerDetailRepository.InsertOne(customerDetail);
+            //customerDetail = customer.ToNoSqlDetailEntity();
+            //_customerDetailRepository.InsertOne(customerDetail);
 
-            return customerDetail;
+            //return customerDetail;
         }
 
         public IList<SalesLineChart> GetSalesLineChart(string customerCode)
@@ -82,106 +84,99 @@ namespace DAL.Core
             if (insuranceCoverageChart != null)
                 return insuranceCoverageChart.SalesLineCharts;
 
-            insuranceCoverageChart = new InsuranceCoverageChart();
-            insuranceCoverageChart.CustomerCode = customerCode;
-            insuranceCoverageChart.SalesLineCharts = new List<SalesLineChart>();
+            return new List<SalesLineChart>();
+            //var customerInsuranceCoverages = new List<Tuple<SalesLineType, IList<InsurancePolicy>>>();
+            //var salesLines = UnitOfWork.SalesLines.GetSalesLineTypes(customerCode).ToList();
+            //foreach (var item in salesLines)
+            //{
+            //    var insurancePolicies = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode, item.Id).ToList();
+            //    customerInsuranceCoverages.Add(new Tuple<SalesLineType, IList<InsurancePolicy>>( item,insurancePolicies));
+            //}
 
-            var salesLines = UnitOfWork.SalesLines.GetSalesLineTypes(customerCode).ToList();
-            foreach (var item in salesLines)
-            {
-                var insurancePolicies = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode, item.Id).ToList();
-                insuranceCoverageChart.SalesLineCharts.Add(new SalesLineChart
-                {
-                    SalesLineCode = item.SalesLineCode,
-                    SalesLineName = item.SalesLineName,
-                    BackGroundColor = item.BackGroundColor,
-                    TotalCount = insurancePolicies.Count,
-                    TotalPrice = insurancePolicies.Sum(x => x.TotalPrize)
-                });
-            }
-
-            _insuranceCoverageChartRepository.InsertOne(insuranceCoverageChart);
-            return insuranceCoverageChart.SalesLineCharts;
+            //insuranceCoverageChart = customerInsuranceCoverages.ToInsuranceCoverageChart(customerCode);
+            //_insuranceCoverageChartRepository.InsertOne(insuranceCoverageChart);
+            //return insuranceCoverageChart.SalesLineCharts;
         }
 
         public IList<InsuranceCoverageGrid> GetInsuranceCoverageGridSummaries(string customerCode)
         {
-            //var insuranceCoverageSummary = _insuranceCoverageSummaryRepository.GetInsuranceCoverageSummary(customerCode);
-            //if (insuranceCoverageSummary != null)
-            //    return insuranceCoverageSummary.InsuranceCoverageGrids;
+            var insuranceCoverageSummary = _insuranceCoverageSummaryRepository.GetInsuranceCoverageSummary(customerCode);
+            if (insuranceCoverageSummary != null)
+                return insuranceCoverageSummary.InsuranceCoverageGrids;
 
-            var insurancePolicies = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode).ToList();
-            var insuranceCoverageSummary = new InsuranceCoverageSummary();
-            insuranceCoverageSummary.CustomerCode = customerCode;
-            InsuranceCoverageGrid insuranceCoverageGrid = null;
+            return new List<InsuranceCoverageGrid>();
+            //var insurancePolicies = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode).ToList();
+            //insuranceCoverageSummary = new InsuranceCoverageSummary();
+            //insuranceCoverageSummary.CustomerCode = customerCode;
+            //InsuranceCoverageGrid insuranceCoverageGrid = null;
 
-            foreach (var item in insurancePolicies)
-            {
-                switch ((EnumInsurancePolicyCategory)item.InsurancePolicyCategory.Id)
-                {
-                    case EnumInsurancePolicyCategory.None:
-                        break;
-                    case EnumInsurancePolicyCategory.Auto:
-                    case EnumInsurancePolicyCategory.Moto:
-                        var vehicleInsurancePolicy = UnitOfWork.InsurancePolicies.GetVehicleInsurancePolicy(item.InsurancePolicyCode).FirstOrDefault();
-                        insuranceCoverageGrid = new InsuranceCoverageGrid
-                        {
-                            Code = vehicleInsurancePolicy.InsurancePolicyCode,
-                            CategoryType = item.InsurancePolicyCategory.InsurancePolicyCategoryName,
-                            ItemDescription = $"Targa: {vehicleInsurancePolicy.LicensePlate} - {vehicleInsurancePolicy.ConfigurationModel.Model.Brand.BrandName} - {vehicleInsurancePolicy.ConfigurationModel.Model.ModelName} - {vehicleInsurancePolicy.ConfigurationModel.ConfigurationDescription}",
-                            IssueDate = vehicleInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
-                            ExpiryDate = vehicleInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
-                            TotalPrice = $"{vehicleInsurancePolicy.TotalPrize.ToString("#,##0.00")} €"
-                        };
-                        insuranceCoverageSummary.InsuranceCoverageGrids.Add(insuranceCoverageGrid);
-                        break;
-                    case EnumInsurancePolicyCategory.Imbarcazione:
-                        break;
-                    case EnumInsurancePolicyCategory.Viaggi:
-                        var travelInsurancePolicy = UnitOfWork.InsurancePolicies.GetInsurancePolicyTravel(item.InsurancePolicyCode).FirstOrDefault();
-                        insuranceCoverageGrid = new InsuranceCoverageGrid
-                        {
-                            Code = travelInsurancePolicy.InsurancePolicyCode,
-                            CategoryType = item.InsurancePolicyCategory.InsurancePolicyCategoryName,
-                            ItemDescription = travelInsurancePolicy.Travels.GetItemDescription(),
-                            IssueDate = travelInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
-                            ExpiryDate = travelInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
-                            TotalPrice = $"{travelInsurancePolicy.TotalPrize.ToString("#,##0.00")} €"
-                        };
-                        insuranceCoverageSummary.InsuranceCoverageGrids.Add(insuranceCoverageGrid);
-                        break;
-                    case EnumInsurancePolicyCategory.Vacanza:
-                        var vacationInsurancePolicy = UnitOfWork.InsurancePolicies.GetInsurancePolicyVacation(item.InsurancePolicyCode).FirstOrDefault();
-                        insuranceCoverageGrid = new InsuranceCoverageGrid
-                        {
-                            Code = vacationInsurancePolicy.InsurancePolicyCode,
-                            CategoryType = item.InsurancePolicyCategory.InsurancePolicyCategoryName,
-                            ItemDescription = vacationInsurancePolicy.Vacations.GetItemDescription(),
-                            IssueDate = vacationInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
-                            ExpiryDate = vacationInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
-                            TotalPrice = $"{vacationInsurancePolicy.TotalPrize.ToString("#,##0.00")} €"
-                        };
-                        insuranceCoverageSummary.InsuranceCoverageGrids.Add(insuranceCoverageGrid);
-                        break;
-                    case EnumInsurancePolicyCategory.PerditaBagaglio:
-                        var insurancePolicyBaggageLoss = UnitOfWork.InsurancePolicies.GetInsurancePolicyBaggageLoss(item.InsurancePolicyCode);
-                        break;
-                    case EnumInsurancePolicyCategory.FamiliareeCongiunto:
-                        var familyInsurancePolicy = UnitOfWork.InsurancePolicies.GetFamilyInsurancePolicy(item.InsurancePolicyCode);
-                        break;
-                    case EnumInsurancePolicyCategory.AnimaleDomestico:
-                        var petInsurancePolicy = UnitOfWork.InsurancePolicies.GetPetInsurancePolicy(item.InsurancePolicyCode);
-                        break;
-                    case EnumInsurancePolicyCategory.VisiteSpecialistiche:
-                    case EnumInsurancePolicyCategory.GrandiInterventi:
-                    case EnumInsurancePolicyCategory.CureOdontoiatriche:
-                        var healthInsurancePolicy = UnitOfWork.InsurancePolicies.GetHealthInsurancePolicy(item.InsurancePolicyCode);
-                        break;
-                }
-            }
+            //foreach (var item in insurancePolicies)
+            //{
+            //    switch ((EnumInsurancePolicyCategory)item.InsurancePolicyCategory.Id)
+            //    {
+            //        case EnumInsurancePolicyCategory.None:
+            //            break;
+            //        case EnumInsurancePolicyCategory.Auto:
+            //        case EnumInsurancePolicyCategory.Moto:
+            //            var vehicleInsurancePolicy = UnitOfWork.InsurancePolicies.GetVehicleInsurancePolicy(item.InsurancePolicyCode).FirstOrDefault();
+            //            insuranceCoverageGrid = new InsuranceCoverageGrid
+            //            {
+            //                Code = vehicleInsurancePolicy.InsurancePolicyCode,
+            //                CategoryType = item.InsurancePolicyCategory.InsurancePolicyCategoryName,
+            //                ItemDescription = $"Targa: {vehicleInsurancePolicy.LicensePlate} - {vehicleInsurancePolicy.ConfigurationModel.Model.Brand.BrandName} - {vehicleInsurancePolicy.ConfigurationModel.Model.ModelName} - {vehicleInsurancePolicy.ConfigurationModel.ConfigurationDescription}",
+            //                IssueDate = vehicleInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
+            //                ExpiryDate = vehicleInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
+            //                TotalPrice = $"{vehicleInsurancePolicy.TotalPrize.ToString("#,##0.00")} €"
+            //            };
+            //            insuranceCoverageSummary.InsuranceCoverageGrids.Add(insuranceCoverageGrid);
+            //            break;
+            //        case EnumInsurancePolicyCategory.Imbarcazione:
+            //            break;
+            //        case EnumInsurancePolicyCategory.Viaggi:
+            //            var travelInsurancePolicy = UnitOfWork.InsurancePolicies.GetInsurancePolicyTravel(item.InsurancePolicyCode).FirstOrDefault();
+            //            insuranceCoverageGrid = new InsuranceCoverageGrid
+            //            {
+            //                Code = travelInsurancePolicy.InsurancePolicyCode,
+            //                CategoryType = item.InsurancePolicyCategory.InsurancePolicyCategoryName,
+            //                ItemDescription = travelInsurancePolicy.Travels.GetItemDescription(),
+            //                IssueDate = travelInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
+            //                ExpiryDate = travelInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
+            //                TotalPrice = $"{travelInsurancePolicy.TotalPrize.ToString("#,##0.00")} €"
+            //            };
+            //            insuranceCoverageSummary.InsuranceCoverageGrids.Add(insuranceCoverageGrid);
+            //            break;
+            //        case EnumInsurancePolicyCategory.Vacanza:
+            //            var vacationInsurancePolicy = UnitOfWork.InsurancePolicies.GetInsurancePolicyVacation(item.InsurancePolicyCode).FirstOrDefault();
+            //            insuranceCoverageGrid = new InsuranceCoverageGrid
+            //            {
+            //                Code = vacationInsurancePolicy.InsurancePolicyCode,
+            //                CategoryType = item.InsurancePolicyCategory.InsurancePolicyCategoryName,
+            //                ItemDescription = vacationInsurancePolicy.Vacations.GetItemDescription(),
+            //                IssueDate = vacationInsurancePolicy.IssueDate.ToString("dd/MM/yyyy"),
+            //                ExpiryDate = vacationInsurancePolicy.ExpiryDate.ToString("dd/MM/yyyy"),
+            //                TotalPrice = $"{vacationInsurancePolicy.TotalPrize.ToString("#,##0.00")} €"
+            //            };
+            //            insuranceCoverageSummary.InsuranceCoverageGrids.Add(insuranceCoverageGrid);
+            //            break;
+            //        case EnumInsurancePolicyCategory.PerditaBagaglio:
+            //            var insurancePolicyBaggageLoss = UnitOfWork.InsurancePolicies.GetInsurancePolicyBaggageLoss(item.InsurancePolicyCode);
+            //            break;
+            //        case EnumInsurancePolicyCategory.FamiliareeCongiunto:
+            //            var familyInsurancePolicy = UnitOfWork.InsurancePolicies.GetFamilyInsurancePolicy(item.InsurancePolicyCode);
+            //            break;
+            //        case EnumInsurancePolicyCategory.AnimaleDomestico:
+            //            var petInsurancePolicy = UnitOfWork.InsurancePolicies.GetPetInsurancePolicy(item.InsurancePolicyCode);
+            //            break;
+            //        case EnumInsurancePolicyCategory.VisiteSpecialistiche:
+            //        case EnumInsurancePolicyCategory.GrandiInterventi:
+            //        case EnumInsurancePolicyCategory.CureOdontoiatriche:
+            //            var healthInsurancePolicy = UnitOfWork.InsurancePolicies.GetHealthInsurancePolicy(item.InsurancePolicyCode);
+            //            break;
+            //    }
+            //}
 
             //_insuranceCoverageSummaryRepository.InsertOne(insuranceCoverageSummary);
-            return insuranceCoverageSummary.InsuranceCoverageGrids;
+            //return insuranceCoverageSummary.InsuranceCoverageGrids;
         }
 
         public IList<InsuranceCategoryPolicyDashboardCard> GetRecommendationInsuranceCategoryPolicyDashboardCards(string customerCode)

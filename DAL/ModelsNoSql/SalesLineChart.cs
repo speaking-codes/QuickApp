@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace DAL.ModelsNoSql
 {
-    public class SalesLineChart : IDocument
+    public class SalesLineChart 
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
-
         [BsonElement("SalesLineCode")]
         public string SalesLineCode { get; set; }
 

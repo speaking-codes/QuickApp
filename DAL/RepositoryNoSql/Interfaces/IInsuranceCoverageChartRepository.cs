@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace DAL.RepositoryNoSql.Interfaces
 {
-    public interface IInsuranceCoverageChartRepository:IRepositoryNoSql<InsuranceCoverageChart>
+    public interface IInsuranceCoverageChartRepository : IRepositoryNoSql<InsuranceCoverageChart>
     {
         InsuranceCoverageChart GetInsuranceCoverageChart(string customerCode);
+        bool DeleteInsuranceCoverageChart(string customerCode);
+        bool UpdateInsuranceCoverageChart(string customerCode, InsuranceCoverageChart insuranceCoverageChart);
     }
 }

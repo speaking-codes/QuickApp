@@ -19,7 +19,9 @@ namespace DAL.Models
         public bool IsLuxuryPolicy { get; set; }
         public bool IsTransferForMachineLearning { get; set; }
 
+        public byte InsurancePolicyCategoryId { get; set; }
         public virtual InsurancePolicyCategory InsurancePolicyCategory { get; set; }
+
         public virtual Customer Customer { get; set; }
 
         public virtual IList<BaggageLoss> BaggageLosses { get; set; }
