@@ -417,21 +417,14 @@ namespace DAL
             builder.Entity<Temp>().Property(c => c.Gender).IsRequired(false);
 
             builder.Entity<Temp>().Property(c => c.MaritalStatusCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.MaritalStatusId).IsRequired(false).HasDefaultValue(0);
-
             builder.Entity<Temp>().Property(c => c.FamilyTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.FamilyTypeId).IsRequired(false).HasDefaultValue(0);
             builder.Entity<Temp>().Property(c => c.ChildrenNumbers).IsRequired(false).HasDefaultValue(0);
-
             builder.Entity<Temp>().Property(c => c.IncomeTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.IncomeTypeId).IsRequired(false).HasDefaultValue(0);
-
             builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.ProfessionTypeId).IsRequired(false).HasDefaultValue(0);
-            builder.Entity<Temp>().Property(c => c.Income).IsRequired(false).HasDefaultValue(0.0);
-
+            builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
+            builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
+            builder.Entity<Temp>().Property(c => c.CountryAbbreviation).IsRequired(false);
             builder.Entity<Temp>().Property(c => c.RegionCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.RegionId).IsRequired(false).HasDefaultValue(0);
 
             builder.Entity<Temp>().ToTable($"App{nameof(Temp)}");
 

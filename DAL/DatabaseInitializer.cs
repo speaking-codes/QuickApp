@@ -231,39 +231,39 @@ namespace DAL
                                                           .Where(x => x.IsActive)
                                                           .Select(x => x.InsurancePolicyCategoryCode)
                                                           .ToListAsync();
-            var temps = await _context.Temps.ToListAsync();
-            var rnd = new Random();
-            LearningCustomerPreferences learningCustomerPreferences = null;
-            DateTime birthDate;
+            //var temps = await _context.Temps.ToListAsync();
+            //var rnd = new Random();
+            //LearningCustomerPreferences learningCustomerPreferences = null;
+            //DateTime birthDate;
 
-            foreach (var itemCategory in insurancePolicyCategories)
-            {
-                foreach (var item in temps)
-                {
-                    var index = rnd.Next(0, insurancePolicyCategories.Count);
+            //foreach (var itemCategory in insurancePolicyCategories)
+            //{
+            //    foreach (var item in temps)
+            //    {
+            //        var index = rnd.Next(0, insurancePolicyCategories.Count);
 
-                    learningCustomerPreferences = new LearningCustomerPreferences();
-                    learningCustomerPreferences.UserId = item.Id;
-                    learningCustomerPreferences.CustomerCode = null;
-                    learningCustomerPreferences.Gender = item.Gender;
+            //        learningCustomerPreferences = new LearningCustomerPreferences();
+            //        learningCustomerPreferences.UserId = item.Id;
+            //        learningCustomerPreferences.CustomerCode = null;
+            //        learningCustomerPreferences.Gender = item.Gender;
 
-                    if (DateTime.TryParse(item.BirthDate, out birthDate))
-                        learningCustomerPreferences.Age = birthDate.GetAge();
+            //        if (DateTime.TryParse(item.BirthDate, out birthDate))
+            //            learningCustomerPreferences.Age = birthDate.GetAge();
 
-                    learningCustomerPreferences.MaritalStatus = item.MaritalStatusCode;
-                    learningCustomerPreferences.FamilyType = item.FamilyTypeCode;
-                    learningCustomerPreferences.ChildrenNumbers = item.ChildrenNumbers;
-                    learningCustomerPreferences.IncomeType = item.IncomeTypeCode;
-                    learningCustomerPreferences.ProfessionType = item.ProfessioneTypeCode;
-                    learningCustomerPreferences.Income = item.Income;
-                    learningCustomerPreferences.Region = item.RegionCode;
-                    learningCustomerPreferences.InsurancePolicyCategory = itemCategory;
-                    learningCustomerPreferences.PredictionInsurancePolicyCategory= insurancePolicyCategories[index];
+            //        learningCustomerPreferences.MaritalStatus = item.MaritalStatusCode;
+            //        learningCustomerPreferences.FamilyType = item.FamilyTypeCode;
+            //        learningCustomerPreferences.ChildrenNumbers = item.ChildrenNumbers;
+            //        learningCustomerPreferences.IncomeType = item.IncomeTypeCode;
+            //        learningCustomerPreferences.ProfessionType = item.ProfessioneTypeCode;
+            //        learningCustomerPreferences.Income = item.Income;
+            //        learningCustomerPreferences.Region = item.RegionCode;
+            //        learningCustomerPreferences.InsurancePolicyCategory = itemCategory;
+            //        learningCustomerPreferences.PredictionInsurancePolicyCategory= insurancePolicyCategories[index];
 
-                    await _context.LearningCustomerPreferences.AddAsync(learningCustomerPreferences);
-                }
-            }
-            await _context.SaveChangesAsync();
+            //        await _context.LearningCustomerPreferences.AddAsync(learningCustomerPreferences);
+            //    }
+            //}
+            //await _context.SaveChangesAsync();
         }
 
         private async Task LoadMatrixUserItems()

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { InsuranceCategoryPolicyCard, InsuranceCoveragePolicyFooter } from 'src/app/models/insurance-coverage';
 import { CardComponent } from '../../controls/card/card.component';
 import { TxtStyleDirective } from 'src/app/directives/txt-style.directive';
@@ -9,7 +9,7 @@ import { IconStyleDirective } from 'src/app/directives/icon-style.directive';
   templateUrl: './insurancecoverage.component.html',
   styleUrls: ['./insurancecoverage.component.scss']
 })
-export class InsurancecoverageComponent {
+export class InsurancecoverageComponent implements OnInit {
   isShowen: boolean;
 
   @Input()
@@ -27,13 +27,23 @@ export class InsurancecoverageComponent {
   @ViewChild('flexSwitchCheckChecked')
   searchInput!: ElementRef;
 
+  ngOnInit(): void {
+    this.isShowen = false;
+  }
+  
   IsShowen():boolean {
     return this.isShowen;
   }
 
-  Show(): void { this.isShowen = true; }
+  Show(): void { 
+    debugger;
+    this.isShowen = true; 
+  }
 
-  Hide(): void { this.isShowen = false; }
+  Hide(): void { 
+    debugger;
+    this.isShowen = false; 
+  }
 
   selectItem(event):void { 
     var isChecked = event.target.checked;

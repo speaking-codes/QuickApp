@@ -64,7 +64,11 @@ namespace QuickApp.Controllers
         [HttpGet("insurancecoveragerecommended/{customerCode}")]
         public IActionResult GetInsuranceCoverageRecommended(string customerCode)
         {
-            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetRecommendationInsuranceCategoryPolicyDashboardCards(customerCode);
+            var currentYear = DateTime.Now.Year - 1;
+            var top = 6;
+            var insuranceCategoryPolicyCodes = string.Empty;
+            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetTopSellingInsuranceCategoryPolicyDashboardCards(currentYear, top, insuranceCategoryPolicyCodes.Split(new string[] { ";" }, System.StringSplitOptions.RemoveEmptyEntries));
+            //_dashboardManager.GetRecommendationInsuranceCategoryPolicyDashboardCards(customerCode);
             return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCards));
         }
 

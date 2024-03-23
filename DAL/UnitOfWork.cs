@@ -263,7 +263,7 @@ namespace DAL
         public async Task BeginTransactionAsync() => _transaction = await _context.Database.BeginTransactionAsync();
 
         public void CommitTransaction() => _transaction.Commit();
-        public async Task CommitTransactionAsync() => await _transaction.CommitAsync();
+        public async Task CommitTransactionAsync() { if (_transaction != null) await _transaction.CommitAsync(); }
 
         public void RollbackTransaction() => _transaction.Rollback();
 
