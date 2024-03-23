@@ -50,7 +50,48 @@ namespace DAL.BuilderModel
 
         public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
         {
-            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Casa).FirstOrDefault();
+            _houseInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Casa).FirstOrDefault();
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetCustomer(Customer customer)
+        {
+            _houseInsurancePolicy.Customer = customer;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetIssueDate()
+        {
+            base.SetIssueDate();
+            _houseInsurancePolicy.IssueDate = InsurancePolicy.IssueDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetExpiryDate()
+        {
+            base.SetExpiryDate();
+            _houseInsurancePolicy.ExpiryDate = InsurancePolicy.ExpiryDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsuredMaximum()
+        {
+            base.SetInsuredMaximum();
+            _houseInsurancePolicy.InsuredMaximum = InsurancePolicy.InsuredMaximum;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetTotalPrize()
+        {
+            base.SetTotalPrize();
+            _houseInsurancePolicy.TotalPrize = InsurancePolicy.TotalPrize;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetLuxuryPolicy()
+        {
+            base.SetLuxuryPolicy();
+            _houseInsurancePolicy.IsLuxuryPolicy = InsurancePolicy.IsLuxuryPolicy;
             return this;
         }
 
@@ -62,6 +103,7 @@ namespace DAL.BuilderModel
                        .SetLocation(insurancePolicyTemplate.AddressTemplate)
                        .SetMunicipality(insurancePolicyTemplate.AddressTemplate.Municipalities);
         }
-        public new HouseInsurancePolicy Build() => _houseInsurancePolicy;
+
+        public override HouseInsurancePolicy Build() => _houseInsurancePolicy;
     }
 }

@@ -1,14 +1,16 @@
 <div class="row">
-    <div class="col-2">
-        <h6>Nominativo</h6><p>{{ this?.customerHeader?.fullName }}</p>
+    <div class="col-4">
+        <h6><strong>Nominativo</strong></h6><p>{{ this?.customerHeader?.fullName }}</p>
     </div>
-    <div class="col-5">
-        <h6>Residenza</h6><p>{{ this?.customerHeader?.address }}</p>
+    <div class="col-8">
+        <h6><strong>Residenza</strong></h6><p>{{ this?.customerHeader?.address }}</p>
     </div>
-    <div class="col-2">
-        <h6>Telefono</h6><p>{{ this?.customerHeader?.phone}}</p>
-    </div>
-    <div class="col-2">
-        <h6>Indirizzo Email</h6><p>{{ this?.customerHeader?.email}}</p>
+</div>
+    <div class="row">
+        <div class="col-4">
+            <h6><strong>Telefono</strong></h6><p>{{ this?.customerHeader?.phone}}</p>
+        </div>
+    <div class="col-8">
+        <h6><strong>Email</strong></h6><p>{{ this?.customerHeader?.email}}</p>
     </div>
 </div>

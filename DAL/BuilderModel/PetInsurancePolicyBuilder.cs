@@ -48,10 +48,51 @@ namespace DAL.BuilderModel
 
         public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
         {
-            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.AnimaleDomestico).FirstOrDefault();
+            _petInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.AnimaleDomestico).FirstOrDefault();
             return this;
         }
 
+        public override IInsurancePolicyBuilder SetCustomer(Customer customer)
+        {
+            _petInsurancePolicy.Customer = customer;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetIssueDate()
+        {
+            base.SetIssueDate();
+            _petInsurancePolicy.IssueDate = InsurancePolicy.IssueDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetExpiryDate()
+        {
+            base.SetExpiryDate();
+            _petInsurancePolicy.ExpiryDate = InsurancePolicy.ExpiryDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsuredMaximum()
+        {
+            base.SetInsuredMaximum();
+            _petInsurancePolicy.InsuredMaximum = InsurancePolicy.InsuredMaximum;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetTotalPrize()
+        {
+            base.SetTotalPrize();
+            _petInsurancePolicy.TotalPrize = InsurancePolicy.TotalPrize;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetLuxuryPolicy()
+        {
+            base.SetLuxuryPolicy();
+            _petInsurancePolicy.IsLuxuryPolicy = InsurancePolicy.IsLuxuryPolicy;
+            return this;
+        }
+        
         public override IInsurancePolicyBuilder SetDetailItem(InsurancePolicyTemplate insurancePolicyTemplate)
         {
             return this.SetPetIdentificationCode()
@@ -60,6 +101,6 @@ namespace DAL.BuilderModel
                        .SetBreedPetDetailType(insurancePolicyTemplate.BreedPetDetailTypes);
 
         }
-        public new PetInsurancePolicy Build() => _petInsurancePolicy;
+        public override PetInsurancePolicy Build() => _petInsurancePolicy;
     }
 }

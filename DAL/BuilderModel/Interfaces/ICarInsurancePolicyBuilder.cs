@@ -14,6 +14,6 @@ namespace DAL.BuilderModel.Interfaces
         ICarInsurancePolicyBuilder SetInsuredValue();
         ICarInsurancePolicyBuilder SetRiskCategory();
         ICarInsurancePolicyBuilder SetConfigurationModel(IList<ConfigurationModel> carConfigurationModels);
-        new VehicleInsurancePolicy Build();
+        VehicleInsurancePolicy Build();
     }
 }

@@ -1,4 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace QuickApp.ViewModels
 {
@@ -11,10 +13,10 @@ namespace QuickApp.ViewModels
         public string BirthPlace { get; set; }
         public string MaritalStatus { get; set; }
         public string ChildrenNumber { get; set; }
-        public string AddressLocation { get; set; }
-        public string AddressCity { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }    
+
+        public IList<AddressDetailViewModel> Addresses { get; set; }
+        public IList<DeliveryDetailViewModel> Deliveries { get; set; }
+        
         public string JobTitle { get; set; }
         public string ContractType { get; set; }
         public string Income { get; set; }

@@ -9,8 +9,8 @@ namespace DAL.Models
     public class MatrixCustomerInsurancePolicy
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public int InsurancePolicyCategoryId { get; set; }
-        public float? Rating { get; set; }
+        public int UserId { get; set; }
+        public string InsurancePolicyCategory { get; set; }
+        public bool IsLiked { get; set; }
     }
 }

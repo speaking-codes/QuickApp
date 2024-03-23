@@ -48,11 +48,25 @@ export class CustomerDetail extends Customer{
     birthPlace: string;
     maritalStatus: string;
     childrenNumber: string;
-    addressLocation: string;
-    addressCity: string;
-    phone: string;
-    email: string;
+    addresses: AddressDetail[];   
+    deliveries: DeliveryDetail[];
     contractType: string;
     jobTitle: string;
     income: string;
+}
+
+export class AddressDetail {
+    location: string;
+    city: string;
+    postalCode: string;
+    country: string;
+    addressType: string;
+    isPrimary: boolean;
+}
+
+export class DeliveryDetail {
+    phone: string;
+    email: string;
+    deliveryType: string;
+    isPrimary: boolean;
 }

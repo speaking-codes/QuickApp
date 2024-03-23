@@ -45,6 +45,7 @@ var host = new HostBuilder()
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<ICustomerServerlessManager, CustomerServerlessManager>();
         services.AddTransient<IInsurancePolicyServerlessManager, InsurancePolicyServerlessManager>();
+        services.AddTransient<ILearningManager, LearningManager>();
     })
     .Build();
 

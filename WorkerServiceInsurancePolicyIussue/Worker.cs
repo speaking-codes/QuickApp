@@ -68,12 +68,12 @@ namespace WorkerServiceInsurancePolicyIussue
 
                     try
                     {
-                        await _insurancePolicyManager.BeginTransactionAsync();
+                        //await _insurancePolicyManager.BeginTransactionAsync();
 
                         foreach (var item in insurancePolicies)
                             _insurancePolicyManager.AddInsurancePolicy(item);
 
-                        await _insurancePolicyManager.CommitTransactionAsync();
+                        //await _insurancePolicyManager.CommitTransactionAsync();
                     }
                     catch (Exception ex)
                     {

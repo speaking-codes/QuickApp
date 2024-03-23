@@ -165,10 +165,85 @@ namespace DAL.Mapping
             var insuranceCoverageChart = new InsuranceCoverageChart();
             insuranceCoverageChart.CustomerCode = customerCode;
             insuranceCoverageChart.SalesLineCharts = new List<SalesLineChart>();
-            foreach(var item in customerInsuranceCoverages)
+            foreach (var item in customerInsuranceCoverages)
                 insuranceCoverageChart.SalesLineCharts.Add(item.ToSalesLineChart());
 
             return insuranceCoverageChart;
+        }
+
+        private static InsuranceCoverageGrid ToInsuranceCoverageGridBase(this InsurancePolicy insurancePolicy)
+        {
+            var insuranceCoverageGrid = new InsuranceCoverageGrid();
+            insuranceCoverageGrid.Code = insurancePolicy.InsurancePolicyCode;
+            insuranceCoverageGrid.CategoryType = insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryName;
+            insuranceCoverageGrid.IssueDate = insurancePolicy.IssueDate.ToString("dd/MM/yyyy");
+            insuranceCoverageGrid.ExpiryDate = insurancePolicy.ExpiryDate.ToString("dd/MM/yyyy");
+            insuranceCoverageGrid.TotalPrice = $"{insurancePolicy.TotalPrize.ToString("#,##0.00")} €";
+
+            return insuranceCoverageGrid;
+        }
+        public static InsuranceCoverageGrid ToInsuranceCoverageGrid(this VehicleInsurancePolicy insurancePolicy)
+        {
+            var insuranceCoverageGrid = insurancePolicy.ToInsuranceCoverageGridBase();
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Targa: {insurancePolicy.LicensePlate}");
+            sb.Append($" - {insurancePolicy.ConfigurationModel.Model.Brand.BrandName}");
+            sb.Append($" - {insurancePolicy.ConfigurationModel.Model.ModelName}");
+            sb.Append($"  - {insurancePolicy.ConfigurationModel.ConfigurationDescription}");
+            insuranceCoverageGrid.ItemDescription =  sb.ToString();
+            
+            return insuranceCoverageGrid;
+        }
+        public static InsuranceCoverageGrid ToInsuranceCoverageGrid(this FamilyInsurancePolicy insurancePolicy)
+        {
+            var insuranceCoverageGrid = insurancePolicy.ToInsuranceCoverageGridBase();
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Nominativo: {insurancePolicy.LastName} {insurancePolicy.FirstName}");
+            
+            if (insurancePolicy.Gender == EnumGender.Uomo)
+                sb.Append($" - Nato il: {insurancePolicy.BirthDate.ToString("dd/MM/yyyy")}");
+            else
+                sb.Append($" - Nata il: {insurancePolicy.BirthDate.ToString("dd/MM/yyyy")}");
+            sb.Append($" - Relazione: {insurancePolicy.KinshipRelationshipType.KinshipRelationshipTypeName}");
+            
+            if (insurancePolicy.IsUnderage)
+                sb.Append(" - Minore a carico");
+            
+            if (insurancePolicy.IsDisabled)
+                sb.Append(" - Disabile a carico");
+
+            insuranceCoverageGrid.ItemDescription= sb.ToString();
+
+            return insuranceCoverageGrid;
+        }
+        public static InsuranceCoverageGrid ToInsuranceCoverageGrid(this PetInsurancePolicy insurancePolicy)
+        {
+            var insuranceCoverageGrid = insurancePolicy.ToInsuranceCoverageGridBase();
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Codice identificativo: {insurancePolicy.PetIdentificationCode}");
+            sb.Append($" - Nome: {insurancePolicy.PetName}");
+            sb.Append($" - Data di nascita: {insurancePolicy.PetBirthDate.ToString("dd/MM/yyyy")}");
+            sb.Append($" - Tipo Animale: {insurancePolicy.BreedPetDetailType.BreedPetType.PetType.PetTypeDescription}");
+            sb.Append($" - Razza: {insurancePolicy.BreedPetDetailType.BreedPetType.BreedPetTypeDescription}");
+            sb.Append($" - Dettaglio razza: {insurancePolicy.BreedPetDetailType.BreedPetDetailTypeDescription}");
+
+            insuranceCoverageGrid.ItemDescription = sb.ToString();
+            
+            return insuranceCoverageGrid;
+        }
+        public static InsuranceCoverageGrid ToInsuranceCoverageGrid(this HouseInsurancePolicy insurancePolicy)
+        {
+            var insuranceCoverageGrid = insurancePolicy.ToInsuranceCoverageGridBase();
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Immobile presso: {insurancePolicy.Location}");
+            sb.Append($" - Nel comune: {insurancePolicy.Municipality.PostalCode} {insurancePolicy.Municipality.MunicipalityName} ({insurancePolicy.Municipality.Province.ProvinceAbbreviation})");
+            sb.Append($" - Estensione in mq: {insurancePolicy.ExtensionSquareMeters}");
+            sb.Append($" - Numero piani immobile: {insurancePolicy.NumberBuildingFloors}");
+            sb.Append($" - Piano appartamento: {insurancePolicy.HomeFloorNumber}");
+
+            insuranceCoverageGrid.ItemDescription = sb.ToString();
+
+            return insuranceCoverageGrid;
         }
     }
 }

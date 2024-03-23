@@ -55,7 +55,48 @@ namespace DAL.BuilderModel
 
         public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
         {
-            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Moto).FirstOrDefault();
+            _vehicleInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Moto).FirstOrDefault();
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetCustomer(Customer customer)
+        {
+            _vehicleInsurancePolicy.Customer = customer;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetIssueDate()
+        {
+            base.SetIssueDate();
+           _vehicleInsurancePolicy .IssueDate = InsurancePolicy.IssueDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetExpiryDate()
+        {
+            base.SetExpiryDate();
+            _vehicleInsurancePolicy.ExpiryDate = InsurancePolicy.ExpiryDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsuredMaximum()
+        {
+            base.SetInsuredMaximum();
+            _vehicleInsurancePolicy.InsuredMaximum = InsurancePolicy.InsuredMaximum;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetTotalPrize()
+        {
+            base.SetTotalPrize();
+            _vehicleInsurancePolicy.TotalPrize = InsurancePolicy.TotalPrize;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetLuxuryPolicy()
+        {
+            base.SetLuxuryPolicy();
+            _vehicleInsurancePolicy.IsLuxuryPolicy = InsurancePolicy.IsLuxuryPolicy;
             return this;
         }
 
@@ -68,6 +109,6 @@ namespace DAL.BuilderModel
                        .SetRiskCategory();
         }
 
-        public new VehicleInsurancePolicy Build() => _vehicleInsurancePolicy;
+        public override VehicleInsurancePolicy Build() => _vehicleInsurancePolicy;
     }
 }

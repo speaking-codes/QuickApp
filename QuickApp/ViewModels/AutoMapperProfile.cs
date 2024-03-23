@@ -60,11 +60,24 @@ namespace QuickApp.ViewModels
             if (addresses==null || !addresses.Any())
                 return returnValue;
 
-            var municipality = addresses.FirstOrDefault(x => x.AddressType == EnumAddressType.Residenza)?.Municipality;
+            var municipality = addresses.FirstOrDefault(x => x.IsPrimary)?.Municipality;
             if (municipality == null)
                 return returnValue;
 
             return $"{municipality.MunicipalityName} ({municipality.Province.ProvinceAbbreviation})";
+        }
+
+        private string getAddressDetailString(IEnumerable<Address> addresses)
+        {
+            var returnValue = string.Empty;
+            if (addresses == null || !addresses.Any())
+                return returnValue;
+
+            var address = addresses.FirstOrDefault(x => x.IsPrimary);
+            if (address == null)
+                return returnValue;
+
+            return $"{address.Location} - {address.Municipality.MunicipalityName} ({address.Municipality.Province.ProvinceAbbreviation})";
         }
 
         public AutoMapperProfile()
@@ -125,12 +138,14 @@ namespace QuickApp.ViewModels
 
             CreateMap<Customer, CustomerDetailHeaderViewModel>()
                 .ForMember(d => d.FullName, map => map.MapFrom(s => $"{s.LastName} {s.FirstName}"))
-                //.ForMember(d => d.Residence, map => map.MapFrom(s => (s.Addresses == null || s.Addresses.Count == 0) ? string.Empty : $"{s.Addresses[0].Location} - {s.Addresses[0].City} ({s.Addresses[0].Province})"))
+                .ForMember(d => d.Residence, map => map.MapFrom(s => getAddressDetailString(s.Addresses)))
                 .ForMember(d => d.PhoneNumber, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].PhoneNumber))
                 .ForMember(d => d.Email, map => map.MapFrom(s => (s.Deliveries == null || s.Deliveries.Count == 0) ? string.Empty : s.Deliveries[0].Email));
 
             CreateMap<CustomerHeader, CustomerHeaderViewModel>();
             CreateMap<CustomerDetail, CustomerDetailViewModel>();
+            CreateMap<AddressDetail, AddressDetailViewModel>();
+            CreateMap<DeliveryDetail, DeliveryDetailViewModel>();
             CreateMap<InsuranceCategoryPolicyDashboardCard, InsuranceCategoryPolicyDashboardCardViewModel>();
             CreateMap<InsuranceCoverageGrid, InsuranceCoverageSummaryViewModel>();
             CreateMap<SalesLineChart, SalesLineChartViewModel>();

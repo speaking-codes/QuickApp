@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using DAL.Core.Helpers;
 using System.IO;
 using System.Linq;
+using DAL.Helpers;
 
 namespace DAL
 {
@@ -213,6 +214,7 @@ namespace DAL
                     }
 
                     await LoadLearningTableDataForMatrix();
+                    await LoadMatrixUserItems();
 
                     await _context.Database.CommitTransactionAsync();
                 }
@@ -225,59 +227,64 @@ namespace DAL
 
         private async Task LoadLearningTableDataForMatrix()
         {
-            var insurancePolicyCategories = await _context.InsurancePolicyCategories.Select(x => x.Id).ToListAsync();
+            var insurancePolicyCategories = await _context.InsurancePolicyCategories
+                                                          .Where(x => x.IsActive)
+                                                          .Select(x => x.InsurancePolicyCategoryCode)
+                                                          .ToListAsync();
             var temps = await _context.Temps.ToListAsync();
             var rnd = new Random();
-            LearningTraining learningTraining = null;
-            DateTime dataNascite;
-            var minRenewvalNumber = int.MaxValue;
-            var maxRenewvalNumber = int.MinValue;
-            var current = 0;
-            double renewalNumber = 0.0;
-            double normalizedRenewalNumber = 0.0;
+            LearningCustomerPreferences learningCustomerPreferences = null;
+            DateTime birthDate;
+
             foreach (var itemCategory in insurancePolicyCategories)
             {
                 foreach (var item in temps)
                 {
-                    if (string.IsNullOrEmpty(item.Gender))
-                        continue;
+                    var index = rnd.Next(0, insurancePolicyCategories.Count);
 
-                    learningTraining = new LearningTraining();
-                    learningTraining.CustomerId = item.Id;
-                    learningTraining.Gender = item.Gender;
+                    learningCustomerPreferences = new LearningCustomerPreferences();
+                    learningCustomerPreferences.UserId = item.Id;
+                    learningCustomerPreferences.CustomerCode = null;
+                    learningCustomerPreferences.Gender = item.Gender;
 
-                    if (DateTime.TryParse(item.BirthDate, out dataNascite))
-                        learningTraining.Age = (int)Math.Ceiling(DateTime.Now.Subtract(dataNascite).TotalDays / 365);
-                    else
-                        learningTraining.Age = 0;
+                    if (DateTime.TryParse(item.BirthDate, out birthDate))
+                        learningCustomerPreferences.Age = birthDate.GetAge();
 
-                    learningTraining.MaritalStatusId = item.MaritalStatusId ?? 0;
-                    learningTraining.FamilyTypeId = item.FamilyTypeId ?? 0;
-                    learningTraining.ChildrenNumbers = item.ChildrenNumbers ?? 0;
-                    learningTraining.IncomeTypeId = item.IncomeTypeId ?? 0;
-                    learningTraining.ProfessionTypeId = item.ProfessionTypeId ?? 0;
-                    learningTraining.Income = item.Income ?? 0;
-                    learningTraining.RegionId = item.RegionId ?? 0;
-                    learningTraining.InsurancePolicyCategoryId = itemCategory;
+                    learningCustomerPreferences.MaritalStatus = item.MaritalStatusCode;
+                    learningCustomerPreferences.FamilyType = item.FamilyTypeCode;
+                    learningCustomerPreferences.ChildrenNumbers = item.ChildrenNumbers;
+                    learningCustomerPreferences.IncomeType = item.IncomeTypeCode;
+                    learningCustomerPreferences.ProfessionType = item.ProfessioneTypeCode;
+                    learningCustomerPreferences.Income = item.Income;
+                    learningCustomerPreferences.Region = item.RegionCode;
+                    learningCustomerPreferences.InsurancePolicyCategory = itemCategory;
+                    learningCustomerPreferences.PredictionInsurancePolicyCategory= insurancePolicyCategories[index];
 
-                    current = rnd.Next(1, 121);
-                    if (current < minRenewvalNumber)
-                        minRenewvalNumber = current;
-                    if (current > maxRenewvalNumber)
-                        maxRenewvalNumber = current;
-                    learningTraining.RenewalNumber = current;
-
-                    await _context.LearningTrainings.AddAsync(learningTraining);
+                    await _context.LearningCustomerPreferences.AddAsync(learningCustomerPreferences);
                 }
             }
             await _context.SaveChangesAsync();
-            float differenceMaxMin = maxRenewvalNumber - minRenewvalNumber;
-            foreach (var item in _context.LearningTrainings)
-            {
-                renewalNumber = item.RenewalNumber;
-                normalizedRenewalNumber = (double)((renewalNumber - minRenewvalNumber) / differenceMaxMin);
-                item.NormalizedRenewalNumber = normalizedRenewalNumber;
-            }
+        }
+
+        private async Task LoadMatrixUserItems()
+        {
+            var learningCustomerPreferences = _context.LearningCustomerPreferences
+                                                      .Select(x => new LearningCustomerPreferences
+                                                      {
+                                                          UserId = x.UserId,
+                                                          InsurancePolicyCategory = x.InsurancePolicyCategory,
+                                                          PredictionInsurancePolicyCategory = x.PredictionInsurancePolicyCategory
+                                                      })
+                                                      .ToList();
+
+            foreach (var item in learningCustomerPreferences)
+                _context.MatrixUsersItems.Add(new MatrixCustomerInsurancePolicy
+                {
+                    UserId = item.UserId,
+                    InsurancePolicyCategory = item.InsurancePolicyCategory,
+                    IsLiked = item.InsurancePolicyCategory == item.PredictionInsurancePolicyCategory
+                });
+
             await _context.SaveChangesAsync();
         }
     }

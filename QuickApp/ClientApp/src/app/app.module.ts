@@ -74,6 +74,8 @@ import { DivStyleDirective } from './directives/div-style.directive';
 import { IconStyleDirective } from './directives/icon-style.directive';
 import { TxtStyleDirective } from './directives/txt-style.directive';
 import { TextMultilineDirective } from './directives/text-multiline.directive';
+import { DeliveryDetailComponent } from './components/dashboard/delivery-detail/delivery-detail.component';
+import { AddressDetailComponent } from './components/dashboard/address-detail/address-detail.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,9 @@ import { TextMultilineDirective } from './directives/text-multiline.directive';
     DivStyleDirective,
     IconStyleDirective,
     TxtStyleDirective,
-    TextMultilineDirective
+    TextMultilineDirective,
+    DeliveryDetailComponent,
+    AddressDetailComponent
   ],
   imports: [
     BrowserModule,

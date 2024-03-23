@@ -121,7 +121,7 @@ export class CustomerGridComponent implements OnInit, OnDestroy {
     this.rowsCache = [...data];    
     this.rows = this.getCustomersFilterActive();    
 
-    setTimeout(() => { this.loadingIndicator = false; }, 1500);    
+    setTimeout(() => { this.loadData(); }, 60000);
   }
   
   onDataLoadFailed(error: HttpErrorResponse) {

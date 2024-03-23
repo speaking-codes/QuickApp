@@ -61,7 +61,48 @@ namespace DAL.BuilderModel
 
         public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
         {
-            InsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.FamiliareeCongiunto).FirstOrDefault();
+            _familyInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.FamiliareeCongiunto).FirstOrDefault();
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetCustomer(Customer customer)
+        {
+            _familyInsurancePolicy.Customer = customer;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetIssueDate()
+        {
+            base.SetIssueDate();
+            _familyInsurancePolicy.IssueDate = InsurancePolicy.IssueDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetExpiryDate()
+        {
+            base.SetExpiryDate();
+            _familyInsurancePolicy.ExpiryDate = InsurancePolicy.ExpiryDate;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetInsuredMaximum()
+        {
+            base.SetInsuredMaximum();
+            _familyInsurancePolicy.InsuredMaximum = InsurancePolicy.InsuredMaximum;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetTotalPrize()
+        {
+            base.SetTotalPrize();
+            _familyInsurancePolicy.TotalPrize = InsurancePolicy.TotalPrize;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetLuxuryPolicy()
+        {
+            base.SetLuxuryPolicy();
+            _familyInsurancePolicy.IsLuxuryPolicy = InsurancePolicy.IsLuxuryPolicy;
             return this;
         }
 
@@ -75,5 +116,7 @@ namespace DAL.BuilderModel
                        .SetDisabled()
                        .SetKinshipRelationshipType(insurancePolicyTemplate.KinshipRelationshipTypes);
         }
+
+        public override InsurancePolicy Build() => _familyInsurancePolicy;
     }
 }

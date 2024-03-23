@@ -41,7 +41,10 @@ namespace QuickApp.Controllers
             var customer = _dashboardManager.GetCustomerDetail(customerCode.ToUpper());
             if (customer == null) customer = new CustomerDetail();
 
-            return Ok(_mapper.Map<CustomerDetailViewModel>(customer));
+            var customerDetailVM = _mapper.Map<CustomerDetailViewModel>(customer);
+            customerDetailVM.Addresses=_mapper.Map<IList<AddressDetailViewModel>>(customer.AddressDetails);
+            customerDetailVM.Deliveries=_mapper.Map<IList<DeliveryDetailViewModel>>(customer.DeliveryDetails);
+            return Ok(customerDetailVM);
         }
 
         [HttpGet("InsuranceCoverageChart/{customerCode}")]

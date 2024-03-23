@@ -34,7 +34,7 @@ namespace DAL.Core
 
         private void GetCustomerFromDb()
         {
-            Customer = _customerRepository.GetCustomerForServerLessManager (_customerQueue.CustomerCode).FirstOrDefault();
+            Customer = _customerRepository.GetCustomersForServerLessManager (_customerQueue.CustomerCode).FirstOrDefault();
         }
 
         protected abstract void Run();

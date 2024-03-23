@@ -1,18 +1,8 @@
-﻿using DAL.Core.Helpers;
-using DAL.Core.Interfaces;
-using DAL.Mapping;
-using DAL.Models;
+﻿using DAL.Core.Interfaces;
 using DAL.ModelsNoSql;
 using DAL.RepositoryNoSql.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static MachineLearningModel.RecommenderSystemModel;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DAL.Core
 {
@@ -51,14 +41,6 @@ namespace DAL.Core
                 return customerHeader;
 
             return new CustomerHeader();
-            //var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
-            //if (customer == null)
-            //    return new CustomerHeader();
-
-            //customerHeader = customer.ToNoSqlHeaderEntity();
-            //_customerHeaderRepository.InsertOne(customerHeader);
-
-            //return customerHeader;
         }
 
         public CustomerDetail GetCustomerDetail(string customerCode)
@@ -68,14 +50,6 @@ namespace DAL.Core
                 return customerDetail;
 
             return new CustomerDetail();
-            //var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
-            //if (customer == null)
-            //    return new CustomerDetail();
-
-            //customerDetail = customer.ToNoSqlDetailEntity();
-            //_customerDetailRepository.InsertOne(customerDetail);
-
-            //return customerDetail;
         }
 
         public IList<SalesLineChart> GetSalesLineChart(string customerCode)
@@ -85,17 +59,6 @@ namespace DAL.Core
                 return insuranceCoverageChart.SalesLineCharts;
 
             return new List<SalesLineChart>();
-            //var customerInsuranceCoverages = new List<Tuple<SalesLineType, IList<InsurancePolicy>>>();
-            //var salesLines = UnitOfWork.SalesLines.GetSalesLineTypes(customerCode).ToList();
-            //foreach (var item in salesLines)
-            //{
-            //    var insurancePolicies = UnitOfWork.InsurancePolicies.GetInsurancePolicies(customerCode, item.Id).ToList();
-            //    customerInsuranceCoverages.Add(new Tuple<SalesLineType, IList<InsurancePolicy>>( item,insurancePolicies));
-            //}
-
-            //insuranceCoverageChart = customerInsuranceCoverages.ToInsuranceCoverageChart(customerCode);
-            //_insuranceCoverageChartRepository.InsertOne(insuranceCoverageChart);
-            //return insuranceCoverageChart.SalesLineCharts;
         }
 
         public IList<InsuranceCoverageGrid> GetInsuranceCoverageGridSummaries(string customerCode)
@@ -190,34 +153,34 @@ namespace DAL.Core
                                                        .Select(x => x.Id)
                                                        .ToList();
 
-            var modelOutputRecommendationCollection = new List<ModelOutput>();
-            ModelOutput modelOutput = null;
-            foreach (var itemId in insurancePolicyCategoryIds)
-            {
-                modelOutput = _learningManager.GetRecommendation(customer[0].Id, itemId);
-                modelOutputRecommendationCollection.Add(modelOutput);
-            }
+            //var modelOutputRecommendationCollection = new List<ModelOutput>();
+            //ModelOutput modelOutput = null;
+            //foreach (var itemId in insurancePolicyCategoryIds)
+            //{
+            //    modelOutput = _learningManager.GetRecommendation(customer[0].Id, itemId);
+            //    modelOutputRecommendationCollection.Add(modelOutput);
+            //}
 
             var insuranceCategoryPolicyDashboardCards = new List<InsuranceCategoryPolicyDashboardCard>();
-            foreach (var itemOutput in modelOutputRecommendationCollection)
-            {
-                var categoryPolicyCard = UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategory((int)itemOutput.InsurancePolicyCategoryId).SingleOrDefault();
-                insuranceCategoryPolicyDashboardCards.Add(new InsuranceCategoryPolicyDashboardCard
-                {
-                    Code = categoryPolicyCard.InsurancePolicyCategoryCode,
-                    Name = categoryPolicyCard.InsurancePolicyCategoryName,
-                    Abstract = categoryPolicyCard.InsurancePolicyCategoryDescription.Length > 170 ?
-                                                 categoryPolicyCard.InsurancePolicyCategoryDescription.Substring(0, 170) :
-                                                 categoryPolicyCard.InsurancePolicyCategoryDescription,
-                    IconCssClass = categoryPolicyCard.IconCssClass,
-                    SalesLineBackgroundColor = categoryPolicyCard.SalesLine.BackGroundColor,
-                    SalesLineBackgroundCssClass = categoryPolicyCard.SalesLine.BackGroundColorCssClass,
-                    SalesLineCode = categoryPolicyCard.SalesLine.SalesLineCode,
-                    SalesLineName = categoryPolicyCard.SalesLine.SalesLineName
-                });
-                if (insuranceCategoryPolicyDashboardCards.Count >= 6)
-                    break;
-            }
+            //foreach (var itemOutput in modelOutputRecommendationCollection)
+            //{
+            //    var categoryPolicyCard = UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategory((int)itemOutput.InsurancePolicyCategoryId).SingleOrDefault();
+            //    insuranceCategoryPolicyDashboardCards.Add(new InsuranceCategoryPolicyDashboardCard
+            //    {
+            //        Code = categoryPolicyCard.InsurancePolicyCategoryCode,
+            //        Name = categoryPolicyCard.InsurancePolicyCategoryName,
+            //        Abstract = categoryPolicyCard.InsurancePolicyCategoryDescription.Length > 170 ?
+            //                                     categoryPolicyCard.InsurancePolicyCategoryDescription.Substring(0, 170) :
+            //                                     categoryPolicyCard.InsurancePolicyCategoryDescription,
+            //        IconCssClass = categoryPolicyCard.IconCssClass,
+            //        SalesLineBackgroundColor = categoryPolicyCard.SalesLine.BackGroundColor,
+            //        SalesLineBackgroundCssClass = categoryPolicyCard.SalesLine.BackGroundColorCssClass,
+            //        SalesLineCode = categoryPolicyCard.SalesLine.SalesLineCode,
+            //        SalesLineName = categoryPolicyCard.SalesLine.SalesLineName
+            //    });
+            //    if (insuranceCategoryPolicyDashboardCards.Count >= 6)
+            //        break;
+            //}
             return insuranceCategoryPolicyDashboardCards;
         }
 

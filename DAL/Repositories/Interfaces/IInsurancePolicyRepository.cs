@@ -13,6 +13,7 @@ namespace DAL.Repositories.Interfaces
         IQueryable<InsurancePolicy> GetInsurancePolicies(string customerCode);
         IQueryable<InsurancePolicy> GetInsurancePolicy(int id);
         IQueryable<InsurancePolicy> GetInsurancePolicy(string insurancePolicyCode);
+        IQueryable<InsurancePolicy> GetInsurancePolicyForTrainingMachineLearning(string insurancePolicyCode);
         IQueryable<InsurancePolicy> GetActiveInsurancePolicies(string customercode);
         IQueryable<InsurancePolicy> GetExiperedInsurancePolicies(DateTime expireDate);
         int GetInsurancePolicyCategoryCount(string insurancePolicyCategoryCode);
@@ -22,6 +23,7 @@ namespace DAL.Repositories.Interfaces
         IQueryable<FamilyInsurancePolicy> GetFamilyInsurancePolicy(string insurancePolicyCode);
         IQueryable<HealthInsurancePolicy> GetHealthInsurancePolicy(string insurancePolicyCode);
         IQueryable<PetInsurancePolicy> GetPetInsurancePolicy(string insurancePolicyCode);
+        IQueryable<HouseInsurancePolicy> GetHouseInsurancePolicy(string insurancePolicyCode);
 
         IQueryable<InsurancePolicy> GetInsurancePolicyBaggageLoss(string insurancePolicyCode);
         IQueryable<InsurancePolicy> GetInsurancePolicyTravel(string insurancePolicyCode);

@@ -24,7 +24,7 @@
        </div>
        <div class="row">
         <div class="col-12">
-            <app-customer-detail [customerCode]="this.customerCode" [showDetail]="this.showCustomerDetail"></app-customer-detail>
+            <app-customer-detail *ngIf="IsShowenCustomerDetail()" [customerCode]="this.customerCode" [showDetail]="this.showCustomerDetail"></app-customer-detail>
         </div>
        </div>
     </div>

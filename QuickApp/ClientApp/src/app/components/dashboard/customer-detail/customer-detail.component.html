@@ -1,45 +1,91 @@
-<div *ngIf="isShowCustomerDetail()">
-    <div class="row">
-        <div class="col-12">
-            <h6>Dati Anagrafici</h6>
+
+<div [@fadeInOut]>
+    <div class="d-sm-flex flex-row mb-2">
+        <ul appBootstrapTab #tab="bootstrap-tab" (showBSTab)="onShowTab($event)" class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
+            <li class="nav-item">
+              <a id="registryTab" [routerLink]="[]" fragment="registry" data-bs-target="#registry" class="nav-link active" role="tab" aria-controls="registry">
+                <i class="fa-solid fa-id-badge"></i> Anagrafica
+              </a>
+            </li>
+            <li class="nav-item">
+              <a id="addressTab" [routerLink]="[]" fragment="address" data-bs-target="#address" class="nav-link" role="tab" aria-controls="address">
+                <i class="fa-solid fa-location-pin"></i> Indirizzi
+              </a>
+            </li>
+            <li class="nav-item">
+              <a id="deliveryTab" [routerLink]="[]" fragment="delivery" data-bs-target="#delivery" class="nav-link" role="tab" aria-controls="delivery">
+                <i class="fa-solid fa-mobile-screen-button"></i> Recapiti
+              </a>
+            </li>
+            <li class="nav-item">
+              <a id="jobTab" [routerLink]="[]" fragment="job" data-bs-target="#job" class="nav-link" role="tab" aria-controls="job">
+                <i class="fa-solid fa-briefcase"></i> Professione
+              </a>
+            </li>
+          </ul>
+        <div class="tab-content w-100">
+            <div class="tab-pane active" id="registry" role="tabpanel">
+                <h5>Anagrafica</h5>
+                <hr class="hr-separator" />
+                <div [@fadeInOut] *ngIf="isRegistryActivated" class="content-container ps-lg-2">
+                    <div class="row">
+                        <div class="col-5"><strong>Nominativo: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.fullName }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Sesso: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.gender }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Stato civile: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.maritalStatus }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Numero figli: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.childrenNumber }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Data di nascita: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.birthDate }}</div>    
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Luogo di nascita: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.birthPlace }}</div>    
+                    </div>
+                </div>    
+            </div>
+            <div class="tab-pane" id="address" role="tabpanel">
+                <h5>Indirizzi</h5>
+                <hr class="hr-separator" />
+                <div [@fadeInOut] *ngIf="isAddressActivated" class="content-container ps-lg-2">
+                    <app-address-detail [addresses]="this?.customerDetail?.addresses"></app-address-detail>
+                </div>
+            </div>
+            <div class="tab-pane" id="delivery" role="tabpanel">
+                <h5>Recapiti</h5>
+                <hr class="hr-separator" />
+                <div [@fadeInOut] *ngIf="isDeliveryActivated" class="content-container ps-lg-2">
+                    <app-delivery-detail [deliveries]="this?.customerDetail?.deliveries"></app-delivery-detail>
+                </div>
+            </div>
+            <div class="tab-pane" id="job" role="tabpanel">
+                <h5>Professione</h5>
+                <hr class="hr-separator" />
+                <div [@fadeInOut] *ngIf="isJobActivated" class="content-container ps-lg-2">
+                    <div class="row">
+                        <div class="col-5"><strong>Tipo contratto: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.contractType }}</div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Posizione lavorativa: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.jobTitle }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>R.A.L. <i>(Redditto Annuo Lordo)</i>: </strong></div>
+                        <div class="col-7">{{ this?.customerDetail?.income }}</div>            
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-5"><p><strong>Nominativo: </strong>{{ this?.customerDetail?.fullName }}</p></div>
-        <div class="col-2"><p><strong>Sesso: </strong>{{ this?.customerDetail?.gender }}</p></div>
-        <div class="col-3"><p><strong>Stato civile: </strong>{{ this?.customerDetail?.maritalStatus }}</p></div>
-        <div class="col-2"><p><strong>Numero figli: </strong>{{ this?.customerDetail?.childrenNumber }}</p></div>
-    </div>
-    <div class="row">
-        <div class="col-5"><p><strong>Data di nascita: </strong>{{ this?.customerDetail?.birthDate }}</p></div>    
-        <div class="col-7"><p><strong>Luogo di nascita: </strong>{{ this?.customerDetail?.birthPlace }}</p></div>    
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h6>Residenza</h6>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-5"><p><strong>Indirizzo: </strong>{{ this?.customerDetail?.addressLocation }}</p></div>
-        <div class="col-7"><p><strong>Cap - Città (Prov.): </strong>{{ this?.customerDetail?.addressCity }}</p></div>    
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h6>Recapiti</h6>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-5"><p><strong>Telefono: </strong>{{ this?.customerDetail?.phone }}</p></div>    
-        <div class="col-7"><p><strong>Email: </strong>{{ this?.customerDetail?.email }}</p></div>        
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h6>Dati Reddituali</h6>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-5"><p><strong>Tipo contratto: </strong>{{ this?.customerDetail?.contractType }}</p></div>        
-        <div class="col-5"><p><strong>Posizione lavorativa: </strong>{{ this?.customerDetail?.jobTitle }}</p></div>
-        <div class="col-2"><p><strong>R.A.L.: </strong>{{ this?.customerDetail?.income }}</p></div>            
     </div>
 </div>

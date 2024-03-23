@@ -34,6 +34,11 @@ namespace DAL.Repositories
             _appContext.InsurancePolicies
                        .Where(x => x.InsurancePolicyCode == insurancePolicyCode);
 
+        public IQueryable<InsurancePolicy> GetInsurancePolicyForTrainingMachineLearning(string insurancePolicyCode)=>
+            _appContext.InsurancePolicies
+                       .Include(x => x.InsurancePolicyCategory)
+                       .Where(x => x.InsurancePolicyCode == insurancePolicyCode);
+
         public IQueryable<InsurancePolicy> GetActiveInsurancePolicies(string customerCode) =>
             _appContext.InsurancePolicies
                                 .Include(x => x.InsurancePolicyCategory)
@@ -65,11 +70,15 @@ namespace DAL.Repositories
                             .ThenInclude(y => y.Model)
                                 .ThenInclude(z => z.Brand)
                                     .ThenInclude(w => w.BrandType)
+                       .Include(x => x.InsurancePolicyCategory)
+                            .ThenInclude(y => y.SalesLine)
                        .Where(x => x.InsurancePolicyCode == insurancePolicyCode);
 
         public IQueryable<FamilyInsurancePolicy> GetFamilyInsurancePolicy(string insurancePolicyCode) =>
             _appContext.FamilyInsurancePolicies
                        .Include(x => x.KinshipRelationshipType)
+                       .Include(x => x.InsurancePolicyCategory)
+                            .ThenInclude(y => y.SalesLine)
                        .Where(x => x.InsurancePolicyCode == insurancePolicyCode);
 
         public IQueryable<HealthInsurancePolicy> GetHealthInsurancePolicy(string insurancePolicyCode) =>
@@ -82,7 +91,17 @@ namespace DAL.Repositories
                        .Include(x => x.BreedPetDetailType)
                             .ThenInclude(y => y.BreedPetType)
                                 .ThenInclude(z => z.PetType)
+                       .Include(x => x.InsurancePolicyCategory)
+                            .ThenInclude(y => y.SalesLine)
                        .Where(x => x.InsurancePolicyCode == insurancePolicyCode);
+
+        public IQueryable<HouseInsurancePolicy> GetHouseInsurancePolicy(string insurancePolicyCode)=>
+            _appContext.HouseInsurancePolicies
+                       .Include(x => x.Municipality)
+                            .ThenInclude(y => y.Province)
+                       .Include(x => x.InsurancePolicyCategory)
+                            .ThenInclude(y => y.SalesLine)
+                       .Where(x => x.InsurancePolicyCode==insurancePolicyCode);
 
         public IQueryable<InsurancePolicy> GetInsurancePolicyBaggageLoss(string insurancePolicyCode) =>
             _appContext.InsurancePolicies

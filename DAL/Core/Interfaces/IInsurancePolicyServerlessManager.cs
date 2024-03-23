@@ -9,6 +9,6 @@ namespace DAL.Core.Interfaces
 {
     public interface IInsurancePolicyServerlessManager
     {
-        void Manage(CustomerInsurancePolicyQueue customerInsurancePolicyQueue);
+        Task Manage(CustomerInsurancePolicyQueue customerInsurancePolicyQueue);
     }
 }

@@ -43,12 +43,6 @@ namespace DAL.Core
             {
                 if (!IsMassiveWriter) UnitOfWork.BeginTransaction();
 
-                //if (UnitOfWork.InsurancePolicies.IsExistingInsurancePolicyCategory(insurancePolicy.Customer.CustomerCode,
-                //                                                                   insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryCode, 
-                //                                                                   insurancePolicy.IssueDate, 
-                //                                                                   insurancePolicy.ExpiryDate))
-                //    return string.Empty;
-
                 insurancePolicy.InsurancePolicyCode = getInsurancePolicyCode(insurancePolicy);
                 UnitOfWork.InsurancePolicies.Add(insurancePolicy);
                 UnitOfWork.SaveChanges();

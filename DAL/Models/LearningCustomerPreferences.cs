@@ -9,18 +9,18 @@ namespace DAL.Models
     public class LearningCustomerPreferences
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public int UserId { get; set; }
+        public string CustomerCode { get; set; }
         public string Gender { get; set; }
-        public DateTime BirthDate { get; set; }
-        public int MaritalStatusId { get; set; }
-        public int FamilyTypeId { get; set; }
-        public int ChildrenNumbers { get; set; }
-        public int IncomeTypeId { get; set; }
-        public int ProfessionTypeId { get; set; }
-        public double Income { get; set; }
-        public int RegionId { get; set; }
-        public byte InsurancePolicyCategoryId { get; set; }
-        public byte TotalCountPolicy { get; set; }
-        public double TotalCountPolicyNormalized { get; set; }
+        public int? Age { get; set; }
+        public string MaritalStatus { get; set; }
+        public string FamilyType { get; set; }
+        public int? ChildrenNumbers { get; set; }
+        public string IncomeType { get; set; }
+        public string ProfessionType { get; set; }
+        public double? Income { get; set; }
+        public string Region { get; set; }
+        public string InsurancePolicyCategory { get; set; }
+        public string PredictionInsurancePolicyCategory { get; set; }
     }
 }

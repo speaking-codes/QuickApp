@@ -21,5 +21,24 @@ namespace DAL.RepositoryNoSql
             var filter = Builders<InsuranceCoverageSummary>.Filter.Eq(x => x.CustomerCode, customerCode);
             return FindOne(filter);
         }
+
+        public bool DeleteInsuranceCoverageSummary(string customerCode)
+        {
+            var filter = Builders<InsuranceCoverageSummary>.Filter.Eq(c => c.CustomerCode, customerCode);
+            var result = DeleteOne(filter);
+            return result.DeletedCount > 0;
+        }
+
+        public bool UpdateInsuranceCoverageSummary(string customerCode, InsuranceCoverageSummary insuranceCoverageSummary)
+        {
+            var filter = Builders<InsuranceCoverageSummary>.Filter.Eq(c => c.CustomerCode, customerCode);
+            var result = DeleteOne(filter);
+            if (result.DeletedCount > 0)
+            {
+                InsertOne(insuranceCoverageSummary);
+                return true;
+            }
+            return false;
+        }
     }
 }

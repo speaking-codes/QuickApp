@@ -69,6 +69,6 @@ namespace DAL.BuilderModel
         //public virtual IInsurancePolicyBuilder SetVacations(IList<StructureType> structureTypes, IList<Municipality> municipalities) => this;
         public virtual IInsurancePolicyBuilder SetDetailItem(InsurancePolicyTemplate insurancePolicyTemplate) => this;
 
-        public InsurancePolicy Build() => InsurancePolicy;
+        public virtual InsurancePolicy Build() => InsurancePolicy;
     }
 }

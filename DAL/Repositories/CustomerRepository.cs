@@ -42,25 +42,36 @@ namespace DAL.Repositories
                 .OrderBy(c => c.LastName)
                 .ThenBy(c => c.FirstName);
         }
-        
-        public IQueryable<Customer> GetCustomersWithoutInsurancePolicies()=>
-            _appContext.Customers.Where(x => !x.InsurancePolicies.Any());        
 
-        public IQueryable<Customer> GetActiveCustomersWithoutInsurancePolicies()=>
+        public IQueryable<Customer> GetCustomersWithoutInsurancePolicies() =>
+            _appContext.Customers.Where(x => !x.InsurancePolicies.Any());
+
+        public IQueryable<Customer> GetActiveCustomersWithoutInsurancePolicies() =>
             _appContext.Customers.Where(x => !x.InsurancePolicies.Any() && x.IsActive);
 
-        public IQueryable<Customer> GetCustomerForServerLessManager(string customerCode)
-        {
-            return _appContext.Customers
-                            .Include(c => c.BirthMunicipality)      
+        public IQueryable<Customer> GetCustomersForServerLessManager(string customerCode) =>
+                 _appContext.Customers
+                            .Include(c => c.BirthMunicipality)
                                 .ThenInclude(m => m.Province)
-                                .AsSingleQuery()
                             .Include(c => c.Deliveries)
                             .Include(c => c.Addresses)
                                 .ThenInclude(a => a.Municipality)
                                     .ThenInclude(m => m.Province)
+                                        .ThenInclude(p => p.Region)
                             .Where(c => c.CustomerCode == customerCode);
-        }
+
+        public IQueryable<Customer> GetCustomersForTrainingMachineLearning(string customerCode) =>
+                _appContext.Customers
+                           .Include(c=> c.FamilyType)
+                           .Include(c =>c.MaritalStatus)
+                           .Include(c=>c.ContractType)
+                           .Include(c=>c.IncomeType)
+                           .Include(c=>c.ProfessionType)
+                           .Include(c => c.Addresses)
+                               .ThenInclude(a => a.Municipality)
+                                   .ThenInclude(m => m.Province)
+                                       .ThenInclude(p => p.Region)
+                           .Where(c => c.CustomerCode == customerCode);
 
         public int MaxId()
         {

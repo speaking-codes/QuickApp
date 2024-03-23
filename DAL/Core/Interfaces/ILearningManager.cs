@@ -1,10 +1,4 @@
-﻿using MachineLearningModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static MachineLearningModel.RecommenderSystemModel;
+﻿using System.Threading.Tasks;
 
 namespace DAL.Core.Interfaces
 {
@@ -12,6 +6,7 @@ namespace DAL.Core.Interfaces
     {
         Task LoadMatrixUserItems();
 
-        RecommenderSystemModel.ModelOutput GetRecommendation(int customerId, byte insurancePolicyCategory);
+        void GetPrediction();
+        void GetRecommendation(int customerId, byte insurancePolicyCategory);
     }
 }

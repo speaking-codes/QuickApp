@@ -11,7 +11,6 @@ export class TextMultilineDirective implements OnInit{
   appTextMultiline: string = "";
 
   ngOnInit(): void {
-    debugger;
     var textLines = this.appTextMultiline.split('\n');
     var innerHtml = "";
     textLines.forEach(item =>{

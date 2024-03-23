@@ -15,6 +15,6 @@ namespace DAL.BuilderModel.Interfaces
         IHouseInsurancePolicyBuilder SetHomeFloorNumber();
         IHouseInsurancePolicyBuilder SetLocation(AdressModelTemplate adressModelTemplate);
         IHouseInsurancePolicyBuilder SetMunicipality(IList<Municipality> municipalities);
-        new HouseInsurancePolicy Build();
+         HouseInsurancePolicy Build();
     }
 }

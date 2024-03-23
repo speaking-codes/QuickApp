@@ -14,17 +14,20 @@ namespace DAL.Core
         private readonly IUnitOfWork _unitOfWork;
         private readonly IInsuranceCoverageChartRepository _insuranceCoverageChartRepository;
         private readonly IInsuranceCoverageSummaryRepository _insuranceCoverageSummaryRepository;
+        private readonly ILearningManager _learningManager;
 
-        public InsurancePolicyServerlessManager(IUnitOfWork unitOfWork, 
+        public InsurancePolicyServerlessManager(IUnitOfWork unitOfWork,
                                                 IInsuranceCoverageChartRepository insuranceCoverageChartRepository,
-                                                IInsuranceCoverageSummaryRepository insuranceCoverageSummaryRepository)
+                                                IInsuranceCoverageSummaryRepository insuranceCoverageSummaryRepository,
+                                                ILearningManager learningManager)
         {
             _unitOfWork = unitOfWork;
             _insuranceCoverageChartRepository = insuranceCoverageChartRepository;
             _insuranceCoverageSummaryRepository = insuranceCoverageSummaryRepository;
+            _learningManager = learningManager;
         }
 
-        public void Manage(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)
+        public async Task Manage(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)
         {
             try
             {
@@ -34,24 +37,25 @@ namespace DAL.Core
                 {
                     case Enums.EnumPublishQueueType.Added:
                         insurancePolicyNoSqlManager = new InsurancePolicyNoSqlManagerAdded(_unitOfWork,
-                                                                                           _insuranceCoverageChartRepository, 
+                                                                                           _insuranceCoverageChartRepository,
                                                                                            _insuranceCoverageSummaryRepository,
-                                                                                           customerInsurancePolicyQueue);
+                                                                                           customerInsurancePolicyQueue,
+                                                                                           _learningManager);
                         break;
                     case Enums.EnumPublishQueueType.Deleted:
-                        insurancePolicyNoSqlManager = new InsurancePolicyNoSqlManagerDeleted(_unitOfWork, 
-                                                                                             _insuranceCoverageChartRepository, 
+                        insurancePolicyNoSqlManager = new InsurancePolicyNoSqlManagerDeleted(_unitOfWork,
+                                                                                             _insuranceCoverageChartRepository,
                                                                                              _insuranceCoverageSummaryRepository,
                                                                                              customerInsurancePolicyQueue);
                         break;
                     default:
-                        insurancePolicyNoSqlManager = new InsurancePolicyNoSqlManagerNoObject(_unitOfWork, 
-                                                                                              _insuranceCoverageChartRepository, 
+                        insurancePolicyNoSqlManager = new InsurancePolicyNoSqlManagerNoObject(_unitOfWork,
+                                                                                              _insuranceCoverageChartRepository,
                                                                                               _insuranceCoverageSummaryRepository,
                                                                                               customerInsurancePolicyQueue);
                         break;
                 }
-                insurancePolicyNoSqlManager.Execute();
+                await insurancePolicyNoSqlManager.Execute();
             }
             catch (Exception ex)
             {

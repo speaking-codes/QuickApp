@@ -17,7 +17,22 @@ namespace DAL.Core
                                                    CustomerInsurancePolicyQueue customerInsurancePolicyQueue) : 
             base(unitOfWork, insuranceCoverageChartRepository, insuranceCoverageSummaryRepository, customerInsurancePolicyQueue) { }
 
-        public override void UpadateInsuranceCoverageChart(InsuranceCoverageChart insuranceCoverageChart)
+        public override void UpdateInsuranceCoverageChart(InsuranceCoverageChart insuranceCoverageChart)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateInsuranceCoverageSummary(InsuranceCoverageSummary insuranceCoverageSummary)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override async Task UpdateLearningTable(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override async Task UpdateMatrixUserItem(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)
         {
             throw new NotImplementedException();
         }

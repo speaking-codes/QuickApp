@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceCustomer", "Wo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceInsurancePolicyIussue", "WorkerServiceInsurancePolicyIussue\WorkerServiceInsurancePolicyIussue.csproj", "{6A8BA432-B23C-41CA-8EA8-FB43360C2601}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceDeleteExipiredInsurancePolicy", "WorkerServiceDeleteExipiredInsurancePolicy\WorkerServiceDeleteExipiredInsurancePolicy.csproj", "{A726DB9D-A797-455D-BBE6-F4347C1A1DF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceDeleteExipiredInsurancePolicy", "WorkerServiceDeleteExipiredInsurancePolicy\WorkerServiceDeleteExipiredInsurancePolicy.csproj", "{A726DB9D-A797-455D-BBE6-F4347C1A1DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceMachineLearningTraining", "WorkerServiceMachineLearningTraining\WorkerServiceMachineLearningTraining.csproj", "{0F943525-7349-4351-ADC1-375DDDEBE637}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{A726DB9D-A797-455D-BBE6-F4347C1A1DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A726DB9D-A797-455D-BBE6-F4347C1A1DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A726DB9D-A797-455D-BBE6-F4347C1A1DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F943525-7349-4351-ADC1-375DDDEBE637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F943525-7349-4351-ADC1-375DDDEBE637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F943525-7349-4351-ADC1-375DDDEBE637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F943525-7349-4351-ADC1-375DDDEBE637}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -44,5 +44,8 @@ namespace DAL.Helpers
             var houseNumber = random.Next(1, 599);
             return $"{streetTypeNames[i]} {streetNames[j]}, {houseNumber}";
         }
+
+        public static int GetAge(this DateTime birthDate) =>
+            (int)(Math.Ceiling(DateTime.Now.Subtract(birthDate).TotalDays/365));
     }
 }

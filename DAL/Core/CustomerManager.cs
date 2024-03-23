@@ -23,7 +23,7 @@ namespace DAL.Core
 
         public IList<Customer> GetCustomers() => UnitOfWork.Customers.GetAllCustomers().ToList();
 
-        public Customer GetCustomer(string customerCode) => UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
+        public Customer GetCustomer(string customerCode) => UnitOfWork.Customers.GetCustomersForServerLessManager(customerCode).FirstOrDefault();
 
         public IList<Customer> GetActiveCustomers() => UnitOfWork.Customers.GetActiveCustomers().ToList();
 
@@ -58,7 +58,7 @@ namespace DAL.Core
 
         public string UpdateCustomer(string customerCode, Customer customerToUpdate)
         {
-            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomersForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
 
@@ -123,7 +123,7 @@ namespace DAL.Core
 
         public int activateCustomer(string customerCode)
         {
-            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomersForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
 
@@ -150,7 +150,7 @@ namespace DAL.Core
 
         public int DeleteCustomer(string customerCode)
         {
-            var customer = UnitOfWork.Customers.GetCustomerForServerLessManager(customerCode).FirstOrDefault();
+            var customer = UnitOfWork.Customers.GetCustomersForServerLessManager(customerCode).FirstOrDefault();
             if (customer == null)
                 throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
 

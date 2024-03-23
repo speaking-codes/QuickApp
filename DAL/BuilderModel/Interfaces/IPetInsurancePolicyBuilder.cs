@@ -13,6 +13,6 @@ namespace DAL.BuilderModel.Interfaces
         IPetInsurancePolicyBuilder SetPetName(IList<string> petNames);
         IPetInsurancePolicyBuilder SetPetBirthDate();
         IPetInsurancePolicyBuilder SetBreedPetDetailType(IList<BreedPetDetailType> breedPetDetailTypes);
-        new PetInsurancePolicy Build();
+        PetInsurancePolicy Build();
     }
 }

@@ -10,5 +10,7 @@ namespace DAL.RepositoryNoSql.Interfaces
     public interface IInsuranceCoverageSummaryRepository : IRepositoryNoSql<InsuranceCoverageSummary>
     {
         InsuranceCoverageSummary GetInsuranceCoverageSummary(string customerCode);
+        bool DeleteInsuranceCoverageSummary(string customerCode);
+        bool UpdateInsuranceCoverageSummary(string customerCode, InsuranceCoverageSummary insuranceCoverageSummary);
     }
 }
