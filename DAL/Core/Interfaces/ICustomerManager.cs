@@ -11,9 +11,16 @@ namespace DAL.Core.Interfaces
         IList<Customer> GetActiveCustomers();
         IList<Customer> GetCustomersWithoutInsurancePolicies();
         IList<Customer> GetActiveCustomersWithoutInsurancePolicies();
+
         string AddCustomer(Customer customer);
-        string UpdateCustomer(string customerCode, Customer customer);
         int activateCustomer(string customerCode);
+        void EnqueueAddedCustomers(IEnumerable<string> customerCodes);
+
+        string UpdateCustomer(string customerCode, Customer customer);
+        void EnqueueUpdatedCustomers(IEnumerable<string> customerCodes);
+
+
         int DeleteCustomer(string customerCode);
+        void EnqueueDeletedCustomers(IEnumerable<string> customerCodes);
     }
 }

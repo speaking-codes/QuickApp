@@ -1,6 +1,8 @@
 ﻿using DAL.Core.Interfaces;
+using DAL.Enums;
 using DAL.Models;
 using DAL.ModelsRabbitMQ;
+using DAL.QueueModels;
 using DAL.QueueService;
 using System;
 using System.Collections.Generic;
@@ -47,9 +49,11 @@ namespace DAL.Core
                 UnitOfWork.InsurancePolicies.Add(insurancePolicy);
                 UnitOfWork.SaveChanges();
 
-                if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
-
-                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(Enums.EnumPublishQueueType.Added, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
+                if (!IsMassiveWriter)
+                {
+                    UnitOfWork.CommitTransaction();
+                    _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(EnumPublishQueueType.Added, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
+                }
 
                 return insurancePolicy.InsurancePolicyCode;
             }
@@ -59,6 +63,12 @@ namespace DAL.Core
                 _countError++;
                 throw;
             }
+        }
+
+        public void EnqueueAddedInsurancePolicies(IEnumerable<CustomerInsurancePolicy> customerInsurancePolicies)
+        {
+            foreach (var item in customerInsurancePolicies)
+                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(EnumPublishQueueType.Added, item.CustomerCode, item.InsurancePolicyCode));
         }
 
         public int DeleteInsurancePolicy(string insurancePolicyCode)
@@ -75,9 +85,11 @@ namespace DAL.Core
                 UnitOfWork.InsurancePolicies.Remove(insurancePolicy);
                 countRow = UnitOfWork.SaveChanges();
 
-                if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
-
-                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(Enums.EnumPublishQueueType.Deleted, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
+                if (!IsMassiveWriter)
+                {
+                    UnitOfWork.CommitTransaction();
+                    _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(EnumPublishQueueType.Deleted, insurancePolicy.Customer.CustomerCode, insurancePolicy.InsurancePolicyCode));
+                }
 
                 return countRow;
             }
@@ -87,6 +99,12 @@ namespace DAL.Core
                 _countError++;
                 throw;
             }
+        }
+
+        public void EnqueueDeletedInsurancePolicies(IEnumerable<CustomerInsurancePolicy> customerInsurancePolicies)
+        {
+            foreach (var item in customerInsurancePolicies)
+                _messageQueueProducer.Send(_queueName, new CustomerInsurancePolicyQueue(EnumPublishQueueType.Deleted, item.CustomerCode, item.InsurancePolicyCode));
         }
 
         public override void Dispose()

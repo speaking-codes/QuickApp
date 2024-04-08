@@ -1,5 +1,6 @@
 ﻿using DAL.Core.Helpers;
 using DAL.Core.Interfaces;
+using DAL.Enums;
 using DAL.Models;
 using DAL.ModelsRabbitMQ;
 using DAL.QueueService;
@@ -29,7 +30,7 @@ namespace DAL.Core
 
         public IList<Customer> GetCustomersWithoutInsurancePolicies() => UnitOfWork.Customers.GetCustomersWithoutInsurancePolicies().ToList();
 
-        public IList<Customer> GetActiveCustomersWithoutInsurancePolicies()=> UnitOfWork.Customers.GetActiveCustomersWithoutInsurancePolicies().ToList();
+        public IList<Customer> GetActiveCustomersWithoutInsurancePolicies() => UnitOfWork.Customers.GetActiveCustomersWithoutInsurancePolicies().ToList();
 
         public string AddCustomer(Customer customer)
         {
@@ -42,9 +43,11 @@ namespace DAL.Core
                 UnitOfWork.Customers.Add(customer);
                 UnitOfWork.SaveChanges();
 
-                if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
-
-                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Added, customer.CustomerCode));
+                if (!IsMassiveWriter)
+                {
+                    UnitOfWork.CommitTransaction();
+                    _messageQueueProducer.Send(_queueName, new CustomerQueue(EnumPublishQueueType.Added, customer.CustomerCode));
+                }
 
                 return customer.CustomerCode;
             }
@@ -54,6 +57,42 @@ namespace DAL.Core
                 _countError++;
                 throw;
             }
+        }
+
+        public int activateCustomer(string customerCode)
+        {
+            var customer = UnitOfWork.Customers.GetCustomersForServerLessManager(customerCode).FirstOrDefault();
+            if (customer == null)
+                throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
+
+            try
+            {
+                if (!IsMassiveWriter) UnitOfWork.BeginTransaction();
+
+                customer.IsActive = true;
+                UnitOfWork.Customers.Update(customer);
+                var countRow = UnitOfWork.SaveChanges();
+
+                if (!IsMassiveWriter)
+                {
+                    UnitOfWork.CommitTransaction();
+                    _messageQueueProducer.Send(_queueName, new CustomerQueue(EnumPublishQueueType.Added, customer.CustomerCode));
+                }
+
+                return countRow;
+            }
+            catch
+            {
+                if (!IsMassiveWriter) UnitOfWork.RollbackTransaction();
+                _countError++;
+                throw;
+            }
+        }
+
+        public void EnqueueAddedCustomers(IEnumerable<string> customerCodes)
+        {
+            foreach (var item in customerCodes)
+                _messageQueueProducer.Send(_queueName, new CustomerQueue(EnumPublishQueueType.Added, item));
         }
 
         public string UpdateCustomer(string customerCode, Customer customerToUpdate)
@@ -108,9 +147,13 @@ namespace DAL.Core
 
                 UnitOfWork.Customers.Update(customer);
                 UnitOfWork.SaveChanges();
-                if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
 
-                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Updated, customer.CustomerCode));
+                if (!IsMassiveWriter)
+                {
+                    UnitOfWork.CommitTransaction();
+                    _messageQueueProducer.Send(_queueName, new CustomerQueue(EnumPublishQueueType.Updated, customer.CustomerCode));
+                }
+
                 return customer.CustomerCode;
             }
             catch
@@ -121,31 +164,10 @@ namespace DAL.Core
             }
         }
 
-        public int activateCustomer(string customerCode)
+        public void EnqueueUpdatedCustomers(IEnumerable<string> customerCodes)
         {
-            var customer = UnitOfWork.Customers.GetCustomersForServerLessManager(customerCode).FirstOrDefault();
-            if (customer == null)
-                throw new Exception($"Customer with Customer.taxIdCode: {customerCode} not found");
-
-            try
-            {
-                if (!IsMassiveWriter) UnitOfWork.BeginTransaction();
-
-                customer.IsActive = true;
-                UnitOfWork.Customers.Update(customer);
-                _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Added, customer.CustomerCode));
-                var countRow = UnitOfWork.SaveChanges();
-
-                if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
-
-                return countRow;
-            }
-            catch
-            {
-                if (!IsMassiveWriter) UnitOfWork.RollbackTransaction();
-                _countError++;
-                throw;
-            }
+            foreach (var item in customerCodes)
+                _messageQueueProducer.Send(_queueName, new CustomerQueue(EnumPublishQueueType.Updated, item));
         }
 
         public int DeleteCustomer(string customerCode)
@@ -161,7 +183,7 @@ namespace DAL.Core
                 customer.IsActive = false;
                 UnitOfWork.Customers.Update(customer);
                 _messageQueueProducer.Send(_queueName, new CustomerQueue(Enums.EnumPublishQueueType.Deleted, customer.CustomerCode));
-                var countRow= UnitOfWork.SaveChanges();
+                var countRow = UnitOfWork.SaveChanges();
 
                 if (!IsMassiveWriter) UnitOfWork.CommitTransaction();
 
@@ -173,6 +195,12 @@ namespace DAL.Core
                 _countError++;
                 throw;
             }
+        }
+
+        public void EnqueueDeletedCustomers(IEnumerable<string> customerCodes)
+        {
+            foreach (var item in customerCodes)
+                _messageQueueProducer.Send(_queueName, new CustomerQueue(EnumPublishQueueType.Deleted, item));
         }
 
         public override void Dispose()

@@ -1,4 +1,5 @@
 using DAL.Core.Interfaces;
+using DAL.QueueModels;
 
 namespace WorkerServiceDeleteExipiredInsurancePolicy
 {
@@ -18,7 +19,7 @@ namespace WorkerServiceDeleteExipiredInsurancePolicy
 
         private async Task DeleteInsurancePolicies()
         {
-            _monthCount ++;
+            _monthCount++;
             _monthCount = (_monthCount > 6) ? 0 : _monthCount;
 
             try
@@ -33,6 +34,13 @@ namespace WorkerServiceDeleteExipiredInsurancePolicy
                     _insurancePolicyManager.DeleteInsurancePolicy(policy.InsurancePolicyCode);
 
                 await _insurancePolicyManager.CommitTransactionAsync();
+
+                _insurancePolicyManager.EnqueueDeletedInsurancePolicies(insurancePolicies.Select(x =>
+                                        new CustomerInsurancePolicy
+                                        {
+                                            CustomerCode = x.Customer.CustomerCode,
+                                            InsurancePolicyCode = x.InsurancePolicyCode
+                                        }));
             }
             catch (Exception ex)
             {
@@ -58,6 +66,8 @@ namespace WorkerServiceDeleteExipiredInsurancePolicy
                     _customerManager.DeleteCustomer(customer.CustomerCode);
 
                 await _customerManager.CommitTransactionAsync();
+
+                _customerManager.EnqueueDeletedCustomers(customers.Select(x => x.CustomerCode));
             }
             catch (Exception ex)
             {

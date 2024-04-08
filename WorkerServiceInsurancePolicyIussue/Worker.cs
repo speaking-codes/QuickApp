@@ -2,6 +2,7 @@ using DAL.BuilderModelTemplate;
 using DAL.Core.Interfaces;
 using DAL.ModelFactory.Interfaces;
 using DAL.Models;
+using DAL.QueueModels;
 
 namespace WorkerServiceInsurancePolicyIussue
 {
@@ -30,50 +31,57 @@ namespace WorkerServiceInsurancePolicyIussue
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                    _insurancePolicyTemplate ??= _templateFactory.CreateInsurancePolicyTemplate();
+                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                _insurancePolicyTemplate ??= _templateFactory.CreateInsurancePolicyTemplate();
 
-                    if (_customers == null || _customers.Count == 0)
+                if (_customers == null || _customers.Count == 0)
+                {
+                    _customers = _customerManager.GetCustomersWithoutInsurancePolicies();
+                    _random = new Random();
+                }
+
+                if (_customers.Count > 0)
+                {
+                    var i = _random.Next(_customers.Count);
+                    var count = _random.Next(1, _insurancePolicyTemplate.InsurancePolicyCategories.Count);
+                    var insurancePolicyBuilders = _templateFactory.CreateInsurancePolicyBuilders(count, _insurancePolicyTemplate.InsurancePolicyCategories, _random);
+                    IList<InsurancePolicy> insurancePolicies = new List<InsurancePolicy>();
+                    foreach (var builder in insurancePolicyBuilders)
                     {
-                        _customers = _customerManager.GetCustomersWithoutInsurancePolicies();
-                        _random = new Random();
+                        InsurancePolicy insurancePolicy = null;
+                        insurancePolicies.Add(builder.SetInsurancePolicy(insurancePolicy)
+                                                     .SetInsurancePolicyCategory(_insurancePolicyTemplate.InsurancePolicyCategories)
+                                                     .SetCustomer(_customers[i])
+                                                     .SetDetailItem(_insurancePolicyTemplate)
+                                                     .SetIssueDate()
+                                                     .SetExpiryDate()
+                                                     .SetInsuredMaximum()
+                                                     .SetTotalPrize()
+                                                     .SetLuxuryPolicy()
+                                                     .Build());
                     }
 
-                    if (_customers.Count > 0)
+                    if (!_customers[i].IsActive)
                     {
-                        var i = _random.Next(_customers.Count);
-                        var count = _random.Next(1, _insurancePolicyTemplate.InsurancePolicyCategories.Count);
-                        var insurancePolicyBuilders = _templateFactory.CreateInsurancePolicyBuilders(count, _insurancePolicyTemplate.InsurancePolicyCategories, _random);
-                        IList<InsurancePolicy> insurancePolicies = new List<InsurancePolicy>();
-                        foreach (var builder in insurancePolicyBuilders)
-                        {
-                            InsurancePolicy insurancePolicy = null;
-                            insurancePolicies.Add(builder.SetInsurancePolicy(insurancePolicy)
-                                                         .SetInsurancePolicyCategory(_insurancePolicyTemplate.InsurancePolicyCategories)
-                                                         .SetCustomer(_customers[i])
-                                                         .SetDetailItem(_insurancePolicyTemplate)
-                                                         .SetIssueDate()
-                                                         .SetExpiryDate()
-                                                         .SetInsuredMaximum()
-                                                         .SetTotalPrize()
-                                                         .SetLuxuryPolicy()
-                                                         .Build());
-                        }
-
-                        if (!_customers[i].IsActive)
-                        {
-                            _customers[i].IsActive = true;
-                            _customerManager.activateCustomer(_customers[i].CustomerCode);
-                        }
+                        _customers[i].IsActive = true;
+                        _customerManager.activateCustomer(_customers[i].CustomerCode);
+                    }
 
                     try
                     {
-                        //await _insurancePolicyManager.BeginTransactionAsync();
+                        await _insurancePolicyManager.BeginTransactionAsync();
 
                         foreach (var item in insurancePolicies)
                             _insurancePolicyManager.AddInsurancePolicy(item);
 
-                        //await _insurancePolicyManager.CommitTransactionAsync();
+                        await _insurancePolicyManager.CommitTransactionAsync();
+
+                        _insurancePolicyManager.EnqueueAddedInsurancePolicies(insurancePolicies.Select(x =>
+                                                 new CustomerInsurancePolicy
+                                                 {
+                                                     CustomerCode = x.Customer.CustomerCode,
+                                                     InsurancePolicyCode = x.InsurancePolicyCode
+                                                 }));
                     }
                     catch (Exception ex)
                     {
