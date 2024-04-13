@@ -1,0 +1,11 @@
+Bambini in tenera età: 0-4 anni
+Bambini in età prescolare: 5-6 anni
+Bambini in età scolare: 7-12 anni
+Adolescenti: 13-18 anni
+Giovani adulti: 19-25 anni
+Adulti giovani (prima fase): 26-35 anni
+Adulti giovani (seconda fase): 36-40 anni
+Adulti di mezza età (prima fase): 41-50 anni
+Adulti di mezza età (seconda fase): 51-60 anni
+Anziani: 61-75 anni
+Anziani anziani: 76 anni e oltre

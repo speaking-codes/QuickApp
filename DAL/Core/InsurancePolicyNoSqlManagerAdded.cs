@@ -22,20 +22,20 @@ namespace DAL.Core
             if (learningCustomerPreferences==null)
                 learningCustomerPreferences=new LearningCustomerPreferences();
 
-            learningCustomerPreferences.Age = customer.BirthDate.HasValue ? customer.BirthDate.Value.GetAge() : 0;
-            learningCustomerPreferences.MaritalStatus = customer.MaritalStatus?.MaritalStatusDescription;
-            learningCustomerPreferences.FamilyType = customer.FamilyType?.FamilyTypeDescription;
-            learningCustomerPreferences.ChildrenNumbers = customer.ChildrenNumber;
-            learningCustomerPreferences.IncomeType = customer.IncomeType?.IncomeTypeDescription;
-            learningCustomerPreferences.ProfessionType = customer.ProfessionType?.ProfessionTypeDescription;
-            learningCustomerPreferences.Income = customer.Income;
-            learningCustomerPreferences.Region = customer.Addresses
-                                                .Where(x => x.IsPrimary)
-                                                .FirstOrDefault()?
-                                                .Municipality?
-                                                .Province?
-                                                .Region?
-                                                .RegionName;
+            //learningCustomerPreferences.Age = customer.BirthDate.HasValue ? customer.BirthDate.Value.GetAge() : 0;
+            //learningCustomerPreferences.MaritalStatus = customer.MaritalStatus?.MaritalStatusDescription;
+            //learningCustomerPreferences.FamilyType = customer.FamilyType?.FamilyTypeDescription;
+            //learningCustomerPreferences.ChildrenNumbers = customer.ChildrenNumber;
+            //learningCustomerPreferences.IncomeType = customer.IncomeType?.IncomeTypeDescription;
+            //learningCustomerPreferences.ProfessionType = customer.ProfessionType?.ProfessionTypeDescription;
+            //learningCustomerPreferences.Income = customer.Income;
+            //learningCustomerPreferences.Region = customer.Addresses
+            //                                    .Where(x => x.IsPrimary)
+            //                                    .FirstOrDefault()?
+            //                                    .Municipality?
+            //                                    .Province?
+            //                                    .Region?
+            //                                    .RegionName;
 
             return learningCustomerPreferences;
         }

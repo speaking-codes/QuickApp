@@ -28,6 +28,8 @@ namespace DAL
         public DbSet<ContractType> ContractTypes { get; set; }
         public DbSet<GenderType> GenderTypes { get; set; }
         public DbSet<MaritalStatusType> MaritalStatusTypes { get; set; }
+        public DbSet<AgeClassType> AgeClassTypes { get; set; }
+        public DbSet<IncomeClassType> IncomeClassTypes { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
@@ -163,6 +165,12 @@ namespace DAL
 
             builder.Entity<ProfessionType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<ProfessionType>().ToTable($"App{nameof(ProfessionTypes)}");
+
+            builder.Entity<AgeClassType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<AgeClassType>().ToTable($"App{nameof(AgeClassTypes)}");
+            
+            builder.Entity<IncomeClassType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<IncomeClassType>().ToTable($"App{nameof(IncomeClassTypes)}");
 
             builder.Entity<Customer>().Property(c => c.FirstName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.FirstName);
@@ -433,11 +441,11 @@ namespace DAL
             builder.Entity<LearningCustomerPreferences>().Property(c => c.Gender).IsRequired(false).IsFixedLength(false);
             builder.Entity<LearningCustomerPreferences>().Property(c => c.MaritalStatus).IsRequired(false).IsFixedLength(false);
             builder.Entity<LearningCustomerPreferences>().Property(c => c.FamilyType).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.IncomeType).IsRequired(false).IsFixedLength(false);
+            builder.Entity<LearningCustomerPreferences>().Property(c => c.IncomeTypeClass).IsRequired(false).IsFixedLength(false);
             builder.Entity<LearningCustomerPreferences>().Property(c => c.ProfessionType).IsRequired(false).IsFixedLength(false);
+            builder.Entity<LearningCustomerPreferences>().Property(c => c.Country).IsRequired(false).IsFixedLength(false);
             builder.Entity<LearningCustomerPreferences>().Property(c => c.Region).IsRequired(false).IsFixedLength(false);
             builder.Entity<LearningCustomerPreferences>().Property(c => c.InsurancePolicyCategory).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.PredictionInsurancePolicyCategory).IsRequired(false).IsFixedLength(false);
             builder.Entity<LearningCustomerPreferences>().ToTable("AppLearningCustomerPreferences");
 
             builder.Entity<MatrixCustomerInsurancePolicy>().ToTable($"App{nameof(MatrixUsersItems)}");

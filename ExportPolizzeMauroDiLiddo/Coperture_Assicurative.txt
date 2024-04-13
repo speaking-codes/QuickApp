@@ -1,0 +1,132 @@
+Copertura Assicurativa,Beni Assicurabili
+R.C.A.,Veicoli a motore
+MULTIGARANZIA ABITAZIONE,Edifici residenziali, contenuto della casa, responsabilità civile verso terzi
+INFORTUNI,Infortuni personali
+MALATTIA,Malattie specifiche coperte dalla polizza
+A.R.D.,Responsabilità civile per danni arrecati a terzi
+R.C. DIVERSI,Varie responsabilità civili non coperte da altre polizze
+GLOBALE FABBRICATI,Edifici e strutture aziendali
+INCENDIO/FURTO,Proprietà danneggiate o rubate a causa di incendio o furto
+TUTELA GIUDIZIARIA,Costi legali e spese per azioni legali
+
+R.C.A. (Responsabilità Civile Auto):
+
+Veicoli a motore
+MULTIGARANZIA ABITAZIONE:
+
+Edifici residenziali
+Contenuto della casa
+Responsabilità civile verso terzi
+INFORTUNI:
+
+Infortuni personali
+MALATTIA:
+
+Malattie specifiche coperte dalla polizza
+A.R.D. (Assicurazione per la Responsabilità Civile):
+
+Responsabilità civile per danni arrecati a terzi
+R.C. DIVERSI (Responsabilità Civile Diversi):
+
+Varie responsabilità civili non coperte da altre polizze
+GLOBALE FABBRICATI:
+
+Edifici e strutture aziendali
+INCENDIO/FURTO:
+
+Proprietà danneggiate o rubate a causa di incendio o furto
+TUTELA GIUDIZIARIA:
+
+Costi legali e spese per azioni legali
+
+R.C.A. (Responsabilità Civile Auto):
+
+Copertura obbligatoria per legge in Italia per veicoli a motore.
+MULTIGARANZIA ABITAZIONE:
+
+Non esiste una copertura specificamente obbligatoria per l'abitazione in Italia, ma la responsabilità civile verso terzi potrebbe essere richiesta in alcuni casi, ad esempio per la responsabilità dell'inquilino nei confronti del proprietario dell'immobile.
+INFORTUNI:
+
+Non vi è un'assicurazione infortuni obbligatoria in Italia per la popolazione generale, ma è comune che i datori di lavoro offrano assicurazioni infortuni per i propri dipendenti.
+MALATTIA:
+
+Non esiste un'assicurazione malattia obbligatoria in Italia, ma l'assistenza sanitaria è garantita dal Servizio Sanitario Nazionale.
+A.R.D. (Assicurazione per la Responsabilità Civile):
+
+La copertura di responsabilità civile verso terzi è richiesta per alcune attività professionali, come medici, avvocati, commercialisti, etc.
+R.C. DIVERSI (Responsabilità Civile Diversi):
+
+La responsabilità civile può essere richiesta per specifiche attività professionali o commerciali, ma non esiste una copertura obbligatoria generale.
+GLOBALE FABBRICATI:
+
+Non esiste una copertura assicurativa specificamente obbligatoria per gli edifici aziendali, ma l'assicurazione incendio potrebbe essere richiesta dalla banca come condizione per un mutuo ipotecario.
+INCENDIO/FURTO:
+
+L'assicurazione incendio non è obbligatoria per legge, ma potrebbe essere richiesta dalla banca come condizione per un mutuo ipotecario.
+TUTELA GIUDIZIARIA:
+
+Non esiste un'assicurazione tutela giudiziaria obbligatoria in Italia.
+
+R.C.A. (Responsabilità Civile Auto):
+
+Furto e incendio
+Eventi naturali (es. grandine, alluvione)
+Atti vandalici
+Cristalli
+Assistenza stradale
+Kasko (danni propri)
+MULTIGARANZIA ABITAZIONE:
+
+Incendio
+Furto
+Eventi naturali (es. grandine, alluvione)
+Danni accidentali
+Responsabilità civile familiare
+Cristalli
+Assistenza casa
+INFORTUNI:
+
+Invalidità permanente totale o parziale
+Spese mediche
+Indennità giornaliera per ricovero
+Trasporto sanitario
+MALATTIA:
+
+Rimborso delle spese mediche
+Indennità giornaliera per degenza in ospedale
+Rimborso delle spese farmaceutiche
+Rimborso delle spese per visite specialistiche
+A.R.D. (Assicurazione per la Responsabilità Civile):
+
+Copertura per danni causati a terzi nel corso dell'attività professionale
+Difesa legale
+R.C. DIVERSI (Responsabilità Civile Diversi):
+
+Copertura per danni causati a terzi nell'esercizio di attività non professionali (es. durante la pratica sportiva, attività di volontariato)
+GLOBALE FABBRICATI:
+
+Incendio
+Furto
+Eventi naturali (es. grandine, alluvione)
+Danni accidentali
+Responsabilità civile per danni a terzi
+INCENDIO/FURTO:
+
+Copertura per danni causati da incendio
+Copertura per furto e tentato furto
+Copertura per eventi naturali
+Responsabilità civile per danni a terzi
+TUTELA GIUDIZIARIA:
+
+Copertura per spese legali e di rappresentanza in caso di controversie legali
+Assistenza legale e consulenza giuridica
+
+R.C.A. (Responsabilità Civile Auto): Copertura obbligatoria per danni a terzi causati dal veicolo.
+MULTIGARANZIA ABITAZIONE: Protezione per casa e responsabilità civile.
+INFORTUNI: Indennizzo per infortuni personali.
+MALATTIA: Rimborso spese mediche per malattia.
+A.R.D. (Assicurazione per la Responsabilità Civile): Protezione legale per responsabilità civile.
+R.C. DIVERSI (Responsabilità Civile Diversi): Copertura per danni a terzi non auto.
+GLOBALE FABBRICATI: Assicurazione per edifici aziendali.
+INCENDIO/FURTO: Copertura per danni da incendio e furto.
+TUTELA GIUDIZIARIA: Copertura legale e spese legali.

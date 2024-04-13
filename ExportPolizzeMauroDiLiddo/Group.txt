@@ -1,0 +1,52 @@
+Generale
+Tipoligia di polizze stipulate - 1
+R.C.A.              - 573876
+MULTIGARANZIA ABITAZIONE - 2413
+INFORTUNI           - 64266
+MALATTIA                 - 766
+A.R.D.              - 22
+R.C. DIVERSI        - 78
+GLOBALE FABBRICATI  - 8
+INCENDIO/FURTO      - 4
+TUTELA GIUDIZIARIA       - 2
+
+Uomini
+R.C.A.              - 381993
+MULTIGARANZIA ABITAZIONE - 1680
+INFORTUNI           - 45558
+MALATTIA                 - 570
+A.R.D.              - 16
+INCENDIO/FURTO      - 4
+R.C. DIVERSI        - 25
+TUTELA GIUDIZIARIA       - 1
+
+Donne
+R.C.A.              - 191309
+INFORTUNI           - 18128
+MALATTIA                 - 187
+MULTIGARANZIA ABITAZIONE - 656
+A.R.D.              - 6
+R.C. DIVERSI        - 8
+TUTELA GIUDIZIARIA       - 1
+GLOBALE FABBRICATI  - 2
+
+Persone Fisiche
+R.C.A.              - 573302
+MULTIGARANZIA ABITAZIONE - 2336
+INFORTUNI           - 63686
+MALATTIA                 - 757
+A.R.D.              - 22
+INCENDIO/FURTO      - 4
+R.C. DIVERSI        - 33
+TUTELA GIUDIZIARIA       - 2
+GLOBALE FABBRICATI  - 2
+
+Persone Giuridiche
+Tipoligia di polizze stipulate - 1
+R.C.A.              - 574
+INFORTUNI           - 580
+MULTIGARANZIA ABITAZIONE - 77
+R.C. DIVERSI        - 45
+GLOBALE FABBRICATI  - 6
+MALATTIA                 - 9
+

@@ -1,0 +1,51 @@
+Professione
+Operaio
+Impiegato
+Disoccupato
+Libero professionista
+Commerciante
+Agente di commercio
+Altra professione
+Insegnante
+Pensionato
+Cuoco
+Casalinga
+Artigiano
+Studente
+Avvocato
+Appartenente a Forze Armate
+Architetto
+Consulente Commerciale
+Medico
+Agricoltore
+Geometra
+Imprenditore
+Lavoratore autonomo
+Cameriere
+Infermiere
+Ingegnere
+Bracciante
+Autista
+Tecnico
+Dipendente generico
+Fotografo
+Dipendente Ente privato
+Farmacista
+Giornalista
+Rappresentante
+Dipendente Ente pubblico
+Manovale
+Dirigente
+Marittimo
+Magistrato
+Quadro
+Agronomo
+Disegnatore
+Artista
+Dimostratore scientifico
+Sportivo
+Chimico
+Religioso
+Societ�
+Interprete
+Consulente Turistico

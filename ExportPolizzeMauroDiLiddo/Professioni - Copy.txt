@@ -1,0 +1,51 @@
+Professione;RAL Minima;RAL Massima
+Operaio;18000;25000
+Impiegato;20000;35000
+Disoccupato;0;0
+Libero professionista;25000;100000
+Commerciante;25000;80000
+Agente di commercio;22000;60000
+Altra professione;20000;60000
+Insegnante;25000;50000
+Pensionato;0;0
+Cuoco;19000;30000
+Casalinga;0;0
+Artigiano;22000;40000
+Studente;0;0
+Avvocato;30000;150000
+Appartenente a Forze Armate;22000;60000
+Architetto;30000;80000
+Consulente Commerciale;25000;70000
+Medico;40000;200000
+Agricoltore;18000;40000
+Geometra;25000;60000
+Imprenditore;30000;150000
+Lavoratore autonomo;22000;60000
+Cameriere;18000;25000
+Infermiere;22000;40000
+Ingegnere;30000;80000
+Bracciante;18000;25000
+Autista;19000;30000
+Tecnico;22000;50000
+Dipendente generico;20000;40000
+Fotografo;20000;50000
+Dipendente Ente privato;20000;40000
+Farmacista;25000;60000
+Giornalista;22000;50000
+Rappresentante;22000;60000
+Dipendente Ente pubblico;22000;50000
+Manovale;18000;25000
+Dirigente;40000;200000
+Marittimo;18000;30000
+Magistrato;40000;200000
+Quadro;30000;150000
+Agronomo;25000;60000
+Disegnatore;20000;40000
+Artista;18000;60000
+Dimostratore scientifico;25000;70000
+Sportivo;25000;100000
+Chimico;25000;80000
+Religioso;0;0
+Societa';0;0
+Interprete;22000;60000
+Consulente Turistico;25000;70000

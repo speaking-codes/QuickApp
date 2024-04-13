@@ -1,0 +1,6 @@
+Fino a 15.000 euro (reddito basso)
+Da 15.001 euro a 28.000 euro (reddito medio-basso)
+Da 28.001 euro a 55.000 euro (reddito medio)
+Da 55.001 euro a 75.000 euro (reddito medio-alto)
+Da 75.001 euro a 120.000 euro (reddito alto)
+Oltre 120.000 euro (reddito molto alto)

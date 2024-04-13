@@ -9,15 +9,15 @@
     <PackageReference Include="Microsoft.ML.FastTree" Version="1.7.1" />
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.19.1" />
   </ItemGroup>
-  <ItemGroup Label="ClassificationLearningModel">
-    <None Include="ClassificationLearningModel.consumption.cs">
-      <DependentUpon>ClassificationLearningModel.mbconfig</DependentUpon>
+  <ItemGroup Label="MLModel1">
+    <None Include="MLModel1.consumption.cs">
+      <DependentUpon>MLModel1.mbconfig</DependentUpon>
     </None>
-    <None Include="ClassificationLearningModel.training.cs">
-      <DependentUpon>ClassificationLearningModel.mbconfig</DependentUpon>
+    <None Include="MLModel1.training.cs">
+      <DependentUpon>MLModel1.mbconfig</DependentUpon>
     </None>
-    <None Include="ClassificationLearningModel.zip">
-      <DependentUpon>ClassificationLearningModel.mbconfig</DependentUpon>
+    <None Include="MLModel1.zip">
+      <DependentUpon>MLModel1.mbconfig</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

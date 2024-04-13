@@ -12,15 +12,14 @@ namespace DAL.Models
         public int UserId { get; set; }
         public string CustomerCode { get; set; }
         public string Gender { get; set; }
-        public int? Age { get; set; }
+        public int AgeClass { get; set; }
         public string MaritalStatus { get; set; }
         public string FamilyType { get; set; }
         public int? ChildrenNumbers { get; set; }
-        public string IncomeType { get; set; }
+        public string IncomeTypeClass { get; set; }
         public string ProfessionType { get; set; }
-        public double? Income { get; set; }
+        public string Country { get; set; }
         public string Region { get; set; }
         public string InsurancePolicyCategory { get; set; }
-        public string PredictionInsurancePolicyCategory { get; set; }
     }
 }
