@@ -29,7 +29,7 @@ namespace DAL
         public DbSet<GenderType> GenderTypes { get; set; }
         public DbSet<MaritalStatusType> MaritalStatusTypes { get; set; }
         public DbSet<AgeClassType> AgeClassTypes { get; set; }
-        public DbSet<IncomeClassType> IncomeClassTypes { get; set; }
+        //public DbSet<IncomeClassType> IncomeClassTypes { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
@@ -73,6 +73,9 @@ namespace DAL
         public DbSet<InsurancePolicyCategory> InsurancePolicyCategories { get; set; }
         public DbSet<InsurancePolicyCategoryStatic> InsurancePolicyCategoryStatics { get; set; }
         public DbSet<InsurancePolicy> InsurancePolicies { get; set; }
+
+        public DbSet<WarrantyAvaible> WarrantyAvaibles { get; set; }
+        public DbSet<WarrantySelected> WarrantySelecteds { get; set; }
 
         #endregion
 
@@ -169,8 +172,8 @@ namespace DAL
             builder.Entity<AgeClassType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<AgeClassType>().ToTable($"App{nameof(AgeClassTypes)}");
             
-            builder.Entity<IncomeClassType>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<IncomeClassType>().ToTable($"App{nameof(IncomeClassTypes)}");
+            //builder.Entity<IncomeClassType>().Property(c => c.Id).ValueGeneratedNever();
+            //builder.Entity<IncomeClassType>().ToTable($"App{nameof(IncomeClassTypes)}");
 
             builder.Entity<Customer>().Property(c => c.FirstName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.FirstName);
@@ -208,10 +211,10 @@ namespace DAL
                                       .HasForeignKey(c => c.ContractTypeId)
                                       .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Entity<Customer>().HasOne(c => c.IncomeType)
-                                      .WithMany(m => m.Customers)
-                                      .HasForeignKey(c => c.IncomeTypeId)
-                                      .OnDelete(DeleteBehavior.NoAction);
+            //builder.Entity<Customer>().HasOne(c => c.IncomeType)
+            //                          .WithMany(m => m.Customers)
+            //                          .HasForeignKey(c => c.IncomeTypeId)
+            //                          .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Customer>().HasOne(c => c.ProfessionType)
                                       .WithMany(m => m.Customers)
@@ -329,7 +332,7 @@ namespace DAL
             #region General
 
             builder.Entity<SalesLineType>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<SalesLineType>().Property(c => c.SalesLineCode).HasMaxLength(3).IsFixedLength().IsRequired();
+            builder.Entity<SalesLineType>().Property(c => c.SalesLineCode).HasMaxLength(5).IsFixedLength().IsRequired();
             builder.Entity<SalesLineType>().Property(c => c.BackGroundColor).HasMaxLength(60).IsRequired(false);
             builder.Entity<SalesLineType>().Property(c => c.BackGroundColorCssClass).HasMaxLength(30).IsRequired();
             builder.Entity<SalesLineType>().ToTable($"App{nameof(SalesLineTypes)}");
@@ -355,6 +358,11 @@ namespace DAL
                                                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<InsurancePolicy>().UseTptMappingStrategy().ToTable($"App{nameof(InsurancePolicies)}");
+
+            builder.Entity<WarrantyAvaible>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<WarrantyAvaible>().ToTable($"App{nameof(WarrantyAvaibles)}");
+
+            builder.Entity<WarrantySelected>().ToTable($"App{nameof(WarrantySelecteds)}");
 
             #endregion
 

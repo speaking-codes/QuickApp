@@ -17,6 +17,7 @@ namespace DAL.Models
 
         public virtual SalesLineType SalesLine { get; set; }
         public virtual IList<InsurancePolicy> InsurancePolicies { get; set; }
+        public virtual IList<WarrantyAvaible> WarrantyAvaibles { get; set; }
         public virtual IList<InsurancePolicyCategoryStatic> InsurancePolicyCategoryStatics { get; set; }
     }
 }

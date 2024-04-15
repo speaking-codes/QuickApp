@@ -29,5 +29,7 @@ namespace DAL.Models
         public virtual IList<Travel> Travels { get; set; }
 
         public virtual IList<Vacation> Vacations { get; set; }
+
+        public virtual IList<WarrantySelected> WarrantySelecteds { get;set; }
     }
 }

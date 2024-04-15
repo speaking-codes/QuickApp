@@ -11,6 +11,6 @@ namespace DAL.Models
         public byte Id { get; set; }
         public string IncomeTypeDescription { get; set; }
 
-        public virtual IList<Customer> Customers { get; set; }
+        public virtual IList<ProfessionType> ProfessionTypes { get; set;}
     }
 }

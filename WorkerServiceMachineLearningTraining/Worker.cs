@@ -17,7 +17,7 @@ namespace WorkerServiceMachineLearningTraining
         private IList<string> getCopertureString(IList<string> coperture)
         {
             var copertureItem = new List<List<string>>();
-            var innerList=new List<string>();
+            var innerList = new List<string>();
 
             if (coperture.Count == 2)
             {
@@ -31,7 +31,7 @@ namespace WorkerServiceMachineLearningTraining
                 innerList.Add(coperture[1]);
                 copertureItem.Add(innerList);
 
-                innerList=new List<string>();
+                innerList = new List<string>();
                 innerList.Add(coperture[0]);
                 innerList.Add(coperture[2]);
                 copertureItem.Add(innerList);
@@ -73,16 +73,16 @@ namespace WorkerServiceMachineLearningTraining
                 copertureItem.Add(innerList);
             }
 
-            var copertureItemReverse=new List<List<string>>();
-            for (var i=0;i<copertureItem.Count;i++)
+            var copertureItemReverse = new List<List<string>>();
+            for (var i = 0; i < copertureItem.Count; i++)
             {
                 copertureItem[i].Reverse();
                 copertureItemReverse.Add(copertureItem[i]);
                 copertureItem[i].Reverse();
             }
 
-            var copertureItemEquals =new List<List<string>>();
-            foreach(var item in coperture)
+            var copertureItemEquals = new List<List<string>>();
+            foreach (var item in coperture)
             {
                 innerList = new List<string>();
                 innerList.Add(item);
@@ -95,7 +95,7 @@ namespace WorkerServiceMachineLearningTraining
             copertureTotal.AddRange(copertureItemReverse);
             copertureTotal.AddRange(copertureItemEquals);
 
-            var copertureOutput=new List<string>();
+            var copertureOutput = new List<string>();
 
             foreach (var item in copertureTotal)
                 copertureOutput.Add(string.Join(";", item));
@@ -121,7 +121,7 @@ namespace WorkerServiceMachineLearningTraining
                     var rnd = new Random();
                     var indexRnd = 0;
                     var professioneList = new List<List<string>>();
-                    var customerList = new List<List<string>>();
+                    //var customerList = new List<List<string>>();
                     var lineSplit = new List<string>();
                     float annualGrossIncomeBase = 0f;
 
@@ -178,292 +178,329 @@ namespace WorkerServiceMachineLearningTraining
                     var pathFileProfessioni = $"{pathDirectory}Professioni - Copy.txt";
                     var pathFileCustomer = $"{pathDirectory}ExportPolizzeMauroDiLiddo.csv";
                     var pathFileCustomerToWrite = $"{pathDirectory}ExportPolizzeMauroDiLiddo_V1.csv";
-                    var pathFileCustomerFinal = $"{pathDirectory}ExportPolizzeMauroDiLiddo_Finale.csv";
 
-                    var pathFileGroup = $"{pathDirectory}CustomerReports.txt";
+                    var preProcess = new PreProcess();
+                    var customerList = preProcess.LoadData(pathFileCustomer, pathFileProfessioni);
+                    preProcess.WriteData(pathFileCustomerToWrite, customerList);
 
-                    var provinciaList = new List<string>();
+                    //var pathFileCustomerFinal = $"{pathDirectory}ExportPolizzeMauroDiLiddo_Finale.csv";
+                    //string pathFileCustomerForRecommender = $"{pathDirectory}ExportPolizzeMauroDiLiddo_For_Recommender.csv";
 
-                    using (var sr = new StreamReader(pathFileProfessioni))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            var line = sr.ReadLine();
-                            if (!string.IsNullOrEmpty(line))
-                            {
-                                lineSplit = line.Split(new char[] { ';' }).ToList();
-                                professioneList.Add(lineSplit);
-                            }
-                        }
-                    }
+                    //var pathFileGroup = $"{pathDirectory}CustomerReports.txt";
 
-                    using (var sr = new StreamReader(pathFileCustomer))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            var line = sr.ReadLine();
-                            if (!string.IsNullOrEmpty(line))
-                            {
-                                lineSplit = line.Split(new char[] { ';' }).ToList();
+                    //var provinciaList = new List<string>();
 
-                                if (string.IsNullOrEmpty(lineSplit[0].Trim()))
-                                {
-                                    if (string.IsNullOrEmpty(lineSplit[4]))
-                                        lineSplit[0] = "S";
-                                    else
-                                        lineSplit[0] = (rnd.Next() % 2) == 0 ? "M" : "F";
-                                }
+                    //using (var sr = new StreamReader(pathFileProfessioni))
+                    //{
+                    //    while (!sr.EndOfStream)
+                    //    {
+                    //        var line = sr.ReadLine();
+                    //        if (!string.IsNullOrEmpty(line))
+                    //        {
+                    //            lineSplit = line.Split(new char[] { ';' }).ToList();
+                    //            professioneList.Add(lineSplit);
+                    //        }
+                    //    }
+                    //}
 
-                                #region Data di Nascita
+                    //using (var sr = new StreamReader(pathFileCustomer))
+                    //{
+                    //    while (!sr.EndOfStream)
+                    //    {
+                    //        var line = sr.ReadLine();
+                    //        if (!string.IsNullOrEmpty(line))
+                    //        {
+                    //            lineSplit = line.Split(new char[] { ';' }).ToList();
 
-                                if (string.IsNullOrEmpty(lineSplit[1]))
-                                {
-                                    indexRnd = rnd.Next(yearList.Count);
-                                    var year = yearList[indexRnd];
-                                    var month = rnd.Next(1, 13);
-                                    var day = 0;
-                                    if (month == 2)
-                                        day = rnd.Next(1, 29);
-                                    else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-                                        day = rnd.Next(1, 32);
-                                    else
-                                        day = rnd.Next(1, 31);
-                                    var dataNascita = new DateTime(year, month, day);
-                                    lineSplit[1] = dataNascita.ToString();
-                                }
+                    //            index++;
+                    //            lineSplit.Insert(0, index.ToString());
 
-                                #endregion
+                    //            if (string.IsNullOrEmpty(lineSplit[0].Trim()))
+                    //            {
+                    //                if (string.IsNullOrEmpty(lineSplit[4]))
+                    //                    lineSplit[0] = "S";
+                    //                else
+                    //                    lineSplit[0] = (rnd.Next() % 2) == 0 ? "M" : "F";
+                    //            }
 
-                                #region Stato Civile
+                    //            #region Data di Nascita
 
-                                if (string.IsNullOrEmpty(lineSplit[2]))
-                                {
-                                    indexRnd = rnd.Next() % 3;
-                                    lineSplit[2] = statoCivileList[indexRnd];
-                                }
+                    //            if (string.IsNullOrEmpty(lineSplit[1]))
+                    //            {
+                    //                indexRnd = rnd.Next(yearList.Count);
+                    //                var year = yearList[indexRnd];
+                    //                var month = rnd.Next(1, 13);
+                    //                var day = 0;
+                    //                if (month == 2)
+                    //                    day = rnd.Next(1, 29);
+                    //                else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+                    //                    day = rnd.Next(1, 32);
+                    //                else
+                    //                    day = rnd.Next(1, 31);
+                    //                var dataNascita = new DateTime(year, month, day);
+                    //                lineSplit[1] = dataNascita.ToString();
+                    //            }
 
-                                #endregion
+                    //            #endregion
 
-                                #region Coniuge a Carico
+                    //            #region Stato Civile
 
-                                if (string.IsNullOrEmpty(lineSplit[3]))
-                                {
-                                    if (lineSplit[2] == "Coniugato" || lineSplit[2] == "Convivente")
-                                        lineSplit[3] = (rnd.Next() % 2) == 0 ? System.Boolean.TrueString : System.Boolean.FalseString;
-                                    else
-                                        lineSplit[3] = System.Boolean.FalseString;
-                                }
+                    //            if (string.IsNullOrEmpty(lineSplit[2]))
+                    //            {
+                    //                indexRnd = rnd.Next() % 3;
+                    //                lineSplit[2] = statoCivileList[indexRnd];
+                    //            }
 
-                                #endregion
+                    //            #endregion
 
-                                #region Numero Figli
+                    //            #region Coniuge a Carico
 
-                                if (string.IsNullOrEmpty(lineSplit[4]))
-                                {
-                                    if (lineSplit[0] == "0" || lineSplit[0] == "X" || lineSplit[0] == "S")
-                                        lineSplit[4] = "0";
-                                    else
-                                        lineSplit[4] = (rnd.Next() % 4).ToString();
-                                }
+                    //            if (string.IsNullOrEmpty(lineSplit[3]))
+                    //            {
+                    //                if (lineSplit[2] == "Coniugato" || lineSplit[2] == "Convivente")
+                    //                    lineSplit[3] = (rnd.Next() % 2) == 0 ? System.Boolean.TrueString : System.Boolean.FalseString;
+                    //                else
+                    //                    lineSplit[3] = System.Boolean.FalseString;
+                    //            }
 
-                                #endregion
+                    //            #endregion
 
-                                #region Figli a Carico
+                    //            #region Numero Figli
 
-                                if (string.IsNullOrEmpty(lineSplit[5]))
-                                {
-                                    var dataNascita = DateTime.Parse(lineSplit[1]);
-                                    var age = (int)DateTime.Now.Subtract(dataNascita).TotalDays / 365;
+                    //            if (string.IsNullOrEmpty(lineSplit[4]))
+                    //            {
+                    //                if (lineSplit[0] == "0" || lineSplit[0] == "X" || lineSplit[0] == "S")
+                    //                    lineSplit[4] = "0";
+                    //                else
+                    //                    lineSplit[4] = (rnd.Next() % 4).ToString();
+                    //            }
 
-                                    if (lineSplit[4] == "0")
-                                        lineSplit[5] = System.Boolean.FalseString;
-                                    else if (age < 18)
-                                        lineSplit[5] = System.Boolean.TrueString;
-                                    else
-                                        lineSplit[5] = System.Boolean.FalseString;
-                                }
+                    //            #endregion
 
-                                #endregion
+                    //            #region Figli a Carico
 
-                                #region RAL
+                    //            if (string.IsNullOrEmpty(lineSplit[5]))
+                    //            {
+                    //                var dataNascita = DateTime.Parse(lineSplit[1]);
+                    //                var age = (int)DateTime.Now.Subtract(dataNascita).TotalDays / 365;
 
-                                if (string.IsNullOrEmpty(lineSplit[7]))
-                                {
-                                    var profession = professioneList.FirstOrDefault(x => x[0] == lineSplit[6]);
-                                    if (profession == null)
-                                        continue;
+                    //                if (lineSplit[4] == "0")
+                    //                    lineSplit[5] = System.Boolean.FalseString;
+                    //                else if (age < 18)
+                    //                    lineSplit[5] = System.Boolean.TrueString;
+                    //                else
+                    //                    lineSplit[5] = System.Boolean.FalseString;
+                    //            }
 
-                                    if ((rnd.Next() % 2) == 0)
-                                        annualGrossIncomeBase = int.Parse(profession[1]) * (1 + rnd.NextSingle());
-                                    else
-                                        annualGrossIncomeBase = int.Parse(profession[2]) * rnd.NextSingle();
+                    //            #endregion
 
-                                    lineSplit[7] = annualGrossIncomeBase.ToString();
-                                }
+                    //            #region RAL
 
-                                #endregion
+                    //            if (string.IsNullOrEmpty(lineSplit[7]))
+                    //            {
+                    //                var profession = professioneList.FirstOrDefault(x => x[0] == lineSplit[6]);
+                    //                if (profession == null)
+                    //                    continue;
 
-                                #region Tipo Reddito
+                    //                if ((rnd.Next() % 2) == 0)
+                    //                    annualGrossIncomeBase = int.Parse(profession[1]) * (1 + rnd.NextSingle());
+                    //                else
+                    //                    annualGrossIncomeBase = int.Parse(profession[2]) * rnd.NextSingle();
 
-                                if (string.IsNullOrEmpty(lineSplit[8]))
-                                {
-                                    if (lineSplit[0] == "0" || lineSplit[0] == "X" || lineSplit[0] == "S")
-                                        lineSplit[8] = "Reddito da Libera Professione";
-                                    else if (liberoProfessionistaList.Any(x => x == lineSplit[6]))
-                                        lineSplit[8] = "Reddito da Libera Professione";
-                                    else if (dipedenteList.Any(x => x == lineSplit[6]))
-                                        lineSplit[8] = "Reddito da Lavoro Dipendente";
-                                    else if (nullaTenenteList.Any(x => x == lineSplit[6]) && lineSplit[7] == "0")
-                                        lineSplit[8] = "Nessun Reddito";
-                                    else if (nullaTenenteList.Any(x => x == lineSplit[6]) && lineSplit[7] != "0")
-                                        lineSplit[8] = "Altro Reddito";
-                                    else
-                                        lineSplit[8] = (rnd.Next() % 2) == 0 ? "Reddito da Lavoro Dipendente" : "Reddito da Libera Professione";
-                                }
+                    //                lineSplit[7] = annualGrossIncomeBase.ToString();
+                    //            }
 
-                                if (!string.IsNullOrEmpty(lineSplit[10]) && lineSplit[10].Length == 2)
-                                {
-                                    if (!provinciaList.Any(x => x == lineSplit[10]))
-                                        provinciaList.Add(lineSplit[10]);
-                                }
-                                else if (string.IsNullOrEmpty(lineSplit[10]))
-                                {
-                                    indexRnd = rnd.Next(provinciaList.Count);
-                                    lineSplit[10] = provinciaList[indexRnd];
-                                }
+                    //            #endregion
 
-                                #endregion
+                    //            #region Tipo Reddito
 
-                                customerList.Add(lineSplit);
-                            }
-                        }
-                    }
-                    var temp = customerList.Where(x => string.IsNullOrEmpty(x[10])).ToList();
-                    using (var sw = new StreamWriter(pathFileCustomerToWrite))
-                    {
-                        foreach (var item in customerList)
-                            sw.WriteLine(string.Join(";", item));
-                    }
-                    var uominiGroupList = customerList.Where(x => x[0] == "M").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
-                    var donneGroupList = customerList.Where(x => x[0] == "F").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
-                    var personeFisicheGroupList = customerList.Where(x => x[0] == "M" || x[0] == "F").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
-                    var societaGroupList = customerList.Where(x => x[0] != "M" && x[0] != "F").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
-                    var groupList = customerList.GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
-                    using (var sw = new StreamWriter(pathFileGroup))
-                    {
-                        sw.WriteLine("Generale");
-                        foreach (var item in groupList)
-                            sw.WriteLine($"{item.itemKey} - {item.itemCount}");
-                        sw.WriteLine();
+                    //            if (string.IsNullOrEmpty(lineSplit[8]))
+                    //            {
+                    //                if (lineSplit[0] == "0" || lineSplit[0] == "X" || lineSplit[0] == "S")
+                    //                    lineSplit[8] = "Reddito da Libera Professione";
+                    //                else if (liberoProfessionistaList.Any(x => x == lineSplit[6]))
+                    //                    lineSplit[8] = "Reddito da Libera Professione";
+                    //                else if (dipedenteList.Any(x => x == lineSplit[6]))
+                    //                    lineSplit[8] = "Reddito da Lavoro Dipendente";
+                    //                else if (nullaTenenteList.Any(x => x == lineSplit[6]) && lineSplit[7] == "0")
+                    //                    lineSplit[8] = "Nessun Reddito";
+                    //                else if (nullaTenenteList.Any(x => x == lineSplit[6]) && lineSplit[7] != "0")
+                    //                    lineSplit[8] = "Altro Reddito";
+                    //                else
+                    //                    lineSplit[8] = (rnd.Next() % 2) == 0 ? "Reddito da Lavoro Dipendente" : "Reddito da Libera Professione";
+                    //            }
 
-                        sw.WriteLine("Uomini");
-                        foreach (var item in uominiGroupList)
-                            sw.WriteLine($"{item.itemKey} - {item.itemCount}");
-                        sw.WriteLine();
+                    //            if (!string.IsNullOrEmpty(lineSplit[10]) && lineSplit[10].Length == 2)
+                    //            {
+                    //                if (!provinciaList.Any(x => x == lineSplit[10]))
+                    //                    provinciaList.Add(lineSplit[10]);
+                    //            }
+                    //            else if (string.IsNullOrEmpty(lineSplit[10]))
+                    //            {
+                    //                indexRnd = rnd.Next(provinciaList.Count);
+                    //                lineSplit[10] = provinciaList[indexRnd];
+                    //            }
 
-                        sw.WriteLine("Donne");
-                        foreach (var item in donneGroupList)
-                            sw.WriteLine($"{item.itemKey} - {item.itemCount}");
-                        sw.WriteLine();
+                    //            #endregion
 
-                        sw.WriteLine("Persone Fisiche");
-                        foreach (var item in personeFisicheGroupList)
-                            sw.WriteLine($"{item.itemKey} - {item.itemCount}");
-                        sw.WriteLine();
+                    //            customerList.Add(lineSplit);
+                    //        }
+                    //    }
+                    //}
+                    //var temp = customerList.Where(x => string.IsNullOrEmpty(x[10])).ToList();
+                    //using (var sw = new StreamWriter(pathFileCustomerToWrite))
+                    //{
+                    //    foreach (var item in customerList)
+                    //        sw.WriteLine(string.Join(";", item));
+                    //}
+                    //var uominiGroupList = customerList.Where(x => x[0] == "M").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
+                    //var donneGroupList = customerList.Where(x => x[0] == "F").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
+                    //var personeFisicheGroupList = customerList.Where(x => x[0] == "M" || x[0] == "F").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
+                    //var societaGroupList = customerList.Where(x => x[0] != "M" && x[0] != "F").GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
+                    //var groupList = customerList.GroupBy(x => x[11]).Select(y => new { itemKey = y.Key, itemCount = y.Count() }).ToList();
+                    //using (var sw = new StreamWriter(pathFileGroup))
+                    //{
+                    //    sw.WriteLine("Generale");
+                    //    foreach (var item in groupList)
+                    //        sw.WriteLine($"{item.itemKey} - {item.itemCount}");
+                    //    sw.WriteLine();
 
-                        sw.WriteLine("Persone Giuridiche");
-                        foreach (var item in societaGroupList)
-                            sw.WriteLine($"{item.itemKey} - {item.itemCount}");
-                        sw.WriteLine();
-                    }
+                    //    sw.WriteLine("Uomini");
+                    //    foreach (var item in uominiGroupList)
+                    //        sw.WriteLine($"{item.itemKey} - {item.itemCount}");
+                    //    sw.WriteLine();
 
-                    var header = "Sesso;AnnoNascita;ComposizioneNucleoFamiliare;ConiugeCarico;Professione;FasciaReddito;TipoReddito;Residenza;PolizzaStipulata;PolizzaTarget";
-                    customerList.RemoveAt(0);
-                    var clienteList = customerList.Select(x => new Cliente
-                    {
-                        Sesso = x[0],
-                        DataNascita = x[1],
-                        StatoCivile = x[2],
-                        ConiugeCarico = x[3],
-                        NumeroFigli = x[4],
-                        NumeroFigliCarico = x[5],
-                        Professione = x[6],
-                        Reddito = x[7],
-                        TipoImpiego = x[8],
-                        TipologiaContratto = x[9],
-                        Residenza = x[10],
-                        TipoligiaPolizzaStipulate = x[11],
-                    })
-                    .ToList();
+                    //    sw.WriteLine("Donne");
+                    //    foreach (var item in donneGroupList)
+                    //        sw.WriteLine($"{item.itemKey} - {item.itemCount}");
+                    //    sw.WriteLine();
 
+                    //    sw.WriteLine("Persone Fisiche");
+                    //    foreach (var item in personeFisicheGroupList)
+                    //        sw.WriteLine($"{item.itemKey} - {item.itemCount}");
+                    //    sw.WriteLine();
 
-                    var clienteStepOneList = clienteList.Select(x => x.ToClienteStepOne()).ToList();
-                    var clienteStepTwoList = clienteStepOneList.Select(x => x.ToClienteStepTwo(statoCivileSingleList, statoCivileCoppiaList, fascieReddito)).ToList();
-                    var clienteStepThreeList = clienteStepTwoList.GroupBy(cliente => new
-                    {
-                        cliente.Sesso,
-                        cliente.AnnoNascita,
-                        cliente.ComposizioneNucleo,
-                        cliente.ConiugeCarico,
-                        cliente.Professione,
-                        cliente.FasciaReddito,
-                        cliente.TipoImpiego,
-                        cliente.Residenza
-                    })
-                    .Select(group => new
-                    {
-                        GroupKey = group.Key,
-                        Coperture = group.Select(x => x.TipoligiaPolizzaStipulata.Trim()).Distinct().ToList()
-                    })
-                    .ToList();
+                    //    sw.WriteLine("Persone Giuridiche");
+                    //    foreach (var item in societaGroupList)
+                    //        sw.WriteLine($"{item.itemKey} - {item.itemCount}");
+                    //    sw.WriteLine();
+                    //}
 
-                    var clienteStepFinalOneList = clienteStepThreeList.Where(x => x.Coperture.Count == 1).ToList();
-                    var clienteStepFinalTwoList = clienteStepThreeList.Where(x => x.Coperture.Count > 1).ToList();
+                    //var header = "Sesso;AnnoNascita;ComposizioneNucleoFamiliare;ConiugeCarico;Professione;FasciaReddito;TipoReddito;Residenza;PolizzaStipulata;PolizzaTarget";
+                    //customerList.RemoveAt(0);
+                    //var clienteList = customerList.Select(x => new Cliente
+                    //{
+                    //    Sesso = x[0],
+                    //    DataNascita = x[1],
+                    //    StatoCivile = x[2],
+                    //    ConiugeCarico = x[3],
+                    //    NumeroFigli = x[4],
+                    //    NumeroFigliCarico = x[5],
+                    //    Professione = x[6],
+                    //    Reddito = x[7],
+                    //    TipoImpiego = x[8],
+                    //    TipologiaContratto = x[9],
+                    //    Residenza = x[10],
+                    //    TipoligiaPolizzaStipulate = x[11],
+                    //})
+                    //.ToList();
 
-                    using (var sw = new StreamWriter(pathFileCustomerFinal))
-                    {
-                        sw.WriteLine(header);
+                    //var headerCliente = "IdCliente;Sesso;DataNascita;StatoCivile;ConiugeCarico;NumeroFigli;NumeroFigliCarico;Professione;Reddito;TipoReddito;TipologiaContratto;Residenza;PolizzaStipulata";
+                    //int i = 1;
+                    //using (var sw = new StringWriter(pathFileCustomerForRecommender))
+                    //{
+                    //    sw.WriteLine(headerCliente);
 
-                        foreach (var item in clienteStepFinalOneList)
-                        {
-                            var lista = new List<string>();
-                            lista.Add(item.GroupKey.Sesso);
-                            lista.Add(item.GroupKey.AnnoNascita.ToString());
-                            lista.Add(item.GroupKey.ComposizioneNucleo);
-                            lista.Add(item.GroupKey.ConiugeCarico.ToString());
-                            lista.Add(item.GroupKey.Professione);
-                            lista.Add(item.GroupKey.FasciaReddito);
-                            lista.Add(item.GroupKey.TipoImpiego);
-                            lista.Add(item.GroupKey.Residenza);
-                            lista.Add(item.Coperture[0]);
+                    //    foreach (var item in clienteList)
+                    //    {
+                    //        item.IdCliente = i.ToString();
 
-                            var line = string.Join(";", lista);
-                            sw.WriteLine(line);
-                        }
+                    //        var sb = new StringBuilder(string.Empty);
+                    //        sb.Append($"{item.IdCliente};");
+                    //        sb.Append($"{item.Sesso};");
+                    //        sb.Append($"{item.DataNascita};");
+                    //        sb.Append($"{item.StatoCivile};");
+                    //        sb.Append($"{item.ConiugeCarico};");
+                    //        sb.Append($"{item.NumeroFigli};");
+                    //        sb.Append($"{item.NumeroFigliCarico};");
+                    //        sb.Append($"{item.Professione};");
+                    //        sb.Append($"{item.Reddito};");
+                    //        sb.Append($"{item.TipoImpiego};");
+                    //        sb.Append($"{item.TipologiaContratto};");
+                    //        sb.Append($"{item.Residenza};");
+                    //        sb.Append($"{item.TipoligiaPolizzaStipulate}");
 
-                        foreach (var item in clienteStepFinalTwoList)
-                        {
-                            var lista = new List<string>();
-                            lista.Add(item.GroupKey.Sesso);
-                            lista.Add(item.GroupKey.AnnoNascita.ToString());
-                            lista.Add(item.GroupKey.ComposizioneNucleo);
-                            lista.Add(item.GroupKey.ConiugeCarico.ToString());
-                            lista.Add(item.GroupKey.Professione);
-                            lista.Add(item.GroupKey.FasciaReddito);
-                            lista.Add(item.GroupKey.TipoImpiego);
-                            lista.Add(item.GroupKey.Residenza);
+                    //        sw.WriteLine(sb.ToString());
+                    //    }
+                    //}
 
-                            var copertureString = getCopertureString(item.Coperture);
+                    //var clienteStepOneList = clienteList.Select(x => x.ToClienteStepOne()).ToList();
+                    //var clienteStepTwoList = clienteStepOneList.Select(x => x.ToClienteStepTwo(statoCivileSingleList, statoCivileCoppiaList, fascieReddito)).ToList();
+                    //var clienteStepThreeList = clienteStepTwoList.GroupBy(cliente => new
+                    //{
+                    //    cliente.Sesso,
+                    //    cliente.AnnoNascita,
+                    //    cliente.ComposizioneNucleo,
+                    //    cliente.ConiugeCarico,
+                    //    cliente.Professione,
+                    //    cliente.FasciaReddito,
+                    //    cliente.TipoImpiego,
+                    //    cliente.Residenza
+                    //})
+                    //.Select(group => new
+                    //{
+                    //    GroupKey = group.Key,
+                    //    Coperture = group.Select(x => x.TipoligiaPolizzaStipulata.Trim()).Distinct().ToList()
+                    //})
+                    //.ToList();
 
-                            foreach (var coperturaItem in copertureString)
-                            {
-                                var sbLine = new StringBuilder(string.Empty);
-                                sbLine.Append(string.Join(";", lista));
-                                sbLine.Append($";{coperturaItem}");
-                                sw.WriteLine(sbLine.ToString());
-                            }
-                        }
-                    }
+                    //var clienteStepFinalOneList = clienteStepThreeList.Where(x => x.Coperture.Count == 1).ToList();
+                    //var clienteStepFinalTwoList = clienteStepThreeList.Where(x => x.Coperture.Count > 1).ToList();
+
+                    //using (var sw = new StreamWriter(pathFileCustomerFinal))
+                    //{
+                    //    sw.WriteLine(header);
+
+                    //    foreach (var item in clienteStepFinalOneList)
+                    //    {
+                    //        var lista = new List<string>();
+                    //        lista.Add(item.GroupKey.Sesso);
+                    //        lista.Add(item.GroupKey.AnnoNascita.ToString());
+                    //        lista.Add(item.GroupKey.ComposizioneNucleo);
+                    //        lista.Add(item.GroupKey.ConiugeCarico.ToString());
+                    //        lista.Add(item.GroupKey.Professione);
+                    //        lista.Add(item.GroupKey.FasciaReddito);
+                    //        lista.Add(item.GroupKey.TipoImpiego);
+                    //        lista.Add(item.GroupKey.Residenza);
+                    //        lista.Add(item.Coperture[0]);
+
+                    //        var line = string.Join(";", lista);
+                    //        sw.WriteLine(line);
+                    //    }
+
+                    //    foreach (var item in clienteStepFinalTwoList)
+                    //    {
+                    //        var lista = new List<string>();
+                    //        lista.Add(item.GroupKey.Sesso);
+                    //        lista.Add(item.GroupKey.AnnoNascita.ToString());
+                    //        lista.Add(item.GroupKey.ComposizioneNucleo);
+                    //        lista.Add(item.GroupKey.ConiugeCarico.ToString());
+                    //        lista.Add(item.GroupKey.Professione);
+                    //        lista.Add(item.GroupKey.FasciaReddito);
+                    //        lista.Add(item.GroupKey.TipoImpiego);
+                    //        lista.Add(item.GroupKey.Residenza);
+
+                    //        var copertureString = getCopertureString(item.Coperture);
+
+                    //        foreach (var coperturaItem in copertureString)
+                    //        {
+                    //            var sbLine = new StringBuilder(string.Empty);
+                    //            sbLine.Append(string.Join(";", lista));
+                    //            sbLine.Append($";{coperturaItem}");
+                    //            sw.WriteLine(sbLine.ToString());
+                    //        }
+                    //    }
+                    //}
                 }
                 catch (Exception ex)
                 {
@@ -479,6 +516,7 @@ namespace WorkerServiceMachineLearningTraining
 
     class Cliente
     {
+        public string IdCliente { get; set; }
         public string Sesso { get; set; }
         public string DataNascita { get; set; }
         public string StatoCivile { get; set; }

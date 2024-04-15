@@ -14,6 +14,8 @@ namespace DAL.Models
         public double MinAnnualGrossIncome { get; set; }
         public double MaxAnnualGrossIncome { get; set; }
 
+        public virtual IncomeType IncomeType { get; set; }
+
         public virtual IList<Customer> Customers { get; set; }
 
         public virtual IList<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }

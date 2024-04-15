@@ -52,7 +52,7 @@ namespace DAL
             if (isRestart)
             {
                 await LoadTypologicalTableData();
-                await LoadLearningTableData();
+                //await LoadLearningTableData();
             }
         }
 
@@ -123,18 +123,21 @@ namespace DAL
             var filePath = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\DAL\ScriptsInizializzazione\StartupScript.txt";
             using (var reader = new StreamReader(filePath))
             {
+                var rowCount = 0;
                 try
                 {
                     await _context.Database.BeginTransactionAsync();
 
                     var line = reader.ReadLine();
+                    rowCount++;
                     while (!reader.EndOfStream)
                     {
                         await _context.Database.ExecuteSqlRawAsync(line);
                         line = reader.ReadLine();
+                        rowCount++;
                     }
 
-                    await GenerateInsurcancePolicyCategoryStatistics();
+                    //await GenerateInsurcancePolicyCategoryStatistics();
 
                     await _context.Database.CommitTransactionAsync();
                 }
