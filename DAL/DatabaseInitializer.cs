@@ -137,6 +137,8 @@ namespace DAL
                         rowCount++;
                     }
 
+                    await _context.Database.ExecuteSqlRawAsync(line);
+
                     //await GenerateInsurcancePolicyCategoryStatistics();
 
                     await _context.Database.CommitTransactionAsync();
