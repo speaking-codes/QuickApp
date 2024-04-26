@@ -18,9 +18,9 @@ namespace DAL.Core
     {
         private readonly ILearningManager _learningManager;
 
-        private LearningCustomerPreferences getLearningCustomerPreferencesFromCustomer(Customer customer, LearningCustomerPreferences learningCustomerPreferences) {
-            if (learningCustomerPreferences==null)
-                learningCustomerPreferences=new LearningCustomerPreferences();
+        private CustomerLearningFeature getLearningCustomerPreferencesFromCustomer(Customer customer, CustomerLearningFeature customerLearningFeature) {
+            if (customerLearningFeature==null)
+                customerLearningFeature=new CustomerLearningFeature();
 
             //learningCustomerPreferences.Age = customer.BirthDate.HasValue ? customer.BirthDate.Value.GetAge() : 0;
             //learningCustomerPreferences.MaritalStatus = customer.MaritalStatus?.MaritalStatusDescription;
@@ -37,10 +37,10 @@ namespace DAL.Core
             //                                    .Region?
             //                                    .RegionName;
 
-            return learningCustomerPreferences;
+            return customerLearningFeature;
         }
 
-        private float getLearningScore(LearningCustomerPreferences learningCustomerPreferences)
+        private float getLearningScore(CustomerLearningFeature customerLearningFeature)
         {
             //var modelInput = learningCustomerPreferences.ToRegressionPredictionModel();
             //var modelOutput= _learningManager.GetPrediction(modelInput);
@@ -86,32 +86,32 @@ namespace DAL.Core
         {
             var customer = _unitOfWork.Customers.GetCustomersForServerLessManager(customerInsurancePolicyQueue.CustomerCode).FirstOrDefault();
             var insurancePolicy = _unitOfWork.InsurancePolicies.GetInsurancePolicyForTrainingMachineLearning(customerInsurancePolicyQueue.InsurancePolicyCode).FirstOrDefault();
-            var customerLearning = _unitOfWork.LearningTrainings.GetLearningCustomerPreferences(customer.CustomerCode, insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryCode).FirstOrDefault();
+            var customerLearning = _unitOfWork.CustomerLearningFeatures.GetLearningCustomerPreferences(customer.CustomerCode, insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryCode).FirstOrDefault();
 
-            await _unitOfWork.BeginTransactionAsync();
+            //await _unitOfWork.BeginTransactionAsync();
 
-            if (customerLearning != null)
-            {
-                              _unitOfWork.LearningTrainings.Update(customerLearning);
-            }
-            else
-            {
-                var userId = 0;
-                var userIds = _unitOfWork.LearningTrainings.GetUserId(customer.CustomerCode);
-                if (userIds == null || userIds.Count == 0)
-                    userId = _unitOfWork.LearningTrainings.GetLastUserId() + 1;
-                else
-                    userId = userIds.Max();
+            //if (customerLearning != null)
+            //{
+            //                  _unitOfWork.LearningTrainings.Update(customerLearning);
+            //}
+            //else
+            //{
+            //    var userId = 0;
+            //    var userIds = _unitOfWork.LearningTrainings.GetUserId(customer.CustomerCode);
+            //    if (userIds == null || userIds.Count == 0)
+            //        userId = _unitOfWork.LearningTrainings.GetLastUserId() + 1;
+            //    else
+            //        userId = userIds.Max();
 
-                customerLearning = getLearningCustomerPreferencesFromCustomer(customer, customerLearning);
-                customerLearning.CustomerCode = customer.CustomerCode;
-                customerLearning.UserId = userId;
+            //    customerLearning = getLearningCustomerPreferencesFromCustomer(customer, customerLearning);
+            //    customerLearning.CustomerCode = customer.CustomerCode;
+            //    customerLearning.UserId = userId;
 
-                _unitOfWork.LearningTrainings.Add(customerLearning);
-            }
+            //    _unitOfWork.LearningTrainings.Add(customerLearning);
+            //}
 
-            await _unitOfWork.SaveChangesAsync();
-            await _unitOfWork.CommitTransactionAsync();
+            //await _unitOfWork.SaveChangesAsync();
+            //await _unitOfWork.CommitTransactionAsync();
         }
 
         public override async Task UpdateMatrixUserItem(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)

@@ -2,11 +2,11 @@
 {
     public enum EnumGender
     {
-        [ValueInfo(Definition = "Non specificato")]
+        [ValueInfo(Code = "", Definition = "Non specificato")]
         None,
-        [ValueInfo(Definition = "Uomo")]
+        [ValueInfo(Code = "M", Definition = "Uomo")]
         Uomo,
-        [ValueInfo(Definition = "Donna")]
+        [ValueInfo(Code = "F", Definition = "Donna")]
         Donna
     }
 }

@@ -9,5 +9,6 @@ namespace DAL.Repositories.Interfaces
 {
     public interface IProfessionTypeRepository:IRepository<ProfessionType>
     {
+        IQueryable<ProfessionType> GetProfessionTypes();
     }
 }

@@ -1,33 +1,46 @@
-﻿namespace DAL.Mapping
+﻿using DAL.ModelML;
+using DAL.Models;
+using System.Collections.Generic;
+
+namespace DAL.Mapping
 {
     public static class MapFromEntitiesToEntities
     {
-        //public static RegressionModel ToRegressionPredictionModel(this LearningCustomerPreferences learningCustomerPreferences)
-        //{
-        //    var model = new RegressionModel();
-        //    model.UserId = learningCustomerPreferences.UserId;
-        //    model.Gender = learningCustomerPreferences.Gender;
-        //    model.Age = learningCustomerPreferences.Age;
-        //    model.MaritalStatusId = learningCustomerPreferences.MaritalStatusId;
-        //    model.FamilyTypeId = learningCustomerPreferences.FamilyTypeId;
-        //    model.ChildrenNumbers = learningCustomerPreferences.ChildrenNumbers;
-        //    model.IncomeTypeId = learningCustomerPreferences.IncomeTypeId;
-        //    model.ProfessionTypeId = learningCustomerPreferences.ProfessionTypeId;
-        //    model.Income = (float)learningCustomerPreferences.Income;
-        //    model.RegionId = learningCustomerPreferences.RegionId;
-        //    model.InsurancePolicyCategoryId = learningCustomerPreferences.InsurancePolicyCategoryId;
+        public static CustomerLearningFeatureDataView ToDataViewModel(this CustomerLearningFeature customerLearningFeature)
+        {
+            var model = new CustomerLearningFeatureDataView();
+            model.CustomerId = customerLearningFeature.CustomerId ?? 0;
+            model.Gender = customerLearningFeature.Gender;
+            model.BirthMonth = customerLearningFeature.BirthMonth;
+            model.YearBirth = customerLearningFeature.YearBirth;
+            model.MaritalStatus = customerLearningFeature.MaritalStatus;
+            model.IsSingle = customerLearningFeature.IsSingle;
+            model.IsDependentSpouse = customerLearningFeature.IsDependentSpouse;
+            model.ChildrenNumbers = customerLearningFeature.ChildrenNumbers;
+            model.DependentChildrenNumber = customerLearningFeature.DependentChildrenNumber;
+            //model.ProfessionType = customerLearningFeature.ProfessionType;
+            model.IsFreelancer = customerLearningFeature.IsFreelancer;
+            //model.IncomeClassType = customerLearningFeature.IncomeClassType;
+            //model.IncomeType = customerLearningFeature.IncomeType;
+            //model.Country = customerLearningFeature.Country;
+            //model.Region = customerLearningFeature.Region;
+            model.InsurancePolicyId = customerLearningFeature.InsurancePolicyId;
+            //model.InsurancePolicyCode = customerLearningFeature.InsurancePolicyCode;
+            //model.InsurancePolicyName = customerLearningFeature.InsurancePolicyName;
+            //model.InsurancePolicyDescription = customerLearningFeature.InsurancePolicyDescription;
+            //model.WarrantyAvaibles = customerLearningFeature.WarrantyAvaibles;
 
-        //    return model;
-        //}
+            return model;
+        }
 
-        //public static IList<RegressionModel> ToRegressionPredictionModel(this IEnumerable<LearningCustomerPreferences> learningCustomerPreferences)
-        //{
-        //    var models = new List<RegressionModel>();
-        //    foreach(var item in learningCustomerPreferences)
-        //        models.Add(item.ToRegressionPredictionModel());
+        public static IList<CustomerLearningFeatureDataView> ToDataViewModels(this IEnumerable<CustomerLearningFeature> customerLearningFeatures)
+        {
+            var models = new List<CustomerLearningFeatureDataView>();
+            foreach (var item in customerLearningFeatures)
+                models.Add(item.ToDataViewModel());
 
-        //    return models;
-        //}
+            return models;
+        }
 
         //public static ClassificationLearningModel.ModelInput ToClassificationModelInput(this LearningCustomerPreferences learningCustomerPreferences)
         //{

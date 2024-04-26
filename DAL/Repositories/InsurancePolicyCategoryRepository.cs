@@ -18,6 +18,7 @@ namespace DAL.Repositories
         public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories() =>
             _appContext.InsurancePolicyCategories
                        .Include(x => x.SalesLine)
+                       .Include(x => x.WarrantyAvaibles)
                        .Where(x => x.IsActive);
 
         public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories(string customerCode) =>
@@ -25,12 +26,17 @@ namespace DAL.Repositories
                        .Include(x => x.InsurancePolicies)
                        .Where(x => x.InsurancePolicies.Any(y => y.Customer.CustomerCode == customerCode));
 
+        public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(byte insurancePolicyCategoryId) =>
+            _appContext.InsurancePolicyCategories
+                       .Include(x => x.SalesLine)
+                       .Where(x => x.Id == insurancePolicyCategoryId);
+
         public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(string insurancePolicyCategoryCode) =>
             _appContext.InsurancePolicyCategories
                        .Include(x => x.SalesLine)
                        .Where(x => x.InsurancePolicyCategoryCode == insurancePolicyCategoryCode);
 
-        public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(int insurancePolicyCategoryId)=>
+        public IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(int insurancePolicyCategoryId) =>
             _appContext.InsurancePolicyCategories
                        .Include(x => x.SalesLine)
                        .Where(x => x.Id == insurancePolicyCategoryId);
@@ -41,7 +47,7 @@ namespace DAL.Repositories
                        .Include(x => x.InsurancePolicyCategoryStatics)
                        .Where(x => x.InsurancePolicyCategoryStatics.Any(y => y.Year == year));
 
-        public IQueryable<InsurancePolicyCategory> GetSalesLineTypes(string customerCode)=>
+        public IQueryable<InsurancePolicyCategory> GetSalesLineTypes(string customerCode) =>
             _appContext.InsurancePolicyCategories
                        .Include(x => x.SalesLine)
                        .Include(x => x.InsurancePolicies)

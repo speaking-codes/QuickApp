@@ -48,7 +48,7 @@ namespace QuickApp
             var app = builder.Build();
             ConfigureRequestPipeline(app); // Configure the HTTP request pipeline.
 
-            await SeedDatabase(app, true); //Seed initial database
+            await SeedDatabase(app, false); //Seed initial database
 
             await app.RunAsync();
         }

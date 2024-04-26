@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
-    public interface ILearningTrainingRepository : IRepository<LearningCustomerPreferences>
+    public interface ILearningTrainingRepository : IRepository<CustomerLearningFeature>
     {
-        IQueryable<LearningCustomerPreferences> GetLearningCustomerPreferences(string customerCode, string insurancePolicyCategory);
-        IQueryable<LearningCustomerPreferences> GetLearningCustomerPreferences(string customerCode);
+        IQueryable<CustomerLearningFeature> GetCustomerLearningFeatures();
+        IQueryable<CustomerLearningFeature> GetCustomerLearningFeature(CustomerLearningFeature customerLearningFeature);
+        IQueryable<CustomerLearningFeature> GetCustomerLearningFeaturesForTraining();
+        IQueryable<CustomerLearningFeature> GetLearningCustomerPreferences(string customerCode, string insurancePolicyCategory);
+        IQueryable<CustomerLearningFeature> GetLearningCustomerPreferences(string customerCode);
         IList<int> GetUserId(string customerCode);
-        int GetLastUserId();
+        long GetMaxCustomerId();
+        int CustomUpdate(CustomerLearningFeature customerLearningFeature);
     }
 }

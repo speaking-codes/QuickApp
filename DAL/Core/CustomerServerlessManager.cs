@@ -50,7 +50,7 @@ namespace DAL.Core
                 }
                 customerNoSqlManager.Execute();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }

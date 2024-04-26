@@ -11,6 +11,8 @@ namespace DAL.Enums
     {
         public string Definition;
 
+        public string Code;
+
         public ValueInfoAttribute()
         {
         }

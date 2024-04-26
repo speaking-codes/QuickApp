@@ -1,0 +1,1058 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/22/2024 9:39:02 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FGBAL031929"
+  DTS:CreatorName="FINCONSGROUP\mauro.diliddo"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{2792A573-1C8B-4002-8895-09F453C5F0CF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.229"
+  DTS:LocaleID="1040"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="New Package"
+  DTS:ProtectionLevel="0"
+  DTS:VersionGUID="{DCC53BA2-5483-4652-91D7-6810079FAB3F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionExcel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{FD6BA91C-BF79-45B7-8120-F52F15A54479}"
+      DTS:ObjectName="DestinationConnectionExcel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\ExportPolizzeMauroDiLiddo\CustomerLearningFeatures.xls;Extended Properties=&quot;Excel 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D39B2FD1-0C13-4C58-8BFA-D2FA0E3AEB4F}"
+      DTS:ObjectName="SourceConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=FGBAL031929\MSSQLSERVER_1;Initial Catalog=datSampleDataBase;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{FD38AF1E-2F75-46BC-A371-E35715EEC465}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task 1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task 1\Data Conversion 0 - 0"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 0 - 0"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input].Columns[Id]"
+                      cachedDataType="i8"
+                      cachedName="Id"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input].Columns[CustomerId]"
+                      cachedDataType="i8"
+                      cachedName="CustomerId"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input].Columns[IsSingle]"
+                      cachedDataType="bool"
+                      cachedName="IsSingle"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsSingle]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input].Columns[IsDependentSpouse]"
+                      cachedDataType="bool"
+                      cachedName="IsDependentSpouse"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsDependentSpouse]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input].Columns[IsFreelancer]"
+                      cachedDataType="bool"
+                      cachedName="IsFreelancer"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsFreelancer]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[Id]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[Id]"
+                      name="Id"
+                      precision="19"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[CustomerId]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      precision="19"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[CustomerId]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsSingle]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsSingle]"
+                      name="IsSingle"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsSingle]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsDependentSpouse]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsDependentSpouse]"
+                      name="IsDependentSpouse"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsDependentSpouse]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsFreelancer]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsFreelancer]"
+                      name="IsFreelancer"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsFreelancer]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Destination - AppCustomerLearningFeatures"
+              usesDispositions="true"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">AppCustomerLearningFeatures</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionExcel]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionExcel]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[Id]"
+                      cachedDataType="numeric"
+                      cachedName="Id"
+                      cachedPrecision="19"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Id]"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[Id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[CustomerId]"
+                      cachedDataType="numeric"
+                      cachedName="CustomerId"
+                      cachedPrecision="19"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[CustomerId]"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[Gender]"
+                      cachedDataType="nText"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[BirthMonth]"
+                      cachedDataType="nText"
+                      cachedName="BirthMonth"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[BirthMonth]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[BirthMonth]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[YearBirth]"
+                      cachedDataType="nText"
+                      cachedName="YearBirth"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[YearBirth]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[YearBirth]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[MaritalStatus]"
+                      cachedDataType="nText"
+                      cachedName="MaritalStatus"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[MaritalStatus]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[MaritalStatus]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[IsSingle]"
+                      cachedDataType="i2"
+                      cachedName="IsSingle"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IsSingle]"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsSingle]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[IsDependentSpouse]"
+                      cachedDataType="i2"
+                      cachedName="IsDependentSpouse"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IsDependentSpouse]"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsDependentSpouse]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[ChildrenNumbers]"
+                      cachedDataType="i4"
+                      cachedName="ChildrenNumbers"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[ChildrenNumbers]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[ChildrenNumbers]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[DependentChildrenNumber]"
+                      cachedDataType="i4"
+                      cachedName="DependentChildrenNumber"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[DependentChildrenNumber]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[DependentChildrenNumber]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[ProfessionType]"
+                      cachedDataType="nText"
+                      cachedName="ProfessionType"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[ProfessionType]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[ProfessionType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[IsFreelancer]"
+                      cachedDataType="i2"
+                      cachedName="IsFreelancer"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IsFreelancer]"
+                      lineageId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[IsFreelancer]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[IncomeClassType]"
+                      cachedDataType="nText"
+                      cachedName="IncomeClassType"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IncomeClassType]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IncomeClassType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[IncomeType]"
+                      cachedDataType="nText"
+                      cachedName="IncomeType"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IncomeType]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IncomeType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[Country]"
+                      cachedDataType="nText"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[Region]"
+                      cachedDataType="nText"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[InsurancePolicyId]"
+                      cachedDataType="ui1"
+                      cachedName="InsurancePolicyId"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyId]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[InsurancePolicyCode]"
+                      cachedDataType="nText"
+                      cachedName="InsurancePolicyCode"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyCode]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[InsurancePolicyName]"
+                      cachedDataType="nText"
+                      cachedName="InsurancePolicyName"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyName]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[InsurancePolicyDescription]"
+                      cachedDataType="nText"
+                      cachedName="InsurancePolicyDescription"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyDescription]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyDescription]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].Columns[WarrantyAvaibles]"
+                      cachedDataType="nText"
+                      cachedName="WarrantyAvaibles"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[WarrantyAvaibles]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[WarrantyAvaibles]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Id]"
+                      dataType="numeric"
+                      name="Id"
+                      precision="19" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[CustomerId]"
+                      dataType="numeric"
+                      name="CustomerId"
+                      precision="19" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Gender]"
+                      dataType="nText"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[BirthMonth]"
+                      dataType="nText"
+                      name="BirthMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[YearBirth]"
+                      dataType="nText"
+                      name="YearBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[MaritalStatus]"
+                      dataType="nText"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IsSingle]"
+                      dataType="i2"
+                      name="IsSingle" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IsDependentSpouse]"
+                      dataType="i2"
+                      name="IsDependentSpouse" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[ChildrenNumbers]"
+                      dataType="i4"
+                      name="ChildrenNumbers" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[DependentChildrenNumber]"
+                      dataType="i4"
+                      name="DependentChildrenNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[ProfessionType]"
+                      dataType="nText"
+                      name="ProfessionType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IsFreelancer]"
+                      dataType="i2"
+                      name="IsFreelancer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IncomeClassType]"
+                      dataType="nText"
+                      name="IncomeClassType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[IncomeType]"
+                      dataType="nText"
+                      name="IncomeType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Country]"
+                      dataType="nText"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[Region]"
+                      dataType="nText"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyId]"
+                      dataType="ui1"
+                      name="InsurancePolicyId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyCode]"
+                      dataType="nText"
+                      name="InsurancePolicyCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyName]"
+                      dataType="nText"
+                      name="InsurancePolicyName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[InsurancePolicyDescription]"
+                      dataType="nText"
+                      name="InsurancePolicyDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input].ExternalColumns[WarrantyAvaibles]"
+                      dataType="nText"
+                      name="WarrantyAvaibles" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - AppCustomerLearningFeatures"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[AppCustomerLearningFeatures]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionOLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[BirthMonth]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[BirthMonth]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[BirthMonth]"
+                      name="BirthMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[YearBirth]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[YearBirth]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[YearBirth]"
+                      name="YearBirth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[MaritalStatus]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[MaritalStatus]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[MaritalStatus]"
+                      name="MaritalStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsSingle]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IsSingle]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsSingle]"
+                      name="IsSingle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsDependentSpouse]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IsDependentSpouse]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsDependentSpouse]"
+                      name="IsDependentSpouse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[ChildrenNumbers]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[ChildrenNumbers]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[ChildrenNumbers]"
+                      name="ChildrenNumbers"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[DependentChildrenNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[DependentChildrenNumber]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[DependentChildrenNumber]"
+                      name="DependentChildrenNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[ProfessionType]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[ProfessionType]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[ProfessionType]"
+                      name="ProfessionType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsFreelancer]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IsFreelancer]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IsFreelancer]"
+                      name="IsFreelancer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IncomeClassType]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IncomeClassType]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IncomeClassType]"
+                      name="IncomeClassType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IncomeType]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IncomeType]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[IncomeType]"
+                      name="IncomeType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Country]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Region]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyId]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyId]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyId]"
+                      name="InsurancePolicyId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyCode]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyCode]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyCode]"
+                      name="InsurancePolicyCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyName]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyName]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyName]"
+                      name="InsurancePolicyName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyDescription]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyDescription]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[InsurancePolicyDescription]"
+                      name="InsurancePolicyDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[WarrantyAvaibles]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[WarrantyAvaibles]"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].Columns[WarrantyAvaibles]"
+                      name="WarrantyAvaibles"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="i8"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="i8"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="nText"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[BirthMonth]"
+                      dataType="nText"
+                      name="BirthMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[YearBirth]"
+                      dataType="nText"
+                      name="YearBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[MaritalStatus]"
+                      dataType="nText"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IsSingle]"
+                      dataType="bool"
+                      name="IsSingle" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IsDependentSpouse]"
+                      dataType="bool"
+                      name="IsDependentSpouse" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[ChildrenNumbers]"
+                      dataType="i4"
+                      name="ChildrenNumbers" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[DependentChildrenNumber]"
+                      dataType="i4"
+                      name="DependentChildrenNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[ProfessionType]"
+                      dataType="nText"
+                      name="ProfessionType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IsFreelancer]"
+                      dataType="bool"
+                      name="IsFreelancer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IncomeClassType]"
+                      dataType="nText"
+                      name="IncomeClassType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[IncomeType]"
+                      dataType="nText"
+                      name="IncomeType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="nText"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      dataType="nText"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyId]"
+                      dataType="ui1"
+                      name="InsurancePolicyId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyCode]"
+                      dataType="nText"
+                      name="InsurancePolicyCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyName]"
+                      dataType="nText"
+                      name="InsurancePolicyName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[InsurancePolicyDescription]"
+                      dataType="nText"
+                      name="InsurancePolicyDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output].ExternalColumns[WarrantyAvaibles]"
+                      dataType="nText"
+                      name="WarrantyAvaibles" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[BirthMonth]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[BirthMonth]"
+                      name="BirthMonth" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[YearBirth]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[YearBirth]"
+                      name="YearBirth" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[MaritalStatus]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[MaritalStatus]"
+                      name="MaritalStatus" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IsSingle]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IsSingle]"
+                      name="IsSingle" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IsDependentSpouse]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IsDependentSpouse]"
+                      name="IsDependentSpouse" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ChildrenNumbers]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ChildrenNumbers]"
+                      name="ChildrenNumbers" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[DependentChildrenNumber]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[DependentChildrenNumber]"
+                      name="DependentChildrenNumber" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ProfessionType]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ProfessionType]"
+                      name="ProfessionType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IsFreelancer]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IsFreelancer]"
+                      name="IsFreelancer" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IncomeClassType]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IncomeClassType]"
+                      name="IncomeClassType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IncomeType]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[IncomeType]"
+                      name="IncomeType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyId]"
+                      dataType="ui1"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyId]"
+                      name="InsurancePolicyId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyCode]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyCode]"
+                      name="InsurancePolicyCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyName]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyName]"
+                      name="InsurancePolicyName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyDescription]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[InsurancePolicyDescription]"
+                      name="InsurancePolicyDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[WarrantyAvaibles]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[WarrantyAvaibles]"
+                      name="WarrantyAvaibles" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task 1.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task 1\Destination - AppCustomerLearningFeatures.Inputs[Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task 1\Data Conversion 0 - 0.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data Flow Task 1.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task 1\Data Conversion 0 - 0.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task 1\Source - AppCustomerLearningFeatures.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Preparation SQL Task 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{2C8473C2-26CF-49CC-A336-0D7B27AA9A52}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Preparation SQL Task 1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FD6BA91C-BF79-45B7-8120-F52F15A54479}"
+          SQLTask:SqlStatementSource="CREATE TABLE `AppCustomerLearningFeatures` (&#xA;`Id` Decimal(19,0),&#xA;`CustomerId` Decimal(19,0),&#xA;`Gender` LongText,&#xA;`BirthMonth` LongText,&#xA;`YearBirth` LongText,&#xA;`MaritalStatus` LongText,&#xA;`IsSingle` Short,&#xA;`IsDependentSpouse` Short,&#xA;`ChildrenNumbers` Long,&#xA;`DependentChildrenNumber` Long,&#xA;`ProfessionType` LongText,&#xA;`IsFreelancer` Short,&#xA;`IncomeClassType` LongText,&#xA;`IncomeType` LongText,&#xA;`Country` LongText,&#xA;`Region` LongText,&#xA;`InsurancePolicyId` Byte,&#xA;`InsurancePolicyCode` LongText,&#xA;`InsurancePolicyName` LongText,&#xA;`InsurancePolicyDescription` LongText,&#xA;`WarrantyAvaibles` LongText&#xA;)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{DFF1B072-85BB-4253-BF3A-DA12CBC6A2D9\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{DFF1B072-85BB-4253-BF3A-DA12CBC6A2D9}"
+      DTS:From="Package\Preparation SQL Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{DFF1B072-85BB-4253-BF3A-DA12CBC6A2D9}"
+      DTS:To="Package\Data Flow Task 1" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

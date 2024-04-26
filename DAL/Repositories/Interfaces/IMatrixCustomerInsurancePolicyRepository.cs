@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
-    public interface IMatrixCustomerInsurancePolicyRepository : IRepository<MatrixCustomerInsurancePolicy>
+    public interface IMatrixCustomerInsurancePolicyRepository : IRepository<MatrixUsersItems>
     {
     }
 }

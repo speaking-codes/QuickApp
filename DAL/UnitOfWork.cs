@@ -23,10 +23,12 @@ namespace DAL
 
         private ICustomerRepository _customers;
 
+        private IProvinceRepository _provinces;
         private IRepositoryMunicipality _municipalities;
         private IFamilyTypeRepository _familyTypes;
         private IMaritalStatusTypeRepository _maritalStatusTypes;
 
+        private IIncomeClassTypeRepository _incomeClassTypes;
         private IContractTypeRepository _contractTypes;
         private IProfessionTypeRepository _professionTypes;
 
@@ -37,8 +39,8 @@ namespace DAL
 
         private IConfigurationModelRepository _configurationModels;
 
-        private ILearningTrainingRepository _learningTrainings;
-        private IMatrixCustomerInsurancePolicyRepository _matrixCustomerInsurancePolicies;
+        private ILearningTrainingRepository _customerLearningFeatures;
+        private IMatrixCustomerInsurancePolicyRepository _matrixUsersItems;
 
         private IBaggageTypeRepository _baggageTypes;
         private ITravelMeansTypeRepository _travelMeansTypes;
@@ -78,6 +80,15 @@ namespace DAL
             }
         }
 
+        public IProvinceRepository Provinces
+        {
+            get
+            {
+                _provinces ??= new ProvinceRepository(_context);
+                return _provinces;
+            }
+        }
+
         public IRepositoryMunicipality Municipalities
         {
             get
@@ -105,6 +116,14 @@ namespace DAL
             }
         }
 
+        public IIncomeClassTypeRepository IncomeClassTypes
+        {
+            get
+            {
+                _incomeClassTypes ??= new IncomeClassTypeRepository(_context);
+                return _incomeClassTypes;
+            }
+        }
 
         public IContractTypeRepository ContractTypes
         {
@@ -169,21 +188,21 @@ namespace DAL
             }
         }
 
-        public ILearningTrainingRepository LearningTrainings
+        public ILearningTrainingRepository CustomerLearningFeatures
         {
             get
             {
-                _learningTrainings ??= new LearningTrainingRepository(_context);
-                return _learningTrainings;
+                _customerLearningFeatures ??= new LearningTrainingRepository(_context);
+                return _customerLearningFeatures;
             }
         }
 
-        public IMatrixCustomerInsurancePolicyRepository MatrixCustomerInsurancePolicies
+        public IMatrixCustomerInsurancePolicyRepository MatrixUsersItems
         {
             get
             {
-                _matrixCustomerInsurancePolicies ??= new MatrixCustomerInsurancePolicyRepository(_context);
-                return _matrixCustomerInsurancePolicies;
+                _matrixUsersItems ??= new MatrixCustomerInsurancePolicyRepository(_context);
+                return _matrixUsersItems;
             }
         }
 

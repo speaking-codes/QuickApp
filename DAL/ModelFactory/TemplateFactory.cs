@@ -15,13 +15,12 @@ namespace DAL.ModelFactory
 {
     public class TemplateFactory : ITemplateFactory
     {
-        private const string _basePath = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\ConsoleAppCaricamentoDati\DatiBase\";
+        private const string _basePath = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\DataStorage\Input\";
         private const string _lastNamePath = $"{_basePath}Cognomi.txt";
         private const string _firstNameMalePath = $"{_basePath}NomiMaschili.txt";
         private const string _petNamePath = $"{_basePath}Pets.txt";
         private const string _firstNameFemalePath = $"{_basePath}NomiFemminili.txt";
         private const string _addressPath = $"{_basePath}Indirizzi.txt";
-        private const string _jobPath = $"{_basePath}Professioni.txt";
 
         private readonly IUnitOfWork _unitOfWork;
 

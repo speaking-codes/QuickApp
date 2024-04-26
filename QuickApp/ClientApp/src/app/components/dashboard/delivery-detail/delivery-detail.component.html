@@ -1,0 +1,27 @@
+<ngx-datatable class="material colored-header sm table-x table-striped table-hover"
+[loadingIndicator]="loadingIndicator"
+[rows]="rows"
+rowHeight="auto"
+[headerHeight]="45"
+[footerHeight]="45"
+[columnMode]="'force'"
+[columns]="columns"
+[scrollbarV]="false"
+[columnMode]="'force'"
+[limit]="5"
+[selectionType]="'single'">
+<ngx-datatable-column name="Principale" prop="isPrimary" [sortable]="false" [resizeable]="false" [maxWidth]="100">
+<ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+    <p *ngIf="isDeliveryPrimary(row)"><i class="fa fa-check"></i></p>
+    <p *ngIf="!isDeliveryPrimary(row)"><i class="fa fa-times"></i></p>
+</ng-template>
+</ngx-datatable-column>
+    <ngx-datatable-column name="Tipo" prop="deliveryType" [sortable]="false" [resizeable]="false" [maxWidth]="100">
+    <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Telefono" prop="phone" [resizeable]="false" [sortable]="false"  [maxWidth]="140">
+    <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="E-mail" prop="email" [sortable]="false" [resizeable]="false">   
+    </ngx-datatable-column>    
+</ngx-datatable>          

@@ -16,8 +16,6 @@ namespace DAL.Models
 
         public double MinAnnualGrossIncome { get; set; }
 
-        public double MaxAnnualGrossIncome { get; set; }
-
-        public virtual IList<ProfessionType> ProfessionTypes { get; set; }
+        public double? MaxAnnualGrossIncome { get; set; }
     }
 }

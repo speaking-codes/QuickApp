@@ -25,5 +25,22 @@ namespace DAL.Enums
             }
             return string.Empty;
         }
+
+        public static string GetCode(this object enumValue)
+        {
+            if (enumValue != null)
+            {
+                MemberInfo[] mi = enumValue.GetType().GetMember(enumValue.ToString());
+                if (mi != null && mi.Length > 0)
+                {
+                    ValueInfoAttribute attr = Attribute.GetCustomAttribute(mi[0], typeof(ValueInfoAttribute)) as ValueInfoAttribute;
+                    if (attr != null)
+                    {
+                        return attr.Code;
+                    }
+                }
+            }
+            return string.Empty;
+        }
     }
 }

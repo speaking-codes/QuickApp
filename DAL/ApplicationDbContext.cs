@@ -29,7 +29,7 @@ namespace DAL
         public DbSet<GenderType> GenderTypes { get; set; }
         public DbSet<MaritalStatusType> MaritalStatusTypes { get; set; }
         public DbSet<AgeClassType> AgeClassTypes { get; set; }
-        //public DbSet<IncomeClassType> IncomeClassTypes { get; set; }
+        public DbSet<IncomeClassType> IncomeClassTypes { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
@@ -114,11 +114,11 @@ namespace DAL
 
         #region Machine Learning
 
-        public DbSet<Temp> Temps { get; set; }
+        //public DbSet<Temp> Temps { get; set; }
         
-        public DbSet<LearningCustomerPreferences> LearningCustomerPreferences  { get; set; }
+        public DbSet<CustomerLearningFeature> CustomerLearningFeatures { get; set; }
 
-        public DbSet<MatrixCustomerInsurancePolicy> MatrixUsersItems { get; set; }
+        public DbSet<MatrixUsersItems> MatrixUsersItems { get; set; }
 
         #endregion
 
@@ -171,9 +171,9 @@ namespace DAL
 
             builder.Entity<AgeClassType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<AgeClassType>().ToTable($"App{nameof(AgeClassTypes)}");
-            
-            //builder.Entity<IncomeClassType>().Property(c => c.Id).ValueGeneratedNever();
-            //builder.Entity<IncomeClassType>().ToTable($"App{nameof(IncomeClassTypes)}");
+
+            builder.Entity<IncomeClassType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<IncomeClassType>().ToTable($"App{nameof(IncomeClassTypes)}");
 
             builder.Entity<Customer>().Property(c => c.FirstName).IsRequired().HasMaxLength(100);
             builder.Entity<Customer>().HasIndex(c => c.FirstName);
@@ -428,35 +428,37 @@ namespace DAL
 
             #region Machine Learning
 
-            builder.Entity<Temp>().Property(c => c.BirthDate).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.BirthDate).IsRequired(false);
 
-            builder.Entity<Temp>().Property(c => c.Gender).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.Gender).IsRequired(false);
 
-            builder.Entity<Temp>().Property(c => c.MaritalStatusCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.FamilyTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.ChildrenNumbers).IsRequired(false).HasDefaultValue(0);
-            builder.Entity<Temp>().Property(c => c.IncomeTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.CountryAbbreviation).IsRequired(false);
-            builder.Entity<Temp>().Property(c => c.RegionCode).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.MaritalStatusCode).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.FamilyTypeCode).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.ChildrenNumbers).IsRequired(false).HasDefaultValue(0);
+            //builder.Entity<Temp>().Property(c => c.IncomeTypeCode).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.ProfessioneTypeCode).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.CountryAbbreviation).IsRequired(false);
+            //builder.Entity<Temp>().Property(c => c.RegionCode).IsRequired(false);
 
-            builder.Entity<Temp>().ToTable($"App{nameof(Temp)}");
+            //builder.Entity<Temp>().ToTable($"App{nameof(Temp)}");
 
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.UserId).ValueGeneratedNever();
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.CustomerCode).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.Gender).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.MaritalStatus).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.FamilyType).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.IncomeTypeClass).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.ProfessionType).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.Country).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.Region).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().Property(c => c.InsurancePolicyCategory).IsRequired(false).IsFixedLength(false);
-            builder.Entity<LearningCustomerPreferences>().ToTable("AppLearningCustomerPreferences");
+            //builder.Entity<CustomerLearningFeature>().Property(c => c.Gender).IsRequired(false).IsFixedLength(false);
+            //builder.Entity<CustomerLearningFeature>().Property(c => c.MaritalStatus).IsRequired(false).IsFixedLength(false);
+            //builder.Entity<CustomerLearningFeature>().Property(c => c.IncomeTypeClass).IsRequired(false).IsFixedLength(false);
+            //builder.Entity<CustomerLearningFeature>().Property(c => c.ProfessionType).IsRequired(false).IsFixedLength(false);
+            //builder.Entity<CustomerLearningFeature>().Property(c => c.Country).IsRequired(false).IsFixedLength(false);
+            //builder.Entity<CustomerLearningFeature>().Property(c => c.Region).IsRequired(false).IsFixedLength(false);
+            builder.Entity<CustomerLearningFeature>().Property(c => c.Id).ValueGeneratedOnAdd();
+            builder.Entity<CustomerLearningFeature>().HasKey(c => c.Id);
+            builder.Entity<CustomerLearningFeature>().ToTable($"App{nameof(CustomerLearningFeatures)}");
 
-            builder.Entity<MatrixCustomerInsurancePolicy>().ToTable($"App{nameof(MatrixUsersItems)}");
+            builder.Entity<MatrixUsersItems>().Property(c=>c.Id).ValueGeneratedOnAdd();
+            builder.Entity<MatrixUsersItems>().Property(c => c.UserId).ValueGeneratedNever();
+            builder.Entity<MatrixUsersItems>().Property(c => c.ItemId).ValueGeneratedNever();
+            builder.Entity<MatrixUsersItems>().HasKey(c =>c.Id);
+            builder.Entity<MatrixUsersItems>().ToTable($"App{nameof(MatrixUsersItems)}");
 
             #endregion
         }

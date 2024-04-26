@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class MatrixCustomerInsurancePolicyRepository : Repository<MatrixCustomerInsurancePolicy>, IMatrixCustomerInsurancePolicyRepository
+    public class MatrixCustomerInsurancePolicyRepository : Repository<MatrixUsersItems>, IMatrixCustomerInsurancePolicyRepository
     {
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
 

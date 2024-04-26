@@ -1,0 +1,31 @@
+<ngx-datatable class="material colored-header sm table-x table-striped table-hover"
+[loadingIndicator]="loadingIndicator"
+[rows]="rows"
+rowHeight="auto"
+[headerHeight]="45"
+[footerHeight]="45"
+[columnMode]="'force'"
+[columns]="columns"
+[scrollbarV]="false"
+[columnMode]="'force'"
+[limit]="5"
+[selectionType]="'single'">
+    <ngx-datatable-column name="Principale" prop="isPrimary" [sortable]="false" [resizeable]="false" [maxWidth]="80">
+    <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+        <p *ngIf="isAddressPrimary(row)"><i class="fa fa-check"></i></p>
+        <p *ngIf="!isAddressPrimary(row)"><i class="fa fa-times"></i></p>
+    </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Tipo" prop="addressType" [sortable]="false" [resizeable]="false" [maxWidth]="100">
+    <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Ubicazione" prop="location" [resizeable]="false" [sortable]="false">
+    <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Città" prop="city" [sortable]="false" [resizeable]="false">   
+    </ngx-datatable-column>    
+    <ngx-datatable-column name="C.A.P." prop="postalCode" [sortable]="false" [resizeable]="false" [maxWidth]="60">   
+    </ngx-datatable-column>  
+    <ngx-datatable-column name="Prov." prop="country" [sortable]="false" [resizeable]="false" [maxWidth]="60">   
+    </ngx-datatable-column>  
+</ngx-datatable>        

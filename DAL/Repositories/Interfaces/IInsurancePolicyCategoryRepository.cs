@@ -11,6 +11,7 @@ namespace DAL.Repositories.Interfaces
     {
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories();
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategories(string customerCode);
+        IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(byte insurancePolicyCategoryId); 
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(string insurancePolicyCategoryCode);
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategory(int insurancePolicyCategoryId);
         IQueryable<InsurancePolicyCategory> GetInsurancePolicyCategoryStatistics(int year);

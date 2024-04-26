@@ -9,15 +9,27 @@
     <PackageReference Include="Microsoft.ML.FastTree" Version="1.7.1" />
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.19.1" />
   </ItemGroup>
-  <ItemGroup Label="MLModel1">
-    <None Include="MLModel1.consumption.cs">
-      <DependentUpon>MLModel1.mbconfig</DependentUpon>
+  <ItemGroup Label="MLClassifierCustomerFeature">
+    <None Include="MLClassifierCustomerFeature.consumption.cs">
+      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
     </None>
-    <None Include="MLModel1.training.cs">
-      <DependentUpon>MLModel1.mbconfig</DependentUpon>
+    <None Include="MLClassifierCustomerFeature.training.cs">
+      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
     </None>
-    <None Include="MLModel1.zip">
-      <DependentUpon>MLModel1.mbconfig</DependentUpon>
+    <None Include="MLClassifierCustomerFeature.zip">
+      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemCustomer">
+    <None Include="MLRecommenderSystemCustomer.consumption.cs">
+      <DependentUpon>MLRecommenderSystemCustomer.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemCustomer.training.cs">
+      <DependentUpon>MLRecommenderSystemCustomer.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemCustomer.zip">
+      <DependentUpon>MLRecommenderSystemCustomer.mbconfig</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -14,10 +14,12 @@ namespace DAL
     {
         ICustomerRepository Customers { get; }
 
+        IProvinceRepository Provinces { get; }
         IRepositoryMunicipality Municipalities { get; }
         IFamilyTypeRepository FamilyTypes { get; }
         IMaritalStatusTypeRepository MaritalStatusTypes { get; }
 
+        IIncomeClassTypeRepository IncomeClassTypes { get; }
         IContractTypeRepository ContractTypes { get; }
         IProfessionTypeRepository ProfessionTypes { get; }
 
@@ -28,8 +30,8 @@ namespace DAL
 
         IConfigurationModelRepository ConfigurationModels { get; }
 
-        ILearningTrainingRepository LearningTrainings { get; }
-        IMatrixCustomerInsurancePolicyRepository MatrixCustomerInsurancePolicies { get; }
+        ILearningTrainingRepository CustomerLearningFeatures { get; }
+        IMatrixCustomerInsurancePolicyRepository MatrixUsersItems { get; }
 
         IBaggageTypeRepository BaggageTypes { get; }
         ITravelMeansTypeRepository TravelMeansTypes { get; }
