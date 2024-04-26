@@ -34,6 +34,7 @@ namespace DAL
 
         private IInsurancePolicyRepository _insurancePolicies;
         private IInsurancePolicyCategoryRepository _insurancePolicyCategories;
+        private IWarrantyRepository _warranties;
         private IInsurancePolicyCategoryStaticRepository _insurancePolicyCategoryStatics;
         private ISalesLineRepository _salesLines;
 
@@ -158,6 +159,15 @@ namespace DAL
             {
                 _insurancePolicyCategories ??= new InsurancePolicyCategoryRepository(_context);
                 return _insurancePolicyCategories;
+            }
+        }
+
+        public IWarrantyRepository Warranties
+        {
+            get
+            {
+                _warranties ??= new WarrantyRepository(_context);
+                return _warranties;
             }
         }
 

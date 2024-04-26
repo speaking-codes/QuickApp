@@ -18,11 +18,9 @@ namespace DAL.BuilderModel.Interfaces
         IInsurancePolicyBuilder SetLuxuryPolicy();
         IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories);
         IInsurancePolicyBuilder SetCustomer(Customer customer);
+        IInsurancePolicyBuilder SetWarranties();
         IInsurancePolicyBuilder SetDetailItem(InsurancePolicyTemplate insurancePolicyTemplate);
-        //IInsurancePolicyBuilder SetBaggageLosses(IList<BaggageType> baggageTypes);
-        //IInsurancePolicyBuilder SetTravels(IList<TravelMeansType> travelMeansTypes, IList<TravelClassType> travelClassTypes, IList<ConfigurationModel> configurationModels, IList<Municipality> municipalities);
-        //IInsurancePolicyBuilder SetVacations(IList<StructureType> structureTypes, IList<Municipality> municipalities);
-
+        
         InsurancePolicy Build();
     }
 }

@@ -64,9 +64,8 @@ namespace DAL.BuilderModel
             return this;
         }
 
-        //public virtual IInsurancePolicyBuilder SetBaggageLosses(IList<BaggageType> baggageTypes) => this;
-        //public virtual IInsurancePolicyBuilder SetTravels(IList<TravelMeansType> travelMeansTypes, IList<TravelClassType> travelClassTypes, IList<ConfigurationModel> configurationModels, IList<Municipality> municipalities) => this;
-        //public virtual IInsurancePolicyBuilder SetVacations(IList<StructureType> structureTypes, IList<Municipality> municipalities) => this;
+        public abstract IInsurancePolicyBuilder SetWarranties();
+
         public virtual IInsurancePolicyBuilder SetDetailItem(InsurancePolicyTemplate insurancePolicyTemplate) => this;
 
         public virtual InsurancePolicy Build() => InsurancePolicy;

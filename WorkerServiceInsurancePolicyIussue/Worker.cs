@@ -53,6 +53,7 @@ namespace WorkerServiceInsurancePolicyIussue
                                                      .SetInsurancePolicyCategory(_insurancePolicyTemplate.InsurancePolicyCategories)
                                                      .SetCustomer(_customers[i])
                                                      .SetDetailItem(_insurancePolicyTemplate)
+                                                     .SetWarranties()
                                                      .SetIssueDate()
                                                      .SetExpiryDate()
                                                      .SetInsuredMaximum()

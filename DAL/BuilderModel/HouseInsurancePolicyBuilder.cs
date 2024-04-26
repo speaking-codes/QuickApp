@@ -50,7 +50,7 @@ namespace DAL.BuilderModel
 
         public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
         {
-            _houseInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Casa).FirstOrDefault();
+            _houseInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.MULTIGARANZIA_ABITAZIONE).FirstOrDefault();
             return this;
         }
 

@@ -37,11 +37,9 @@ namespace DAL.Repositories
 
         public IQueryable<CustomerLearningFeature> GetLearningCustomerPreferences(string customerCode, string insurancePolicyCategory) =>
             _appContext.CustomerLearningFeatures;
-        //.Where(x => x.CustomerCode == customerCode && x.InsurancePolicyCategory == insurancePolicyCategory);
 
         public IQueryable<CustomerLearningFeature> GetLearningCustomerPreferences(string customerCode) =>
             _appContext.CustomerLearningFeatures;
-        //.Where(x => x.CustomerCode == customerCode);
 
         public IList<int> GetUserId(string customerCode) => new List<int>();
         //_appContext.CustomerLearningFeatures

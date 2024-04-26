@@ -25,6 +25,7 @@ namespace DAL
 
         IInsurancePolicyRepository InsurancePolicies { get; }
         IInsurancePolicyCategoryRepository InsurancePolicyCategories { get; }
+        IWarrantyRepository Warranties { get; }
         IInsurancePolicyCategoryStaticRepository InsurancePolicyCategoryStatics { get; }
         ISalesLineRepository SalesLines { get; }
 

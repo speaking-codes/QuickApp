@@ -55,7 +55,7 @@ namespace DAL.BuilderModel
 
         public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
         {
-            _vehicleInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.Moto).FirstOrDefault();
+            _vehicleInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.RCA).FirstOrDefault();
             return this;
         }
 
@@ -97,6 +97,22 @@ namespace DAL.BuilderModel
         {
             base.SetLuxuryPolicy();
             _vehicleInsurancePolicy.IsLuxuryPolicy = InsurancePolicy.IsLuxuryPolicy;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetWarranties()
+        {
+            _vehicleInsurancePolicy.WarrantySelecteds=new List<WarrantySelected>();
+            _vehicleInsurancePolicy.WarrantySelecteds.Add(new WarrantySelected { WarrantyAvaible = _vehicleInsurancePolicy.InsurancePolicyCategory.WarrantyAvaibles.Where(x => x.IsPrimary).FirstOrDefault() });
+            var warranties = _vehicleInsurancePolicy.InsurancePolicyCategory.WarrantyAvaibles.Where(x=>!x.IsPrimary).ToList();
+
+            while (_vehicleInsurancePolicy.WarrantySelecteds.Count < 3)
+            {
+                var index = Random.Next(warranties.Count);
+                if (!_vehicleInsurancePolicy.WarrantySelecteds.Any(x=> x.WarrantyAvaible.Id == warranties[index].Id))
+                    _vehicleInsurancePolicy.WarrantySelecteds.Add(new WarrantySelected { WarrantyAvaible = warranties[index] });
+            }
+
             return this;
         }
 

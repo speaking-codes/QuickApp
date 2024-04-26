@@ -183,14 +183,12 @@ namespace DAL.ModelFactory
                 {
                     case EnumInsurancePolicyCategory.None:
                         break;
-                    case EnumInsurancePolicyCategory.Auto:
+                    case EnumInsurancePolicyCategory.RCA:
                         insurancePolicyBuilders.Add(new CarInsurancePolicyBuilder());
                         break;
-                    case EnumInsurancePolicyCategory.Moto:
-                        insurancePolicyBuilders.Add(new BykeInsurancePolicyBuilder());
-                        break;
-                    case EnumInsurancePolicyCategory.Imbarcazione:
-                        break;
+                    //case EnumInsurancePolicyCategory.RCA:
+                    //    insurancePolicyBuilders.Add(new BykeInsurancePolicyBuilder());
+                    //    break;
                     //case EnumInsurancePolicyCategory.Viaggi:
                     //    insurancePolicyBuilders.Add(new TravelInsurancePolicyBuilder());
                     //    break;
@@ -215,15 +213,15 @@ namespace DAL.ModelFactory
                     //case EnumInsurancePolicyCategory.AllevamentoBestiame:
                     //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
                     //    break;
-                    case EnumInsurancePolicyCategory.FamiliareeCongiunto:
-                        insurancePolicyBuilders.Add(new FamilyInsurancePolicyBuilder());
-                        break;
-                    case EnumInsurancePolicyCategory.AnimaleDomestico:
-                        insurancePolicyBuilders.Add(new PetInsurancePolicyBuilder());
-                        break;
-                    case EnumInsurancePolicyCategory.Casa:
-                        insurancePolicyBuilders.Add(new HouseInsurancePolicyBuilder());
-                        break;
+                    //case EnumInsurancePolicyCategory.FamiliareeCongiunto:
+                    //    insurancePolicyBuilders.Add(new FamilyInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.AnimaleDomestico:
+                    //    insurancePolicyBuilders.Add(new PetInsurancePolicyBuilder());
+                    //    break;
+                    //case EnumInsurancePolicyCategory.Casa:
+                    //    insurancePolicyBuilders.Add(new HouseInsurancePolicyBuilder());
+                    //    break;
                     //case EnumInsurancePolicyCategory.Infortunio:
                     //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
                     //    break;

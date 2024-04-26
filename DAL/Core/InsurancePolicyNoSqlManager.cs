@@ -60,50 +60,50 @@ namespace DAL.Core
         {
             var enumInsurancePolicyCategory = (EnumInsurancePolicyCategory)insurancePolicy.InsurancePolicyCategoryId;
 
-            switch (enumInsurancePolicyCategory)
-            {
-                case EnumInsurancePolicyCategory.None:
-                    break;
-                case EnumInsurancePolicyCategory.Auto:
-                case EnumInsurancePolicyCategory.Moto:
-                    return getVehicleInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-                case EnumInsurancePolicyCategory.Imbarcazione:
-                    break;
-                case EnumInsurancePolicyCategory.Viaggi:
-                    break;
-                case EnumInsurancePolicyCategory.Vacanza:
-                    break;
-                case EnumInsurancePolicyCategory.PerditaBagaglio:
-                    break;
-                case EnumInsurancePolicyCategory.AttivitàProfessionale:
-                    break;
-                case EnumInsurancePolicyCategory.ImmobileAziendale:
-                    break;
-                case EnumInsurancePolicyCategory.AttivitàCommerciale:
-                    break;
-                case EnumInsurancePolicyCategory.AttivitàAgricola:
-                    break;
-                case EnumInsurancePolicyCategory.AllevamentoBestiame:
-                    break;
-                case EnumInsurancePolicyCategory.FamiliareeCongiunto:
-                    return getFamilyInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-                case EnumInsurancePolicyCategory.AnimaleDomestico:
-                    return getPetInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-                case EnumInsurancePolicyCategory.Casa:
-                    return GetHouseInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-                case EnumInsurancePolicyCategory.Infortunio:
-                    break;
-                case EnumInsurancePolicyCategory.Malattia:
-                    break;
-                case EnumInsurancePolicyCategory.VisiteSpecialistiche:
-                    break;
-                case EnumInsurancePolicyCategory.GrandiInterventi:
-                    break;
-                case EnumInsurancePolicyCategory.CureOdontoiatriche:
-                    break;
-                default:
-                    break;
-            }
+            //switch (enumInsurancePolicyCategory)
+            //{
+            //    case EnumInsurancePolicyCategory.None:
+            //        break;
+            //    case EnumInsurancePolicyCategory.Auto:
+            //    case EnumInsurancePolicyCategory.Moto:
+            //        return getVehicleInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
+            //    case EnumInsurancePolicyCategory.Imbarcazione:
+            //        break;
+            //    case EnumInsurancePolicyCategory.Viaggi:
+            //        break;
+            //    case EnumInsurancePolicyCategory.Vacanza:
+            //        break;
+            //    case EnumInsurancePolicyCategory.PerditaBagaglio:
+            //        break;
+            //    case EnumInsurancePolicyCategory.AttivitàProfessionale:
+            //        break;
+            //    case EnumInsurancePolicyCategory.ImmobileAziendale:
+            //        break;
+            //    case EnumInsurancePolicyCategory.AttivitàCommerciale:
+            //        break;
+            //    case EnumInsurancePolicyCategory.AttivitàAgricola:
+            //        break;
+            //    case EnumInsurancePolicyCategory.AllevamentoBestiame:
+            //        break;
+            //    case EnumInsurancePolicyCategory.FamiliareeCongiunto:
+            //        return getFamilyInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
+            //    case EnumInsurancePolicyCategory.AnimaleDomestico:
+            //        return getPetInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
+            //    case EnumInsurancePolicyCategory.Casa:
+            //        return GetHouseInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
+            //    case EnumInsurancePolicyCategory.Infortunio:
+            //        break;
+            //    case EnumInsurancePolicyCategory.Malattia:
+            //        break;
+            //    case EnumInsurancePolicyCategory.VisiteSpecialistiche:
+            //        break;
+            //    case EnumInsurancePolicyCategory.GrandiInterventi:
+            //        break;
+            //    case EnumInsurancePolicyCategory.CureOdontoiatriche:
+            //        break;
+            //    default:
+            //        break;
+            //}
             return new InsuranceCoverageGrid();
         }
 

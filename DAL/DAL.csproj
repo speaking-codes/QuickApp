@@ -8,6 +8,14 @@
     <Company>EBENMONNEY</Company>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="BuilderModel\BaggageLossInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\DentalCareInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\FamilyInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\GreatInterventionsInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\HouseInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\SpecialisticExaminationsInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\TravelInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\VacationInsurancePolicyBuilder.cs" />
     <Compile Remove="Models\AgeRatingCoefficient.cs" />
     <Compile Remove="Models\CustomerInsuranceCategoryPolicyRating.cs" />
     <Compile Remove="Models\JobRalRatingCoefficient.cs" />

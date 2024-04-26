@@ -1,23 +1,13 @@
 ﻿public enum EnumInsurancePolicyCategory
 {
     None = 0,
-    Auto = 1,
-    Moto = 2,
-    Imbarcazione = 3,
-    Viaggi = 4,
-    Vacanza = 5,
-    PerditaBagaglio = 6,
-    AttivitàProfessionale = 7,
-    ImmobileAziendale = 8,
-    AttivitàCommerciale = 9,
-    AttivitàAgricola = 10,
-    AllevamentoBestiame = 11,
-    FamiliareeCongiunto = 12,
-    AnimaleDomestico = 13,
-    Casa = 14,
-    Infortunio = 15,
-    Malattia = 16,
-    VisiteSpecialistiche = 17,
-    GrandiInterventi = 18,
-    CureOdontoiatriche = 19
+    RCA = 1,
+    ARD = 2,
+    RC_DIVERSI = 3,
+    MULTIGARANZIA_ABITAZIONE = 4,
+    GLOBALE_FABBRICATI = 5,
+    INFORTUNI = 6,
+    MALATTIA = 7,
+    INCENDIO_FURTO = 8,
+    TUTELA_GIUDIZIARIA = 9
 }

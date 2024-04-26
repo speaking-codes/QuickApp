@@ -48,7 +48,7 @@ namespace DAL.BuilderModel
 
         public override IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories)
         {
-            _petInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.AnimaleDomestico).FirstOrDefault();
+            _petInsurancePolicy.InsurancePolicyCategory = insurancePolicyCategories.Where(x => x.Id == (byte)EnumInsurancePolicyCategory.ARD).FirstOrDefault();
             return this;
         }
 
@@ -90,6 +90,22 @@ namespace DAL.BuilderModel
         {
             base.SetLuxuryPolicy();
             _petInsurancePolicy.IsLuxuryPolicy = InsurancePolicy.IsLuxuryPolicy;
+            return this;
+        }
+
+        public override IInsurancePolicyBuilder SetWarranties()
+        {
+            _petInsurancePolicy.WarrantySelecteds = new List<WarrantySelected>();
+            _petInsurancePolicy.WarrantySelecteds.Add(new WarrantySelected { WarrantyAvaible = _petInsurancePolicy.InsurancePolicyCategory.WarrantyAvaibles.Where(x => x.IsPrimary).FirstOrDefault() });
+            var warranties = _petInsurancePolicy.InsurancePolicyCategory.WarrantyAvaibles.Where(x => !x.IsPrimary).ToList();
+
+            while (_petInsurancePolicy.WarrantySelecteds.Count < 3)
+            {
+                var index = Random.Next(warranties.Count);
+                if (!_petInsurancePolicy.WarrantySelecteds.Any(x => x.WarrantyAvaible.Id == warranties[index].Id))
+                    _petInsurancePolicy.WarrantySelecteds.Add(new WarrantySelected { WarrantyAvaible = warranties[index] });
+            }
+
             return this;
         }
         
