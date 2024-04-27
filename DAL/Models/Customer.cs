@@ -37,6 +37,7 @@ namespace DAL.Models
         public byte? IncomeTypeId { get; set; }
         public virtual IncomeType IncomeType { get; set; }
 
+        public bool IsFreelancer { get; set; }
         public short? ProfessionTypeId { get; set; }
         public virtual ProfessionType ProfessionType { get; set; }
 

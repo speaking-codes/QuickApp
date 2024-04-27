@@ -13,6 +13,6 @@ namespace DAL.Models
 
         public virtual BreedPetType BreedPetType { get; set; }
 
-        public virtual IList<PetInsurancePolicy> PetInsurancePolicies { get; set; }
+        public virtual IList<Pet> Pets { get; set; }
     }
 }

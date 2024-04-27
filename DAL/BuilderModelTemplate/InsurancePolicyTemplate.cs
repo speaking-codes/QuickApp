@@ -14,14 +14,13 @@ namespace DAL.BuilderModelTemplate
         public IList<string> PetNames { get; set; }
         public AdressModelTemplate AddressTemplate { get; set; }
         public IList<InsurancePolicyCategory> InsurancePolicyCategories { get; set; }
-        public IList<ConfigurationModel> CarConfigurationModels { get; set; }
-        public IList<ConfigurationModel> BykeConfigurationModels { get; set; }
+        public IList<ConfigurationModel> ConfigurationModels { get; set; }
         public IList<Municipality> Municipalities { get; set; }
-        public IList<TravelMeansType> TravelMeansTypes { get; set; }
-        public IList<TravelClassType> TravelClassTypes { get; set; }
-        public IList<StructureType> StructureTypes { get; set; }
+        public IList<SportEventType> SportEventTypes { get; set; }
+        public IList<GenderType> GenderTypes { get; set; }
+        public IList<IncomeType> IncomeTypes { get; set; }
+        public IList<IncomeClassType> IncomeClassType { get; set; }
         public IList<ProfessionType> ProfessionTypes { get; set; }
-        public IList<BaggageType> BaggageTypes { get; set;}
         public IList<KinshipRelationshipType> KinshipRelationshipTypes { get;set; }
         public IList<BreedPetDetailType> BreedPetDetailTypes { get; set; }
 

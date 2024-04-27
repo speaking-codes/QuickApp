@@ -19,14 +19,10 @@ namespace DAL.Models
 
         public virtual IList<Address> Addresses { get; set; }
 
-        public virtual IList<Vacation> Vacations { get; set; }
+        public virtual IList<SportEvent> SportEvents { get; set; }
 
-        public virtual IList<Travel> DepartureTravels { get; set; }
+        public virtual IList<LargeBuilding> LargeBuildings { get; set; }
 
-        public virtual IList<Travel> ArrivalTravels { get; set; }
-
-        public virtual IList<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
-
-        public virtual IList<HouseInsurancePolicy> PropertyInsurancePolicies { get; set; }        
+        public virtual IList<House> Houses { get; set; }
     }
 }

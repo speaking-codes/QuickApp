@@ -9,24 +9,51 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="BuilderModel\BaggageLossInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\BykeInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\CarInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\DentalCareInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\FamilyInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\GreatInterventionsInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\HouseInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\Interfaces\IBykeInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\Interfaces\ICarInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\PetInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\SpecialisticExaminationsInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\TravelInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\VacationInsurancePolicyBuilder.cs" />
     <Compile Remove="Models\AgeRatingCoefficient.cs" />
+    <Compile Remove="Models\BaggageLossInsurancePolicy.cs" />
+    <Compile Remove="Models\BaggageType.cs" />
     <Compile Remove="Models\CustomerInsuranceCategoryPolicyRating.cs" />
+    <Compile Remove="Models\FamilyInsurancePolicy.cs" />
+    <Compile Remove="Models\HealthcareProvisionType.cs" />
+    <Compile Remove="Models\HealthInsurancePolicy.cs" />
+    <Compile Remove="Models\HouseInsurancePolicy.cs" />
     <Compile Remove="Models\JobRalRatingCoefficient.cs" />
+    <Compile Remove="Models\PetInsurancePolicy.cs" />
+    <Compile Remove="Models\StructureType.cs" />
     <Compile Remove="Models\Temp.cs" />
+    <Compile Remove="Models\TravelClassType.cs" />
+    <Compile Remove="Models\TravelInsurancePolicy.cs" />
+    <Compile Remove="Models\TravelMeansType.cs" />
+    <Compile Remove="Models\VacationInsurancePolicy.cs" />
+    <Compile Remove="Models\VehicleInsurancePolicy.cs" />
+    <Compile Remove="Models\WorkActivityInsurancePolicy.cs" />
     <Compile Remove="Repositories\AgeRatingCoefficientRepository.cs" />
+    <Compile Remove="Repositories\BaggageTypeRepository.cs" />
     <Compile Remove="Repositories\CustomerInsuranceCategoryPolicyRatingRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IAgeRatingCoefficientRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\IBaggageTypeRepository.cs" />
     <Compile Remove="Repositories\Interfaces\ICustomerInsuranceCategoryPolicyRatingRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IHealthcareProvisionTypeRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IJobRalRatingCoefficientRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\IStructureTypeRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\ITravelClassTypeRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\ITravelMeansTypeRepository.cs" />
     <Compile Remove="Repositories\JobRalRatingCoefficientRepository.cs" />
+    <Compile Remove="Repositories\StructureTypeRepository.cs" />
+    <Compile Remove="Repositories\TravelClassTypeRepository.cs" />
+    <Compile Remove="Repositories\TravelMeansTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

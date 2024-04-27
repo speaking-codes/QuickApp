@@ -10,14 +10,12 @@ namespace DAL.Models
     {
         public short Id { get; set; }
         public string ProfessionTypeDescription { get; set; }
-        public bool IsFreelancer { get; set; }
         public double MinAnnualGrossIncome { get; set; }
         public double MaxAnnualGrossIncome { get; set; }
+        public bool? IsFreelancer { get; set; }
 
         public virtual IncomeType IncomeType { get; set; }
 
         public virtual IList<Customer> Customers { get; set; }
-
-        public virtual IList<WorkActivityInsurancePolicy> WorkActivityInsurancePolicies { get; set; }
     }
 }

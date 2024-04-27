@@ -41,8 +41,6 @@ namespace DAL.Models
         public virtual Model Model { get; set; }//Modello
         public virtual PowerType PowerType { get; set; }//Tipo Combustibile
 
-        public virtual IList<VehicleInsurancePolicy> VehicleInsurancePolicies { get; set; }
-
-        public virtual IList<ConfigurationModel> ConfigurationModels { get; set; }
+        public virtual IList<Vehicle> Vehicles { get; set; }
     }
 }

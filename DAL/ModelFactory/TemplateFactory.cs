@@ -92,27 +92,12 @@ namespace DAL.ModelFactory
         private IList<Municipality> GetMunicipalities() => _unitOfWork.Municipalities.GetAll();
         private IList<ContractType> GetContractTypes() => _unitOfWork.ContractTypes.GetAll();
         private IList<IncomeType> GetIncomeTypes() => _unitOfWork.IncomeTypes.GetAll();
+        private IList<IncomeClassType> GetIncomeClassTypes() => _unitOfWork.IncomeClassTypes.GetAll();
         private IList<ProfessionType> GetProfessionTypes() => _unitOfWork.ProfessionTypes.GetAll();
-        private IList<double> GetIncomes()
-        {
-            var random = new Random();
-            var incomes = new List<double>();
-            double incomeBase = 9000;
-
-            while (incomeBase < 180000)
-            {
-                incomes.Add(incomeBase);
-                incomeBase = incomeBase + 1500 + 1000 * random.NextDouble();
-            }
-            return incomes;
-        }
         private IList<InsurancePolicyCategory> GetInsurancePolicyCategories() => _unitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories().ToList();
-        private IList<ConfigurationModel> GetCarConfigurationModels() => _unitOfWork.ConfigurationModels.GetCarConfigurationModels().ToList();
-        private IList<ConfigurationModel> GetBykeConfigurationModels() => _unitOfWork.ConfigurationModels.GetBykeConfigurationModels().ToList();
-        private IList<TravelMeansType> GetTravelMeansTypes() => _unitOfWork.TravelMeansTypes.GetTravelMeansTypes().ToList();
-        private IList<TravelClassType> GetTravelClassTypes() => _unitOfWork.TravelClassTypes.GetAll();
-        private IList<StructureType> GetStructureTypes() => _unitOfWork.StructureTypes.GetAll();
-        private IList<BaggageType> GetBaggageTypes() => _unitOfWork.BaggageTypes.GetAll();
+        private IList<ConfigurationModel> GetConfigurationModels() => _unitOfWork.ConfigurationModels.GetConfigurationModels().ToList();
+        private IList<GenderType> GetGenderTypes() => _unitOfWork.GenderTypes.GetAll();
+        private IList<SportEventType> GetSportEventTypes() => _unitOfWork.SportEventTypes.GetAll();
         private IList<KinshipRelationshipType> GetKinshipRelationshipTypes() => _unitOfWork.KinshipRelationshipTypes.GetAll();
         private IList<BreedPetDetailType> GetBreedPetDetailTypes() => _unitOfWork.BreedPetDetailTypes.GetAll();
 
@@ -135,14 +120,15 @@ namespace DAL.ModelFactory
 
             customerModel.LastNames = getLastName(_lastNamePath);
             customerModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
+            customerModel.GenderTypes= GetGenderTypes();
             customerModel.FamilyTypes = GetFamilyTypes();
             customerModel.MaritalStatuses = GetMaritalStatusTypes();
             customerModel.BirthMunicipalities = GetMunicipalities();
 
             customerModel.ContractTypes = GetContractTypes();
             customerModel.IncomeTypes = GetIncomeTypes();
-            customerModel.ProfessionTypes = GetProfessionTypes();
-            customerModel.Incomes = GetIncomes();
+            customerModel.IncomeClassTypes = GetIncomeClassTypes();
+            customerModel.ProfessionTypes = GetProfessionTypes();            
 
             customerModel.DeliveryModelTemplate = getDeliveryModel();
             customerModel.AddressTemplate = CreateAddressModelTemplate();
@@ -155,16 +141,15 @@ namespace DAL.ModelFactory
             var insurancePolicyModel = new InsurancePolicyTemplate();
             insurancePolicyModel.LastNames = getLastName(_lastNamePath);
             insurancePolicyModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
+            insurancePolicyModel.GenderTypes= GetGenderTypes();
             insurancePolicyModel.PetNames = getPetNames(_petNamePath);
             insurancePolicyModel.InsurancePolicyCategories = GetInsurancePolicyCategories();
-            insurancePolicyModel.CarConfigurationModels = GetCarConfigurationModels();
-            insurancePolicyModel.BykeConfigurationModels = GetBykeConfigurationModels();
+            insurancePolicyModel.ConfigurationModels = GetConfigurationModels();
             insurancePolicyModel.Municipalities = GetMunicipalities();
-            insurancePolicyModel.TravelMeansTypes = GetTravelMeansTypes();
-            insurancePolicyModel.TravelClassTypes = GetTravelClassTypes();
-            insurancePolicyModel.StructureTypes = GetStructureTypes();
+            insurancePolicyModel.IncomeTypes = GetIncomeTypes();
+            insurancePolicyModel.IncomeClassType = GetIncomeClassTypes();
+            insurancePolicyModel.SportEventTypes =GetSportEventTypes();
             insurancePolicyModel.ProfessionTypes = GetProfessionTypes();
-            insurancePolicyModel.BaggageTypes = GetBaggageTypes();
             insurancePolicyModel.KinshipRelationshipTypes = GetKinshipRelationshipTypes();
             insurancePolicyModel.BreedPetDetailTypes = GetBreedPetDetailTypes();
             insurancePolicyModel.AddressTemplate = CreateAddressModelTemplate();
@@ -184,59 +169,32 @@ namespace DAL.ModelFactory
                     case EnumInsurancePolicyCategory.None:
                         break;
                     case EnumInsurancePolicyCategory.RCA:
-                        insurancePolicyBuilders.Add(new CarInsurancePolicyBuilder());
+                        insurancePolicyBuilders.Add(new VehicleBuilder());
                         break;
-                    //case EnumInsurancePolicyCategory.RCA:
-                    //    insurancePolicyBuilders.Add(new BykeInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.Viaggi:
-                    //    insurancePolicyBuilders.Add(new TravelInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.Vacanza:
-                    //    insurancePolicyBuilders.Add(new VacationInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.PerditaBagaglio:
-                    //    insurancePolicyBuilders.Add(new BaggageLossInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.AttivitàProfessionale:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.ImmobileAziendale:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.AttivitàCommerciale:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.AttivitàAgricola:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.AllevamentoBestiame:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.FamiliareeCongiunto:
-                    //    insurancePolicyBuilders.Add(new FamilyInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.AnimaleDomestico:
-                    //    insurancePolicyBuilders.Add(new PetInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.Casa:
-                    //    insurancePolicyBuilders.Add(new HouseInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.Infortunio:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.Malattia:
-                    //    insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.VisiteSpecialistiche:
-                    //    insurancePolicyBuilders.Add(new SpecialisticExaminationsInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.GrandiInterventi:
-                    //    insurancePolicyBuilders.Add(new GreatInterventionsInsurancePolicyBuilder());
-                    //    break;
-                    //case EnumInsurancePolicyCategory.CureOdontoiatriche:
-                    //    insurancePolicyBuilders.Add(new DentalCareInsurancePolicyBuilder());
-                    //    break;
+                    case EnumInsurancePolicyCategory.ARD:
+                        insurancePolicyBuilders.Add(new PetBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.RC_DIVERSI:
+                        insurancePolicyBuilders.Add(new SportEventBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.MULTIGARANZIA_ABITAZIONE:
+                        insurancePolicyBuilders.Add(new HouseBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.GLOBALE_FABBRICATI:
+                        insurancePolicyBuilders.Add(new LargeBuildingBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.INFORTUNI:
+                        insurancePolicyBuilders.Add(new InjuryBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.MALATTIA:
+                        insurancePolicyBuilders.Add(new IllnessBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.INCENDIO_FURTO:
+                        //insurancePolicyBuilders.Add(new InsurancePolicyBuilder());
+                        break;
+                    case EnumInsurancePolicyCategory.TUTELA_GIUDIZIARIA:
+                        insurancePolicyBuilders.Add(new LegalProtectionBuilder());
+                        break;
                     default:
                         break;                        
                 }

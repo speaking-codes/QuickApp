@@ -22,14 +22,17 @@ namespace DAL.Models
         public byte InsurancePolicyCategoryId { get; set; }
         public virtual InsurancePolicyCategory InsurancePolicyCategory { get; set; }
 
+        public virtual IList<Vehicle> Vehicles { get; set; }
+        public virtual IList<Pet> Pets { get; set; }
+        public virtual IList<SportEvent> SportEvents { get; set; }
+        public virtual IList<House> Houses { get; set; }
+        public virtual IList<LegalProtection> LegalProtections { get; set; }
+        public virtual IList<LargeBuilding> LargeBuildings { get; set; }
+        public virtual IList<Injury> Injuries { get; set; }
+        public virtual IList<Illness> Illnesses { get; set; }
+
         public virtual Customer Customer { get; set; }
 
-        public virtual IList<BaggageLoss> BaggageLosses { get; set; }
-
-        public virtual IList<Travel> Travels { get; set; }
-
-        public virtual IList<Vacation> Vacations { get; set; }
-
-        public virtual IList<WarrantySelected> WarrantySelecteds { get;set; }
+        public virtual IList<WarrantySelected> WarrantySelecteds { get; set; }
     }
 }

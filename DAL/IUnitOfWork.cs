@@ -4,7 +4,9 @@
 // (c) 2023 www.ebenmonney.com/mit-license
 // ---------------------------------------
 
+using DAL.Models;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -34,13 +36,20 @@ namespace DAL
         ILearningTrainingRepository CustomerLearningFeatures { get; }
         IMatrixCustomerInsurancePolicyRepository MatrixUsersItems { get; }
 
-        IBaggageTypeRepository BaggageTypes { get; }
-        ITravelMeansTypeRepository TravelMeansTypes { get; }
-        ITravelClassTypeRepository TravelClassTypes { get; }
         IKinshipRelationshipTypeRepository KinshipRelationshipTypes { get; }
-        IStructureTypeRepository StructureTypes { get; }
         IBreedPetDetailTypeRepository BreedPetDetailTypes { get; }
         IIncomeTypeRepository IncomeTypes { get; }
+        ISportEventTypeRepository SportEventTypes { get; }
+        IGenderTypeRepository GenderTypes { get; }
+        
+        IVehicleRepository Vehicles { get;  }
+        IPetRepository Pets { get;  }
+        ISportEventRepository SportEvents { get;  }
+        IHouseRepository Houses { get;  }
+        ILegalProtectionRepository LegalProtections { get;  }
+        ILargeBuildingRepository LargeBuildings { get;  }
+        IInjuryRepository Injuries { get;  }
+        IIllnessRepository Illnesses { get;  }
 
         bool IsTransactionOpened { get; }
 

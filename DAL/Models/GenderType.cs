@@ -11,6 +11,5 @@ namespace DAL.Models
         public byte Id { get; set; }
         public string GenderDescription { get; set; }
         public string GenderTitle { get; set; }
-        public float RatingCoefficient { get; set; }
     }
 }

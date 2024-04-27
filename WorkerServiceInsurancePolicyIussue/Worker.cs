@@ -52,7 +52,7 @@ namespace WorkerServiceInsurancePolicyIussue
                         insurancePolicies.Add(builder.SetInsurancePolicy(insurancePolicy)
                                                      .SetInsurancePolicyCategory(_insurancePolicyTemplate.InsurancePolicyCategories)
                                                      .SetCustomer(_customers[i])
-                                                     .SetDetailItem(_insurancePolicyTemplate)
+                                                     .SetDetailItems(_insurancePolicyTemplate)
                                                      .SetWarranties()
                                                      .SetIssueDate()
                                                      .SetExpiryDate()

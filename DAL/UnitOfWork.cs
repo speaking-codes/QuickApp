@@ -42,14 +42,22 @@ namespace DAL
 
         private ILearningTrainingRepository _customerLearningFeatures;
         private IMatrixCustomerInsurancePolicyRepository _matrixUsersItems;
-
-        private IBaggageTypeRepository _baggageTypes;
-        private ITravelMeansTypeRepository _travelMeansTypes;
-        private ITravelClassTypeRepository _travelClassTypes;
         private IKinshipRelationshipTypeRepository _kinshipRelationshipTypes;
-        private IStructureTypeRepository _structureTypes;
+
         private IBreedPetDetailTypeRepository _breedPetDetailTypes;
         private IIncomeTypeRepository _incomeTypes;
+        private ISportEventTypeRepository _sportEventTypes;
+        private IGenderTypeRepository _genderTypes;
+
+        private IVehicleRepository _vehicles;
+        private IPetRepository _pets;
+        private ISportEventRepository _sportEvents;
+        private IHouseRepository _houses;
+        private ILegalProtectionRepository _legalProtections;
+        private ILargeBuildingRepository _largeBuildings;
+        private IInjuryRepository _injuries;
+        private IIllnessRepository _illnesses;
+
 
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
@@ -216,48 +224,12 @@ namespace DAL
             }
         }
 
-        public IBaggageTypeRepository BaggageTypes
-        {
-            get
-            {
-                _baggageTypes ??= new BaggageTypeRepository(_context);
-                return _baggageTypes;
-            }
-        }
-
-        public ITravelMeansTypeRepository TravelMeansTypes
-        {
-            get
-            {
-                _travelMeansTypes ??= new TravelMeansTypeRepository(_context);
-                return _travelMeansTypes;
-            }
-        }
-
-        public ITravelClassTypeRepository TravelClassTypes
-        {
-            get
-            {
-                _travelClassTypes ??= new TravelClassTypeRepository(_context);
-                return _travelClassTypes;
-            }
-        }
-
         public IKinshipRelationshipTypeRepository KinshipRelationshipTypes
         {
             get
             {
                 _kinshipRelationshipTypes ??= new KinshipRelationshipTypeRepository(_context);
                 return _kinshipRelationshipTypes;
-            }
-        }
-
-        public IStructureTypeRepository StructureTypes
-        {
-            get
-            {
-                _structureTypes ??= new StructureTypeRepository(_context);
-                return _structureTypes;
             }
         }
 
@@ -276,6 +248,96 @@ namespace DAL
             {
                 _incomeTypes ??= new IncomeTypeRepository(_context);
                 return _incomeTypes;
+            }
+        }
+
+        public ISportEventTypeRepository SportEventTypes
+        {
+            get
+            {
+                _sportEventTypes ??= new SportEventTypeRepository(_context);
+                return _sportEventTypes;
+            }
+        }
+
+        public IGenderTypeRepository GenderTypes
+        {
+            get
+            {
+                _genderTypes ??= new GenderTypeRepository(_context);
+                return _genderTypes;
+            }
+        }
+
+        public IVehicleRepository Vehicles
+        {
+            get
+            {
+                _vehicles ??= new VehicleRepository(_context);
+                return _vehicles;
+            }
+        }
+
+        public IPetRepository Pets
+        {
+            get
+            {
+                _pets ??= new PetRepository(_context);
+                return _pets;
+            }
+        }
+
+        public ISportEventRepository SportEvents
+        {
+            get
+            {
+                _sportEvents ??= new SportEventRepository(_context);
+                return _sportEvents;
+            }
+        }
+
+        public IHouseRepository Houses
+        {
+            get
+            {
+                _houses ??= new HouseRepository(_context);
+                return _houses;
+            }
+        }
+
+        public ILegalProtectionRepository LegalProtections
+        {
+            get
+            {
+                _legalProtections ??= new LegalProtectionRepository(_context);
+                return _legalProtections;
+            }
+        }
+
+        public ILargeBuildingRepository LargeBuildings
+        {
+            get
+            {
+                _largeBuildings ??= new LargeBuildingRepository(_context);
+                return _largeBuildings;
+            }
+        }
+
+        public IInjuryRepository Injuries
+        {
+            get
+            {
+                _injuries ??= new InjuryRepository(_context);
+                return _injuries;
+            }
+        }
+
+        public IIllnessRepository Illnesses
+        {
+            get
+            {
+                _illnesses ??= new IllnessRepository(_context);
+                return _illnesses;
             }
         }
 

@@ -19,7 +19,7 @@ namespace DAL.BuilderModel.Interfaces
         IInsurancePolicyBuilder SetInsurancePolicyCategory(IList<InsurancePolicyCategory> insurancePolicyCategories);
         IInsurancePolicyBuilder SetCustomer(Customer customer);
         IInsurancePolicyBuilder SetWarranties();
-        IInsurancePolicyBuilder SetDetailItem(InsurancePolicyTemplate insurancePolicyTemplate);
+        IInsurancePolicyBuilder SetDetailItems(InsurancePolicyTemplate insurancePolicyTemplate);
         
         InsurancePolicy Build();
     }

@@ -14,6 +14,6 @@ namespace DAL.BuilderModel.Interfaces
         IBykeInsurancePolicyBuilder SetInsuredValue();
         IBykeInsurancePolicyBuilder SetRiskCategory();
         IBykeInsurancePolicyBuilder SetConfigurationModel(IList<ConfigurationModel> bykeConfigurationModels);
-        VehicleInsurancePolicy Build();
+        Vehicle Build();
     }
 }

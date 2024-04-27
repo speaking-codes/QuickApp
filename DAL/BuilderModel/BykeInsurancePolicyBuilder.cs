@@ -100,22 +100,6 @@ namespace DAL.BuilderModel
             return this;
         }
 
-        public override IInsurancePolicyBuilder SetWarranties()
-        {
-            _vehicleInsurancePolicy.WarrantySelecteds=new List<WarrantySelected>();
-            _vehicleInsurancePolicy.WarrantySelecteds.Add(new WarrantySelected { WarrantyAvaible = _vehicleInsurancePolicy.InsurancePolicyCategory.WarrantyAvaibles.Where(x => x.IsPrimary).FirstOrDefault() });
-            var warranties = _vehicleInsurancePolicy.InsurancePolicyCategory.WarrantyAvaibles.Where(x=>!x.IsPrimary).ToList();
-
-            while (_vehicleInsurancePolicy.WarrantySelecteds.Count < 3)
-            {
-                var index = Random.Next(warranties.Count);
-                if (!_vehicleInsurancePolicy.WarrantySelecteds.Any(x=> x.WarrantyAvaible.Id == warranties[index].Id))
-                    _vehicleInsurancePolicy.WarrantySelecteds.Add(new WarrantySelected { WarrantyAvaible = warranties[index] });
-            }
-
-            return this;
-        }
-
         public override IInsurancePolicyBuilder SetDetailItem(InsurancePolicyTemplate insurancePolicyTemplate)
         {
             return this.SetConfigurationModel(insurancePolicyTemplate.CarConfigurationModels)
