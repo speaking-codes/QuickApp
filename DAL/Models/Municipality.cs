@@ -24,5 +24,7 @@ namespace DAL.Models
         public virtual IList<LargeBuilding> LargeBuildings { get; set; }
 
         public virtual IList<House> Houses { get; set; }
+
+        public virtual IList<Business> Businesss { get; set; }
     }
 }

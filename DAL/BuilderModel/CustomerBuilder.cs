@@ -187,9 +187,9 @@ namespace DAL.BuilderModel
 
             IList<ProfessionType> tempProfessionTypes = null;
             if (contractType.IsSubordinateEmployment)
-                tempProfessionTypes = professionTypes.Where(x => !x.IsFreelancer).ToList();
+                tempProfessionTypes = professionTypes.Where(x => x.IsFreelancer.HasValue && !x.IsFreelancer).ToList();
             else
-                tempProfessionTypes = professionTypes.Where(x => x.IsFreelancer).ToList();
+                tempProfessionTypes = professionTypes.Where(x => !x.IsFreelancer.HasValue || x.IsFreelancer).ToList();
 
             var i = _random.Next(tempProfessionTypes.Count);
             _customer.ProfessionTypeId = tempProfessionTypes[i].Id;

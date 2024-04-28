@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.BuilderModel.Exstensions
+namespace DAL.Exstensions
 {
     public static class VehicleExstension
     {
@@ -41,4 +41,5 @@ namespace DAL.BuilderModel.Exstensions
             return vehicle;
         }
     }
+
 }

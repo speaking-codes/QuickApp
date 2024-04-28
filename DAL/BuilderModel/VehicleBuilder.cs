@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL.BuilderModel.Exstensions;
 using DAL.BuilderModel.Interfaces;
 using DAL.BuilderModelTemplate;
+using DAL.Exstensions;
 using DAL.Helpers;
 using DAL.Models;
 
@@ -25,17 +26,23 @@ namespace DAL.BuilderModel
             InsurancePolicy.IsLuxuryPolicy = InsurancePolicy.IsLuxuryPolicy;
             return this;
         }
-        
+
         public override IInsurancePolicyBuilder SetDetailItems(InsurancePolicyTemplate insurancePolicyTemplate)
         {
+            var maxVehicles = Random.Next(1, 2);
             InsurancePolicy.Vehicles = new List<Vehicle>();
-            var vehicle = new Vehicle();
-            vehicle.SetConfigurationModel(Random, insurancePolicyTemplate.ConfigurationModels)
-                   .SetLicensePlate(Random)
-                   .SetCommercialValue(Random)
-                   .SetInsuredValue()
-                   .SetRiskCategory(Random);
-            InsurancePolicy.Vehicles.Add(vehicle);
+            Vehicle vehicle;
+
+            for (var i = 0; i < maxVehicles; i++)
+            {
+                vehicle = new Vehicle();
+                vehicle = vehicle.SetConfigurationModel(Random, insurancePolicyTemplate.ConfigurationModels)
+                                .SetLicensePlate(Random)
+                                .SetCommercialValue(Random)
+                                .SetInsuredValue()
+                                .SetRiskCategory(Random);
+                InsurancePolicy.Vehicles.Add(vehicle);
+            }
             return this;
         }
     }

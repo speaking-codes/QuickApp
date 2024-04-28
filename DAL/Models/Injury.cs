@@ -13,9 +13,9 @@ namespace DAL.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
-        public GenderType Gender { get; set; }
+        public EnumGender Gender { get; set; }
         public bool IsInjuryPrivateLife { get; set; }
-        public bool IsInjuryProfessionalLine { get; set; }
+        public bool IsInjuryProfessionalLife { get; set; }
 
         public virtual KinshipRelationshipType KinshipRelationshipType { get; set; }
 

@@ -21,7 +21,6 @@ namespace DAL.Core.Helpers
                     value.Add(item);
             }
         }
-
         //public static string GetItemDescription(this IEnumerable<Travel> travels)
         //{
         //    var itemDescription = new StringBuilder(string.Empty);
@@ -48,4 +47,4 @@ namespace DAL.Core.Helpers
         //    return itemDescription.ToString();
         //}
     }
-    }
+}

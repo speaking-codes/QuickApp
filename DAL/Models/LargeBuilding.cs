@@ -14,6 +14,7 @@ namespace DAL.Models
         public int BuildingNumbers { get; set; }
         public int RoomNumbers { get; set; }
         public float PercentageResidentialUse { get; set; }
+        public int CommercialActivityNumbers { get; set; }
         public bool HasCommercialActivities { get; set; }
 
         public virtual Municipality Municipality { get; set; }

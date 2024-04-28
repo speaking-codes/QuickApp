@@ -30,6 +30,7 @@ namespace DAL.Models
         public virtual IList<LargeBuilding> LargeBuildings { get; set; }
         public virtual IList<Injury> Injuries { get; set; }
         public virtual IList<Illness> Illnesses { get; set; }
+        public virtual IList<Business> Businesss { get; set; }
 
         public virtual Customer Customer { get; set; }
 

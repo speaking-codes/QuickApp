@@ -41,7 +41,8 @@ namespace DAL
         IIncomeTypeRepository IncomeTypes { get; }
         ISportEventTypeRepository SportEventTypes { get; }
         IGenderTypeRepository GenderTypes { get; }
-        
+        IBusinessTypeRepository BusinessTypes { get; }
+
         IVehicleRepository Vehicles { get;  }
         IPetRepository Pets { get;  }
         ISportEventRepository SportEvents { get;  }
@@ -50,6 +51,7 @@ namespace DAL
         ILargeBuildingRepository LargeBuildings { get;  }
         IInjuryRepository Injuries { get;  }
         IIllnessRepository Illnesses { get;  }
+        IBusinessRepository Businesses { get; }
 
         bool IsTransactionOpened { get; }
 

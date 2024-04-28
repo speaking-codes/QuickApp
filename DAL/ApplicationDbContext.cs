@@ -76,6 +76,9 @@ namespace DAL
         public DbSet<WarrantyAvaible> WarrantyAvaibles { get; set; }
         public DbSet<WarrantySelected> WarrantySelecteds { get; set; }
 
+        public DbSet<SportEventType> SportEventTypes { get; set; }
+        public DbSet<BusinessType> BusinessTypes { get; set; }
+
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<SportEvent> SportEvents { get; set; }
@@ -84,6 +87,7 @@ namespace DAL
         public DbSet<LargeBuilding> LargeBuildings { get; set; }
         public DbSet<Injury> Injuries { get; set; }
         public DbSet<Illness> Illnesses { get; set; }
+        public DbSet<Business> Businesss { get; set; }
 
         public DbSet<KinshipRelationshipType> KinshipRelationshipTypes { get; set; }
 
@@ -301,6 +305,15 @@ namespace DAL
 
             #region Insurance Policy
 
+            builder.Entity<KinshipRelationshipType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<KinshipRelationshipType>().ToTable($"App{nameof(KinshipRelationshipTypes)}");
+
+            builder.Entity<SportEventType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<SportEventType>().ToTable($"App{nameof(SportEventTypes)}");
+
+            builder.Entity<BusinessType>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<BusinessType>().ToTable($"App{nameof(BusinessTypes)}");
+
             builder.Entity<SalesLineType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<SalesLineType>().Property(c => c.SalesLineCode).HasMaxLength(5).IsFixedLength().IsRequired();
             builder.Entity<SalesLineType>().Property(c => c.BackGroundColor).HasMaxLength(60).IsRequired(false);
@@ -342,9 +355,8 @@ namespace DAL
             builder.Entity<LargeBuilding>().ToTable($"App{nameof(LargeBuildings)}");
             builder.Entity<Injury>().ToTable($"App{nameof(Injuries)}");
             builder.Entity<Illness>().ToTable($"App{nameof(Illnesses)}");
+            builder.Entity<Business>().ToTable($"App{nameof(Businesss)}");
 
-            builder.Entity<KinshipRelationshipType>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<KinshipRelationshipType>().ToTable($"App{nameof(KinshipRelationshipTypes)}");
 
             builder.Entity<CustomerLearningFeature>().Property(c => c.Id).ValueGeneratedOnAdd();
             builder.Entity<CustomerLearningFeature>().HasKey(c => c.Id);

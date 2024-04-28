@@ -48,6 +48,7 @@ namespace DAL
         private IIncomeTypeRepository _incomeTypes;
         private ISportEventTypeRepository _sportEventTypes;
         private IGenderTypeRepository _genderTypes;
+        private IBusinessTypeRepository _businessTypes;
 
         private IVehicleRepository _vehicles;
         private IPetRepository _pets;
@@ -57,7 +58,7 @@ namespace DAL
         private ILargeBuildingRepository _largeBuildings;
         private IInjuryRepository _injuries;
         private IIllnessRepository _illnesses;
-
+        private IBusinessRepository _businesses;
 
         private bool _disposedValue;
         private IDbContextTransaction _transaction;
@@ -269,6 +270,15 @@ namespace DAL
             }
         }
 
+        public IBusinessTypeRepository BusinessTypes
+        {
+            get
+            {
+                _businessTypes ??= new BusinessTypeRepository(_context);
+                return _businessTypes;
+            }
+        }
+
         public IVehicleRepository Vehicles
         {
             get
@@ -338,6 +348,15 @@ namespace DAL
             {
                 _illnesses ??= new IllnessRepository(_context);
                 return _illnesses;
+            }
+        }
+
+        public IBusinessRepository Businesses
+        {
+            get
+            {
+                _businesses ??= new BusinessRepository(_context);
+                return _businesses;
             }
         }
 
