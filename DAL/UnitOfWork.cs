@@ -47,7 +47,7 @@ namespace DAL
         private IBreedPetDetailTypeRepository _breedPetDetailTypes;
         private IIncomeTypeRepository _incomeTypes;
         private ISportEventTypeRepository _sportEventTypes;
-        private IGenderTypeRepository _genderTypes;
+        //private IGenderTypeRepository _genderTypes;
         private IBusinessTypeRepository _businessTypes;
 
         private IVehicleRepository _vehicles;
@@ -261,14 +261,14 @@ namespace DAL
             }
         }
 
-        public IGenderTypeRepository GenderTypes
-        {
-            get
-            {
-                _genderTypes ??= new GenderTypeRepository(_context);
-                return _genderTypes;
-            }
-        }
+        //public IGenderTypeRepository GenderTypes
+        //{
+        //    get
+        //    {
+        //        _genderTypes ??= new GenderTypeRepository(_context);
+        //        return _genderTypes;
+        //    }
+        //}
 
         public IBusinessTypeRepository BusinessTypes
         {

@@ -187,9 +187,9 @@ namespace DAL.BuilderModel
 
             IList<ProfessionType> tempProfessionTypes = null;
             if (contractType.IsSubordinateEmployment)
-                tempProfessionTypes = professionTypes.Where(x => x.IsFreelancer.HasValue && !x.IsFreelancer).ToList();
+                tempProfessionTypes = professionTypes.Where(x => x.IsFreelancer.HasValue && !x.IsFreelancer.Value).ToList();
             else
-                tempProfessionTypes = professionTypes.Where(x => !x.IsFreelancer.HasValue || x.IsFreelancer).ToList();
+                tempProfessionTypes = professionTypes.Where(x => !x.IsFreelancer.HasValue || x.IsFreelancer.Value).ToList();
 
             var i = _random.Next(tempProfessionTypes.Count);
             _customer.ProfessionTypeId = tempProfessionTypes[i].Id;
@@ -197,45 +197,18 @@ namespace DAL.BuilderModel
             return this;
         }
 
-        public ICustomerBuilder SetIncome(IList<double> incomes)
+        public ICustomerBuilder SetIncome()
         {
-            var i = _random.Next(incomes.Count);
-            var incomeBase = incomes[i] * (1 + _random.NextDouble());
-            var contractType = (EnumContractType)_customer.ContractTypeId;
+            double annualIncome;
+            if ((_random.Next() % 2) == 0)
+                annualIncome = _customer.ProfessionType.MinAnnualGrossIncome * (1 + _random.NextDouble());
+            else
+                annualIncome = _customer.ProfessionType.MaxAnnualGrossIncome * _random.NextDouble();
 
-            switch (contractType)
-            {
-                case EnumContractType.None:
-                    break;
-                case EnumContractType.Contratto_A_Termine:
-                    incomeBase = incomeBase * 0.8;
-                    break;
-                case EnumContractType.Contratto_Tempo_Indeterminato:
-                    incomeBase = incomeBase * 0.9;
-                    break;
-                case EnumContractType.Contratto_Apprendistato:
-                    incomeBase = incomeBase * 0.75;
-                    break;
-                case EnumContractType.Partita_Iva:
-                    incomeBase = incomeBase * 1.45;
-                    break;
-                case EnumContractType.Contratto_CO_CO_PRO:
-                case EnumContractType.Contratto_CO_CO_CO:
-                case EnumContractType.Contratto_Somministrazione:
-                case EnumContractType.Contratto_Lavoro_Intermittente:
-                    incomeBase = incomeBase * 0.65;
-                    break;
-                case EnumContractType.Contratto_Lavoro_Part_Time:
-                    incomeBase = incomeBase * 0.5;
-                    break;
-                case EnumContractType.Contratto_Lavoro_Domicilio:
-                    incomeBase = incomeBase * 1.20;
-                    break;
-                default:
-                    break;
-            }
+            if (annualIncome < _customer.ProfessionType.MinAnnualGrossIncome)
+                annualIncome = _customer.ProfessionType.MinAnnualGrossIncome;
 
-            _customer.Income = incomeBase;
+            _customer.Income = annualIncome;
 
             return this;
         }

@@ -43,6 +43,6 @@ namespace DAL.Repositories
             _appContext.ConfigurationModels
                        .Include(x => x.Model)
                        .ThenInclude(x => x.Brand)
-                       .Where(x => x.VehicleInsurancePolicies.Any(y => y.Id == idPolicy));
+                       .Where(x => x.Vehicles.Any(y => y.InsurancePolicy.Id == idPolicy));
     }
 }

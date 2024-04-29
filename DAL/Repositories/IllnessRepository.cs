@@ -1,5 +1,6 @@
 ﻿using DAL.Models;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,13 @@ namespace DAL.Repositories
         public IllnessRepository(ApplicationDbContext context) : base(context) { }
 
         public IQueryable<Illness> GetIllnesses(int insurancePolicyId) =>
-            _appContext.Illnesses.Where(x => x.InsurancePolicy.Id == insurancePolicyId);
+            _appContext.Illnesses
+                       .Include(x => x.KinshipRelationshipType)
+                       .Where(x => x.InsurancePolicy.Id == insurancePolicyId);
 
         public IQueryable<Illness> GetIllnesses(string insurancePolicyCode)=>
-            _appContext.Illnesses.Where(x=>x.InsurancePolicy.InsurancePolicyCode== insurancePolicyCode);
+            _appContext.Illnesses
+                       .Include(x => x.KinshipRelationshipType)
+                       .Where(x=>x.InsurancePolicy.InsurancePolicyCode== insurancePolicyCode);
     }
 }

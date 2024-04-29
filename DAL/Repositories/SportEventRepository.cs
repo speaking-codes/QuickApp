@@ -1,5 +1,6 @@
 ﻿using DAL.Models;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,14 @@ namespace DAL.Repositories
 
         public SportEventRepository(ApplicationDbContext context) : base(context) { }
 
-        public IQueryable<SportEvent> GetSportEvents(int insurancePolicyId)=>
-            _appContext.SportEvents.Where(x=>x.InsurancePolicy.Id== insurancePolicyId);
+        public IQueryable<SportEvent> GetSportEvents(int insurancePolicyId) =>
+            _appContext.SportEvents
+                       .Include(x => x.SportEventType)
+                       .Where(x => x.InsurancePolicy.Id == insurancePolicyId);
 
-        public IQueryable<SportEvent> GetSportEvents(string insurancePolicyCode)=>
-            _appContext.SportEvents.Where(x=>x.InsurancePolicy.InsurancePolicyCode== insurancePolicyCode);
+        public IQueryable<SportEvent> GetSportEvents(string insurancePolicyCode) =>
+            _appContext.SportEvents
+                       .Include(x => x.SportEventType)
+                       .Where(x => x.InsurancePolicy.InsurancePolicyCode == insurancePolicyCode);
     }
 }

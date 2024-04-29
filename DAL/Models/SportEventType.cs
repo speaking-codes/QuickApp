@@ -10,9 +10,10 @@ namespace DAL.Models
     {
         public byte Id { get; set; }
         public string SportEventTypeName { get; set; }
-        public bool HasMaxNumberMembers { get; set; }
-        public int MinNumberMembers { get; set; }
-        public int? MaxNumberMembers { get; set; }
+        public bool IsTeamCompetition { get; set; }
+        public int? MaxNumberTeams { get; set; }
+        public int? MaxNumberForTeam { get; set; }
+        public int MaxTotalNumberMembers { get; set; }
 
         public virtual IList<SportEvent> SportEvents { get; set; }
     }

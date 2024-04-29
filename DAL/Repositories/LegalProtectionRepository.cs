@@ -1,5 +1,6 @@
 ﻿using DAL.Models;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,13 @@ namespace DAL.Repositories
         public LegalProtectionRepository(ApplicationDbContext context) : base(context) { }
 
         public IQueryable<LegalProtection> GetLegalProtections(int insurancePolicyId) =>
-             _appContext.LegalProtections.Where(x => x.InsurancePolicy.Id == insurancePolicyId);
+             _appContext.LegalProtections
+                        .Include(x => x.KinshipRelationshipType)
+                        .Where(x => x.InsurancePolicy.Id == insurancePolicyId);
 
         public IQueryable<LegalProtection> GetLegalProtections(string insurancePolicyCode)=>
-            _appContext.LegalProtections.Where(x=>x.InsurancePolicy.InsurancePolicyCode== insurancePolicyCode);
+            _appContext.LegalProtections
+                       .Include(x => x.KinshipRelationshipType)
+                       .Where(x=>x.InsurancePolicy.InsurancePolicyCode== insurancePolicyCode);
     }
 }

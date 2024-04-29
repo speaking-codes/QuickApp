@@ -34,7 +34,7 @@ namespace DAL.Exstensions
         }
         public static House SetIsFirstHouse(this House house, Random random)
         {
-            house.IsFirstHouse = (random.Next()%2) == 0;
+            house.IsFirstHouse = (random.Next() % 2) == 0;
             return house;
         }
         public static House SetMunicipality(this House house, Random random, IList<Municipality> municipalities)
@@ -43,7 +43,28 @@ namespace DAL.Exstensions
             house.Municipality = municipalities[i];
             return house;
         }
+        public static string GetHouseDescription(this House house)
+        {
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Immobile presso: {house.Location}");
+            sb.Append($" - Nel comune: {house.Municipality.PostalCode} {house.Municipality.MunicipalityName} ({house.Municipality.Province.ProvinceAbbreviation})");
+            sb.Append($" - Estensione in mq: {house.ExtensionSquareMeters}");
+            sb.Append($" - Numero piani immobile: {house.NumberBuildingFloors}");
+            sb.Append($" - Piano appartamento: {house.HomeFloorNumber}");
 
+            if (house.IsFirstHouse)
+                sb.Append(" - Abitazione principale");
+            else
+                sb.Append(" - Abitazione secondaria");
 
+            return sb.ToString();
+        }
+        public static IList<string> GetHouseDescriptions(this IEnumerable<House> houses)
+        {
+            var houseDescriptions = new List<string>();
+            foreach (var item in houses)
+                houseDescriptions.Add(item.GetHouseDescription());
+            return houseDescriptions;
+        }
     }
 }

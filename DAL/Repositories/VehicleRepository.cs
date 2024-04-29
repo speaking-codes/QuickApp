@@ -1,5 +1,6 @@
 ﻿using DAL.Models;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,19 @@ namespace DAL.Repositories
         public VehicleRepository(ApplicationDbContext context) : base(context) { }
 
         public IQueryable<Vehicle> GetVehicles(int insurancePolicyId) =>
-               _appContext.Vehicles.Where(x => x.InsurancePolicy.Id == insurancePolicyId);
+               _appContext.Vehicles
+                          .Include(x => x.ConfigurationModel)
+                                .ThenInclude(y => y.Model)
+                                    .ThenInclude(z => z.Brand)
+                                        .ThenInclude(k => k.BrandType)
+                          .Where(x => x.InsurancePolicy.Id == insurancePolicyId);
 
         public IQueryable<Vehicle> GetVehicles(string insurancePolicyCode)=>
-            _appContext.Vehicles.Where(x=>x.InsurancePolicy.InsurancePolicyCode== insurancePolicyCode);
+            _appContext.Vehicles
+                       .Include(x => x.ConfigurationModel)
+                                .ThenInclude(y => y.Model)
+                                    .ThenInclude(z => z.Brand)
+                                        .ThenInclude(k => k.BrandType)
+                       .Where(x=>x.InsurancePolicy.InsurancePolicyCode== insurancePolicyCode);
     }
 }

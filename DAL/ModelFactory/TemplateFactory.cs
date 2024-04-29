@@ -96,7 +96,7 @@ namespace DAL.ModelFactory
         private IList<ProfessionType> GetProfessionTypes() => _unitOfWork.ProfessionTypes.GetAll();
         private IList<InsurancePolicyCategory> GetInsurancePolicyCategories() => _unitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories().ToList();
         private IList<ConfigurationModel> GetConfigurationModels() => _unitOfWork.ConfigurationModels.GetConfigurationModels().ToList();
-        private IList<GenderType> GetGenderTypes() => _unitOfWork.GenderTypes.GetAll();
+        //private IList<GenderType> GetGenderTypes() => _unitOfWork.GenderTypes.GetAll();
         private IList<SportEventType> GetSportEventTypes() => _unitOfWork.SportEventTypes.GetAll();
         private IList<KinshipRelationshipType> GetKinshipRelationshipTypes() => _unitOfWork.KinshipRelationshipTypes.GetAll();
         private IList<BreedPetDetailType> GetBreedPetDetailTypes() => _unitOfWork.BreedPetDetailTypes.GetAll();
@@ -120,7 +120,7 @@ namespace DAL.ModelFactory
 
             customerModel.LastNames = getLastName(_lastNamePath);
             customerModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
-            customerModel.GenderTypes= GetGenderTypes();
+            //customerModel.GenderTypes= GetGenderTypes();
             customerModel.FamilyTypes = GetFamilyTypes();
             customerModel.MaritalStatuses = GetMaritalStatusTypes();
             customerModel.BirthMunicipalities = GetMunicipalities();
@@ -141,7 +141,7 @@ namespace DAL.ModelFactory
             var insurancePolicyModel = new InsurancePolicyTemplate();
             insurancePolicyModel.LastNames = getLastName(_lastNamePath);
             insurancePolicyModel.FirstNameTemplates = getFirstName(_firstNameMalePath, _firstNameFemalePath);
-            insurancePolicyModel.GenderTypes= GetGenderTypes();
+            //insurancePolicyModel.GenderTypes= GetGenderTypes();
             insurancePolicyModel.PetNames = getPetNames(_petNamePath);
             insurancePolicyModel.InsurancePolicyCategories = GetInsurancePolicyCategories();
             insurancePolicyModel.ConfigurationModels = GetConfigurationModels();

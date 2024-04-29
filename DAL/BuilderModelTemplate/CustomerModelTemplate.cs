@@ -11,7 +11,7 @@ namespace DAL.BuilderModelTemplate
     {
         public IList<string> LastNames { get; set; }
         public IList<FirstNameTemplate> FirstNameTemplates { get; set; }
-        public IList<GenderType> GenderTypes { get; set; }
+        //public IList<GenderType> GenderTypes { get; set; }
         public AdressModelTemplate AddressTemplate { get; set; }
         public DeliveryModelTemplate DeliveryModelTemplate { get; set; }
         public virtual IList<FamilyType> FamilyTypes { get; set; }

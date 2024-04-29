@@ -1,4 +1,6 @@
 ﻿using DAL.BuilderModel;
+using DAL.BuilderModel.Interfaces;
+using DAL.Exstensions;
 using DAL.Mapping;
 using DAL.Models;
 using DAL.ModelsNoSql;
@@ -47,64 +49,89 @@ namespace DAL.Core
             return customerInsuranceCoverages.ToInsuranceCoverageChart(customerCode);
         }
 
-        private VehicleInsurancePolicy getVehicleInsurancePolicy(string insurancePolicyCode) =>
-            _unitOfWork.InsurancePolicies.GetVehicleInsurancePolicy(insurancePolicyCode).FirstOrDefault();
-        private FamilyInsurancePolicy getFamilyInsurancePolicy(string insurancePolicyCode) =>
-            _unitOfWork.InsurancePolicies.GetFamilyInsurancePolicy(insurancePolicyCode).FirstOrDefault();
-        private PetInsurancePolicy getPetInsurancePolicy(string insurancePolicyCode) =>
-            _unitOfWork.InsurancePolicies.GetPetInsurancePolicy(insurancePolicyCode).FirstOrDefault();
-        private HouseInsurancePolicy GetHouseInsurancePolicy(string insurancePolicyCode) =>
-            _unitOfWork.InsurancePolicies.GetHouseInsurancePolicy(insurancePolicyCode).FirstOrDefault();
-
+        private IList<string> getDescriptionEmpty(InsurancePolicy insurancePolicy) => new List<string>();
+        private IList<string> getDescriptionVehicles(InsurancePolicy insurancePolicy)
+        {
+            var vehicles = _unitOfWork.Vehicles.GetVehicles(insurancePolicy.Id);
+            return vehicles.GetVehicleDescriptions();
+        }
+        private IList<string> getDescriptionPets(InsurancePolicy insurancePolicy)
+        {
+            var pets = _unitOfWork.Pets.GetPets(insurancePolicy.Id);
+            return pets.GetPetDescriptions();
+        }
+        private IList<string> getDescriptionSportEvents(InsurancePolicy insurancePolicy)
+        {
+            var sportEvents = _unitOfWork.SportEvents.GetSportEvents(insurancePolicy.Id);
+            return new List<string>();
+        }
+        private IList<string> getDescriptionHouses(InsurancePolicy insurancePolicy)
+        {
+            var houses = _unitOfWork.Houses.GetHouses(insurancePolicy.Id);
+            return houses.GetHouseDescriptions();
+        }
+        private IList<string> getDescriptionLargeBuildings(InsurancePolicy insurancePolicy)
+        {
+            var largeBuildings=_unitOfWork.LargeBuildings.GetLargeBuildings(insurancePolicy.Id);
+            return new List<string>();
+        }
+        private IList<string> getDescriptionInjuries(InsurancePolicy insurancePolicy)
+        {
+            var injuries = _unitOfWork.Injuries.GetInjuries(insurancePolicy.Id);
+            return new List<string>();
+        }
+        private IList<string> getDescriptionIllnesses(InsurancePolicy insurancePolicy)
+        {
+            var illnesses = _unitOfWork.Illnesses.GetIllnesses(insurancePolicy.Id);
+            return new List<string>();
+        }
+        private IList<string> getDescriptionLegalProtection(InsurancePolicy insurancePolicy)
+        {
+            var legalProtections = _unitOfWork.LegalProtections.GetLegalProtections(insurancePolicy.Id);
+            return legalProtections.GetLegalProtectionDescriptions();
+        }
         private InsuranceCoverageGrid getInsuranceCoverageGrid(InsurancePolicy insurancePolicy)
         {
             var enumInsurancePolicyCategory = (EnumInsurancePolicyCategory)insurancePolicy.InsurancePolicyCategoryId;
+            var insuranceCoverageGrid = insurancePolicy.ToInsuranceCoverageGrid();
 
-            //switch (enumInsurancePolicyCategory)
-            //{
-            //    case EnumInsurancePolicyCategory.None:
-            //        break;
-            //    case EnumInsurancePolicyCategory.Auto:
-            //    case EnumInsurancePolicyCategory.Moto:
-            //        return getVehicleInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-            //    case EnumInsurancePolicyCategory.Imbarcazione:
-            //        break;
-            //    case EnumInsurancePolicyCategory.Viaggi:
-            //        break;
-            //    case EnumInsurancePolicyCategory.Vacanza:
-            //        break;
-            //    case EnumInsurancePolicyCategory.PerditaBagaglio:
-            //        break;
-            //    case EnumInsurancePolicyCategory.AttivitàProfessionale:
-            //        break;
-            //    case EnumInsurancePolicyCategory.ImmobileAziendale:
-            //        break;
-            //    case EnumInsurancePolicyCategory.AttivitàCommerciale:
-            //        break;
-            //    case EnumInsurancePolicyCategory.AttivitàAgricola:
-            //        break;
-            //    case EnumInsurancePolicyCategory.AllevamentoBestiame:
-            //        break;
-            //    case EnumInsurancePolicyCategory.FamiliareeCongiunto:
-            //        return getFamilyInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-            //    case EnumInsurancePolicyCategory.AnimaleDomestico:
-            //        return getPetInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-            //    case EnumInsurancePolicyCategory.Casa:
-            //        return GetHouseInsurancePolicy(insurancePolicy.InsurancePolicyCode).ToInsuranceCoverageGrid();
-            //    case EnumInsurancePolicyCategory.Infortunio:
-            //        break;
-            //    case EnumInsurancePolicyCategory.Malattia:
-            //        break;
-            //    case EnumInsurancePolicyCategory.VisiteSpecialistiche:
-            //        break;
-            //    case EnumInsurancePolicyCategory.GrandiInterventi:
-            //        break;
-            //    case EnumInsurancePolicyCategory.CureOdontoiatriche:
-            //        break;
-            //    default:
-            //        break;
-            //}
-            return new InsuranceCoverageGrid();
+            switch (enumInsurancePolicyCategory)
+            {
+                case EnumInsurancePolicyCategory.None:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionEmpty(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.RCA:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionVehicles(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.ARD:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionPets(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.RC_DIVERSI:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionSportEvents(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.MULTIGARANZIA_ABITAZIONE:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionHouses(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.GLOBALE_FABBRICATI:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionLargeBuildings(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.INFORTUNI:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionInjuries(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.MALATTIA:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionIllnesses(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.INCENDIO_FURTO:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionEmpty(insurancePolicy);
+                    break;
+                case EnumInsurancePolicyCategory.TUTELA_GIUDIZIARIA:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionLegalProtection(insurancePolicy);
+                    break;
+                default:
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionEmpty(insurancePolicy);
+                    break;
+            }
+            return insuranceCoverageGrid;
         }
 
         private InsuranceCoverageSummary getInsuranceCoverageSummary(string customerCode)
@@ -143,7 +170,7 @@ namespace DAL.Core
             var insuranceCoverageSummary = getInsuranceCoverageSummary(_customerInsurancePolicyQueue.CustomerCode);
             UpdateInsuranceCoverageSummary(insuranceCoverageSummary);
 
-          await  UpdateLearningTable(_customerInsurancePolicyQueue);
+            await UpdateLearningTable(_customerInsurancePolicyQueue);
 
         }
     }

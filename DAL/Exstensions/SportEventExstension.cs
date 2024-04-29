@@ -11,6 +11,7 @@ namespace DAL.Exstensions
 {
     public static class SportEventExstension
     {
+        public string SportEventTitle { get; set; }
         public static SportEvent SetStartDate(this SportEvent sportEvent, Random random)
         {
             var days = random.Next(10, 60);
@@ -35,12 +36,16 @@ namespace DAL.Exstensions
             sportEvent.Municipality = municipalities[index];
             return sportEvent;
         }
+        public int? NumberTeams { get; set; }
+        public int? NumberForTeam { get; set; }
+        public int TotalNumberMembers { get; set; }
+
         public static SportEvent SetNumberMembers(this SportEvent sportEvent, Random random)
         {
-            if (sportEvent.SportEventType != null && sportEvent.SportEventType.HasMaxNumberMembers && sportEvent.SportEventType.MaxNumberMembers.HasValue)
-                sportEvent.NumberMembers = random.Next(sportEvent.SportEventType.MinNumberMembers, sportEvent.SportEventType.MaxNumberMembers.Value);
+            if (sportEvent.SportEventType != null && sportEvent.SportEventType.IsTeamCompetition && sportEvent.SportEventType.MaxNumberMembers.HasValue)
+                sportEvent.NumberMembers = random.Next(sportEvent.SportEventType.MaxNumberTeams, sportEvent.SportEventType.MaxNumberMembers.Value);
             else
-                sportEvent.NumberMembers = random.Next(maxValue: sportEvent.SportEventType.MinNumberMembers);
+                sportEvent.NumberMembers = random.Next(maxValue: sportEvent.SportEventType.MaxNumberTeams);
             return sportEvent;
         }
         public static SportEvent SetLocation(this SportEvent sportEvent, Random random, AdressModelTemplate adressModelTemplate)

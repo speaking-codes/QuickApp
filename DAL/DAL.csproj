@@ -17,10 +17,12 @@
     <Compile Remove="BuilderModel\HouseInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\Interfaces\IBykeInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\Interfaces\ICarInsurancePolicyBuilder.cs" />
+    <Compile Remove="BuilderModel\Interfaces\IPetInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\PetInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\SpecialisticExaminationsInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\TravelInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\VacationInsurancePolicyBuilder.cs" />
+    <Compile Remove="Models\AgeClassType.cs" />
     <Compile Remove="Models\AgeRatingCoefficient.cs" />
     <Compile Remove="Models\BaggageLossInsurancePolicy.cs" />
     <Compile Remove="Models\BaggageType.cs" />
@@ -42,9 +44,11 @@
     <Compile Remove="Repositories\AgeRatingCoefficientRepository.cs" />
     <Compile Remove="Repositories\BaggageTypeRepository.cs" />
     <Compile Remove="Repositories\CustomerInsuranceCategoryPolicyRatingRepository.cs" />
+    <Compile Remove="Repositories\GenderTypeRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IAgeRatingCoefficientRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IBaggageTypeRepository.cs" />
     <Compile Remove="Repositories\Interfaces\ICustomerInsuranceCategoryPolicyRatingRepository.cs" />
+    <Compile Remove="Repositories\Interfaces\IGenderTypeRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IHealthcareProvisionTypeRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IJobRalRatingCoefficientRepository.cs" />
     <Compile Remove="Repositories\Interfaces\IStructureTypeRepository.cs" />

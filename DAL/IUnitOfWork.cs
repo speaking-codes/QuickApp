@@ -40,7 +40,7 @@ namespace DAL
         IBreedPetDetailTypeRepository BreedPetDetailTypes { get; }
         IIncomeTypeRepository IncomeTypes { get; }
         ISportEventTypeRepository SportEventTypes { get; }
-        IGenderTypeRepository GenderTypes { get; }
+        //IGenderTypeRepository GenderTypes { get; }
         IBusinessTypeRepository BusinessTypes { get; }
 
         IVehicleRepository Vehicles { get;  }

@@ -36,5 +36,23 @@ namespace DAL.Exstensions
             pet.BreedPetDetailType = breedPetDetailTypes[i];
             return pet;
         }
+        public static string GetPetDescription(this Pet pet)
+        {
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Codice identificativo: {pet.PetIdentificationCode}");
+            sb.Append($" - Nome: {pet.PetName}");
+            sb.Append($" - Data di nascita: {pet.PetBirthDate.ToString("dd/MM/yyyy")}");
+            sb.Append($" - Tipo Animale: {pet.BreedPetDetailType.BreedPetType.PetType.PetTypeDescription}");
+            sb.Append($" - Razza: {pet.BreedPetDetailType.BreedPetType.BreedPetTypeDescription}");
+            sb.Append($" - Dettaglio razza: {pet.BreedPetDetailType.BreedPetDetailTypeDescription}");
+            return sb.ToString();
+        }
+        public static IList<string> GetPetDescriptions(this IEnumerable<Pet> pets)
+        {
+            var petDescriptions = new List<string>();
+            foreach (var item in pets)
+                petDescriptions.Add(item.GetPetDescription());
+            return petDescriptions;
+        }
     }
 }

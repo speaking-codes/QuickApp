@@ -24,7 +24,7 @@ namespace DAL.BuilderModel.Interfaces
         ICustomerBuilder SetContractType(IList<ContractType> contractTypes);
         ICustomerBuilder SetIncomeType(IList<IncomeType> incomeTypes, IList<ContractType> contractTypes);
         ICustomerBuilder SetProfessionType(IList<ProfessionType> professionTypes, IList<ContractType> contractTypes);
-        ICustomerBuilder SetIncome(IList<double> incomes);
+        ICustomerBuilder SetIncome();
 
         ICustomerBuilder SetDeliveries(DeliveryModelTemplate deliveryTemplate);
         ICustomerBuilder SetAddresses(AdressModelTemplate adressTemplate);

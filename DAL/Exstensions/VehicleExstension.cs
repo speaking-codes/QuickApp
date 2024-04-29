@@ -40,6 +40,21 @@ namespace DAL.Exstensions
             vehicle.RiskCategory = (byte)random.Next(1, 14);
             return vehicle;
         }
+        public static string GetVehicleDescription(this Vehicle vehicle)
+        {
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Targa: {vehicle.LicensePlate}");
+            sb.Append($" - {vehicle.ConfigurationModel.Model.Brand.BrandName}");
+            sb.Append($" - {vehicle.ConfigurationModel.Model.ModelName}");
+            sb.Append($"  - {vehicle.ConfigurationModel.ConfigurationDescription}");
+            return sb.ToString();
+        }
+        public static IList<string> GetVehicleDescriptions(this IEnumerable<Vehicle> vehicles)
+        {
+            var vehicleDescriptions=new List<string>();
+            foreach(var item in vehicles)
+                vehicleDescriptions.Add(item.GetVehicleDescription());
+            return vehicleDescriptions;
+        }
     }
-
 }

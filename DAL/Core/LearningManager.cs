@@ -264,7 +264,7 @@ namespace DAL.Core
             customerLearningFeature.ProfessionType = lineSplit[6].Trim();
 
             var profession = _professionTypeList.FirstOrDefault(x => x.ProfessionTypeDescription == customerLearningFeature.ProfessionType);
-            customerLearningFeature.IsFreelancer = profession.IsFreelancer;
+            customerLearningFeature.IsFreelancer = profession.IsFreelancer ?? false;
 
             var annualGrossIncome = double.Parse(lineSplit[7]);
             var incomeClassType = _incomeClassTypeList.FirstOrDefault(x => x.MinAnnualGrossIncome <= annualGrossIncome && (!x.MaxAnnualGrossIncome.HasValue || x.MaxAnnualGrossIncome >= annualGrossIncome));
@@ -356,7 +356,7 @@ namespace DAL.Core
                 IsSingle = customer.MaritalStatus.IsSingle,
                 ChildrenNumbers = customer.ChildrenNumber ?? 0,
                 ProfessionType = customer.ProfessionType.ProfessionTypeDescription,
-                IsFreelancer = customer.ProfessionType.IsFreelancer,
+                IsFreelancer = customer.ProfessionType.IsFreelancer ?? false,
                 Country = customer.Addresses.Where(x => x.IsPrimary).FirstOrDefault()?.Municipality.Province.ProvinceAbbreviation,
                 Region = customer.Addresses.Where(x => x.IsPrimary).FirstOrDefault()?.Municipality.Province.Region.RegionName,
             };

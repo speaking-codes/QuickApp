@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.BuilderModel.Exstensions;
-using DAL.BuilderModel.Interfaces;
+﻿using DAL.BuilderModel.Interfaces;
 using DAL.BuilderModelTemplate;
 using DAL.Exstensions;
-using DAL.Helpers;
 using DAL.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DAL.BuilderModel
 {

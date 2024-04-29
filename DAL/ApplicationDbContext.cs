@@ -27,9 +27,9 @@ namespace DAL
         public DbSet<IncomeType> IncomeTypes { get; set; }
         public DbSet<ProfessionType> ProfessionTypes { get; set; }
         public DbSet<ContractType> ContractTypes { get; set; }
-        public DbSet<GenderType> GenderTypes { get; set; }
+        //public DbSet<GenderType> GenderTypes { get; set; }
         public DbSet<MaritalStatusType> MaritalStatusTypes { get; set; }
-        public DbSet<AgeClassType> AgeClassTypes { get; set; }
+        //public DbSet<AgeClassType> AgeClassTypes { get; set; }
         public DbSet<IncomeClassType> IncomeClassTypes { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
@@ -130,8 +130,8 @@ namespace DAL
             builder.Entity<ContractType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<ContractType>().ToTable($"App{nameof(ContractTypes)}");
 
-            builder.Entity<GenderType>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<GenderType>().ToTable($"App{nameof(GenderTypes)}");
+            //builder.Entity<GenderType>().Property(c => c.Id).ValueGeneratedNever();
+            //builder.Entity<GenderType>().ToTable($"App{nameof(GenderTypes)}");
 
             builder.Entity<MaritalStatusType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<MaritalStatusType>().ToTable($"App{nameof(MaritalStatusTypes)}");
@@ -145,8 +145,8 @@ namespace DAL
             builder.Entity<ProfessionType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<ProfessionType>().ToTable($"App{nameof(ProfessionTypes)}");
 
-            builder.Entity<AgeClassType>().Property(c => c.Id).ValueGeneratedNever();
-            builder.Entity<AgeClassType>().ToTable($"App{nameof(AgeClassTypes)}");
+            //builder.Entity<AgeClassType>().Property(c => c.Id).ValueGeneratedNever();
+            //builder.Entity<AgeClassType>().ToTable($"App{nameof(AgeClassTypes)}");
 
             builder.Entity<IncomeClassType>().Property(c => c.Id).ValueGeneratedNever();
             builder.Entity<IncomeClassType>().ToTable($"App{nameof(IncomeClassTypes)}");

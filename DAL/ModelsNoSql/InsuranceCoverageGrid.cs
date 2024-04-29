@@ -20,8 +20,8 @@ namespace DAL.ModelsNoSql
         [BsonElement("CategoryType")]
         public string CategoryType { get; set; }
 
-        [BsonElement("ItemDescription")]
-        public string ItemDescription { get; set; }
+        [BsonElement("ItemDescriptions")]
+        public IList<string> ItemDescriptions { get; set; }
 
         [BsonElement("IssueDate")]
         public string IssueDate { get; set; }

@@ -45,7 +45,7 @@ namespace WorkerServiceCustomer
                                                .SetContractType(_customerTemplate.ContractTypes)
                                                .SetIncomeType(_customerTemplate.IncomeTypes, _customerTemplate.ContractTypes)
                                                .SetProfessionType(_customerTemplate.ProfessionTypes, _customerTemplate.ContractTypes)
-                                               .SetIncome(_customerTemplate.Incomes)
+                                               .SetIncome()
 
                                                .SetDeliveries(_customerTemplate.DeliveryModelTemplate)
                                                .SetAddresses(_customerTemplate.AddressTemplate)

@@ -36,6 +36,7 @@ namespace DAL.BuilderModel
                                .SetKinshipRelationshipType(Random, insurancePolicyTemplate.KinshipRelationshipTypes);
                 InsurancePolicy.Injuries.Add(injury);
             }
+            return this;
         }
 
     }
