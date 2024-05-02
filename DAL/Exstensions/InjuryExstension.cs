@@ -1,6 +1,7 @@
 ﻿using DAL.BuilderModel.Interfaces;
 using DAL.BuilderModelTemplate;
 using DAL.Enums;
+using DAL.Helpers;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,33 @@ namespace DAL.Exstensions
             var i = random.Next(kinshipRelationshipTypes.Count);
             injury.KinshipRelationshipType = kinshipRelationshipTypes[i];
             return injury;
+        }
+        public static string GetInjuryDescription(this Injury injury)
+        {
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Nominativo: {injury.LastName} {injury.FirstName}");
+
+            if (injury.Gender == EnumGender.Uomo)
+                sb.Append($" - Nato il: {injury.BirthDate.ToString("dd/MM/yyyy")}");
+            else
+                sb.Append($" - Nata il: {injury.BirthDate.ToString("dd/MM/yyyy")}");
+
+            sb.Append($" - Relazione: {injury.KinshipRelationshipType.KinshipRelationshipTypeName}");
+
+            if (injury.IsInjuryPrivateLife)
+                sb.Append(" - Infortunio vita privata");
+
+            if (injury.IsInjuryProfessionalLife)
+                sb.Append(" - Infortunio sfera professionale");
+
+            return sb.ToString();
+        }
+        public static IList<string> GetInjuryDescriptions(this IEnumerable<Injury> injuries)
+        {
+            var injuryDescriptions = new List<string>();
+            foreach (var item in injuries)
+                injuryDescriptions.Add(item.GetInjuryDescription());
+            return injuryDescriptions;
         }
     }
 }

@@ -16,5 +16,9 @@ namespace DAL.Repositories
         public MatrixCustomerInsurancePolicyRepository(DbContext context) : base(context)
         {
         }
+
+        public async Task<bool> HasItems() => await _appContext.MatrixUsersItems.AnyAsync();
+
+        public async Task<long> GetLastUserId() => await _appContext.MatrixUsersItems.MaxAsync(x => x.UserId);
     }
 }

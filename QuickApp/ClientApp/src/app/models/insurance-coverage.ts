@@ -3,7 +3,7 @@ export class InsuranceCoverageSummary {
     customerCode: string;
     code: string;
     categoryType: string;
-    itemDescription: string;
+    itemDescription: string[];
     issueDate: string;
     expiryDate: string;
     totalPrice: string;

@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerQueueConsumer", "CustomerQueueConsumer\CustomerQueueConsumer.csproj", "{516F6DDC-75AF-4A0A-878F-24A1D3FEDAAC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachineLearningModel", "MachineLearningModel\MachineLearningModel.csproj", "{26602E01-9508-4E18-B8D2-2475062D2550}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceCustomer", "WorkerServiceCustomer\WorkerServiceCustomer.csproj", "{2E75E817-83F9-4309-9B1B-50B7E13131EB}"
@@ -24,7 +22,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceInsurancePolic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceDeleteExipiredInsurancePolicy", "WorkerServiceDeleteExipiredInsurancePolicy\WorkerServiceDeleteExipiredInsurancePolicy.csproj", "{A726DB9D-A797-455D-BBE6-F4347C1A1DF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceMachineLearningTraining", "WorkerServiceMachineLearningTraining\WorkerServiceMachineLearningTraining.csproj", "{0F943525-7349-4351-ADC1-375DDDEBE637}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceMachineLearningTraining", "WorkerServiceMachineLearningTraining\WorkerServiceMachineLearningTraining.csproj", "{0F943525-7349-4351-ADC1-375DDDEBE637}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueueConsumer", "QueueConsumer\QueueConsumer.csproj", "{0C982322-996E-44C6-B231-BA706D77D569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceForRecommenderSystemTraining", "WorkerServiceForRecommenderSystemTraining\WorkerServiceForRecommenderSystemTraining.csproj", "{0D739BCA-F907-49AD-A3DB-696FD0347FFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,10 +42,6 @@ Global
 		{47A06C37-BEBE-4B67-9591-A4067E6C8398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47A06C37-BEBE-4B67-9591-A4067E6C8398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47A06C37-BEBE-4B67-9591-A4067E6C8398}.Release|Any CPU.Build.0 = Release|Any CPU
-		{516F6DDC-75AF-4A0A-878F-24A1D3FEDAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{516F6DDC-75AF-4A0A-878F-24A1D3FEDAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{516F6DDC-75AF-4A0A-878F-24A1D3FEDAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{516F6DDC-75AF-4A0A-878F-24A1D3FEDAAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{26602E01-9508-4E18-B8D2-2475062D2550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26602E01-9508-4E18-B8D2-2475062D2550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26602E01-9508-4E18-B8D2-2475062D2550}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -64,6 +62,14 @@ Global
 		{0F943525-7349-4351-ADC1-375DDDEBE637}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F943525-7349-4351-ADC1-375DDDEBE637}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F943525-7349-4351-ADC1-375DDDEBE637}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C982322-996E-44C6-B231-BA706D77D569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C982322-996E-44C6-B231-BA706D77D569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C982322-996E-44C6-B231-BA706D77D569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C982322-996E-44C6-B231-BA706D77D569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D739BCA-F907-49AD-A3DB-696FD0347FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D739BCA-F907-49AD-A3DB-696FD0347FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D739BCA-F907-49AD-A3DB-696FD0347FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D739BCA-F907-49AD-A3DB-696FD0347FFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

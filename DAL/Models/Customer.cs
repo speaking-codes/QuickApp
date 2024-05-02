@@ -14,7 +14,7 @@ namespace DAL.Models
         public string CustomerCode { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public EnumGender Gender { get; set; }
         public byte? ChildrenNumber { get; set; }
         public double? Income { get; set; }

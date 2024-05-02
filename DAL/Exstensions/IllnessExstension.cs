@@ -37,5 +37,26 @@ namespace DAL.Exstensions
             illness.KinshipRelationshipType = kinshipRelationshipTypes[i];
             return illness;
         }
+        public static string GetIllnessDescription(this Illness illness)
+        {
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Nominativo: {illness.LastName} {illness.FirstName}");
+
+            if (illness.Gender == EnumGender.Uomo)
+                sb.Append($" - Nato il: {illness.BirthDate.ToString("dd/MM/yyyy")}");
+            else
+                sb.Append($" - Nata il: {illness.BirthDate.ToString("dd/MM/yyyy")}");
+
+            sb.Append($" - Relazione: {illness.KinshipRelationshipType.KinshipRelationshipTypeName}");
+
+            return sb.ToString();
+        }
+        public static IList<string> GetIllnessDescriptions(this IEnumerable<Illness> illnesses)
+        {
+            var illnessDescriptions = new List<string>();
+            foreach (var item in illnesses)
+                illnessDescriptions.Add(item.GetIllnessDescription());
+            return illnessDescriptions;
+        }
     }
 }

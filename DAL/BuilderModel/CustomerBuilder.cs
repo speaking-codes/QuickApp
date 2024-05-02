@@ -197,16 +197,20 @@ namespace DAL.BuilderModel
             return this;
         }
 
-        public ICustomerBuilder SetIncome()
+        public ICustomerBuilder SetIncome(IList<ProfessionType> professionTypes)
         {
             double annualIncome;
-            if ((_random.Next() % 2) == 0)
-                annualIncome = _customer.ProfessionType.MinAnnualGrossIncome * (1 + _random.NextDouble());
-            else
-                annualIncome = _customer.ProfessionType.MaxAnnualGrossIncome * _random.NextDouble();
+            var professionType = professionTypes.Where(x => x.Id==_customer.ProfessionTypeId).FirstOrDefault();
+            if (professionType == null)
+                return this;
 
-            if (annualIncome < _customer.ProfessionType.MinAnnualGrossIncome)
-                annualIncome = _customer.ProfessionType.MinAnnualGrossIncome;
+            if ((_random.Next() % 2) == 0)
+                annualIncome = professionType.MinAnnualGrossIncome * (1 + _random.NextDouble());
+            else
+                annualIncome = professionType.MaxAnnualGrossIncome * _random.NextDouble();
+
+            if (annualIncome < professionType.MinAnnualGrossIncome)
+                annualIncome = professionType.MinAnnualGrossIncome;
 
             _customer.Income = annualIncome;
 

@@ -132,7 +132,7 @@ namespace QuickApp.ViewModels
 
             CreateMap<Customer, CustomerGridViewModel>()
                 .ForMember(d => d.FullName, map => map.MapFrom(s => $"{s.LastName} {s.FirstName}"))
-                .ForMember(d => d.BirthDate, map => map.MapFrom(s => s.BirthDate.HasValue ? s.BirthDate.Value.ToString("dd MMM yyyy") : string.Empty))
+                .ForMember(d => d.BirthDate, map => map.MapFrom(s => s.BirthDate.ToString("dd MMM yyyy")))
                 .ForMember(d => d.Gender, map => map.MapFrom(s => s.Gender.GetDefinition()))
                 .ForMember(d => d.Residence, map => map.MapFrom(s => getAddressString(s.Addresses)));
 

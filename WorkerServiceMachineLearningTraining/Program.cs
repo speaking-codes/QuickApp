@@ -14,6 +14,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddDbContextFactory<ApplicationDbContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionStringDbContext), ServiceLifetime.Singleton);
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<ILearningManager, LearningManager>();
+        services.AddTransient<IStorageManager, StorageManager>();
 
         services.AddHostedService<Worker>();
     })

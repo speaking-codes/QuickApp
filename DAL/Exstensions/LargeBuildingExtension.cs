@@ -64,5 +64,24 @@ namespace DAL.Exstensions
             largeBuilding.Municipality = municipalities[index];
             return largeBuilding;
         }
+        public static string GetLargeBuildingDescription(this LargeBuilding largeBuilding)
+        {
+            var sb = new StringBuilder(string.Empty);
+            sb.Append($"Complesso residenziale presso: {largeBuilding.Location}");
+            sb.Append($" - Nel comune: {largeBuilding.Municipality.PostalCode} {largeBuilding.Municipality.MunicipalityName} ({largeBuilding.Municipality.Province.ProvinceAbbreviation})");
+            sb.Append($" - Numero stabili: {largeBuilding.BuildingNumbers}");
+            
+            if (largeBuilding.CommercialActivityNumbers>0)
+                sb.Append($" - Numero attività commerciali presenti: {largeBuilding.CommercialActivityNumbers}");            
+
+            return sb.ToString();
+        }
+        public static IList<string> GetLargeBuildingDescription(this IEnumerable<LargeBuilding> largeBuildings)
+        {
+            var largeBuildingDescriptions = new List<string>();
+            foreach (var item in largeBuildings)
+                largeBuildingDescriptions.Add(item.GetLargeBuildingDescription());
+            return largeBuildingDescriptions;
+        }
     }
 }

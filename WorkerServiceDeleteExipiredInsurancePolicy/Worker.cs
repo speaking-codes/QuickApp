@@ -88,7 +88,7 @@ namespace WorkerServiceDeleteExipiredInsurancePolicy
                 await DeleteInsurancePolicies();
                 await DeleteCustomers();
 
-                await Task.Delay(100000, stoppingToken);
+                await Task.Delay(3600000, stoppingToken);
             }
         }
     }

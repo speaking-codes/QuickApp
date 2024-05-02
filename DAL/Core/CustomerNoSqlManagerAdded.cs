@@ -1,4 +1,5 @@
-﻿using DAL.ModelsRabbitMQ;
+﻿using DAL.Core.Interfaces;
+using DAL.ModelsRabbitMQ;
 using DAL.Repositories.Interfaces;
 using DAL.RepositoryNoSql.Interfaces;
 using System;
@@ -11,6 +12,8 @@ namespace DAL.Core
 {
     internal class CustomerNoSqlManagerAdded: CustomerNoSqlManager
     {
+        private readonly ILearningManager _learningManager;
+
         public CustomerNoSqlManagerAdded(ICustomerRepository customerRepository, 
                                          ICustomerHeaderRepository customerHeaderRepositoryNoSql, 
                                          ICustomerDetailRepository customerDetailRepositoryNoSql, 

@@ -14,7 +14,7 @@ namespace DAL.Repositories.Interfaces
         IQueryable<CustomerLearningFeature> GetCustomerLearningFeaturesForTraining();
         IQueryable<CustomerLearningFeature> GetLearningCustomerPreferences(string customerCode, string insurancePolicyCategory);
         IQueryable<CustomerLearningFeature> GetLearningCustomerPreferences(string customerCode);
-        IList<int> GetUserId(string customerCode);
+        bool HasCustomerIds();
         long GetMaxCustomerId();
         int CustomUpdate(CustomerLearningFeature customerLearningFeature);
     }

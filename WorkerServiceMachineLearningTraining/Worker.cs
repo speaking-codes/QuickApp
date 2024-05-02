@@ -13,6 +13,7 @@ namespace WorkerServiceMachineLearningTraining
         private readonly ILogger<Worker> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILearningManager _learningManager;
+        private readonly IStorageManager _storageManager;
 
         private IList<string> getCopertureString(IList<string> coperture)
         {
@@ -103,11 +104,12 @@ namespace WorkerServiceMachineLearningTraining
             return copertureOutput;
         }
 
-        public Worker(ILogger<Worker> logger, IUnitOfWork unitOfWork, ILearningManager learningManager)
+        public Worker(ILogger<Worker> logger, IUnitOfWork unitOfWork, ILearningManager learningManager, IStorageManager storageManager)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
             _learningManager = learningManager;
+            _storageManager = storageManager;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -118,39 +120,17 @@ namespace WorkerServiceMachineLearningTraining
 
                 try
                 {
-                    var pathDirectory = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\ExportPolizzeMauroDiLiddo\";
-                    var pathFileCustomer = $"{pathDirectory}ExportPolizzeMauroDiLiddo.csv";
+                    var pathDirectory = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\DataStorage\Training\";
+                    var pathInput = $"{pathDirectory}Input\\";
+                    var pathProcessed = $"{pathDirectory}Processed\\";
+                    var customerLearningFeatures = _storageManager.LoadDataFromStorage(pathInput, pathProcessed);
+                    if (customerLearningFeatures.Count > 0)
+                        await _storageManager.SaveDataFeaturs(customerLearningFeatures);
 
-                    //var customerLearningFeatures = _learningManager.LoadDataFromStorage(pathFileCustomer);
-                    //await _learningManager.SaveDataFeaturs(customerLearningFeatures);
-                    //var  customerLearningFeatures = _learningManager.LoadDataFeatures();
-                    //  await _learningManager.UpdateDataFeatures(customerLearningFeatures);
-                    //_learningManager.CreateClassifierModel();
-                    //_learningManager.PredictionClassification();
-                    //var matrixUsersItems = _learningManager.LoadMatrixUsersItems();
-                    //await _learningManager.SaveDataMatrixUsersItems(matrixUsersItems);
-                    //_learningManager.TrainingRecommendation();
-                    //var matrixUsersItems = _learningManager.GetMatrixUsersItems();
-                    //await _learningManager.SaveDataMatrixUsersItems(matrixUsersItems);
-                    //}
-                    var customerCodes = new List<string>() {
-                        "MR-YFESGJ0SG1I-1",
-                        "SC-YFESGJ0SG1I-2",
-                        "MB-YFESGJ0SG1I-3",
-                        "MM-YFESGJ0SG1I-4",
-                        "EC-YFESGJ0SG1I-5",
-                        "FB-YFESGJ0SG1I-6",
-                        "VR-YFESGJ0SG1I-7",
-                        "EG-YFESGJ0SG1I-8",
-                        "EM-YFESGJ0SG1I-9",
-                        "MB-YFESGJ0SG1-10",
-                        "MM-YFESGJ0SG1-11",
-                        "AP-YFESGJ0SG1-12",
-                        "MF-YFESGJ0SG1-13",
-                        "CP-YFESGJ0SG1-14"
-                    };
-                    foreach (var item in customerCodes)
-                        _learningManager.GetRecommendation(item, 0.85f, 4);
+                    customerLearningFeatures = _storageManager.LoadDataFeatures();
+                    await _storageManager.UpdateDataFeatures(customerLearningFeatures);
+                    //_learningManager.TrainingClassifier();
+                    Console.WriteLine("Training Complete");
                 }
                 catch (Exception ex)
                 {

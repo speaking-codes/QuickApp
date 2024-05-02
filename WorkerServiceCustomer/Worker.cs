@@ -45,7 +45,7 @@ namespace WorkerServiceCustomer
                                                .SetContractType(_customerTemplate.ContractTypes)
                                                .SetIncomeType(_customerTemplate.IncomeTypes, _customerTemplate.ContractTypes)
                                                .SetProfessionType(_customerTemplate.ProfessionTypes, _customerTemplate.ContractTypes)
-                                               .SetIncome()
+                                               .SetIncome(_customerTemplate.ProfessionTypes)
 
                                                .SetDeliveries(_customerTemplate.DeliveryModelTemplate)
                                                .SetAddresses(_customerTemplate.AddressTemplate)
@@ -53,7 +53,7 @@ namespace WorkerServiceCustomer
                                                .Build();
                     _customerManager.AddCustomer(customer);
         
-                    await Task.Delay(5000, stoppingToken);
+                    await Task.Delay(360000, stoppingToken);
                 }
                 catch (Exception ex)
                 {

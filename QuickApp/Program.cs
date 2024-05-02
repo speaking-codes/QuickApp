@@ -48,7 +48,7 @@ namespace QuickApp
             var app = builder.Build();
             ConfigureRequestPipeline(app); // Configure the HTTP request pipeline.
 
-            await SeedDatabase(app, false); //Seed initial database
+            await SeedDatabase(app, true); //Seed initial database
 
             await app.RunAsync();
         }
@@ -224,6 +224,7 @@ namespace QuickApp
             builder.Services.AddScoped<IInsuranceCategoryPolicyDashboardCardRepository, InsuranceCategoryPolicyDashboardCardRepository>(x => new InsuranceCategoryPolicyDashboardCardRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCategoryPolicyCard"));
             builder.Services.AddScoped<IInsuranceCoverageSummaryRepository, InsuranceCoverageSummaryRepository>(x => new InsuranceCoverageSummaryRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCoverageSummary"));
             builder.Services.AddScoped<IInsuranceCoverageChartRepository, InsuranceCoverageChartRepository>(x => new InsuranceCoverageChartRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCoverageChart"));
+            builder.Services.AddScoped<IInsuranceCategoryPolicyRecommendationRepository, InsuranceCategoryPolicyRecommendationRepository>(x => new InsuranceCategoryPolicyRecommendationRepository(x.GetRequiredService<IMongoDbContext>(), "InsuranceCoverageRecommendation"));
 
             #endregion
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class Business:AuditableEntity
+    public class Business : AuditableEntity
     {
         public int Id { get; set; }
         public string BusinessTitle { get; set; }

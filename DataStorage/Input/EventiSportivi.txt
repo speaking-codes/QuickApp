@@ -1,0 +1,100 @@
+Torneo dell'Asso
+Sfida Epica
+Coppa dell'Avventura
+Gara Infinita
+Maratona del Destino
+Campionato dell'Eclissi
+Duello del Coraggio
+Spettacolo della Determinazione
+Concorso della Resistenza
+Giochi dell'Orizzonte
+Festival della Forza
+Derby della Passione
+Grande Prova della Volontà
+Battaglia degli Eroi
+Competizione dell'Inganno
+Spedizione dell'Adrenalina
+Gioco del Mistero
+Gran Premio della Speranza
+Scontro dell'Abilità
+Rally dell'Impegno
+Prova della Fede
+Gara dell'Intrigo
+Confronto dell'Avventura
+Trofeo della Tenacia
+Maratona dell'Entusiasmo
+Contesa dell'Intrepidezza
+Duello dell'Amicizia
+Giochi della Saggezza
+Olimpiadi della Determinazione
+Campionato della Risolutezza
+Torneo della Rivelazione
+Gara dell'Impronta
+Concorso dell'Ispirazione
+Sfida dell'Estro
+Competizione del Coraggio
+Festival della Correttezza
+Confronto della Creatività
+Battaglia della Bellezza
+Trofeo della Tattica
+Maratona dell'Innovazione
+Prova della Perseveranza
+Gara della Generosità
+Duello dell'Ingegno
+Giochi della Gentilezza
+Derby della Dedizione
+Spettacolo della Sincronia
+Concorso della Coerenza
+Gran Premio della Grazia
+Scontro dell'Eccellenza
+Rally dell'Entusiasmo
+Prova dell'Amicizia
+Gara dell'Equilibrio
+Maratona dell'Altruismo
+Contesa della Comprensione
+Duello della Destrezza
+Giochi della Giustizia
+Olimpiadi della Solidarietà
+Campionato della Cordialità
+Torneo della Tolleranza
+Gara dell'Empatia
+Concorso della Compassione
+Sfida della Sensibilità
+Competizione della Condivisione
+Festival della Fiducia
+Confronto della Collaborazione
+Battaglia della Benevolenza
+Trofeo della Tranquillità
+Maratona della Misericordia
+Prova della Pace
+Gara della Gentilezza
+Duello della Disponibilità
+Giochi della Gratitudine
+Derby della Dolcezza
+Spettacolo della Solidità
+Concorso della Serenità
+Gran Premio della Generosità
+Scontro della Sobrietà
+Rally della Risata
+Prova della Pazienza
+Gara della Gioia
+Maratona della Generosità
+Contesa della Consapevolezza
+Duello della Dolcezza
+Giochi della Gentilezza
+Olimpiadi della Gentilezza
+Campionato della Cura
+Torneo della Tenerezza
+Gara dell'Amore
+Concorso della Compassione
+Sfida dell'Empatia
+Competizione della Compassione
+Festival della Gentilezza
+Confronto della Comprensione
+Battaglia della Benevolenza
+Trofeo della Tolleranza
+Maratona della Misericordia
+Prova della Pace
+Gara della Gentilezza
+Duello della Disponibilità
+Giochi della Gratitudine

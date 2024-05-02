@@ -27,11 +27,11 @@ namespace DAL.BuilderModel
             for (var i = 0; i < maxSportEvents; i++)
             {
                 sportEvent= new SportEvent();
-                sportEvent = sportEvent.SetStartDate(Random)
+                sportEvent = sportEvent.SetSportEventTitle(Random, insurancePolicyTemplate.SportEventTitles)
+                                       .SetStartDate(Random)
                                        .SetEndDate(Random)
                                        .SetSportEventType(Random, insurancePolicyTemplate.SportEventTypes)
                                        .SetMunicipality(Random, insurancePolicyTemplate.Municipalities)
-                                       .SetNumberMembers(Random)
                                        .SetLocation(Random, insurancePolicyTemplate.AddressTemplate)
                                        .SetIsCompetitive(Random);
                 InsurancePolicy.SportEvents.Add(sportEvent);

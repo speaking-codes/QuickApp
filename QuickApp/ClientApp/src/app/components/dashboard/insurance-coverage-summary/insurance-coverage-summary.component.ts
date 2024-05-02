@@ -16,6 +16,7 @@ export class InsuranceCoverageSummaryComponent implements OnInit {
   columns: TableColumn[] = [];
   rows: InsuranceCoverageSummary[] = [];
   loadingIndicator = false;  
+  expanded: any = {};
   
   @Input()
   customerCode = "";

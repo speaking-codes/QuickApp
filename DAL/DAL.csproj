@@ -22,6 +22,7 @@
     <Compile Remove="BuilderModel\SpecialisticExaminationsInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\TravelInsurancePolicyBuilder.cs" />
     <Compile Remove="BuilderModel\VacationInsurancePolicyBuilder.cs" />
+    <Compile Remove="ModelML\CustomerLearningFeatureDataView.cs" />
     <Compile Remove="Models\AgeClassType.cs" />
     <Compile Remove="Models\AgeRatingCoefficient.cs" />
     <Compile Remove="Models\BaggageLossInsurancePolicy.cs" />

@@ -63,7 +63,7 @@ namespace DAL.Core
         private IList<string> getDescriptionSportEvents(InsurancePolicy insurancePolicy)
         {
             var sportEvents = _unitOfWork.SportEvents.GetSportEvents(insurancePolicy.Id);
-            return new List<string>();
+            return sportEvents.GetSportEventDescriptions();
         }
         private IList<string> getDescriptionHouses(InsurancePolicy insurancePolicy)
         {
@@ -73,17 +73,22 @@ namespace DAL.Core
         private IList<string> getDescriptionLargeBuildings(InsurancePolicy insurancePolicy)
         {
             var largeBuildings=_unitOfWork.LargeBuildings.GetLargeBuildings(insurancePolicy.Id);
-            return new List<string>();
+            return largeBuildings.GetLargeBuildingDescription();
         }
         private IList<string> getDescriptionInjuries(InsurancePolicy insurancePolicy)
         {
             var injuries = _unitOfWork.Injuries.GetInjuries(insurancePolicy.Id);
-            return new List<string>();
+            return injuries.GetInjuryDescriptions();
         }
         private IList<string> getDescriptionIllnesses(InsurancePolicy insurancePolicy)
         {
             var illnesses = _unitOfWork.Illnesses.GetIllnesses(insurancePolicy.Id);
-            return new List<string>();
+            return illnesses.GetIllnessDescriptions();
+        }
+        private IList<string> getDescriptionBusinesses(InsurancePolicy insurancePolicy)
+        {
+            var businesses = _unitOfWork.Businesses.GetBusinesses(insurancePolicy.Id);
+            return businesses.GetBusinessDescriptions();
         }
         private IList<string> getDescriptionLegalProtection(InsurancePolicy insurancePolicy)
         {
@@ -122,7 +127,7 @@ namespace DAL.Core
                     insuranceCoverageGrid.ItemDescriptions = getDescriptionIllnesses(insurancePolicy);
                     break;
                 case EnumInsurancePolicyCategory.INCENDIO_FURTO:
-                    insuranceCoverageGrid.ItemDescriptions = getDescriptionEmpty(insurancePolicy);
+                    insuranceCoverageGrid.ItemDescriptions = getDescriptionBusinesses(insurancePolicy);
                     break;
                 case EnumInsurancePolicyCategory.TUTELA_GIUDIZIARIA:
                     insuranceCoverageGrid.ItemDescriptions = getDescriptionLegalProtection(insurancePolicy);
@@ -142,11 +147,6 @@ namespace DAL.Core
 
             var insurancePolicies = _unitOfWork.InsurancePolicies
                                                .GetInsurancePolicies(customerCode)
-                                               .Select(x => new InsurancePolicy
-                                               {
-                                                   InsurancePolicyCode = x.InsurancePolicyCode,
-                                                   InsurancePolicyCategoryId = x.InsurancePolicyCategoryId,
-                                               })
                                                .ToList();
             foreach (var item in insurancePolicies)
                 insuranceCoverageSummary.InsuranceCoverageGrids.Add(getInsuranceCoverageGrid(item));

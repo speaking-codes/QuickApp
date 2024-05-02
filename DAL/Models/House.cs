@@ -8,6 +8,8 @@ namespace DAL.Models
 {
     public class House:AuditableEntity
     {
+        public int Id { get; set; }
+
         public float ExtensionSquareMeters { get; set; }
 
         public int NumberBuildingFloors { get; set; }

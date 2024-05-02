@@ -82,7 +82,8 @@ namespace WorkerServiceInsurancePolicyIussue
                                                  {
                                                      CustomerCode = x.Customer.CustomerCode,
                                                      InsurancePolicyCode = x.InsurancePolicyCode
-                                                 }));
+                                                 })
+                                                 .Take(1));
                     }
                     catch (Exception ex)
                     {
@@ -96,7 +97,7 @@ namespace WorkerServiceInsurancePolicyIussue
                     _customers.RemoveAt(i);
                 }
 
-                await Task.Delay(4000, stoppingToken);
+                await Task.Delay(720000, stoppingToken);
             }
         }
     }

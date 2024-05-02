@@ -55,55 +55,5 @@ namespace DAL.Core
                 throw;
             }
         }
-
-        //public void ManageInsurancePolicy(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)
-        //{
-        //    try
-        //    {
-        //        var customer = _customerRepository.GetCustomer(customerInsurancePolicyQueue.CustomerCode).SingleOrDefault();
-        //        var insurancePolicyCategory = _insurancePolicyCategory.GetInsurancePolicyCategory(customerInsurancePolicyQueue.InsurancePolicyCategoryCode).SingleOrDefault();
-
-        //        _unitOfWork.BeginTransaction();
-
-        //        var customerInsurancePolicyRating = _unitOfWork.CustomerInsuranceCategoryPolicyRatings.GetCustomerInsuranceCategoryPolicyRatings(customer.CustomerCode, insurancePolicyCategory.InsurancePolicyCategoryCode).SingleOrDefault();
-        //        if (customerInsurancePolicyRating != null)
-        //        {
-        //            customerInsurancePolicyRating.Age = customer.BirthDate.HasValue ? (int)(DateTime.Now.Subtract(customer.BirthDate.Value).Days / 365) : 0;
-        //            customerInsurancePolicyRating.ChildrenNumbers = customer.ChildrenNumber ?? 0;
-        //            customerInsurancePolicyRating.ContractType = customer.ContractType.HasValue ? (byte)customer.ContractType : (byte)0;
-        //            customerInsurancePolicyRating.Gender = (byte)customer.Gender;
-        //            customerInsurancePolicyRating.JobTitle = customer.JobTitle;
-        //            customerInsurancePolicyRating.MaritalStatus = customer.MaritalStatus.HasValue ? (byte)customer.MaritalStatus : (byte)0;
-        //            customerInsurancePolicyRating.Ral = customer.Income ?? 0;
-        //            customerInsurancePolicyRating.Rating += 1;
-        //            _unitOfWork.CustomerInsuranceCategoryPolicyRatings.Update(customerInsurancePolicyRating);
-        //        }
-        //        else
-        //        {
-        //            customerInsurancePolicyRating = new CustomerInsuranceCategoryPolicyRating
-        //            {
-        //                CustomerCode = customer.CustomerCode,
-        //                Age = customer.BirthDate.HasValue ? (int)(DateTime.Now.Subtract(customer.BirthDate.Value).Days / 365) : 0,
-        //                ChildrenNumbers = customer.ChildrenNumber ?? 0,
-        //                ContractType = customer.ContractType.HasValue ? (byte)customer.ContractType : (byte)0,
-        //                Gender = (byte)customer.Gender,
-        //                JobTitle = customer.JobTitle,
-        //                MaritalStatus = customer.MaritalStatus.HasValue ? (byte)customer.MaritalStatus : (byte)0,
-        //                Ral = customer.Income ?? 0,
-        //                InsuranceCategoryPolicyCode = insurancePolicyCategory.InsurancePolicyCategoryCode,
-        //                Rating = 1
-        //            };
-        //            _unitOfWork.CustomerInsuranceCategoryPolicyRatings.Add(customerInsurancePolicyRating);
-        //        }
-
-        //        _unitOfWork.SaveChanges();
-        //        _unitOfWork.CommitTransaction();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _unitOfWork.RollbackTransaction();
-        //        throw;
-        //    }
-        //}
     }
 }

@@ -17,12 +17,13 @@ namespace DAL.BuilderModelTemplate
         public IList<ConfigurationModel> ConfigurationModels { get; set; }
         public IList<Municipality> Municipalities { get; set; }
         public IList<SportEventType> SportEventTypes { get; set; }
-        //public IList<GenderType> GenderTypes { get; set; }
+        public IList<string> SportEventTitles { get; set; }
         public IList<IncomeType> IncomeTypes { get; set; }
         public IList<IncomeClassType> IncomeClassType { get; set; }
         public IList<ProfessionType> ProfessionTypes { get; set; }
         public IList<KinshipRelationshipType> KinshipRelationshipTypes { get;set; }
         public IList<BreedPetDetailType> BreedPetDetailTypes { get; set; }
-
+        public IList<BusinessType> BusinessTypes { get; set; }
+        public IList<string> BusinessTitles { get; set; }
     }
 }

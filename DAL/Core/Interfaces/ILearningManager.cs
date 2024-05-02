@@ -6,17 +6,10 @@ namespace DAL.Core.Interfaces
 {
     public interface ILearningManager : IManager
     {
-        IList<CustomerLearningFeature> LoadDataFromStorage(string pathFile);
-        Task SaveDataFeaturs(IList<CustomerLearningFeature> customerLearningFeatures);
-        IList<CustomerLearningFeature> LoadDataFeatures();
-        Task UpdateDataFeatures(IList<CustomerLearningFeature> customerLearningFeatures);
-
-        void CreateClassifierModel();
+        void TrainingClassifier();
         void PredictionClassification();
 
-        IList<MatrixUsersItems> LoadMatrixUsersItems();
-        Task SaveDataMatrixUsersItems(IList<MatrixUsersItems> matrixUsersItems);
-
+        Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeature> customerLearningFeatures);
         IList<InsurancePolicyCategory> GetRecommendation(string customerCode, float minScore, int maxItems);
     }
 }

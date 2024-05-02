@@ -36,7 +36,7 @@ namespace MachineLearningModel
             // Data process configuration with pipeline data transformations
             var pipeline = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"ItemId",inputColumnName:@"ItemId")      
                                     .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"UserId",inputColumnName:@"UserId"))      
-                                    .Append(mlContext.Recommendation().Trainers.MatrixFactorization(new MatrixFactorizationTrainer.Options(){LabelColumnName=@"Rating",MatrixColumnIndexColumnName=@"UserId",MatrixRowIndexColumnName=@"ItemId",ApproximationRank=1263,LearningRate=0.0467723188667094,NumberOfIterations=163,Quiet=true}));
+                                    .Append(mlContext.Recommendation().Trainers.MatrixFactorization(new MatrixFactorizationTrainer.Options(){LabelColumnName=@"Rating",MatrixColumnIndexColumnName=@"UserId",MatrixRowIndexColumnName=@"ItemId",ApproximationRank=19,LearningRate=1,NumberOfIterations=127,Quiet=true}));
 
             return pipeline;
         }

@@ -18,6 +18,8 @@ namespace DAL.Repositories
         public IQueryable<SportEvent> GetSportEvents(int insurancePolicyId) =>
             _appContext.SportEvents
                        .Include(x => x.SportEventType)
+                       .Include(x => x.Municipality)
+                            .ThenInclude(y=>y.Province)
                        .Where(x => x.InsurancePolicy.Id == insurancePolicyId);
 
         public IQueryable<SportEvent> GetSportEvents(string insurancePolicyCode) =>

@@ -27,8 +27,7 @@ namespace DAL.Repositories
                                                             x.MaritalStatus == customerLearningFeature.MaritalStatus &&
                                                             x.IsSingle == customerLearningFeature.IsSingle &&
                                                             x.ChildrenNumbers == customerLearningFeature.ChildrenNumbers &&
-                                                            //x.ProfessionType == customerLearningFeature.ProfessionType &&
-                                                            //x.IsFreelancer == customerLearningFeature.IsFreelancer &&
+                                                            x.ProfessionType == customerLearningFeature.ProfessionType &&
                                                             x.Country == customerLearningFeature.Country &&
                                                             x.Region == customerLearningFeature.Region &&
                                                             x.CustomerId.HasValue);
@@ -41,11 +40,7 @@ namespace DAL.Repositories
         public IQueryable<CustomerLearningFeature> GetLearningCustomerPreferences(string customerCode) =>
             _appContext.CustomerLearningFeatures;
 
-        public IList<int> GetUserId(string customerCode) => new List<int>();
-        //_appContext.CustomerLearningFeatures
-        //           //.Where(x => x.CustomerCode == customerCode)
-        //           .Select(x => x.CustomerId)
-        //           .ToList();
+        public bool HasCustomerIds() => _appContext.CustomerLearningFeatures.Where(x=> x.CustomerId.HasValue).Any();
 
         public long GetMaxCustomerId() => _appContext.CustomerLearningFeatures.Where(x => x.CustomerId.HasValue).Max(x => x.CustomerId.Value);
 

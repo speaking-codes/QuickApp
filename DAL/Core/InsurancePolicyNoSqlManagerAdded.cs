@@ -17,25 +17,11 @@ namespace DAL.Core
     internal class InsurancePolicyNoSqlManagerAdded : InsurancePolicyNoSqlManager
     {
         private readonly ILearningManager _learningManager;
+        private readonly IStorageManager _storageManager;
 
         private CustomerLearningFeature getLearningCustomerPreferencesFromCustomer(Customer customer, CustomerLearningFeature customerLearningFeature) {
             if (customerLearningFeature==null)
                 customerLearningFeature=new CustomerLearningFeature();
-
-            //learningCustomerPreferences.Age = customer.BirthDate.HasValue ? customer.BirthDate.Value.GetAge() : 0;
-            //learningCustomerPreferences.MaritalStatus = customer.MaritalStatus?.MaritalStatusDescription;
-            //learningCustomerPreferences.FamilyType = customer.FamilyType?.FamilyTypeDescription;
-            //learningCustomerPreferences.ChildrenNumbers = customer.ChildrenNumber;
-            //learningCustomerPreferences.IncomeType = customer.IncomeType?.IncomeTypeDescription;
-            //learningCustomerPreferences.ProfessionType = customer.ProfessionType?.ProfessionTypeDescription;
-            //learningCustomerPreferences.Income = customer.Income;
-            //learningCustomerPreferences.Region = customer.Addresses
-            //                                    .Where(x => x.IsPrimary)
-            //                                    .FirstOrDefault()?
-            //                                    .Municipality?
-            //                                    .Province?
-            //                                    .Region?
-            //                                    .RegionName;
 
             return customerLearningFeature;
         }
@@ -52,10 +38,12 @@ namespace DAL.Core
                                                 IInsuranceCoverageChartRepository insuranceCoverageChartRepository,
                                                 IInsuranceCoverageSummaryRepository insuranceCoverageSummaryRepository,
                                                 CustomerInsurancePolicyQueue customerInsurancePolicyQueue,
-                                                ILearningManager learningManager) :
+                                                ILearningManager learningManager,
+                                                IStorageManager storageManager) :
             base(unitOfWork, insuranceCoverageChartRepository, insuranceCoverageSummaryRepository, customerInsurancePolicyQueue)
         {
             _learningManager = learningManager;
+            _storageManager = storageManager;
         }
 
         public override void UpdateInsuranceCoverageChart(InsuranceCoverageChart insuranceCoverageChart)
@@ -84,34 +72,10 @@ namespace DAL.Core
 
         public override async Task UpdateLearningTable(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)
         {
-            var customer = _unitOfWork.Customers.GetCustomersForServerLessManager(customerInsurancePolicyQueue.CustomerCode).FirstOrDefault();
-            var insurancePolicy = _unitOfWork.InsurancePolicies.GetInsurancePolicyForTrainingMachineLearning(customerInsurancePolicyQueue.InsurancePolicyCode).FirstOrDefault();
-            var customerLearning = _unitOfWork.CustomerLearningFeatures.GetLearningCustomerPreferences(customer.CustomerCode, insurancePolicy.InsurancePolicyCategory.InsurancePolicyCategoryCode).FirstOrDefault();
-
-            //await _unitOfWork.BeginTransactionAsync();
-
-            //if (customerLearning != null)
-            //{
-            //                  _unitOfWork.LearningTrainings.Update(customerLearning);
-            //}
-            //else
-            //{
-            //    var userId = 0;
-            //    var userIds = _unitOfWork.LearningTrainings.GetUserId(customer.CustomerCode);
-            //    if (userIds == null || userIds.Count == 0)
-            //        userId = _unitOfWork.LearningTrainings.GetLastUserId() + 1;
-            //    else
-            //        userId = userIds.Max();
-
-            //    customerLearning = getLearningCustomerPreferencesFromCustomer(customer, customerLearning);
-            //    customerLearning.CustomerCode = customer.CustomerCode;
-            //    customerLearning.UserId = userId;
-
-            //    _unitOfWork.LearningTrainings.Add(customerLearning);
-            //}
-
-            //await _unitOfWork.SaveChangesAsync();
-            //await _unitOfWork.CommitTransactionAsync();
+            var customer =new Customer { CustomerCode = customerInsurancePolicyQueue.CustomerCode };
+            var pathDirectory = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\DataStorage\Training\";
+            var pathInput = $"{pathDirectory}Input\\";
+            await _storageManager.AddToStorage(pathInput,customer);
         }
 
         public override async Task UpdateMatrixUserItem(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)

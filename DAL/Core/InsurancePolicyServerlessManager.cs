@@ -15,16 +15,19 @@ namespace DAL.Core
         private readonly IInsuranceCoverageChartRepository _insuranceCoverageChartRepository;
         private readonly IInsuranceCoverageSummaryRepository _insuranceCoverageSummaryRepository;
         private readonly ILearningManager _learningManager;
+        private readonly IStorageManager _storageManager;
 
         public InsurancePolicyServerlessManager(IUnitOfWork unitOfWork,
                                                 IInsuranceCoverageChartRepository insuranceCoverageChartRepository,
                                                 IInsuranceCoverageSummaryRepository insuranceCoverageSummaryRepository,
-                                                ILearningManager learningManager)
+                                                ILearningManager learningManager,
+                                                IStorageManager storageManager)
         {
             _unitOfWork = unitOfWork;
             _insuranceCoverageChartRepository = insuranceCoverageChartRepository;
             _insuranceCoverageSummaryRepository = insuranceCoverageSummaryRepository;
             _learningManager = learningManager;
+            _storageManager = storageManager;
         }
 
         public async Task Manage(CustomerInsurancePolicyQueue customerInsurancePolicyQueue)
@@ -40,7 +43,8 @@ namespace DAL.Core
                                                                                            _insuranceCoverageChartRepository,
                                                                                            _insuranceCoverageSummaryRepository,
                                                                                            customerInsurancePolicyQueue,
-                                                                                           _learningManager);
+                                                                                           _learningManager,
+                                                                                           _storageManager);
                         break;
                     case Enums.EnumPublishQueueType.Deleted:
                         insurancePolicyNoSqlManager = new InsurancePolicyNoSqlManagerDeleted(_unitOfWork,

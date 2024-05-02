@@ -1,25 +1,24 @@
 using System;
-using DAL;
 using DAL.Core.Interfaces;
 using DAL.ModelsRabbitMQ;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace CustomerQueueConsumer
+namespace QueueConsumer
 {
-    public class Function1
+    public class CustomerFunction
     {
         private readonly ILogger _logger;
         private readonly ICustomerServerlessManager _customerServerlessManager;
 
-        public Function1(ILoggerFactory loggerFactory, ICustomerServerlessManager customerServerlessManager)
+        public CustomerFunction(ILoggerFactory loggerFactory, ICustomerServerlessManager customerServerlessManager)
         {
-            _logger = loggerFactory.CreateLogger<Function1>();
+            _logger = loggerFactory.CreateLogger<CustomerFunction>();
             _customerServerlessManager = customerServerlessManager;
         }
 
-        [Function("Function1")]
+        [Function("CustomerFunction")]
         public void Run([RabbitMQTrigger("customers", ConnectionStringSetting = "localhost")] string myQueueItem)
         {
             _logger.LogInformation($"C# Queue trigger function processed: {myQueueItem}");

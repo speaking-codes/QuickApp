@@ -9,5 +9,7 @@ namespace DAL.Repositories.Interfaces
 {
     public interface IMatrixCustomerInsurancePolicyRepository : IRepository<MatrixUsersItems>
     {
+        Task<bool> HasItems();
+        Task<long> GetLastUserId();
     }
 }

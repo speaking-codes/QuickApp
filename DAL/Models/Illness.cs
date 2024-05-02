@@ -12,7 +12,7 @@ namespace DAL.Models
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public EnumGender Gender { get; set; }
 
         public virtual KinshipRelationshipType KinshipRelationshipType { get; set; }

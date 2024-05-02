@@ -60,7 +60,7 @@ namespace DAL.Repositories
                                         .ThenInclude(p => p.Region)
                             .Where(c => c.CustomerCode == customerCode);
 
-        public IQueryable<Customer> GetCustomersForRecommendations(string customerCode) =>
+        public IQueryable<Customer> GetCustomerForLearningFeature(string customerCode) =>
                 _appContext.Customers
                            .Include(c=> c.FamilyType)
                            .Include(c =>c.MaritalStatus)
