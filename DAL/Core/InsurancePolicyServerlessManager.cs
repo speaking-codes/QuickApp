@@ -43,7 +43,6 @@ namespace DAL.Core
                                                                                            _insuranceCoverageChartRepository,
                                                                                            _insuranceCoverageSummaryRepository,
                                                                                            customerInsurancePolicyQueue,
-                                                                                           _learningManager,
                                                                                            _storageManager);
                         break;
                     case Enums.EnumPublishQueueType.Deleted:

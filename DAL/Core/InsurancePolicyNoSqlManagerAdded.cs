@@ -16,7 +16,6 @@ namespace DAL.Core
 {
     internal class InsurancePolicyNoSqlManagerAdded : InsurancePolicyNoSqlManager
     {
-        private readonly ILearningManager _learningManager;
         private readonly IStorageManager _storageManager;
 
         private CustomerLearningFeature getLearningCustomerPreferencesFromCustomer(Customer customer, CustomerLearningFeature customerLearningFeature) {
@@ -26,23 +25,13 @@ namespace DAL.Core
             return customerLearningFeature;
         }
 
-        private float getLearningScore(CustomerLearningFeature customerLearningFeature)
-        {
-            //var modelInput = learningCustomerPreferences.ToRegressionPredictionModel();
-            //var modelOutput= _learningManager.GetPrediction(modelInput);
-            //return modelOutput.Score;
-            return 0.0f;
-        }
-
         public InsurancePolicyNoSqlManagerAdded(IUnitOfWork unitOfWork,
                                                 IInsuranceCoverageChartRepository insuranceCoverageChartRepository,
                                                 IInsuranceCoverageSummaryRepository insuranceCoverageSummaryRepository,
                                                 CustomerInsurancePolicyQueue customerInsurancePolicyQueue,
-                                                ILearningManager learningManager,
                                                 IStorageManager storageManager) :
             base(unitOfWork, insuranceCoverageChartRepository, insuranceCoverageSummaryRepository, customerInsurancePolicyQueue)
         {
-            _learningManager = learningManager;
             _storageManager = storageManager;
         }
 

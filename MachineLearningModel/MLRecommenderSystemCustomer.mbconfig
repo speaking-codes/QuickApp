@@ -1,5 +1,5 @@
 ﻿{
-  "TrainingTime": 60,
+  "TrainingTime": 600,
   "Scenario": "Recommendation",
   "DataSource": {
     "Type": "SQL",
@@ -56,113 +56,274 @@
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 4.0679998397827148
+        "Score": 0.0,
+        "RuntimeInSeconds": 1.1260000467300415
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 1.8090000152587891
+        "Score": 0.0,
+        "RuntimeInSeconds": 1.375
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.87585584128400418,
-        "RuntimeInSeconds": 5.9060001373291016
+        "Score": 0.12323705180320477,
+        "RuntimeInSeconds": 0.99500000476837158
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.81156715979719485,
-        "RuntimeInSeconds": 1.4579999446868896
+        "Score": 0.0,
+        "RuntimeInSeconds": 1.5770000219345093
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 10.907999992370605
+        "Score": -1.921719450837859,
+        "RuntimeInSeconds": 0.38899999856948853
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 2.0590000152587891
+        "Score": 0.0,
+        "RuntimeInSeconds": 0.43399998545646667
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.87673719112107629,
-        "RuntimeInSeconds": 4.2399997711181641
+        "Score": -0.37273580006149865,
+        "RuntimeInSeconds": 3.1029999256134033
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 4.2779998779296875
+        "Score": -2.0481267257076579,
+        "RuntimeInSeconds": 0.37099999189376831
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.89991565531653916,
-        "RuntimeInSeconds": 1.9950000047683716
+        "Score": 0.0,
+        "RuntimeInSeconds": 2.3710000514984131
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.84409605601037951,
-        "RuntimeInSeconds": 3.4340000152587891
+        "Score": -0.057428789738925623,
+        "RuntimeInSeconds": 2.2079999446868896
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 2.5
+        "Score": 0.20679170068040398,
+        "RuntimeInSeconds": 1.3450000286102295
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.76826549386901721,
-        "RuntimeInSeconds": 2.125999927520752
+        "Score": -0.82792245575291745,
+        "RuntimeInSeconds": 0.65799999237060547
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 4.1139998435974121
+        "Score": 0.0,
+        "RuntimeInSeconds": 1.1979999542236328
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.81683960716880866,
-        "RuntimeInSeconds": 3.0520000457763672
+        "Score": 0.039686399429562647,
+        "RuntimeInSeconds": 0.45600000023841858
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": "NaN",
-        "RuntimeInSeconds": 3.0220000743865967
+        "Score": 0.16019911649421259,
+        "RuntimeInSeconds": 9.1770000457763672
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "MatrixFactorization",
-        "Score": 0.88161469590409536,
-        "RuntimeInSeconds": 3.1400001049041748
+        "Score": 0.0,
+        "RuntimeInSeconds": 5.754000186920166
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -2.0952599225513224,
+        "RuntimeInSeconds": 0.27599999308586121
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -2.3990713694418306,
+        "RuntimeInSeconds": 3.0659999847412109
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.0,
+        "RuntimeInSeconds": 0.26899999380111694
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -0.79155694633663876,
+        "RuntimeInSeconds": 2.005000114440918
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.13233680381139323,
+        "RuntimeInSeconds": 2.871999979019165
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.19019049627672524,
+        "RuntimeInSeconds": 0.25699999928474426
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -0.301295155893063,
+        "RuntimeInSeconds": 1.3380000591278076
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.069012366539262127,
+        "RuntimeInSeconds": 0.91100001335144043
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.15577929517221922,
+        "RuntimeInSeconds": 1.0039999485015869
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.24766417109277405,
+        "RuntimeInSeconds": 1.2029999494552612
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.0969670243969315,
+        "RuntimeInSeconds": 0.70899999141693115
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.24637260130265204,
+        "RuntimeInSeconds": 1.8459999561309814
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.15448091221776361,
+        "RuntimeInSeconds": 0.27700001001358032
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.30992722053487831,
+        "RuntimeInSeconds": 1.9170000553131104
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -0.15013962393502056,
+        "RuntimeInSeconds": 2.1579999923706055
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.1736035241073336,
+        "RuntimeInSeconds": 2.1530001163482666
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.20350433196829987,
+        "RuntimeInSeconds": 0.60000002384185791
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.38167800855353584,
+        "RuntimeInSeconds": 2.6319999694824219
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.056146170431390363,
+        "RuntimeInSeconds": 1.468000054359436
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.62341409874817444,
+        "RuntimeInSeconds": 3.3599998950958252
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.52080637777027783,
+        "RuntimeInSeconds": 2.125
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.81508929404046426,
+        "RuntimeInSeconds": 39.014999389648438
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": 0.67555580054199971,
+        "RuntimeInSeconds": 4.5939998626708984
       }
     ],
     "Pipeline": {
@@ -179,9 +340,9 @@
           "LabelColumnName": "Rating",
           "MatrixColumnIndexColumnName": "UserId",
           "MatrixRowIndexColumnName": "ItemId",
-          "ApproximationRank": 19,
-          "LearningRate": 1.0,
-          "NumberOfIterations": 127,
+          "ApproximationRank": 28,
+          "LearningRate": 0.023406825132903736,
+          "NumberOfIterations": 310,
           "Quiet": true
         }
       },

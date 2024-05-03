@@ -368,7 +368,7 @@ namespace DAL.Core
 
         public async Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeature> customerLearningFeatures)
         {
-            var insurancePolicyCategories =await UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories().ToListAsync();
+            var insurancePolicyCategories = await UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories().ToListAsync();
             var matrixUsersItems = new List<MatrixUsersItems>();
 
             foreach (var item in customerLearningFeatures)
@@ -401,7 +401,7 @@ namespace DAL.Core
                     if (subItem.Id == (byte)prediction.PredictedLabel)
                         userItem = new MatrixUsersItems
                         {
-                            UserId = (long)prediction.CustomerId,
+                            UserId = item.CustomerId ?? 0,
                             ItemId = (byte)prediction.PredictedLabel,
                             Rating = prediction.Score.Max()
                         };
@@ -423,7 +423,6 @@ namespace DAL.Core
         {
             var customerLearningFeature = getCustomerLearningFeature(customerCode);
             var customerId = getCustomerId(customerLearningFeature);
-            customerId = 833;
             var recommendedItems = getItemRecommendations(customerId, minScore, maxItems);
             var recommdendedInsurancePolicyCategories = getRecommendedInsurancePolicyCategories(recommendedItems);
             return recommdendedInsurancePolicyCategories;

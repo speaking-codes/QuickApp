@@ -15,9 +15,6 @@ namespace MachineLearningModel
         #region model input class
         public class ModelInput
         {
-            [ColumnName(@"Id")]
-            public float Id { get; set; }
-
             [ColumnName(@"CustomerId")]
             public float CustomerId { get; set; }
 
@@ -72,12 +69,6 @@ namespace MachineLearningModel
             [ColumnName(@"InsurancePolicyName")]
             public string InsurancePolicyName { get; set; }
 
-            [ColumnName(@"InsurancePolicyDescription")]
-            public string InsurancePolicyDescription { get; set; }
-
-            [ColumnName(@"WarrantyAvaibles")]
-            public string WarrantyAvaibles { get; set; }
-
         }
 
         #endregion
@@ -88,9 +79,6 @@ namespace MachineLearningModel
         #region model output class
         public class ModelOutput
         {
-            [ColumnName(@"Id")]
-            public float Id { get; set; }
-
             [ColumnName(@"CustomerId")]
             public float CustomerId { get; set; }
 
@@ -144,12 +132,6 @@ namespace MachineLearningModel
 
             [ColumnName(@"InsurancePolicyName")]
             public float[] InsurancePolicyName { get; set; }
-
-            [ColumnName(@"InsurancePolicyDescription")]
-            public string InsurancePolicyDescription { get; set; }
-
-            [ColumnName(@"WarrantyAvaibles")]
-            public string WarrantyAvaibles { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }
