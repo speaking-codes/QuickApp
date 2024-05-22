@@ -3,8 +3,9 @@ use datSampleDataBase
 ;with	MatrixUsersItemsCte as
 (
 	select	mui.UserId Utente, InsurancePolicyCategoryName NomePolizza, Rating Valutazione
-	from	AppMatrixUsersItems mui join AppInsurancePolicyCategories ipc
+	from	AppMatrixUsersItemsV7 mui with (nolock) join AppInsurancePolicyCategories ipc with (nolock)
 	on		mui.ItemId = ipc.Id		
+	where	UserId in (select UserId from AppMatrixUsersItems group by UserId having SUM(Rating) > 1)
 ),
 PivotTableCte as
 (
@@ -24,8 +25,23 @@ PivotTableCte as
 						[INCENDIO/FURTO],
 						[TUTELA GIUDIZIARIA])) as PivotTable
 )
-select	top 20 *
+select	*
 from	PivotTableCte
-where	[TUTELA GIUDIZIARIA] <> '0'
-and		[TUTELA GIUDIZIARIA] > '0.82'
+--where	Utente <= '607734'
+--where	Utente > '365018'
+--where	[R.C. DIVERSI] = '0'
+--		([INCENDIO/FURTO] <> '0'
+--and		[TUTELA GIUDIZIARIA] <> '0')
 order	by Utente desc
+--select	*
+--from	AppCustomerLearningFeatures
+--where	CustomerId in 
+--(
+--	select	CustomerId
+--	from	AppCustomerLearningFeatures
+--	where	InsurancePolicyId in (2, 3, 5, 8, 9)
+--)
+--order	by CustomerId asc
+----select	*
+----from	AppMatrixUsersItems
+----where	UserId = '96267'

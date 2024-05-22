@@ -1,16 +1,11 @@
 ﻿using DAL.Core.Interfaces;
 using DAL.Enums;
-using DAL.Mapping;
-using DAL.ModelML;
 using DAL.Models;
 using MachineLearningModel;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.ML;
-using Microsoft.ML.Data;
-using Microsoft.ML.Transforms;
+using QuickApp;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,257 +14,6 @@ namespace DAL.Core
     public class LearningManager : Manager, ILearningManager
     {
         #region Private 
-
-        //private IList<ProfessionType> _professionTypeList;
-        //private IList<MaritalStatusType> _maritalStatusList;
-        //private IList<Province> _provinceList;
-        //private IList<IncomeClassType> _incomeClassTypeList;
-        //private IList<int> _yearList;
-        //private IList<InsurancePolicyCategory> _insurancePolicyCategoryList;
-
-        //private IList<int> getYearList()
-        //{
-        //    var yearList = new List<int>();
-        //    for (var year = 1915; year <= 2006; year++)
-        //        yearList.Add(year);
-
-        //    return yearList;
-        //}
-
-        //private IList<string> fillEmptyValue(IList<string> lineSplit)
-        //{
-        //    var rnd = new Random();
-        //    var indexRnd = 0;
-        //    var annualGrossIncomeBase = 0.0;
-
-        //    #region Sesso
-
-        //    if (string.IsNullOrEmpty(lineSplit[0].Trim()))
-        //    {
-        //        if (string.IsNullOrEmpty(lineSplit[4]))
-        //            lineSplit[0] = "S";
-        //        else
-        //            lineSplit[0] = (rnd.Next() % 2) == 0 ? "M" : "F";
-        //    }
-
-        //    #endregion
-
-        //    #region Data di Nascita
-
-        //    if (string.IsNullOrEmpty(lineSplit[1]))
-        //    {
-        //        indexRnd = rnd.Next(_yearList.Count);
-        //        var year = _yearList[indexRnd];
-        //        var month = rnd.Next(1, 13);
-        //        var day = 0;
-
-        //        if (month == 2)
-        //            day = rnd.Next(1, 29);
-        //        else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-        //            day = rnd.Next(1, 32);
-        //        else
-        //            day = rnd.Next(1, 31);
-
-        //        var dataNascita = new DateTime(year, month, day);
-        //        lineSplit[1] = dataNascita.ToString("dd/MM/yyyy");
-        //    }
-
-        //    #endregion
-
-        //    #region Stato Civile
-
-        //    if (string.IsNullOrEmpty(lineSplit[2]))
-        //    {
-        //        indexRnd = rnd.Next(_maritalStatusList.Count);
-        //        lineSplit[2] = _maritalStatusList[indexRnd].MaritalStatusDescription;
-        //    }
-
-        //    #endregion
-
-        //    #region Coniuge a Carico
-
-        //    if (string.IsNullOrEmpty(lineSplit[3]))
-        //    {
-        //        if (_maritalStatusList.FirstOrDefault(x => x.MaritalStatusDescription == lineSplit[2]).IsSingle)
-        //            lineSplit[3] = System.Boolean.FalseString;
-        //        else
-        //            lineSplit[3] = (rnd.Next() % 2) == 0 ? System.Boolean.TrueString : System.Boolean.FalseString;
-        //    }
-
-        //    #endregion
-
-        //    #region Numero Figli
-
-        //    if (string.IsNullOrEmpty(lineSplit[4]))
-        //    {
-        //        if (lineSplit[0] == "0" || lineSplit[0] == "X" || lineSplit[0] == "S")
-        //            lineSplit[4] = "0";
-        //        else
-        //            lineSplit[4] = (rnd.Next() % 4).ToString();
-        //    }
-
-        //    #endregion
-
-        //    #region Numero Figli a Carico
-
-        //    if (string.IsNullOrEmpty(lineSplit[5]))
-        //    {
-        //        var dataNascita = DateTime.Parse(lineSplit[1]);
-        //        var age = (int)DateTime.Now.Subtract(dataNascita).TotalDays / 365;
-        //        var childrenNumbers = int.Parse(lineSplit[4]);
-
-        //        if (childrenNumbers == 0 || age < 18)
-        //            lineSplit[5] = "0";
-        //        else
-        //            lineSplit[5] = rnd.Next(0, childrenNumbers + 1).ToString();
-        //    }
-
-        //    #endregion
-
-        //    #region Professione
-
-        //    if (lineSplit[6] == "Società" || lineSplit[6] == @"Societ�")
-        //        lineSplit[6] = "Societa'";
-
-        //    #endregion
-
-        //    #region RAL
-
-        //    ProfessionType professionType = null;
-        //    if (string.IsNullOrEmpty(lineSplit[7]))
-        //    {
-        //        professionType = _professionTypeList.FirstOrDefault(x => x.ProfessionTypeDescription == lineSplit[6]);
-
-        //        if ((rnd.Next() % 2) == 0)
-        //            annualGrossIncomeBase = professionType.MinAnnualGrossIncome * (1 + rnd.NextSingle());
-        //        else
-        //            annualGrossIncomeBase = professionType.MaxAnnualGrossIncome * rnd.NextSingle();
-
-        //        if (annualGrossIncomeBase < professionType.MinAnnualGrossIncome)
-        //            annualGrossIncomeBase = professionType.MinAnnualGrossIncome;
-
-        //        lineSplit[7] = annualGrossIncomeBase.ToString();
-        //    }
-
-        //    #endregion
-
-        //    #region Tipo Reddito
-
-        //    if (string.IsNullOrEmpty(lineSplit[8]))
-        //        lineSplit[8] = professionType.IncomeType.IncomeTypeDescription;
-
-        //    #endregion
-
-        //    #region Provincia
-
-        //    if (string.IsNullOrEmpty(lineSplit[10]))
-        //    {
-        //        indexRnd = rnd.Next(0, _provinceList.Count);
-        //        lineSplit[10] = _provinceList[indexRnd].ProvinceAbbreviation;
-        //    }
-
-        //    #endregion
-
-        //    #region Region
-
-        //    lineSplit[9] = lineSplit[10];
-        //    lineSplit[10] = _provinceList[indexRnd].Region.RegionName;
-
-        //    #endregion
-
-        //    return lineSplit;
-        //}
-
-        //private CustomerLearningFeature getCustomerLearningFeature(IList<string> lineSplit)
-        //{
-        //    var customerLearningFeature = new CustomerLearningFeature();
-
-        //    customerLearningFeature.Gender = lineSplit[0].Trim();
-
-        //    var birthDate = DateTime.Parse(lineSplit[1]);
-        //    customerLearningFeature.BirthMonth = birthDate.Month.ToString();
-        //    customerLearningFeature.YearBirth = birthDate.Year.ToString();
-
-        //    customerLearningFeature.MaritalStatus = lineSplit[2].Trim();
-        //    customerLearningFeature.IsSingle = _maritalStatusList.First(x => x.MaritalStatusDescription == customerLearningFeature.MaritalStatus).IsSingle;
-        //    customerLearningFeature.IsDependentSpouse = bool.Parse(lineSplit[3]);
-        //    customerLearningFeature.ChildrenNumbers = int.Parse(lineSplit[4]);
-        //    customerLearningFeature.DependentChildrenNumber = int.Parse(lineSplit[5]);
-
-        //    customerLearningFeature.ProfessionType = lineSplit[6].Trim();
-
-        //    var profession = _professionTypeList.FirstOrDefault(x => x.ProfessionTypeDescription == customerLearningFeature.ProfessionType);
-        //    customerLearningFeature.IsFreelancer = profession.IsFreelancer ?? false;
-
-        //    var annualGrossIncome = double.Parse(lineSplit[7]);
-        //    var incomeClassType = _incomeClassTypeList.FirstOrDefault(x => x.MinAnnualGrossIncome <= annualGrossIncome && (!x.MaxAnnualGrossIncome.HasValue || x.MaxAnnualGrossIncome >= annualGrossIncome));
-        //    customerLearningFeature.IncomeClassType = (incomeClassType != null) ? incomeClassType.DescriptionIncomeClass : string.Empty;
-
-        //    customerLearningFeature.IncomeType = lineSplit[8].Trim();
-        //    customerLearningFeature.Country = lineSplit[9].Trim();
-        //    customerLearningFeature.Region = lineSplit[10].Trim();
-        //    customerLearningFeature.InsurancePolicyName = lineSplit[11].Trim();
-
-        //    return customerLearningFeature;
-        //}
-
-        //private CustomerLearningFeature getInsurancePolicyData(CustomerLearningFeature customerLearningFeature)
-        //{
-        //    var insurancePolicyCategory = _insurancePolicyCategoryList.FirstOrDefault(x => x.InsurancePolicyCategoryName.ToLower() == customerLearningFeature.InsurancePolicyName.ToLower());
-
-        //    customerLearningFeature.InsurancePolicyId = insurancePolicyCategory.Id;
-        //    customerLearningFeature.InsurancePolicyCode = insurancePolicyCategory.InsurancePolicyCategoryCode;
-        //    customerLearningFeature.InsurancePolicyDescription = insurancePolicyCategory.InsurancePolicyCategoryDescription;
-        //    customerLearningFeature.WarrantyAvaibles = string.Join(",", insurancePolicyCategory.WarrantyAvaibles.Select(x => x.WarrantyName.Trim()).ToList());
-
-        //    if (customerLearningFeature.WarrantyAvaibles.Length > 8000)
-        //        customerLearningFeature.WarrantyAvaibles = customerLearningFeature.WarrantyAvaibles.Substring(0, 7990);
-        //    return customerLearningFeature;
-        //}
-
-        //private CustomerLearningFeature fillCustomerLearningFeature(string line)
-        //{
-        //    IList<string> lineSplit = line.Split(new char[] { ';' }).ToList();
-        //    lineSplit = fillEmptyValue(lineSplit);
-        //    var customerLearningFeature = getCustomerLearningFeature(lineSplit);
-        //    customerLearningFeature = getInsurancePolicyData(customerLearningFeature);
-        //    //customerLearningFeature.Rating = getRating(customerLearningFeature);
-        //    return customerLearningFeature;
-        //}
-
-        //private IEstimator<ITransformer> buildPipeline(MLContext mlContext)
-        //{
-        //    var x = mlContext.Transforms.Categorical.OneHotEncoding(new[]
-        //                                {
-        //                                    new InputOutputColumnPair(outputColumnName:"GenderEncoded", inputColumnName:"Gender"),
-        //                                    new InputOutputColumnPair(outputColumnName:"BirthMonthEncoded", inputColumnName:"BirthMonth"),
-        //                                    new InputOutputColumnPair(outputColumnName:"YearBirthEncoded",inputColumnName:"YearBirth"),
-        //                                    new InputOutputColumnPair(outputColumnName:"MaritalStatusEncoded", inputColumnName:"MaritalStatus"),
-        //                                    new InputOutputColumnPair(outputColumnName:"IsSingleEncoded", inputColumnName:"IsSingle"),
-        //                                    new InputOutputColumnPair(outputColumnName:"IsDependentSpouseEncoded", inputColumnName:"IsDependentSpouse"),
-        //                                    new InputOutputColumnPair(outputColumnName:"IsFreelancerEncoded", inputColumnName:"IsFreelancer")
-        //                                })
-        //                                .Append(mlContext.Transforms.Concatenate(outputColumnName: "Features", nameof(CustomerLearningFeatureDataView.CustomerId),
-        //                                                                           nameof(CustomerLearningFeatureDataView.ChildrenNumbers),
-        //                                                                           nameof(CustomerLearningFeatureDataView.DependentChildrenNumber),
-        //                                                                           "GenderEncoded",
-        //                                                                           "BirthMonthEncoded",
-        //                                                                           "YearBirthEncoded",
-        //                                                                           "MaritalStatusEncoded",
-        //                                                                           "IsSingleEncoded",
-        //                                                                           "IsDependentSpouseEncoded",
-        //                                                                           "IsFreelancerEncoded"
-        //                                                                           ))
-        //                                .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "PredictedLabel", inputColumnName: nameof(CustomerLearningFeatureDataView.InsurancePolicyId)));
-        //    return x;
-        //}
-
-        //private EstimatorChain<KeyToValueMappingTransformer> getTrainer(MLContext mlContext)
-        //{
-        //    var trainer = mlContext.MulticlassClassification.Trainers.SdcaNonCalibrated(labelColumnName: "PredictedLabel", featureColumnName: "Features")
-        //                                                    .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: nameof(InsurancePrediction.PredictedInsurancePolicyId), inputColumnName: "PredictedLabel"));
-        //    return trainer;
-        //}
 
         private CustomerLearningFeature getCustomerLearningFeature(string customerCode)
         {
@@ -290,26 +34,87 @@ namespace DAL.Core
             return customerLearningFeature;
         }
 
-        public long getCustomerId(CustomerLearningFeature customerLearningFeature)
+        private long getCustomerId(CustomerLearningFeature customerLearningFeature)
         {
+            var index = 0;
+            var rnd = new Random();
+            
             var customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeature(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
             if (customerLearningFeatures.Count > 0)
-                return customerLearningFeatures.First().CustomerId ?? long.MinValue;
-
-            return long.MinValue;
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutOne(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutTwo(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutThree(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutFour(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutFive(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutSix(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutSeven(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutEight(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutNine(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+            if (customerLearningFeatures.Count > 0)
+            {
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;
+            }
+            customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutTen(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
+                index = rnd.Next(0, customerLearningFeatures.Count);
+                return customerLearningFeatures[index].CustomerId ?? long.MinValue;            
         }
 
-        private IList<MLRecommenderSystemCustomer.ModelOutput> getItemRecommendations(long customerId, float minScore, int maxItems)
+        private IList<MLRecommenderSystem.ModelOutput> getItemRecommendations(long customerId, float minScore, int maxItems)
         {
             var insurancePolicyCategories = UnitOfWork.InsurancePolicyCategories.GetAll();
 
             var descendingComparer = Comparer<float>.Create((x, y) => y.CompareTo(x));
-            var predictions = new SortedList<float, MLRecommenderSystemCustomer.ModelOutput>(descendingComparer);
+            var predictions = new SortedList<float, MLRecommenderSystem.ModelOutput>(descendingComparer);
 
             foreach (var item in insurancePolicyCategories)
             {
-                var modelInput = new MLRecommenderSystemCustomer.ModelInput { UserId = customerId, ItemId = item.Id };
-                var modelOutput = MLRecommenderSystemCustomer.Predict(modelInput);
+                var modelInput = new MLRecommenderSystem.ModelInput { UserId = customerId, ItemId = item.Id };
+                var modelOutput = MLRecommenderSystem.Predict(modelInput);
                 predictions.Add(modelOutput.Score, modelOutput);
             }
 
@@ -319,7 +124,7 @@ namespace DAL.Core
                               .ToList();
         }
 
-        private IList<InsurancePolicyCategory> getRecommendedInsurancePolicyCategories(IEnumerable<MLRecommenderSystemCustomer.ModelOutput> predictions)
+        private IList<InsurancePolicyCategory> getRecommendedInsurancePolicyCategories(IEnumerable<MLRecommenderSystem.ModelOutput> predictions)
         {
             var insurancePolicyCategories = new List<InsurancePolicyCategory>();
 
@@ -340,11 +145,11 @@ namespace DAL.Core
 
         public void TrainingClassifier()
         {
-            var mlContext = new MLContext();
-            var customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeaturesForTraining().Take(1200).ToList();
-            var dataView = mlContext.Data.LoadFromEnumerable(customerLearningFeatures);
-            var transformer = MLClassifierCustomerFeature.RetrainPipeline(mlContext, dataView);
-            mlContext.Model.Save(transformer, dataView.Schema, @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\QueueConsumer\mlClassifierCustomerFeature.zip");
+            //var mlContext = new MLContext();
+            //var customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeaturesForTraining().Take(1200).ToList();
+            //var dataView = mlContext.Data.LoadFromEnumerable(customerLearningFeatures);
+            //var transformer = MLClassifierCustomerFeature.RetrainPipeline(mlContext, dataView);
+            //mlContext.Model.Save(transformer, dataView.Schema, @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\QueueConsumer\mlClassifierCustomerFeature.zip");
         }
 
         public void PredictionClassification()
@@ -373,9 +178,29 @@ namespace DAL.Core
 
             foreach (var item in customerLearningFeatures)
             {
+                var customerLearningFeatureInsurancePolicies = UnitOfWork.CustomerLearningFeatures
+                                                                         .GetCustomerLearningFeatures(item.CustomerId)
+                                                                         .Select(x => new CustomerLearningFeature
+                                                                         {
+                                                                             CustomerId = x.CustomerId,
+                                                                             InsurancePolicyId = x.InsurancePolicyId,
+                                                                         }).ToList();
                 foreach (var subItem in insurancePolicyCategories)
                 {
-                    var modelInput = new MLClassifierCustomerFeature.ModelInput()
+                    MatrixUsersItems userItem;
+                    if (customerLearningFeatureInsurancePolicies.Any(x => x.InsurancePolicyId == subItem.Id))
+                    {
+                        userItem = new MatrixUsersItems
+                        {
+                            UserId = item.CustomerId ?? 0,
+                            ItemId = subItem.Id,
+                            Rating = 1.0f
+                        };
+                        matrixUsersItems.Add(userItem);
+                        continue;
+                    }
+
+                    var modelInput = new MLClassifierCustomerFeatureV8.ModelInput()
                     {
                         Gender = item.Gender,
                         BirthMonth = item.BirthMonth,
@@ -393,11 +218,12 @@ namespace DAL.Core
                         Region = item.Region,
                         InsurancePolicyCode = subItem.InsurancePolicyCategoryCode,
                         InsurancePolicyName = subItem.InsurancePolicyCategoryName,
+                        //InsurancePolicyDescription = subItem.InsurancePolicyCategoryDescription,
+                        //WarrantyAvaibles = string.Join(",", subItem.WarrantyAvaibles.Select(x => x.WarrantyName)),
                     };
 
-                    var prediction = MLClassifierCustomerFeature.Predict(modelInput);
+                    var prediction = MLClassifierCustomerFeatureV8.Predict(modelInput);
 
-                    MatrixUsersItems userItem = new MatrixUsersItems();
                     if (subItem.Id == (byte)prediction.PredictedLabel)
                         userItem = new MatrixUsersItems
                         {
@@ -409,6 +235,61 @@ namespace DAL.Core
                         userItem = new MatrixUsersItems
                         {
                             UserId = item.CustomerId ?? 0,
+                            ItemId = subItem.Id,
+                            Rating = 0f
+                        };
+
+                    matrixUsersItems.Add(userItem);
+                }
+
+                //if (matrixUsersItems.Count > 60000)
+                //    break;
+            }
+            return matrixUsersItems;
+        }
+        public async Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeatureCopy> customerLearningFeatures)
+        {
+            var insurancePolicyCategories = await UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories().ToListAsync();
+            var matrixUsersItems = new List<MatrixUsersItems>();
+
+            foreach (var item in customerLearningFeatures)
+            {
+                foreach (var subItem in insurancePolicyCategories)
+                {
+                    var modelInput = new MLClassifierCustomerFeatureV8.ModelInput()
+                    {
+                        Gender = item.Gender,
+                        BirthMonth = item.BirthMonth,
+                        YearBirth = item.YearBirth,
+                        MaritalStatus = item.MaritalStatus,
+                        IsSingle = item.IsSingle,
+                        IsDependentSpouse = item.IsDependentSpouse,
+                        ChildrenNumbers = item.ChildrenNumbers,
+                        DependentChildrenNumber = item.DependentChildrenNumber,
+                        ProfessionType = item.ProfessionType,
+                        IsFreelancer = item.IsFreelancer,
+                        IncomeClassType = item.IncomeClassType,
+                        IncomeType = item.IncomeType,
+                        Country = item.Country,
+                        Region = item.Region,
+                        InsurancePolicyCode = subItem.InsurancePolicyCategoryCode,
+                        InsurancePolicyName = subItem.InsurancePolicyCategoryName
+                    };
+
+                    var prediction = MLClassifierCustomerFeatureV8.Predict(modelInput);
+
+                    MatrixUsersItems userItem = new MatrixUsersItems();
+                    if (subItem.Id == (byte)prediction.PredictedLabel)
+                        userItem = new MatrixUsersItems
+                        {
+                            UserId = item.CustomerId,
+                            ItemId = (byte)prediction.PredictedLabel,
+                            Rating = prediction.Score.Max()
+                        };
+                    else
+                        userItem = new MatrixUsersItems
+                        {
+                            UserId = item.CustomerId,
                             ItemId = subItem.Id,
                             Rating = 0f
                         };

@@ -18,14 +18,20 @@ namespace DAL.Core
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerHeaderRepository _customerHeaderRepositoryNoSql;
         private readonly ICustomerDetailRepository _customerDetailRepositoryNoSql;
+        private readonly ILearningManager _learningManager;
+        private readonly IInsuranceCategoryPolicyRecommendationRepository _insuranceCategoryPolicyRecommendationRepository;
 
         public CustomerServerlessManager(IUnitOfWork unitOfWork,
                                          ICustomerHeaderRepository customerRepositoryNoSql,
-                                         ICustomerDetailRepository customerDetailRepositoryNoSql)
+                                         ICustomerDetailRepository customerDetailRepositoryNoSql,
+                                         ILearningManager learningManager,
+                                         IInsuranceCategoryPolicyRecommendationRepository insuranceCategoryPolicyRecommendationRepository)
         {
             _customerRepository = unitOfWork.Customers;
             _customerHeaderRepositoryNoSql = customerRepositoryNoSql;
             _customerDetailRepositoryNoSql = customerDetailRepositoryNoSql;
+            _learningManager = learningManager;
+            _insuranceCategoryPolicyRecommendationRepository = insuranceCategoryPolicyRecommendationRepository;
         }
 
         public void Manage(CustomerQueue customerQueue)
@@ -36,7 +42,7 @@ namespace DAL.Core
                 switch (customerQueue.PublishQueueType)
                 {
                     case Enums.EnumPublishQueueType.Added:
-                        customerNoSqlManager = new CustomerNoSqlManagerAdded(_customerRepository, _customerHeaderRepositoryNoSql, _customerDetailRepositoryNoSql, customerQueue);
+                        customerNoSqlManager = new CustomerNoSqlManagerAdded(_customerRepository, _customerHeaderRepositoryNoSql, _customerDetailRepositoryNoSql, _learningManager, _insuranceCategoryPolicyRecommendationRepository, customerQueue);
                         break;
                     case Enums.EnumPublishQueueType.Updated:
                         customerNoSqlManager = new CustomerNoSqlManagerUpdated(_customerRepository, _customerHeaderRepositoryNoSql, _customerDetailRepositoryNoSql, customerQueue);

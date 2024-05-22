@@ -36,12 +36,10 @@ export class InsurancecoverageComponent implements OnInit {
   }
 
   Show(): void { 
-    debugger;
     this.isShowen = true; 
   }
 
   Hide(): void { 
-    debugger;
     this.isShowen = false; 
   }
 

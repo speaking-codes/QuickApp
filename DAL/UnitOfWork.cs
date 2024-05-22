@@ -41,6 +41,7 @@ namespace DAL
         private IConfigurationModelRepository _configurationModels;
 
         private ILearningTrainingRepository _customerLearningFeatures;
+        private ILearningTrainingCopyRepository _customerLearningFeatureCopies;
         private IMatrixCustomerInsurancePolicyRepository _matrixUsersItems;
         private IKinshipRelationshipTypeRepository _kinshipRelationshipTypes;
 
@@ -213,6 +214,15 @@ namespace DAL
             {
                 _customerLearningFeatures ??= new LearningTrainingRepository(_context);
                 return _customerLearningFeatures;
+            }
+        }
+
+        public ILearningTrainingCopyRepository CustomerLearningFeatureCopies
+        {
+            get
+            {
+                _customerLearningFeatureCopies ??= new LearningTrainingCopyRepository(_context);
+                return _customerLearningFeatureCopies;
             }
         }
 

@@ -18,7 +18,7 @@ import { EnumDashboardCall } from 'src/app/models/enums';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit{
-    elementNumber: number = 6;
+    elementNumber: number = 4;
     customerCode: string = "";
     customerFullName: string = "";
     titleInsuranceCoverageRecommended: string;
@@ -35,9 +35,9 @@ export class DashboardComponent implements OnInit{
 
     ngOnInit(): void {
       this.customerCode = this.route.snapshot.params['customerCode'];    
-      this.titleInsuranceCoverageRecommended ="Beni suggeriti al cliente";
-      this.titleInsuranceCoverageTopSelling = "Beni più venduti";
-      this.titleInsuranceCoverageOther = "Altri beni";
+      this.titleInsuranceCoverageRecommended ="Coperture suggerite al cliente";
+      this.titleInsuranceCoverageTopSelling = "Coperture più vendute";
+      this.titleInsuranceCoverageOther = "Altre coperture";
       this.insuranceCoverageCodes = "";
       
       this.loadData();

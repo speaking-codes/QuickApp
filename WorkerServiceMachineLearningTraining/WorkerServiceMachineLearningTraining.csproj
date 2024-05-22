@@ -1,18 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-WorkerServiceMachineLearningTraining-b8d34dc0-e702-4e27-a55a-3bad7d585566</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.ML" Version="1.7.1" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
+  </ItemGroup>
+  <ItemGroup Label="MLClassifierCustomerFeature">
+    <None Include="MLClassifierCustomerFeature.consumption.cs">
+      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLClassifierCustomerFeature.training.cs">
+      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLClassifierCustomerFeature.zip">
+      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

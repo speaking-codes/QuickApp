@@ -13,8 +13,12 @@ namespace DAL.Core.Interfaces
         Task SaveDataFeaturs(IList<CustomerLearningFeature> customerLearningFeatures);
         IList<CustomerLearningFeature> LoadDataFeatures();
         Task UpdateDataFeatures(IList<CustomerLearningFeature> customerLearningFeatures);
+        Task ReduceDataFeaturesDuplicated();
         Task AddToStorage(string inputPath, Customer customer);
+
         Task<IList<CustomerLearningFeature>> LoadCustomerLearningFeature(long customerId);
+        Task<IList<CustomerLearningFeatureCopy>> LoadCustomerLearningFeatureCopyForTest(long customerId);
+
         Task<long> GetLastUserIdFromMatrixUserItems();
         Task SaveMatrixUsersItems(IEnumerable<MatrixUsersItems> matrixUsersItems);
     }

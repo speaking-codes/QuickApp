@@ -1,17 +1,36 @@
 <div *ngIf="isShowInsuranceCoverage()">   
     <ngx-datatable class="material colored-header sm table-x table-striped table-hover expandable"
+    #myTable
     [loadingIndicator]="loadingIndicator"
     [rows]="rows"
     [headerHeight]="45"
     [footerHeight]="45"
     [columnMode]="'force'"
     [columns]="columns"
-    [scrollbarV]="verticalScrollbar"
-    [columnMode]="'force'"
+    [scrollbarV]="verticalScrollbar"    
     [limit]="pageSize"
     [selectionType]="'single'">    
-    <ngx-datatable-column name="Identificativo Polizza" prop="code" [resizeable]="false">
-        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+     <!-- Row Detail Template -->
+     <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow (toggle)="onDetailToggle($event)">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+            <div style="padding-left:25px; padding-bottom: 5px; ">
+              <div style="border-bottom: 1px solid black;"><strong>Descrizione beni assicurati:</strong></div>
+              <div style="padding-left:35px;" *ngFor="let item of row.itemDescriptions">{{item}}</div>    
+            </div>
+            <div style="padding-left:25px; padding-bottom: 5px;">
+              <div style="border-bottom: 1px solid black;"><strong>Garanzie selezionate:</strong></div>
+              <div style="padding-left:35px;" *ngFor="let item of row.warrantySelecteds">{{item}}</div>
+            </div>
+      </ng-template>
+    </ngx-datatable-row-detail>
+    <ngx-datatable-column
+          [width]="10"
+          [resizeable]="false"
+          [sortable]="false"
+          [draggable]="false"
+          [canAutoResize]="false"
+          [scrollbarH]="false">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
             <a
               href="javascript:void(0)"
               [class.datatable-icon-right]="!expanded"
@@ -21,6 +40,8 @@
             >
             </a>
           </ng-template>
+        </ngx-datatable-column>
+    <ngx-datatable-column name="Identificativo Polizza" prop="code" [resizeable]="false">
           <ng-template ngx-datatable-cell-template let-value="value">{{value}}</ng-template>
     </ngx-datatable-column>
         <ngx-datatable-column name="Tipologia Polizza" prop="categoryType" [resizeable]="false">

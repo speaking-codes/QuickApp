@@ -10,6 +10,8 @@ namespace DAL.Core.Interfaces
         void PredictionClassification();
 
         Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeature> customerLearningFeatures);
+        Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeatureCopy> customerLearningFeatures);
+
         IList<InsurancePolicyCategory> GetRecommendation(string customerCode, float minScore, int maxItems);
     }
 }

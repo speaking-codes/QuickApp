@@ -34,6 +34,7 @@ namespace DAL
         IConfigurationModelRepository ConfigurationModels { get; }
 
         ILearningTrainingRepository CustomerLearningFeatures { get; }
+        ILearningTrainingCopyRepository CustomerLearningFeatureCopies { get; }
         IMatrixCustomerInsurancePolicyRepository MatrixUsersItems { get; }
 
         IKinshipRelationshipTypeRepository KinshipRelationshipTypes { get; }

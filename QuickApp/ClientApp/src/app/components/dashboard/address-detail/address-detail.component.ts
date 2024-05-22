@@ -16,7 +16,6 @@ export class AddressDetailComponent implements OnInit {
   addresses: AddressDetail[];
 
   ngOnInit(): void {
-    debugger;
     this.rows = this.addresses;
   }
 

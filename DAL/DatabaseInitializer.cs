@@ -50,10 +50,9 @@ namespace DAL
             await SeedDefaultUsersAsync();
 
             if (isRestart)
-            {
                 await LoadTypologicalTableData();
-                //await LoadLearningTableData();
-            }
+
+            await GenerateInsurcancePolicyCategoryStatistics();
         }
 
 
@@ -139,8 +138,6 @@ namespace DAL
 
                     await _context.Database.ExecuteSqlRawAsync(line);
 
-                    //await GenerateInsurcancePolicyCategoryStatistics();
-
                     await _context.Database.CommitTransactionAsync();
                 }
                 catch (Exception ex)
@@ -152,15 +149,39 @@ namespace DAL
 
         private async Task GenerateInsurcancePolicyCategoryStatistics()
         {
-            var insurancePolicyCategories = _context.InsurancePolicyCategories.ToList();
-            var startYear = DateTime.Now.Year - 10;
-            var endYear = DateTime.Now.Year;
-            var startMonth = 1;
-            var endMonth = 13;
-
-            var random = new Random();
-            for (var currentYear = startYear; currentYear < endYear; currentYear++)
+            try
             {
+                await _context.Database.BeginTransactionAsync();
+
+                var insurancePolicyCategories = _context.InsurancePolicyCategories.ToList();
+                var startYear = DateTime.Now.Year - 10;
+                var endYear = DateTime.Now.Year;
+                var startMonth = 1;
+                var endMonth = 13;
+
+                var random = new Random();
+                for (var currentYear = startYear; currentYear < endYear; currentYear++)
+                {
+                    for (var currentMonth = startMonth; currentMonth < endMonth; currentMonth++)
+                    {
+                        for (var i = 0; i < insurancePolicyCategories.Count; i++)
+                        {
+                            var statistic = new InsurancePolicyCategoryStatic();
+                            statistic.InsurancePolicyCategory = insurancePolicyCategories[i];
+                            statistic.Month = (byte)currentMonth;
+                            statistic.Year = (short)currentYear;
+                            statistic.TotalCount = random.Next(51, 152440);
+                            statistic.CreatedBy = null;
+                            statistic.UpdatedBy = null;
+                            statistic.CreatedDate = DateTime.Now;
+                            statistic.UpdatedDate = DateTime.Now;
+
+                            _context.InsurancePolicyCategoryStatics.Add(statistic);
+                        }
+                    }
+                }
+
+                endMonth = DateTime.Now.Month;
                 for (var currentMonth = startMonth; currentMonth < endMonth; currentMonth++)
                 {
                     for (var i = 0; i < insurancePolicyCategories.Count; i++)
@@ -168,7 +189,7 @@ namespace DAL
                         var statistic = new InsurancePolicyCategoryStatic();
                         statistic.InsurancePolicyCategory = insurancePolicyCategories[i];
                         statistic.Month = (byte)currentMonth;
-                        statistic.Year = (short)currentYear;
+                        statistic.Year = (short)endYear;
                         statistic.TotalCount = random.Next(51, 152440);
                         statistic.CreatedBy = null;
                         statistic.UpdatedBy = null;
@@ -178,28 +199,14 @@ namespace DAL
                         _context.InsurancePolicyCategoryStatics.Add(statistic);
                     }
                 }
-            }
 
-            endMonth = DateTime.Now.Month;
-            for (var currentMonth = startMonth; currentMonth < endMonth; currentMonth++)
+                await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+            }
+            catch (Exception ex)
             {
-                for (var i = 0; i < insurancePolicyCategories.Count; i++)
-                {
-                    var statistic = new InsurancePolicyCategoryStatic();
-                    statistic.InsurancePolicyCategory = insurancePolicyCategories[i];
-                    statistic.Month = (byte)currentMonth;
-                    statistic.Year = (short)endYear;
-                    statistic.TotalCount = random.Next(51, 152440);
-                    statistic.CreatedBy = null;
-                    statistic.UpdatedBy = null;
-                    statistic.CreatedDate = DateTime.Now;
-                    statistic.UpdatedDate = DateTime.Now;
-
-                    _context.InsurancePolicyCategoryStatics.Add(statistic);
-                }
+                await _context.Database.RollbackTransactionAsync();
             }
-
-            await _context.SaveChangesAsync();
         }
 
         private async Task LoadLearningTableData()

@@ -41,5 +41,6 @@ namespace DAL.ModelsNoSql
         [BsonElement("SalesLineBackgroundCssClass")]
         public string SalesLineBackgroundCssClass { get; set; }
 
+        public bool IsTopSelling { get; set; }
     }
 }

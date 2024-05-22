@@ -7,6 +7,8 @@ export class InsuranceCoverageSummary {
     issueDate: string;
     expiryDate: string;
     totalPrice: string;
+    isTopSelling: boolean;
+    warrantySelecteds: string[];
 }
 
 export class InsuranceCategoryPolicyCard {

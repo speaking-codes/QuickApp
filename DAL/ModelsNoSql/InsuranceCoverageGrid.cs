@@ -31,5 +31,8 @@ namespace DAL.ModelsNoSql
 
         [BsonElement("TotalPrice")]
         public string TotalPrice { get; set; }
+
+        [BsonElement("WarrantySelecteds")]
+        public IList<string> WarrantySelecteds { get; set; }
     }
 }

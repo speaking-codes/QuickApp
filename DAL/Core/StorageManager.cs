@@ -1,20 +1,12 @@
 ﻿using DAL.Core.Interfaces;
-using DAL.Enums;
-using DAL.Mapping;
-using DAL.ModelML;
+using DAL.Exstensions;
 using DAL.Models;
-using MachineLearningModel;
-using Microsoft.ML.Data;
-using Microsoft.ML.Transforms;
-using Microsoft.ML;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DAL.Exstensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Core
 {
@@ -361,6 +353,31 @@ namespace DAL.Core
             }
         }
 
+        public async Task ReduceDataFeaturesDuplicated()
+        {
+            try
+            {
+                await UnitOfWork.BeginTransactionAsync();
+
+                var customerLearningFeatures = await UnitOfWork.CustomerLearningFeatures.GetCustomCustomerLearningFeatures();
+                foreach (var item in customerLearningFeatures)
+                {
+                    var duplicateCustomerLearningFeatures = await UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatures(item.CustomerId, item.InsurancePolicyId);
+                    duplicateCustomerLearningFeatures.RemoveAt(0);
+
+                    foreach (var itemDuplicated in duplicateCustomerLearningFeatures)
+                        UnitOfWork.CustomerLearningFeatures.CustomDelete(itemDuplicated.Id);
+                }
+
+                await UnitOfWork.CommitTransactionAsync();
+            }
+            catch
+            {
+                UnitOfWork.RollbackTransaction();
+                throw;
+            }
+        }
+
         public async Task AddToStorage(string inputPath, Customer customer)
         {
             var pathFiles = Directory.GetFiles(inputPath, "*.csv");
@@ -390,7 +407,39 @@ namespace DAL.Core
             await UnitOfWork.CustomerLearningFeatures
                             .GetCustomerLearningFeatures()
                             .Where(x => x.CustomerId.HasValue && x.CustomerId.Value > customerId)
+                            //.Where(x =>x.CustomerId.HasValue && x.CustomerId.Value > customerId && x.InsurancePolicyId != 1 && x.InsurancePolicyId != 4 && x.InsurancePolicyId != 6 && x.InsurancePolicyId != 7)
                             .Select(x => new CustomerLearningFeature
+                            {
+                                CustomerId = x.CustomerId,
+                                Gender = x.Gender,
+                                BirthMonth = x.BirthMonth,
+                                YearBirth = x.YearBirth,
+                                MaritalStatus = x.MaritalStatus,
+                                IsSingle = x.IsSingle,
+                                IsDependentSpouse = x.IsDependentSpouse,
+                                ChildrenNumbers = x.ChildrenNumbers,
+                                DependentChildrenNumber = x.DependentChildrenNumber,
+                                ProfessionType = x.ProfessionType,
+                                IsFreelancer = x.IsFreelancer,
+                                IncomeClassType = x.IncomeClassType,
+                                IncomeType = x.IncomeType,
+                                Country = x.Country,
+                                Region = x.Region,
+                                //InsurancePolicyId= x.InsurancePolicyId,
+                                //InsurancePolicyCode= x.InsurancePolicyCode,
+                                //InsurancePolicyName = x.InsurancePolicyName,
+                                
+                            })
+                            .Distinct()
+                            .OrderBy(x => x.CustomerId)
+                            .Take(12000)
+                            .ToListAsync();
+
+        public async Task<IList<CustomerLearningFeatureCopy>> LoadCustomerLearningFeatureCopyForTest(long customerId) =>
+            await UnitOfWork.CustomerLearningFeatureCopies
+                            .GetCustomerLearningFeatures()
+                            .Where(x => x.CustomerId > customerId)
+                            .Select(x => new CustomerLearningFeatureCopy
                             {
                                 CustomerId = x.CustomerId,
                                 Gender = x.Gender,
@@ -419,7 +468,6 @@ namespace DAL.Core
 
             return userId;
         }
-
         public async Task SaveMatrixUsersItems(IEnumerable<MatrixUsersItems> matrixUsersItems)
         {
             try

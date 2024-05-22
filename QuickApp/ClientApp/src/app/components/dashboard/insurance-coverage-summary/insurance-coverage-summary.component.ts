@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TableColumn } from '@swimlane/ngx-datatable';
 import { InsuranceCoverageSummary } from 'src/app/models/insurance-coverage';
 import { AlertService, MessageSeverity } from 'src/app/services/alert.service';
@@ -13,6 +13,7 @@ import { TextMultilineDirective } from 'src/app/directives/text-multiline.direct
   styleUrls: ['./insurance-coverage-summary.component.scss']
 })
 export class InsuranceCoverageSummaryComponent implements OnInit {
+  @ViewChild('myTable') table: any;
   columns: TableColumn[] = [];
   rows: InsuranceCoverageSummary[] = [];
   loadingIndicator = false;  
@@ -75,5 +76,14 @@ export class InsuranceCoverageSummaryComponent implements OnInit {
 
   isShowInsuranceCoverage(): boolean{
     return this.showDetail;
+  }
+
+  toggleExpandRow(row) {
+    console.log('Toggled Expand Row!', row);
+    this.table.rowDetail.toggleExpandRow(row);
+  }
+
+  onDetailToggle(event) {
+    console.log('Detail Toggled', event);
   }
 }

@@ -11,5 +11,6 @@ namespace QuickApp.ViewModels
         public string IssueDate { get; set; }
         public string ExpiryDate { get; set; }
         public string TotalPrice { get; set; }
+        public IList<string> WarrantySelecteds { get; set; }
     }
 }

@@ -171,7 +171,6 @@ namespace DAL.Core
             UpdateInsuranceCoverageSummary(insuranceCoverageSummary);
 
             await UpdateLearningTable(_customerInsurancePolicyQueue);
-
         }
     }
 }

@@ -21,9 +21,11 @@ namespace WorkerServiceForRecommenderSystemTraining
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 var userId = await _storageManager.GetLastUserIdFromMatrixUserItems();
+
                 var customerLearningFeature = await _storageManager.LoadCustomerLearningFeature(userId);
-                var temp = customerLearningFeature.Where(x => !x.CustomerId.HasValue || x.CustomerId ==0).ToList();
                 var matrixUserItems = await _learningManager.LoadMatrixUsersItems(customerLearningFeature);
+                //var temp = matrixUserItems.Where(x => x.Rating == 0).Select(x => x.ItemId).Distinct().ToList();
+                //var temp2 = matrixUserItems.Where(x => x.Rating != 0).Select(x => x.ItemId).Distinct().ToList();
                 await _storageManager.SaveMatrixUsersItems(matrixUserItems);
                 await Task.Delay(1000, stoppingToken);
             }

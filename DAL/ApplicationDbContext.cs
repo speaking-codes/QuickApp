@@ -93,6 +93,7 @@ namespace DAL
 
 
         public DbSet<CustomerLearningFeature> CustomerLearningFeatures { get; set; }
+        public DbSet<CustomerLearningFeatureCopy> CustomerLearningFeatureCopies { get; set; }
 
         public DbSet<MatrixUsersItems> MatrixUsersItems { get; set; }
 
@@ -361,6 +362,10 @@ namespace DAL
             builder.Entity<CustomerLearningFeature>().Property(c => c.Id).ValueGeneratedOnAdd();
             builder.Entity<CustomerLearningFeature>().HasKey(c => c.Id);
             builder.Entity<CustomerLearningFeature>().ToTable($"App{nameof(CustomerLearningFeatures)}");
+
+            builder.Entity<CustomerLearningFeatureCopy>().Property(c => c.Id).ValueGeneratedNever();
+            builder.Entity<CustomerLearningFeatureCopy>().HasKey(c => c.Id);
+            builder.Entity<CustomerLearningFeatureCopy>().ToTable("AppCustomerLearningFeaturesCopy");
 
             builder.Entity<MatrixUsersItems>().Property(c => c.Id).ValueGeneratedOnAdd();
             builder.Entity<MatrixUsersItems>().Property(c => c.UserId).ValueGeneratedNever();

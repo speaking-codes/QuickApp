@@ -9,27 +9,123 @@
     <PackageReference Include="Microsoft.ML.FastTree" Version="1.7.1" />
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.19.1" />
   </ItemGroup>
-  <ItemGroup Label="MLClassifierCustomerFeature">
-    <None Include="MLClassifierCustomerFeature.consumption.cs">
-      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
+  <ItemGroup Label="MLClassifierCustomerFeatureV8">
+    <None Include="MLClassifierCustomerFeatureV8.consumption.cs">
+      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
     </None>
-    <None Include="MLClassifierCustomerFeature.training.cs">
-      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
+    <None Include="MLClassifierCustomerFeatureV8.training.cs">
+      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
     </None>
-    <None Include="MLClassifierCustomerFeature.zip">
-      <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
+    <None Include="MLClassifierCustomerFeatureV8.zip">
+      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup Label="MLRecommenderSystemCustomer">
-    <None Include="MLRecommenderSystemCustomer.consumption.cs">
-      <DependentUpon>MLRecommenderSystemCustomer.mbconfig</DependentUpon>
+  <ItemGroup Label="MLRecommenderSystem">
+    <None Include="MLRecommenderSystem.consumption.cs">
+      <DependentUpon>MLRecommenderSystem.mbconfig</DependentUpon>
     </None>
-    <None Include="MLRecommenderSystemCustomer.training.cs">
-      <DependentUpon>MLRecommenderSystemCustomer.mbconfig</DependentUpon>
+    <None Include="MLRecommenderSystem.training.cs">
+      <DependentUpon>MLRecommenderSystem.mbconfig</DependentUpon>
     </None>
-    <None Include="MLRecommenderSystemCustomer.zip">
-      <DependentUpon>MLRecommenderSystemCustomer.mbconfig</DependentUpon>
+    <None Include="MLRecommenderSystem.zip">
+      <DependentUpon>MLRecommenderSystem.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV2">
+    <None Include="MLRecommenderSystemV2.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV2.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV2.training.cs">
+      <DependentUpon>MLRecommenderSystemV2.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV2.zip">
+      <DependentUpon>MLRecommenderSystemV2.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV3">
+    <None Include="MLRecommenderSystemV3.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV3.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV3.training.cs">
+      <DependentUpon>MLRecommenderSystemV3.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV3.zip">
+      <DependentUpon>MLRecommenderSystemV3.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV4">
+    <None Include="MLRecommenderSystemV4.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV4.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV4.training.cs">
+      <DependentUpon>MLRecommenderSystemV4.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV4.zip">
+      <DependentUpon>MLRecommenderSystemV4.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV5">
+    <None Include="MLRecommenderSystemV5.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV5.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV5.training.cs">
+      <DependentUpon>MLRecommenderSystemV5.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV5.zip">
+      <DependentUpon>MLRecommenderSystemV5.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV1">
+    <None Include="MLRecommenderSystemV1.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV1.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV1.training.cs">
+      <DependentUpon>MLRecommenderSystemV1.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV1.zip">
+      <DependentUpon>MLRecommenderSystemV1.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV6">
+    <None Include="MLRecommenderSystemV6.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV6.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV6.training.cs">
+      <DependentUpon>MLRecommenderSystemV6.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV6.zip">
+      <DependentUpon>MLRecommenderSystemV6.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV7">
+    <None Include="MLRecommenderSystemV7.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV7.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV7.training.cs">
+      <DependentUpon>MLRecommenderSystemV7.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV7.zip">
+      <DependentUpon>MLRecommenderSystemV7.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV8">
+    <None Include="MLRecommenderSystemV8.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV8.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV8.training.cs">
+      <DependentUpon>MLRecommenderSystemV8.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV8.zip">
+      <DependentUpon>MLRecommenderSystemV8.mbconfig</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

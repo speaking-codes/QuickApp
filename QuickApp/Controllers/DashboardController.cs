@@ -57,18 +57,14 @@ namespace QuickApp.Controllers
         [HttpGet("InsuranceCoverageSummary/{customerCode}")]
         public IActionResult GetInsuranceCoverageSummary(string customerCode)
         {
-            var insuranceCoverageSummaries = _dashboardManager.GetInsuranceCoverageGridSummaries(customerCode);
+            var insuranceCoverageSummaries = _dashboardManager.GetInsuranceCoverageGridSummaries(customerCode.ToUpper());
             return Ok(_mapper.Map<IList<InsuranceCoverageSummaryViewModel>>(insuranceCoverageSummaries));
         }
 
         [HttpGet("insurancecoveragerecommended/{customerCode}")]
         public IActionResult GetInsuranceCoverageRecommended(string customerCode)
         {
-            var currentYear = DateTime.Now.Year - 1;
-            var top = 6;
-            var insuranceCategoryPolicyCodes = string.Empty;
-            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetTopSellingInsuranceCategoryPolicyDashboardCards(currentYear, top, insuranceCategoryPolicyCodes.Split(new string[] { ";" }, System.StringSplitOptions.RemoveEmptyEntries));
-            //_dashboardManager.GetRecommendationInsuranceCategoryPolicyDashboardCards(customerCode);
+            var insuranceCategoryPolicyDashboardCards = _dashboardManager.GetRecommendationInsuranceCategoryPolicyDashboardCards(customerCode.ToUpper());
             return Ok(_mapper.Map<IList<InsuranceCategoryPolicyDashboardCardViewModel>>(insuranceCategoryPolicyDashboardCards));
         }
 

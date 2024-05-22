@@ -19,5 +19,7 @@ namespace QuickApp.ViewModels
         public string SalesLineBackgroundColor { get; set; }
 
         public string SalesLineBackgroundCssClass { get; set; }
+
+        public bool IsTopSelling { get; set; }
     }
 }

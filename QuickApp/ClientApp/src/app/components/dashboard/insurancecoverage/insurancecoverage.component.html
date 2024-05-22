@@ -16,7 +16,9 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title text-card-title" [appTxtStyle]="item.salesLineBackgroundColor">
-                  <i class="fa-solid" [appIconStyle]="item?.iconCssClass"></i>  {{ item.name }} - <i><small>Linea Prodotto: {{ item.salesLineName }}</small></i></h5>
+                  <i class="fa-solid" [appIconStyle]="item?.iconCssClass"></i>  {{ item.name }} - <i><small>Linea Prodotto: {{ item.salesLineName }}</small></i>
+                  <i *ngIf="item.isTopSelling" class="fa-solid fa-award" style="float: right;"></i>
+                </h5>
                 <p class="card-text">{{ item.abstract }}</p>
                 <div class="form-check form-switch">
                   <input class="form-check-input" (change)="selectItem($event)" [value]="item.code" type="checkbox" id="flexSwitchCheckChecked">
