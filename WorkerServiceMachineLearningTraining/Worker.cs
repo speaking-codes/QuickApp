@@ -115,15 +115,15 @@ namespace WorkerServiceMachineLearningTraining
 
                 try
                 {
-                    //var pathDirectory = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\DataStorage\Training\";
-                    //var pathInput = $"{pathDirectory}Input\\";
-                    //var pathProcessed = $"{pathDirectory}Processed\\";
-                    //var customerLearningFeatures = _storageManager.LoadDataFromStorage(pathInput, pathProcessed);
-                    //if (customerLearningFeatures.Count > 0)
-                    //    await _storageManager.SaveDataFeaturs(customerLearningFeatures);
+                    var pathDirectory = @"C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\DataStorage\Training\";
+                    var pathInput = $"{pathDirectory}Input\\";
+                    var pathProcessed = $"{pathDirectory}Processed\\";
+                    var customerLearningFeatures = _storageManager.LoadDataFromStorage(pathInput, pathProcessed);
+                    if (customerLearningFeatures.Count > 0)
+                        await _storageManager.SaveDataFeaturs(customerLearningFeatures);
 
-                    //customerLearningFeatures = _storageManager.LoadDataFeatures();
-                    //await _storageManager.UpdateDataFeatures(customerLearningFeatures);
+                    customerLearningFeatures = _storageManager.LoadDataFeatures();
+                    await _storageManager.UpdateDataFeatures(customerLearningFeatures);
                     await _storageManager.ReduceDataFeaturesDuplicated();
                     Console.WriteLine("Training Complete");
                 }

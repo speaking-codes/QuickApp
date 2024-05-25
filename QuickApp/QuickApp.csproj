@@ -71,6 +71,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup Label="MLClassifierCustomerFeatureV8">
+    <None Include="MLClassifierCustomerFeatureV8.consumption.cs">
+      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLClassifierCustomerFeatureV8.training.cs">
+      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLClassifierCustomerFeatureV8.zip">
+      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup Label="MLClassifierCustomerFeature">
     <None Include="MLClassifierCustomerFeature.consumption.cs">
       <DependentUpon>MLClassifierCustomerFeature.mbconfig</DependentUpon>
@@ -92,18 +104,6 @@
     </None>
     <None Include="MLRecommenderSystem.zip">
       <DependentUpon>MLRecommenderSystem.mbconfig</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup Label="MLClassifierCustomerFeatureV8">
-    <None Include="MLClassifierCustomerFeatureV8.consumption.cs">
-      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
-    </None>
-    <None Include="MLClassifierCustomerFeatureV8.training.cs">
-      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
-    </None>
-    <None Include="MLClassifierCustomerFeatureV8.zip">
-      <DependentUpon>MLClassifierCustomerFeatureV8.mbconfig</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

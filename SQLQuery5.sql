@@ -1,57 +1,15 @@
 use datSampleDataBase
-GO
-BEGIN TRAN
-TRUNCATE TABLE AppCustomerLearningFeaturesCopy
-TRUNCATE TABLE AppMatrixUsersItems
-INSERT INTO [dbo].[AppCustomerLearningFeaturesCopy]
-           ([Id]
-           ,[CustomerId]
-           ,[Gender]
-           ,[BirthMonth]
-           ,[YearBirth]
-           ,[MaritalStatus]
-           ,[IsSingle]
-           ,[IsDependentSpouse]
-           ,[ChildrenNumbers]
-           ,[DependentChildrenNumber]
-           ,[ProfessionType]
-           ,[IsFreelancer]
-           ,[IncomeClassType]
-           ,[IncomeType]
-           ,[Country]
-           ,[Region]
-           ,[InsurancePolicyId]
-           ,[InsurancePolicyCode]
-           ,[InsurancePolicyName]
-           ,[InsurancePolicyDescription])
-			SELECT TOP 90 PERCENT
-				   [Id]
-				  ,[CustomerId]
-				  ,[Gender]
-				  ,[BirthMonth]
-				  ,[YearBirth]
-				  ,[MaritalStatus]
-				  ,[IsSingle]
-				  ,[IsDependentSpouse]
-				  ,[ChildrenNumbers]
-				  ,[DependentChildrenNumber]
-				  ,[ProfessionType]
-				  ,[IsFreelancer]
-				  ,[IncomeClassType]
-				  ,[IncomeType]
-				  ,[Country]
-				  ,[Region]
-				  ,[InsurancePolicyId]
-				  ,[InsurancePolicyCode]
-				  ,[InsurancePolicyName]
-				  ,[InsurancePolicyDescription]
-			  FROM [dbo].[AppCustomerLearningFeatures]
-GO
-GO
-COMMIT TRAN
-SELECT	InsurancePolicyId, InsurancePolicyName, COUNT(DISTINCT CustomerId) CountCustomer
-FROM	AppCustomerLearningFeaturesCopy
-GROUP	BY InsurancePolicyName, InsurancePolicyId
-ORDER	BY InsurancePolicyId ASC
-GO
-
+select	top 15
+		Gender				Sesso,
+		BirthMonth			[Mese Nascita],
+		YearBirth			[Anno Nascita],
+		MaritalStatus		[Stato Civile],
+		ChildrenNumbers		[Numero Figli],
+		ProfessionType		Professione,
+		Income				[Reddito (R.A.L.)],
+		Country				[Provincia Residenza],
+		Region				[Regione Residenza],
+		InsurancePolicyId	[Identificativo Polizza],
+		InsurancePolicyCode	[Codice Polizza]
+from	AppCustomerLearningFeaturesTraining
+order	by NEWID()

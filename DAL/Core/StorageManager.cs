@@ -184,6 +184,7 @@ namespace DAL.Core
         private CustomerLearningFeature getCustomerLearningFeature(IList<string> lineSplit)
         {
             var customerLearningFeature = new CustomerLearningFeature();
+            var random =new Random();
 
             customerLearningFeature.Gender = lineSplit[0].Trim();
 
@@ -195,7 +196,12 @@ namespace DAL.Core
             customerLearningFeature.IsSingle = _maritalStatusList.First(x => x.MaritalStatusDescription == customerLearningFeature.MaritalStatus).IsSingle;
             customerLearningFeature.IsDependentSpouse = bool.Parse(lineSplit[3]);
             customerLearningFeature.ChildrenNumbers = int.Parse(lineSplit[4]);
-            customerLearningFeature.DependentChildrenNumber = int.Parse(lineSplit[5]);
+
+            int dependentChildrenNumber;
+            if (int.TryParse(lineSplit[5], out dependentChildrenNumber))
+                customerLearningFeature.DependentChildrenNumber = dependentChildrenNumber;
+            else
+                customerLearningFeature.DependentChildrenNumber = random.Next(0, customerLearningFeature.ChildrenNumbers);
 
             customerLearningFeature.ProfessionType = lineSplit[6].Trim();
 
@@ -203,8 +209,7 @@ namespace DAL.Core
             customerLearningFeature.IsFreelancer = profession.IsFreelancer ?? false;
 
             var annualGrossIncome = double.Parse(lineSplit[7]);
-            var incomeClassType = _incomeClassTypeList.FirstOrDefault(x => x.MinAnnualGrossIncome <= annualGrossIncome && (!x.MaxAnnualGrossIncome.HasValue || x.MaxAnnualGrossIncome >= annualGrossIncome));
-            customerLearningFeature.IncomeClassType = (incomeClassType != null) ? incomeClassType.DescriptionIncomeClass : string.Empty;
+            customerLearningFeature.Income = annualGrossIncome;
 
             customerLearningFeature.IncomeType = lineSplit[8].Trim();
             customerLearningFeature.Country = lineSplit[9].Trim();
@@ -220,11 +225,11 @@ namespace DAL.Core
 
             customerLearningFeature.InsurancePolicyId = insurancePolicyCategory.Id;
             customerLearningFeature.InsurancePolicyCode = insurancePolicyCategory.InsurancePolicyCategoryCode;
-            customerLearningFeature.InsurancePolicyDescription = insurancePolicyCategory.InsurancePolicyCategoryDescription;
-            customerLearningFeature.WarrantyAvaibles = string.Join(",", insurancePolicyCategory.WarrantyAvaibles.Select(x => x.WarrantyName.Trim()).ToList());
+            //customerLearningFeature.InsurancePolicyDescription = insurancePolicyCategory.InsurancePolicyCategoryDescription;
+            //customerLearningFeature.WarrantyAvaibles = string.Join(",", insurancePolicyCategory.WarrantyAvaibles.Select(x => x.WarrantyName.Trim()).ToList());
 
-            if (customerLearningFeature.WarrantyAvaibles.Length > 8000)
-                customerLearningFeature.WarrantyAvaibles = customerLearningFeature.WarrantyAvaibles.Substring(0, 7990);
+            //if (customerLearningFeature.WarrantyAvaibles.Length > 8000)
+            //    customerLearningFeature.WarrantyAvaibles = customerLearningFeature.WarrantyAvaibles.Substring(0, 7990);
             return customerLearningFeature;
         }
 
@@ -263,6 +268,9 @@ namespace DAL.Core
                         var line = sr.ReadLine();
                         if (!string.IsNullOrEmpty(line))
                             customerLearningFeatures.Add(fillCustomerLearningFeature(line));
+
+                        //if (customerLearningFeatures.Count >= 12000)
+                        //    break;
                     }
                 }
 
@@ -307,7 +315,7 @@ namespace DAL.Core
                                                                DependentChildrenNumber = x.DependentChildrenNumber,
                                                                ProfessionType = x.ProfessionType,
                                                                IsFreelancer = x.IsFreelancer,
-                                                               IncomeClassType = x.IncomeClassType,
+                                                               Income = x.Income,
                                                                IncomeType = x.IncomeType,
                                                                Country = x.Country,
                                                                Region = x.Region
@@ -421,7 +429,7 @@ namespace DAL.Core
                                 DependentChildrenNumber = x.DependentChildrenNumber,
                                 ProfessionType = x.ProfessionType,
                                 IsFreelancer = x.IsFreelancer,
-                                IncomeClassType = x.IncomeClassType,
+                                Income = x.Income,
                                 IncomeType = x.IncomeType,
                                 Country = x.Country,
                                 Region = x.Region,
@@ -438,21 +446,21 @@ namespace DAL.Core
         public async Task<IList<CustomerLearningFeatureCopy>> LoadCustomerLearningFeatureCopyForTest(long customerId) =>
             await UnitOfWork.CustomerLearningFeatureCopies
                             .GetCustomerLearningFeatures()
-                            .Where(x => x.CustomerId > customerId)
+                            //.Where(x => x.CustomerId > customerId)
                             .Select(x => new CustomerLearningFeatureCopy
                             {
-                                CustomerId = x.CustomerId,
+                                //CustomerId = x.CustomerId,
                                 Gender = x.Gender,
                                 BirthMonth = x.BirthMonth,
                                 YearBirth = x.YearBirth,
                                 MaritalStatus = x.MaritalStatus,
-                                IsSingle = x.IsSingle,
+                                //IsSingle = x.IsSingle,
                                 IsDependentSpouse = x.IsDependentSpouse,
                                 ChildrenNumbers = x.ChildrenNumbers,
                                 DependentChildrenNumber = x.DependentChildrenNumber,
                                 ProfessionType = x.ProfessionType,
-                                IsFreelancer = x.IsFreelancer,
-                                IncomeClassType = x.IncomeClassType,
+                                //IsFreelancer = x.IsFreelancer,
+                                Income = x.Income,
                                 IncomeType = x.IncomeType,
                                 Country = x.Country,
                                 Region = x.Region

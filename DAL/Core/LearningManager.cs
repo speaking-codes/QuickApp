@@ -3,7 +3,6 @@ using DAL.Enums;
 using DAL.Models;
 using MachineLearningModel;
 using Microsoft.EntityFrameworkCore;
-using QuickApp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +37,7 @@ namespace DAL.Core
         {
             var index = 0;
             var rnd = new Random();
-            
+
             var customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeature(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
             if (customerLearningFeatures.Count > 0)
             {
@@ -100,8 +99,8 @@ namespace DAL.Core
                 return customerLearningFeatures[index].CustomerId ?? long.MinValue;
             }
             customerLearningFeatures = UnitOfWork.CustomerLearningFeatures.GetCustomerLearningFeatureWithoutTen(customerLearningFeature).OrderByDescending(x => x.CustomerId).ToList();
-                index = rnd.Next(0, customerLearningFeatures.Count);
-                return customerLearningFeatures[index].CustomerId ?? long.MinValue;            
+            index = rnd.Next(0, customerLearningFeatures.Count);
+            return customerLearningFeatures[index].CustomerId ?? long.MinValue;
         }
 
         private IList<MLRecommenderSystem.ModelOutput> getItemRecommendations(long customerId, float minScore, int maxItems)
@@ -137,10 +136,13 @@ namespace DAL.Core
             return insurancePolicyCategories;
         }
 
+        private readonly Random _random;
+
         #endregion
 
         public LearningManager(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+            _random = new Random();
         }
 
         public void TrainingClassifier()
@@ -171,7 +173,7 @@ namespace DAL.Core
             //}
         }
 
-        public async Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeature> customerLearningFeatures)
+        public async Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeature> customerLearningFeatures, double biasMultiplier)
         {
             var insurancePolicyCategories = await UnitOfWork.InsurancePolicyCategories.GetInsurancePolicyCategories().ToListAsync();
             var matrixUsersItems = new List<MatrixUsersItems>();
@@ -194,56 +196,47 @@ namespace DAL.Core
                         {
                             UserId = item.CustomerId ?? 0,
                             ItemId = subItem.Id,
-                            Rating = 1.0f
+                            Rating = 100 + (biasMultiplier * _random.NextDouble())
                         };
                         matrixUsersItems.Add(userItem);
                         continue;
                     }
 
-                    var modelInput = new MLClassifierCustomerFeatureV8.ModelInput()
+                    var modelInput = new MLClassifierCustomerFeature.ModelInput()
                     {
                         Gender = item.Gender,
                         BirthMonth = item.BirthMonth,
                         YearBirth = item.YearBirth,
                         MaritalStatus = item.MaritalStatus,
-                        IsSingle = item.IsSingle,
-                        IsDependentSpouse = item.IsDependentSpouse,
                         ChildrenNumbers = item.ChildrenNumbers,
-                        DependentChildrenNumber = item.DependentChildrenNumber,
                         ProfessionType = item.ProfessionType,
-                        IsFreelancer = item.IsFreelancer,
-                        IncomeClassType = item.IncomeClassType,
-                        IncomeType = item.IncomeType,
                         Country = item.Country,
                         Region = item.Region,
                         InsurancePolicyCode = subItem.InsurancePolicyCategoryCode,
-                        InsurancePolicyName = subItem.InsurancePolicyCategoryName,
-                        //InsurancePolicyDescription = subItem.InsurancePolicyCategoryDescription,
-                        //WarrantyAvaibles = string.Join(",", subItem.WarrantyAvaibles.Select(x => x.WarrantyName)),
                     };
 
-                    var prediction = MLClassifierCustomerFeatureV8.Predict(modelInput);
+                    var prediction = MLClassifierCustomerFeature.Predict(modelInput);
 
                     if (subItem.Id == (byte)prediction.PredictedLabel)
                         userItem = new MatrixUsersItems
                         {
                             UserId = item.CustomerId ?? 0,
                             ItemId = (byte)prediction.PredictedLabel,
-                            Rating = prediction.Score.Max()
+                            Rating = (prediction.Score.Max() * 100) + (biasMultiplier * _random.NextDouble())
                         };
                     else
                         userItem = new MatrixUsersItems
                         {
                             UserId = item.CustomerId ?? 0,
                             ItemId = subItem.Id,
-                            Rating = 0f
+                            Rating = (biasMultiplier * _random.NextDouble())
                         };
 
                     matrixUsersItems.Add(userItem);
                 }
 
-                //if (matrixUsersItems.Count > 60000)
-                //    break;
+                if (matrixUsersItems.Count > 60000)
+                    break;
             }
             return matrixUsersItems;
         }
@@ -256,43 +249,37 @@ namespace DAL.Core
             {
                 foreach (var subItem in insurancePolicyCategories)
                 {
-                    var modelInput = new MLClassifierCustomerFeatureV8.ModelInput()
-                    {
-                        Gender = item.Gender,
-                        BirthMonth = item.BirthMonth,
-                        YearBirth = item.YearBirth,
-                        MaritalStatus = item.MaritalStatus,
-                        IsSingle = item.IsSingle,
-                        IsDependentSpouse = item.IsDependentSpouse,
-                        ChildrenNumbers = item.ChildrenNumbers,
-                        DependentChildrenNumber = item.DependentChildrenNumber,
-                        ProfessionType = item.ProfessionType,
-                        IsFreelancer = item.IsFreelancer,
-                        IncomeClassType = item.IncomeClassType,
-                        IncomeType = item.IncomeType,
-                        Country = item.Country,
-                        Region = item.Region,
-                        InsurancePolicyCode = subItem.InsurancePolicyCategoryCode,
-                        InsurancePolicyName = subItem.InsurancePolicyCategoryName
-                    };
+                    //var modelInput = new MLClassifierCustomerFeature.ModelInput()
+                    //{
+                    //    Gender = item.Gender,
+                    //    BirthMonth = item.BirthMonth,
+                    //    YearBirth = item.YearBirth,
+                    //    MaritalStatus = item.MaritalStatus,
+                    //    ChildrenNumbers = item.ChildrenNumbers,
+                    //    ProfessionType = item.ProfessionType,
+                    //    Income = item.Income,
+                    //    Country = item.Country,
+                    //    Region = item.Region,
+                    //    InsurancePolicyCode = subItem.InsurancePolicyCategoryCode,
+                    //};
 
-                    var prediction = MLClassifierCustomerFeatureV8.Predict(modelInput);
+                    //var prediction = MLClassifierCustomerFeature.Predict(modelInput);
 
                     MatrixUsersItems userItem = new MatrixUsersItems();
-                    if (subItem.Id == (byte)prediction.PredictedLabel)
-                        userItem = new MatrixUsersItems
-                        {
-                            UserId = item.CustomerId,
-                            ItemId = (byte)prediction.PredictedLabel,
-                            Rating = prediction.Score.Max()
-                        };
-                    else
-                        userItem = new MatrixUsersItems
-                        {
-                            UserId = item.CustomerId,
-                            ItemId = subItem.Id,
-                            Rating = 0f
-                        };
+                    //if (subItem.Id == (byte)prediction.PredictedLabel)
+                    //    userItem = new MatrixUsersItems
+                    //    {
+                    //        UserId = item.CustomerId,
+                    //        ItemId = (byte)prediction.PredictedLabel,
+                    //        Rating = prediction.Score.Max()
+                    //    };
+                    //else
+                    //    userItem = new MatrixUsersItems
+                    //    {
+                    //        UserId = item.CustomerId,
+                    //        ItemId = subItem.Id,
+                    //        Rating = 0f
+                    //    };
 
                     matrixUsersItems.Add(userItem);
                 }

@@ -26,11 +26,11 @@ namespace DAL.Repositories
                                                             x.IsSingle == customerLearningFeature.IsSingle &&
                                                             x.ChildrenNumbers == customerLearningFeature.ChildrenNumbers &&
                                                             x.ProfessionType == customerLearningFeature.ProfessionType &&
-                                                            x.IsFreelancer== customerLearningFeature.IsFreelancer &&
+                                                            x.IsFreelancer == customerLearningFeature.IsFreelancer &&
                                                             x.Country == customerLearningFeature.Country &&
                                                             x.Region == customerLearningFeature.Region &&
                                                             x.CustomerId.HasValue);
-        public IQueryable<CustomerLearningFeature> GetCustomerLearningFeatureWithoutOne(CustomerLearningFeature customerLearningFeature)=>
+        public IQueryable<CustomerLearningFeature> GetCustomerLearningFeatureWithoutOne(CustomerLearningFeature customerLearningFeature) =>
                         _appContext.CustomerLearningFeatures.Where(x => x.Gender == customerLearningFeature.Gender &&
                                                             x.BirthMonth == customerLearningFeature.BirthMonth &&
                                                             x.YearBirth == customerLearningFeature.YearBirth &&
@@ -105,7 +105,7 @@ namespace DAL.Repositories
             _appContext.CustomerLearningFeatures;
 
         public async Task<IList<CustomerLearningFeature>> GetCustomCustomerLearningFeatures() =>
-                  await _appContext.CustomerLearningFeatureCopies
+                  await _appContext.CustomerLearningFeatures
                               .FromSqlRaw($"select CustomerId, InsurancePolicyId from AppCustomerLearningFeatures group by CustomerId, InsurancePolicyId having COUNT(Id) > 1")
                               .Select(x => new CustomerLearningFeature
                               {
@@ -147,7 +147,7 @@ namespace DAL.Repositories
                                                 x.DependentChildrenNumber == customerLearningFeature.DependentChildrenNumber &&
                                                 x.ProfessionType == customerLearningFeature.ProfessionType &&
                                                 x.IsFreelancer == customerLearningFeature.IsFreelancer &&
-                                                x.IncomeClassType == customerLearningFeature.IncomeClassType &&
+                                                x.Income == customerLearningFeature.Income &&
                                                 x.IncomeType == customerLearningFeature.IncomeType &&
                                                 x.Country == customerLearningFeature.Country &&
                                                 x.Region == customerLearningFeature.Region)

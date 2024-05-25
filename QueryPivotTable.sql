@@ -3,9 +3,10 @@ use datSampleDataBase
 ;with	MatrixUsersItemsCte as
 (
 	select	mui.UserId Utente, InsurancePolicyCategoryName NomePolizza, Rating Valutazione
-	from	AppMatrixUsersItemsV7 mui with (nolock) join AppInsurancePolicyCategories ipc with (nolock)
+	from	AppMatrixUsersItems mui with (nolock) join AppInsurancePolicyCategories ipc with (nolock)
 	on		mui.ItemId = ipc.Id		
 	where	UserId in (select UserId from AppMatrixUsersItems group by UserId having SUM(Rating) > 1)
+	--and		ItemId not in (8, 9)
 ),
 PivotTableCte as
 (
@@ -23,7 +24,8 @@ PivotTableCte as
 						[INFORTUNI],
 						[MALATTIA],
 						[INCENDIO/FURTO],
-						[TUTELA GIUDIZIARIA])) as PivotTable
+						[TUTELA GIUDIZIARIA]
+						)) as PivotTable
 )
 select	*
 from	PivotTableCte
