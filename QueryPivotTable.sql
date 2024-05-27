@@ -27,14 +27,13 @@ PivotTableCte as
 						[TUTELA GIUDIZIARIA]
 						)) as PivotTable
 )
-select	*
+select	*--top 25 *
 from	PivotTableCte
---where	Utente <= '607734'
+--where	Utente >= '99940'
 --where	Utente > '365018'
 --where	[R.C. DIVERSI] = '0'
 --		([INCENDIO/FURTO] <> '0'
 --and		[TUTELA GIUDIZIARIA] <> '0')
-order	by Utente desc
 --select	*
 --from	AppCustomerLearningFeatures
 --where	CustomerId in 
@@ -47,3 +46,5 @@ order	by Utente desc
 ----select	*
 ----from	AppMatrixUsersItems
 ----where	UserId = '96267'
+--order	by NEWID()
+order	by Utente desc

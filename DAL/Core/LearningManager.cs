@@ -3,6 +3,7 @@ using DAL.Enums;
 using DAL.Models;
 using MachineLearningModel;
 using Microsoft.EntityFrameworkCore;
+using QuickApp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
