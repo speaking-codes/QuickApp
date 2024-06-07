@@ -239,7 +239,7 @@ namespace DAL.Core
                 if (matrixUsersItems.Count > 60000)
                     break;
             }
-            return matrixUsersItems;
+                return matrixUsersItems;
         }
         public async Task<IList<MatrixUsersItems>> LoadMatrixUsersItems(IEnumerable<CustomerLearningFeatureCopy> customerLearningFeatures)
         {

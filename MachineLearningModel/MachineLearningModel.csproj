@@ -34,4 +34,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup Label="MLRecommenderSystemV1">
+    <None Include="MLRecommenderSystemV1.consumption.cs">
+      <DependentUpon>MLRecommenderSystemV1.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV1.training.cs">
+      <DependentUpon>MLRecommenderSystemV1.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLRecommenderSystemV1.zip">
+      <DependentUpon>MLRecommenderSystemV1.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
