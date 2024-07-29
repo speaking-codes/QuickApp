@@ -1,0 +1,66 @@
+﻿Set log file path to C:\Users\mauro.diliddo\AppData\Local\Temp\MLVSTools\logs\MLRecommenderSystem-AJMUHY.txt
+start nni training
+Experiment output folder: C:\Users\mauro.diliddo\AppData\Local\Temp\AutoML-NNI\Experiment-R95AUE
+|     Trainer                             RSquared Absolute-loss Squared-loss RMS-loss  Duration #Iteration      |
+|0    MatrixFactorization                   0,0000          0,00         0,00     0,00       1,3          0      |
+|1    MatrixFactorization                   0,0000          0,00         0,00     0,00       0,6          1      |
+|2    MatrixFactorization                   0,0000          0,00         0,00     0,00       9,0          2      |
+|3    MatrixFactorization                   0,0000          0,00         0,00     0,00       7,4          3      |
+|4    MatrixFactorization                   0,0000          0,00         0,00     0,00       0,6          4      |
+|5    MatrixFactorization                   0,8009          9,13       331,92    18,22       1,7          5      |
+|6    MatrixFactorization                   0,8698          7,91       216,99    14,73       0,7          6      |
+|7    MatrixFactorization                   0,2712         28,94      1214,95    34,86       1,3          7      |
+|8    MatrixFactorization                   0,0000          0,00         0,00     0,00      26,3          8      |
+|9    MatrixFactorization                  -1,8705         61,23      4785,21    69,18       1,6          9      |
+|10   MatrixFactorization                   0,0000          0,00         0,00     0,00      12,6         10      |
+|11   MatrixFactorization                  -2,3535         67,22      5590,29    74,77       0,3         11      |
+|12   MatrixFactorization                   0,0000          0,00         0,00     0,00     316,2         12      |
+|13   MatrixFactorization                   0,0000          0,00         0,00     0,00       9,5         13      |
+|14   MatrixFactorization                  -2,0648         63,64      5109,16    71,48       2,9         14      |
+|15   MatrixFactorization                  -0,4751         42,55      2457,16    49,57      23,2         15      |
+|16   MatrixFactorization                   0,0000          0,00         0,00     0,00       0,4         16      |
+|17   MatrixFactorization                   0,7807          7,78       366,44    19,14      23,3         17      |
+|18   MatrixFactorization                   0,9354          5,98       107,64    10,38       0,7         18      |
+|19   MatrixFactorization                  -0,6455         45,25      2743,17    52,38       1,5         19      |
+|20   MatrixFactorization                   0,7593         10,20       401,93    20,05      11,6         20      |
+|21   MatrixFactorization                  -2,4084         67,67      5694,07    75,46       1,8         21      |
+|22   MatrixFactorization                   0,0000          0,00         0,00     0,00       0,5         22      |
+|23   MatrixFactorization                   0,9858          2,47        23,68     4,87      16,0         23      |
+|24   MatrixFactorization                   0,7279         10,64       453,25    21,29      11,3         24      |
+|25   MatrixFactorization                   0,9824          3,75        29,45     5,43      24,0         25      |
+
+===============================================Experiment Results=================================================
+------------------------------------------------------------------------------------------------------------------
+|                                                     Summary                                                    |
+------------------------------------------------------------------------------------------------------------------
+|ML Task: Recommendation                                                                                         |
+|Dataset:                                                                                                        |
+|Label : Rating                                                                                                  |
+|Total experiment time : 506,38 Secs                                                                             |
+|Total number of models explored: 26                                                                             |
+------------------------------------------------------------------------------------------------------------------
+
+|                                              Top 5 models explored                                             |
+------------------------------------------------------------------------------------------------------------------
+|     Trainer                             RSquared Absolute-loss Squared-loss RMS-loss  Duration #Iteration      |
+|23   MatrixFactorization                   0,9858          2,47        23,68     4,87      16,0         23      |
+|25   MatrixFactorization                   0,9824          3,75        29,45     5,43      24,0         25      |
+|18   MatrixFactorization                   0,9354          5,98       107,64    10,38       0,7         18      |
+|6    MatrixFactorization                   0,8698          7,91       216,99    14,73       0,7          6      |
+|5    MatrixFactorization                   0,8009          9,13       331,92    18,22       1,7          5      |
+------------------------------------------------------------------------------------------------------------------
+
+Generate code behind files
+
+
+Copying generated code to project...
+Copying MLRecommenderSystem.consumption.cs to folder: C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\MachineLearningModel
+Copying MLRecommenderSystem.training.cs to folder: C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\MachineLearningModel
+COMPLETED
+
+
+Updating nuget dependencies...
+Starting update NuGet dependencies async.
+Installing nuget package, package ID: Microsoft.ML, package Version: 1.7.1
+Installing nuget package, package ID: Microsoft.ML.Recommender, package Version: 0.19.1
+COMPLETED

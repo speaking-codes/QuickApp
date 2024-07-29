@@ -1,0 +1,53 @@
+﻿start nni training
+Experiment output folder: C:\Users\mauro.diliddo\AppData\Local\Temp\AutoML-NNI\Experiment-505EA6
+|     Trainer                             RSquared Absolute-loss Squared-loss RMS-loss  Duration #Iteration      |
+|0    MatrixFactorization                   0,0000          0,00         0,00     0,00       2,7          0      |
+|1    MatrixFactorization                   0,0000          0,00         0,00     0,00       0,4          1      |
+|2    MatrixFactorization                   0,8652          7,45       224,32    14,98       9,3          2      |
+|3    MatrixFactorization                  -1,4908         56,29      4118,57    64,18       0,8          3      |
+|4    MatrixFactorization                   0,0000          0,00         0,00     0,00      59,7          4      |
+|5    MatrixFactorization                   0,0000          0,00         0,00     0,00      24,8          5      |
+|6    MatrixFactorization                  -1,0311         50,37      3358,46    57,95       1,9          6      |
+|7    MatrixFactorization                  -1,7563         59,95      4557,57    67,51       0,5          7      |
+|8    MatrixFactorization                   0,0000          0,00         0,00     0,00     172,8          8      |
+|9    MatrixFactorization                  -2,0980         63,88      5122,45    71,57       0,8          9      |
+|10   MatrixFactorization                   0,0000          0,00         0,00     0,00      77,6         10      |
+|11   MatrixFactorization                   0,3692         20,48      1043,02    32,30       1,3         11      |
+|12   MatrixFactorization                   0,9778          2,90        37,15     6,10      42,5         12      |
+|13   MatrixFactorization                   0,9726          3,08        45,78     6,77     180,9         13      |
+
+===============================================Experiment Results=================================================
+------------------------------------------------------------------------------------------------------------------
+|                                                     Summary                                                    |
+------------------------------------------------------------------------------------------------------------------
+|ML Task: Recommendation                                                                                         |
+|Dataset:                                                                                                        |
+|Label : Rating                                                                                                  |
+|Total experiment time : 575,83 Secs                                                                             |
+|Total number of models explored: 14                                                                             |
+------------------------------------------------------------------------------------------------------------------
+
+|                                              Top 5 models explored                                             |
+------------------------------------------------------------------------------------------------------------------
+|     Trainer                             RSquared Absolute-loss Squared-loss RMS-loss  Duration #Iteration      |
+|12   MatrixFactorization                   0,9778          2,90        37,15     6,10      42,5         12      |
+|13   MatrixFactorization                   0,9726          3,08        45,78     6,77     180,9         13      |
+|2    MatrixFactorization                   0,8652          7,45       224,32    14,98       9,3          2      |
+|11   MatrixFactorization                   0,3692         20,48      1043,02    32,30       1,3         11      |
+|10   MatrixFactorization                   0,0000          0,00         0,00     0,00      77,6         10      |
+------------------------------------------------------------------------------------------------------------------
+
+Generate code behind files
+
+
+Copying generated code to project...
+Copying MLRecommenderSystem.consumption.cs to folder: C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\MachineLearningModel
+Copying MLRecommenderSystem.training.cs to folder: C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\MachineLearningModel
+COMPLETED
+
+
+Updating nuget dependencies...
+Starting update NuGet dependencies async.
+Installing nuget package, package ID: Microsoft.ML, package Version: 1.7.1
+Installing nuget package, package ID: Microsoft.ML.Recommender, package Version: 0.19.1
+COMPLETED

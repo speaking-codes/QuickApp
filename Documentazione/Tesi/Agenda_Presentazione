@@ -1,0 +1,96 @@
+Presentazione:	Un cruscotto personalizzato per l'agente assicurativo
+	*	Agenda:
+		*	Tipologia appredimento
+			*	Definizione
+			*	Appredimento supervisionato
+			*	Appredimento non supervisionato
+			*	Appredimento semi supervisionato
+		*	Sistemi di raccomandazione (Recommender System)
+			*	Definizione
+			*	Approccio basato sul contenuto (Content based system)
+			*	Approccio collaborativo (Collaborative filtering system)
+			*	Approccio ibrido (Hybrid system)
+		*	Ambito assicurativo
+			*	Carattestiche
+			*	Contesto analizzato
+			*	Peculiarità
+		*	Soluzione proposta
+			*	Definizione
+			*	Implementazione
+			*	Accorgimenti
+			*	Conclusioni
+
+Presentazione:	XYZ
+	*	Agenda:
+		*	Demo
+		*	Struttura dashboard:
+			*	Cliente
+				*	Dati Principali
+					*	Grafico
+					*	Info
+				*	Profilo Completo
+					*	Anagrafica
+					*	Recapiti
+					*	Indirizzi
+					*	Info Reddito
+				*	Coperture attive
+				*	Coperture suggerite
+				*	Coperture più vendute
+				*	Altre coperture
+				*	Coperture selezionate
+		*	Architettura dashboard
+		*	Machine learning
+			*	Appredimento supervisionato
+				*	Definizione
+				*	Carattestiche
+				*	Esempi
+					*	Predizione
+					*	Classificazione
+			*	Appredimento non supervisionato
+				*	Definizione
+				*	Carattestiche
+				*	Esempi
+					*	Riconoscimento di oggetti
+			*	Appredimento semi supervisionato
+				*	Definizione
+				*	Carattestiche
+				*	Esempi
+					*	Classificazione materiale biologico
+			*	Valutazione
+				*	Underfitting
+				*	Overfitting
+			*	Sistemi di raccomandazione
+				*	Definizione
+				*	Carattestiche
+				*	Tipologia
+					*	Approccio basato sul contenuto (Content based system)
+						*	TF-IDF
+					*	Approccio collaborativo (Collaborative filtering system)
+						*	Sistemi basati sul vicinato (neighborhood based system)
+						*	Sistemi basati sul modello (model based system)
+					*	Approccio ibrido (Hybrid system)
+		*	Ambito assicurativo
+			*	Carattestiche
+			*	Contesto analizzato
+			*	Peculiarità
+		*	Soluzione proposta
+			*	Definizione
+			*	Implementazione
+				*	Approccio collaborativo
+					*	Carattestiche
+					*	Problematiche
+				*	Approccio ibrido
+					*	Carattestiche
+					*	Idea
+						*	Definizione
+						*	Classificatore
+					*	Implementazione
+						*	Classificatore
+						*	Problematiche
+						*	Variazione di scala
+						*	Aggiunta bias
+			*	Conclusioni
+		*	Q&A
+		*	Saluti
+						
+		

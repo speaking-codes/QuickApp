@@ -1,0 +1,49 @@
+start nni training
+Experiment output folder: C:\Users\mauro.diliddo\AppData\Local\Temp\AutoML-NNI\Experiment-3266QQ
+|     Trainer                             RSquared Absolute-loss Squared-loss RMS-loss  Duration #Iteration      |
+|0    MatrixFactorization                   0,0000          0,00         0,00     0,00       1,1          0      |
+|1    MatrixFactorization                   0,0000          0,00         0,00     0,00      18,8          1      |
+|2    MatrixFactorization                   0,0510          0,27         0,17     0,42       0,4          2      |
+|3    MatrixFactorization                   0,0000          0,00         0,00     0,00       8,8          3      |
+|4    MatrixFactorization                  -1,0601          0,51         0,38     0,61       0,6          4      |
+|5    MatrixFactorization                   0,4411          0,20         0,10     0,32      26,2          5      |
+|6    MatrixFactorization                  -0,2293          0,40         0,23     0,47      18,1          6      |
+|7    MatrixFactorization                   0,0000          0,00         0,00     0,00       5,3          7      |
+|8    MatrixFactorization                   0,0000          0,00         0,00     0,00       0,4          8      |
+|9    MatrixFactorization                   0,4553          0,26         0,10     0,32     406,8          9      |
+
+===============================================Experiment Results=================================================
+------------------------------------------------------------------------------------------------------------------
+|                                                     Summary                                                    |
+------------------------------------------------------------------------------------------------------------------
+|ML Task: Recommendation                                                                                         |
+|Dataset:                                                                                                        |
+|Label : Rating                                                                                                  |
+|Total experiment time : 486,60 Secs                                                                             |
+|Total number of models explored: 10                                                                             |
+------------------------------------------------------------------------------------------------------------------
+
+|                                              Top 5 models explored                                             |
+------------------------------------------------------------------------------------------------------------------
+|     Trainer                             RSquared Absolute-loss Squared-loss RMS-loss  Duration #Iteration      |
+|9    MatrixFactorization                   0,4553          0,26         0,10     0,32     406,8          9      |
+|5    MatrixFactorization                   0,4411          0,20         0,10     0,32      26,2          5      |
+|2    MatrixFactorization                   0,0510          0,27         0,17     0,42       0,4          2      |
+|8    MatrixFactorization                   0,0000          0,00         0,00     0,00       0,4          8      |
+|7    MatrixFactorization                   0,0000          0,00         0,00     0,00       5,3          7      |
+------------------------------------------------------------------------------------------------------------------
+
+Generate code behind files
+
+
+Copying generated code to project...
+Copying MLRecommenderSystemV2.consumption.cs to folder: C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\MachineLearningModel
+Copying MLRecommenderSystemV2.training.cs to folder: C:\Users\mauro.diliddo\source\repos\QuickApp\QuickAppGitHub\QuickApp\MachineLearningModel
+COMPLETED
+
+
+Updating nuget dependencies...
+Starting update NuGet dependencies async.
+Installing nuget package, package ID: Microsoft.ML, package Version: 1.7.1
+Installing nuget package, package ID: Microsoft.ML.Recommender, package Version: 0.19.1
+COMPLETED
